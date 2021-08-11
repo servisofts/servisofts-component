@@ -1,0 +1,51 @@
+{
+  "name": "servisofts-component",
+  "version": "1.0.1",
+  "description": "Component sevisofts ",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-native start",
+    "web": "react-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "servisofts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/servisofts/servisofts-component.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.64.2",
+    "react-native-web": "^0.17.1",
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-transformer": "^0.14.3",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.2.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "^3.4.0",
+    "@react-navigation/native": "^5.9.6",
+    "@react-navigation/stack": "^5.14.7",
+    "sc-1": "file:../../../NPMLibrary/sc-1/dist"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-scripts": "^4.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
