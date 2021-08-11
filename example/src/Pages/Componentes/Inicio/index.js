@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { SPage, SView, SText, STheme, SInfo } from 'sc-1'
+import { SPage, SView, SText, STheme, SInfo } from 'servisofts-component'
 
 export default class Inicio extends Component {
     constructor(props) {

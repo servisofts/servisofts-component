@@ -28,7 +28,7 @@
     "react-native-screens": "^3.4.0",
     "@react-navigation/native": "^5.9.6",
     "@react-navigation/stack": "^5.14.7",
-    "sc-1": "file:../../../NPMLibrary/sc-1/dist"
+    "servisofts-component": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

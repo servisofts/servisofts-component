@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { SComponentContainer, SIcon, SNavigation, SView } from 'sc-1';
+import { SComponentContainer, SIcon, SNavigation, SView } from 'servisofts-component';
 import Pages from './Pages';
 const App = (props) => {
     return (

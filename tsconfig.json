@@ -1,0 +1,36 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "esnext",
+        "allowJs": true,
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext",
+            "ES6"
+        ],
+        // "watch": true,
+        "checkJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        // Ensure that .d.ts files are created by tsc, but not .js files
+        "declaration": true,
+        "noEmit": false,
+        "jsx": "react",
+        // Ensure that Babel can safely transpile files in the TypeScript project
+        "isolatedModules": true,
+        "outDir": "./dist",
+    },
+    "include": [
+        "src",
+        "lib",
+        "src/img",
+        "src/declarations.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+    ]
+}

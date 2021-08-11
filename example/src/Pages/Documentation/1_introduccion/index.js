@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SView, SText, STheme, SNavigation, SPage } from 'sc-1'
+import { SView, SText, STheme, SNavigation, SPage } from 'servisofts-component'
 
 export default class Introduccion extends Component {
     constructor(props) {

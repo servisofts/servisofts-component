@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { SView, SText, STheme, SPage } from 'sc-1'
+import { SView, SText, STheme, SPage } from 'servisofts-component'
 // import { Server } from 'servisofts-socket';
 
 

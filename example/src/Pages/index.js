@@ -1,4 +1,4 @@
-import { SPageListProps } from 'sc-1'
+import { SPageListProps } from 'servisofts-component'
 import Componentes from './Componentes';
 import Documentation from './Documentation';
 
