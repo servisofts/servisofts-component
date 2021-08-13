@@ -5,13 +5,13 @@ import SView, { SViewProps } from '../SView/index';
 
 
 export type STextProps = {
-    style?: TextStyle,
+    style?: TextStyle | [TextStyle] | any,
     primary?: boolean,
     fontSize?: number,
     bold?: boolean,
     color?: string,
     underLine?: boolean,
-    justify?:boolean
+    justify?: boolean
 } & SViewProps
 
 export default class SText extends Component<STextProps> {
@@ -45,7 +45,7 @@ export default class SText extends Component<STextProps> {
                         textDecorationLine: "underline",
                     }),
                     ...(!this.props.justify ? {} : {
-                        textAlign:"justify",
+                        textAlign: "justify",
                     }),
                     ...this.props.style
                 }}>{this.props.children}</Text>

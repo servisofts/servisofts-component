@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { TextStyle } from 'react-native';
 import { SViewProps } from '../SView/index';
 export declare type STextProps = {
-    style?: TextStyle;
+    style?: TextStyle | [TextStyle] | any;
     primary?: boolean;
     fontSize?: number;
     bold?: boolean;

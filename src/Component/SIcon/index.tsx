@@ -3,7 +3,7 @@ import { Platform, Text, View } from 'react-native'
 import * as Icon2 from '../../img/Icon2/index';
 import * as Arrow from '../../img/Arrow/index';
 
-type IconNames = "Icon2" | "Arrow"
+type IconNames = "Icon2" | "Arrow" | "engranaje" | "drag"
 
 type SIconType = {
     name?: IconNames,
@@ -33,6 +33,6 @@ export default class SIcon extends Component<SIconType> {
         if (!Icon) {
             return <View />
         }
-        return (<Icon width={"100%"} height={"100%"} {...this.props}/>)
+        return (<Icon width={"100%"} height={"100%"} {...this.props} />)
     }
 }

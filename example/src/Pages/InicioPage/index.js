@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+
 import { SView, SText, STheme, SPage, SNavigation, SIcon, SStorage } from 'servisofts-component'
 
 export default class InicioPage extends Component {
@@ -43,6 +43,15 @@ export default class InicioPage extends Component {
                         onPress={() => {
                             SNavigation.navigate("Componentes")
                         }}>{"Ver componentes"}</SText>
+                    <SView style={{ height: 8 }}></SView>
+                    <SText
+                        col={"xs-12"}
+                        fontSize={16}
+                        bold
+                        underLine
+                        onPress={() => {
+                            SNavigation.navigate("Componentes/STable")
+                        }}>{"Ver Tabla"}</SText>
                 </SView>
             </SPage>
         );

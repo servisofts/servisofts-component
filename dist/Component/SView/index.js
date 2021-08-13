@@ -25,32 +25,38 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Animated } from 'react-native';
 import SGrid from '../SGrid/index';
 var SView = /** @class */ (function (_super) {
     __extends(SView, _super);
     function SView(props) {
         var _this = _super.call(this, props) || this;
-        var propsP = props.props;
-        if (!propsP) {
-            propsP = {};
-        }
+        var propsP;
+        // if (!propsP) {
+        propsP = {};
+        // }
         _this.state = {
             params: {
                 col: (props.col ? props.col : propsP.col),
                 dir: (!props.dir ? (!propsP.dir ? "column" : propsP.dir) : props.dir),
-                style: __assign(__assign({}, (!props.style ? {} : props.style)), (!propsP.style ? {} : propsP.style))
+                style: __assign({}, (!props.style ? {} : props.style))
             }
         };
         return _this;
     }
+    SView.prototype.getData = function () {
+        return this.props.data;
+    };
     SView.prototype.render = function () {
         var Element = View;
         if (this.props.onPress) {
             Element = TouchableOpacity;
         }
+        if (this.props.animated) {
+            Element = Animated.createAnimatedComponent(Element);
+        }
         return (React.createElement(SGrid, { colSquare: this.props.colSquare, col: this.state.params.col, style: this.state.params.style },
-            React.createElement(Element, __assign({}, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -65,7 +71,7 @@ var SView = /** @class */ (function (_super) {
                     justifyContent: 'center'
                 })), (!this.props.flex ? {} : {
                     flex: this.props.flex == true ? 1 : this.props.flex
-                })), (!this.state.params.style ? {} : this.state.params.style)) }), this.props.children)));
+                })), (!this.state.params.style ? {} : this.state.params.style)), this.props.style) }), this.props.children)));
     };
     return SView;
 }(Component));

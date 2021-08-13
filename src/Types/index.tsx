@@ -10,7 +10,8 @@ type TColKey = "xs" | "sm" | "md" | "lg" | "xl";
 type TColVal = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 type TColStr = `${TColKey}-${TColVal}`;
-// type TColCovination = `${TColStr} ${TColStr}`
+type TColCovination = `${TColStr} ${TColStr}`
+type TColCovination2 = `${TColStr} ${TColStr} ${string}`
 
 // type TColSujestPage = `xs-12 sm-10 md-8 lg-7 xl-6` | `xs-12 md-8 xl-6`
 type TColSujestPage =
@@ -23,7 +24,7 @@ type TColSujestPage =
 type SColType =
     { [index in TColKey]?: TColVal }
     | TColStr
-    // | TColCovination
+    | TColCovination
     | TColSujestPage;
 
 //Direcciones

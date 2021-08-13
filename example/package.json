@@ -1,34 +1,29 @@
 {
-  "name": "servisofts-component",
+  "name": "scomponentexample",
   "version": "1.0.1",
-  "description": "Component sevisofts ",
-  "main": "index.js",
+  "description": "scomponentexample",
   "scripts": {
     "start": "react-native start",
     "web": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "servisofts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/servisofts/servisofts-component.git"
-  },
   "license": "ISC",
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/native": "^5.9.6",
+    "@react-navigation/stack": "^5.14.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "^0.64.2",
-    "react-native-web": "^0.17.1",
-    "react-native-svg": "^12.1.1",
-    "react-native-svg-transformer": "^0.14.3",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.4.0",
-    "@react-navigation/native": "^5.9.6",
-    "@react-navigation/stack": "^5.14.7",
-    "servisofts-component": "^1.0.5"
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-transformer": "^0.14.3",
+    "react-native-web": "^0.17.1",
+    "servisofts-component": "file:../dist"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

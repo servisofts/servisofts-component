@@ -17,7 +17,9 @@ export default class SInfo extends Component {
         { name: 'SThread', detail: 'Hilo de SInfo' },
         { name: 'SUuid', detail: 'Uuid de SInfo' },
         { name: 'SView', detail: 'Vista de SInfo' },
-        { name: 'SStorage', detail: 'Almacenamiento de SInfo' }
+        { name: 'SStorage', detail: 'Almacenamiento de SInfo' },
+        { name: 'SScrollView', detail: 'Almacenamiento de SScrollView' },
+        { name: 'SScrollView2', detail: 'Almacenamiento de SScrollView2' },
     ]
 
     render() {

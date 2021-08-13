@@ -83,7 +83,6 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                             // this.setState({ layout: evt.nativeEvent.layout })
                             this.onChangeSize(evt.nativeEvent.layout);
                         }}>
-
                             {this.props.children}
                         </View>
                     </View>

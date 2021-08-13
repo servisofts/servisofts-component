@@ -13,6 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import SThread from '../SThread/index';
@@ -68,8 +79,9 @@ var STheme = /** @class */ (function (_super) {
     };
     STheme.prototype.repaint = function () {
         var _this = this;
-        if (STheme.color != this.props.themes[this.state.select]) {
-            STheme.color = this.props.themes[this.state.select];
+        if (STheme.colorSelect != this.props.themes[this.state.select]) {
+            STheme.colorSelect = this.props.themes[this.state.select];
+            STheme.color = __assign(__assign({}, STheme.color), this.props.themes[this.state.select]);
             if (this.state.lastLoad) {
                 new SThread(10, "stheme-change", true).start(function () {
                     _this.setState({
@@ -95,9 +107,14 @@ var STheme = /** @class */ (function (_super) {
     STheme.color = {
         barStyle: "dark-content",
         barColor: "#000000",
-        background: "#000000",
+        background: "#222222",
         primary: "#000000",
-        secondary: "#000000"
+        secondary: "#ffffff",
+        success: "#71AF4A",
+        warning: "#EF8C38",
+        danger: "#DF2732",
+        error: "#ff0000",
+        info: "#405394"
     };
     return STheme;
 }(Component));

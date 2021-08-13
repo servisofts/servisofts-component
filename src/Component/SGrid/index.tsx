@@ -39,7 +39,7 @@ export default class SGrid extends Component<SGridProps> {
         var col;
         if (typeof this.props.col == "string") {
             col = {};
-            var text:string = this.props.col;
+            var text: string = this.props.col;
             text = text.trim();
             text.split(" ").map((row) => {
                 var cols = /((xs|sm|md|lg|xl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
@@ -66,6 +66,10 @@ export default class SGrid extends Component<SGridProps> {
     render() {
         return (
             <Animated.View style={{
+
+                ...(!this.props.style.position ? {} : {
+                    position: this.props.style.position,
+                }),
                 ...(!this.props.style.flex ? {} : {
                     flex: this.props.style.flex,
                 }),

@@ -1,20 +1,21 @@
 import { Component } from 'react';
-import { ViewStyle } from 'react-native';
+import { ViewProps } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 export declare type SViewProps = {
     col?: SColType;
     dir?: SDirectionType;
     row?: boolean;
-    props?: SViewProps;
-    style?: ViewStyle;
+    style?: any;
     onPress?: Function;
     colSquare?: boolean;
     center?: boolean;
+    animated?: boolean;
     backgroundColor?: string;
     flex?: Number | boolean;
-};
+} & ViewProps & any;
 export default class SView extends Component<SViewProps> {
     state: any;
     constructor(props: SViewProps);
+    getData(): any;
     render(): JSX.Element;
 }

@@ -81,7 +81,9 @@ var SGrid = /** @class */ (function (_super) {
     };
     SGrid.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Animated.View, { style: __assign(__assign(__assign(__assign(__assign({}, (!this.props.style.flex ? {} : {
+        return (React.createElement(Animated.View, { style: __assign(__assign(__assign(__assign(__assign(__assign({}, (!this.props.style.position ? {} : {
+                position: this.props.style.position
+            })), (!this.props.style.flex ? {} : {
                 flex: this.props.style.flex
             })), (!this.props.style.height ? {} : {
                 height: this.props.style.height

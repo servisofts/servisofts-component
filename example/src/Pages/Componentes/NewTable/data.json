@@ -1,0 +1,2771 @@
+[
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "cambo@gmail.com",
+                "key": "117cf00f-22b3-490f-9374-db441e42df6d",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "marquez",
+                "key": "c9753c8a-4c81-42f4-9100-b325b969499c",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "36c7e022-9fed-4cbe-b5b9-d4e9187f43e3",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "1998-01-24",
+                "key": "fde63f8b-6d69-4a3e-b8b9-61bf4718e95c",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "case",
+                "key": "d0a464da-14f4-4330-964b-53fbce5067cf",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "+591 78093018",
+                "key": "926bc7af-c7a3-434c-9ce8-2c3c64f3a451",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "Bolivia",
+                "key": "59e348a5-9db9-4972-9264-41a468950905",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "{\"estado\":1,\"resultado\":4.617968919147596E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "18f7438d-3fa0-4760-94d3-552535bd2e8e",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "Hombre",
+                "key": "e8366e61-359d-40a8-a291-24cb452ecf79",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "7191eeab-4fc6-4773-93c5-2bfe88235f8b",
+                "fecha_on": "2021-01-24T08:50:14.661951",
+                "dato": "BQDNBW",
+                "key": "0eb4cf39-d250-47d7-a71e-4213e6e90a64",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-24T08:50:14.623879",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "7191eeab-4fc6-4773-93c5-2bfe88235f8b"
+        },
+        "key": "7191eeab-4fc6-4773-93c5-2bfe88235f8b"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "juan@gmail.com",
+                "key": "b805ce4d-a60c-47e3-be79-7cc661d56dfc",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "elel",
+                "key": "9d995fd0-7d6a-48d1-9ada-c17973657459",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "8d29cf22-2447-4a7f-b6a8-d5c84275a675",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "1998-12-23",
+                "key": "9678bb0a-40f5-4c16-9b13-a96c20c0e464",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "edson",
+                "key": "ee2c47bc-d188-4583-8c5b-582a9f5ae442",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "+591 77653999",
+                "key": "87da8b6c-e9a7-43cf-9b0e-42ba2ba0b9e8",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:34:36.539179",
+                "dato": "perfil.png",
+                "key": "a6435842-d77e-41ee-a531-e891e59d0c6e",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "Bolivia",
+                "key": "be9370f1-6c06-41ba-923b-a194a55a390e",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "{\"estado\":1,\"resultado\":9.524398419804736E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "853e2f41-94cf-46ab-85c8-48fcd37eb484",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "Hombre",
+                "key": "8811fd08-817b-45dc-870e-d41ef7bd1658",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "bb059418-1612-4676-ac27-e2560c564cb7",
+                "fecha_on": "2020-12-23T17:22:53.159937",
+                "dato": "GYEQUM",
+                "key": "b4e8c36a-ffeb-43c6-825f-3f18f3b1d8c4",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-23T17:22:53.113816",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "bb059418-1612-4676-ac27-e2560c564cb7"
+        },
+        "key": "bb059418-1612-4676-ac27-e2560c564cb7"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "edsoncito@gmail.com",
+                "key": "36fe4472-1159-4652-83aa-e53153a84c98",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "Gonzalo",
+                "key": "bcdbc4f1-c61a-4f88-aa0f-9923bf9ba65b",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "cdf2f6cf-49a2-4980-a2eb-baf6200ca545",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Facebook key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "3176020739114323",
+                "key": "cb1ef39f-89f3-4ffc-9317-64b675b5dc96",
+                "key_dato": "ea679dcc-7b70-4cd8-8551-e1bcb6e780a3"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "1994-04-06",
+                "key": "3592775a-6180-448b-957e-4ff732cdf6c3",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "Edson",
+                "key": "b3d1f304-86b7-4150-aa82-38f6f8288e99",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "+591 77653544",
+                "key": "7e0cce33-15a5-4dd5-9719-8dc1bd1965cd",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T20:24:58.903758",
+                "dato": "error",
+                "key": "1c8c63e5-3b41-4da7-a3dc-29a53da7e881",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "Bolivia",
+                "key": "a66de73b-51cc-436c-a881-61438396f834",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.760410773139313,\"direccion\":\"Tercer Anillo Externo 3320, Santa Cruz de la Sierra, Bolivia\",\"key\":\"89a72201-f552-4fde-9d4a-1fd5f32d8dc3\",\"longitude\":-63.16706484183669}",
+                "key": "e515b0cd-6056-4129-92a7-3d4a0a36edf8",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "Hombre",
+                "key": "605a5319-aa70-4ad2-9723-75fc72033835",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33",
+                "fecha_on": "2021-02-02T19:16:05.750593",
+                "dato": "123",
+                "key": "2a81941a-a21a-43dd-85ed-25a2d19d7cf6",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 35,
+            "fecha_on": "2021-02-02T19:16:05.487624",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33"
+        },
+        "key": "45fedfdc-c63d-4e0d-af6b-9deb3ea47e33"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "rickypazd@icloud.com",
+                "key": "623034f2-2403-4efb-bc3f-1795cd0e98cc",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "Edt2",
+                "key": "6a400e41-e490-47f7-9410-f32e881f2a42",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "14155ab2-6d34-4293-b88c-d451e1255af1",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "2003-05-19",
+                "key": "37c2b6aa-d329-4b81-ade2-37e2474df2dc",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "Test2",
+                "key": "f7a07a07-5c59-4d0b-935f-617a5b0af4a7",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "+591 75395848",
+                "key": "47d26d17-dd57-42eb-98fe-a353e65fa84f",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:47:27.61646",
+                "dato": "error",
+                "key": "923457ff-e3e6-4f11-8463-f1ed4853dd52",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "Bolivia",
+                "key": "89c9942d-4ce4-419d-804f-180f937204b5",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.744195186676592,\"direccion\":\"Avenue Principal 10, Santa Cruz de la Sierra, Bolivia\",\"key\":\"6e410a47-f5ad-4673-8979-c03b21c7445b\",\"longitude\":-63.169189151376486}",
+                "key": "3c327aa7-47fb-4f13-9304-9324c2dfbb46",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "Hombre",
+                "key": "d132080f-bd6b-4e23-9e65-aca930500ee3",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "14c1f251-609d-47a5-b74c-7a5f4979efa2",
+                "fecha_on": "2021-05-19T22:42:31.89507",
+                "dato": "SUFOXI",
+                "key": "5fe2fe88-9e3d-4705-8798-a7d3f2331a9f",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 40,
+            "fecha_on": "2021-05-19T22:42:31.894255",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "14c1f251-609d-47a5-b74c-7a5f4979efa2"
+        },
+        "key": "14c1f251-609d-47a5-b74c-7a5f4979efa2"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "e37d6838-13d0-4499-bb41-a046528952fd",
+                "fecha_on": "2021-01-27T03:57:30.147911",
+                "dato": "admin@gmail.com",
+                "key": "f2d5a8df-f089-4ed0-8824-75cf8922fa04",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "e37d6838-13d0-4499-bb41-a046528952fd",
+                "fecha_on": "2021-01-27T03:57:30.147911",
+                "dato": "administrador",
+                "key": "ea7d308e-2a98-4599-8e8f-e3539f843964",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "e37d6838-13d0-4499-bb41-a046528952fd",
+                "fecha_on": "2021-01-27T03:57:30.147911",
+                "dato": "administrador",
+                "key": "9ee1410a-89da-4bdd-9020-2bd326bdb878",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "e37d6838-13d0-4499-bb41-a046528952fd",
+                "fecha_on": "2021-01-27T03:57:30.147911",
+                "dato": "753232323",
+                "key": "5ac349bf-f949-4eac-9803-4143bc93d5ce",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "e37d6838-13d0-4499-bb41-a046528952fd",
+                "fecha_on": "2021-01-27T03:57:30.147911",
+                "dato": "123",
+                "key": "39abfee1-b3dd-4b5f-847c-8b22282e4d3e",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 33,
+            "fecha_on": "2021-01-27T03:57:29.782373",
+            "key_cabecera": "2847bb86-dbe7-43d7-92a9-f7d218fc3628",
+            "key": "e37d6838-13d0-4499-bb41-a046528952fd"
+        },
+        "key": "e37d6838-13d0-4499-bb41-a046528952fd"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "liceth.dfe@gmail.com",
+                "key": "26e00477-0f53-4394-9680-109a617e0c81",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "Flores",
+                "key": "676ade9d-7b2e-476f-bb3e-d54b09f5bfb2",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "d68c0372-9ce5-450f-9e1b-4204c106f889",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "2004-02-02",
+                "key": "3bb37005-7f1d-4488-acd4-23fe4ff93863",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "Liceth Diana",
+                "key": "e40a84c3-8de7-434e-a3ca-331ac38bc6f6",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "+591 73138222",
+                "key": "fe987e0c-6aad-4eab-a649-1a2fb0536255",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "Bolivia",
+                "key": "5e3d2e95-036f-4730-b5ad-c25817a1ae70",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Gmail key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "106545857374652686496",
+                "key": "0068bee4-dcc7-45d5-9d35-db86c18f1f1a",
+                "key_dato": "9bc848a3-5a61-4763-8926-776e877ff812"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.835116339855276,\"direccion\":\"Petrolera 22, Santa Cruz de la Sierra, Bolivia\",\"key\":\"b1cba4a8-656f-474f-8f2f-a95242134e16\",\"longitude\":-63.127973657101386}",
+                "key": "f261b8fe-abdf-4ae6-b276-cd498fa87486",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "Mujer",
+                "key": "2253f184-1211-4bcd-98fb-8b3cbd251a6c",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27455aff-4c20-422b-9bb9-cf5a78e43120",
+                "fecha_on": "2021-02-02T21:49:00.435312",
+                "dato": "GRECQR",
+                "key": "eb93b872-3b16-4dec-8a07-f765854818ac",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 37,
+            "fecha_on": "2021-02-02T21:49:00.434203",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "27455aff-4c20-422b-9bb9-cf5a78e43120"
+        },
+        "key": "27455aff-4c20-422b-9bb9-cf5a78e43120"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "edson.nur@gmail.com",
+                "key": "8593cd7c-3762-46a4-9706-f6e68b1c330c",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "gonzalo",
+                "key": "7aa70bdd-ea0c-4d95-bd93-92c48ef5c8b6",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "0c3be8d8-084e-45de-a3d9-4f66e17c7229",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "1994-04-06",
+                "key": "71dd620f-73af-4717-b271-cf4b849bdd37",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "edson",
+                "key": "65ec6a51-21d6-4015-b5c0-1e471e646c33",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "+591 77653520",
+                "key": "5252355c-ecad-4b39-94f3-3766be4ab374",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-02-02T20:19:07.577077",
+                "dato": "perfil.png",
+                "key": "722af302-45b9-4df5-adc2-0c707c626af1",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "Bolivia",
+                "key": "a8bc320a-0f4c-499b-bda2-fb997568d433",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.765938246742742,\"direccion\":\"Tercer Anillo Externo 3480, Santa Cruz de la Sierra, Bolivia\",\"key\":\"0d34fcfe-f814-4668-b737-17b732b2d773\",\"longitude\":-63.157620783895254}",
+                "key": "22b665f9-b0b7-4cef-8133-47d5a26425f3",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "Hombre",
+                "key": "3c7407cb-58fe-4604-848d-b9b6841f7307",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "419e5d20-2288-4879-bcfb-aa0973013a2d",
+                "fecha_on": "2021-01-27T03:42:12.553369",
+                "dato": "123",
+                "key": "56d514f9-284f-4d35-8f90-c5e5bd4dd25a",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 32,
+            "fecha_on": "2021-01-27T03:42:12.528426",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "419e5d20-2288-4879-bcfb-aa0973013a2d"
+        },
+        "key": "419e5d20-2288-4879-bcfb-aa0973013a2d"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "rodrigoaot@gmail.com",
+                "key": "eb4ae0e3-69e2-4bc8-b977-6a91328c2237",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "olmos",
+                "key": "d7840518-7f0d-4e63-b353-e1bbf1b02299",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "434bb7e8-20c9-4a99-a8e1-c1dba9a9a238",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "1990-07-09",
+                "key": "280dacac-c341-473b-8f9a-eee291c5ea93",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "rodrigo",
+                "key": "83ced6be-fc02-411d-8654-d31f4c4cbe30",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "+591 70804337",
+                "key": "2f23b449-d231-42a7-a100-d13f1d8f7300",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:27:24.616344",
+                "dato": "perfil.png",
+                "key": "32a966a7-3c34-45de-8d65-b2678260d562",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "Bolivia",
+                "key": "9e2e6425-c2da-4bbf-8d1c-5acd5b7c7674",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.79029143386641,\"direccion\":\"Tte.Hormando Balcazar 168, Santa Cruz de la Sierra, Bolivia\",\"key\":\"29a2c770-348b-4e26-94fb-98c2a8f07390\",\"longitude\":-63.166651614010334}",
+                "key": "37cb3594-9537-4013-898a-746b2805fd74",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "Hombre",
+                "key": "b054fe6a-f2f8-41ec-8b1a-5d2e11156ffc",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "9db3d154-362b-4732-911d-f30b130717a4",
+                "fecha_on": "2021-01-13T21:26:30.288176",
+                "dato": "123",
+                "key": "2906bba0-fcf3-407e-89c4-6500d96de65c",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-13T21:26:30.14186",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "9db3d154-362b-4732-911d-f30b130717a4"
+        },
+        "key": "9db3d154-362b-4732-911d-f30b130717a4"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "asda",
+                "key": "84198c71-8941-4eeb-afd0-a5d4e0e18b9c",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "asdasd",
+                "key": "24c347f2-6f55-4a17-8725-1425113683eb",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "e365c435-33b4-4714-ad87-2dfff43722e1",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "Invalid date",
+                "key": "2f653e0f-e9ee-4a40-8d58-ada4744b7a21",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "asdasd",
+                "key": "f7d56883-d184-4afd-b0b8-4bf99fe46ada",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "+591 76031876",
+                "key": "b4ca33a3-884a-4f2c-97af-ab8a365ea5f2",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "Bolivia",
+                "key": "5411de59-a1de-4b5a-8b0a-63f7aa57ac4b",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "{\"estado\":1,\"resultado\":4.728296063412188E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "f6b8f217-9c04-4211-b3b1-00cfd09f4fcb",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "Hombre",
+                "key": "a38fdc81-c2c7-461e-bc32-e63ec39ffa4c",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1948448e-a728-4bb4-b603-cc9a85fef16f",
+                "fecha_on": "2021-01-14T18:17:09.985937",
+                "dato": "WSRLDB",
+                "key": "bd0afa43-3a1c-4d16-9808-98eee14863dd",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-14T18:17:09.559317",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "1948448e-a728-4bb4-b603-cc9a85fef16f"
+        },
+        "key": "1948448e-a728-4bb4-b603-cc9a85fef16f"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "cesar123@gmail.com",
+                "key": "f400ca4e-21f3-47b6-9f39-a0d08a1328dd",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "hurtado campos",
+                "key": "d6f9d074-876a-4a88-bd4d-b3677a4772c5",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "ef9075cd-5a82-4d90-b297-a16ee50b94a0",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "1996-02-01",
+                "key": "20dee171-c2e2-46f6-8eba-bd5ec4b1ccfb",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "cesar",
+                "key": "6dac61be-e617-433d-86a0-dc701e067d0f",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "+591 78093081",
+                "key": "83edde07-51ea-4381-8d91-3d8f791a0f3c",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "Bolivia",
+                "key": "498e5b21-7211-4b7e-9ee3-4101085d207e",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "{\"estado\":1,\"resultado\":8.294771878079544E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "5244d56b-250c-40a2-91e9-6d0465c16271",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "Hombre",
+                "key": "10864037-a877-43e3-a835-f15ef3006138",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728",
+                "fecha_on": "2021-02-01T17:54:47.336629",
+                "dato": "BYKWGT",
+                "key": "4bd13f07-12c7-4d55-b4da-60b2ee6b4697",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 34,
+            "fecha_on": "2021-02-01T17:54:47.308987",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728"
+        },
+        "key": "b90ff974-5cf3-4d87-83cd-83dfa2fbe728"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "kratos@gmail.com",
+                "key": "9a31233e-cc3b-4d19-b8b9-0e3a38010b3c",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "Hurtado",
+                "key": "c168b9af-01f6-441d-a76c-07b159b6cf23",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "6189325d-b57a-4a80-8eca-cf55b67f7f6c",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "Invalid date",
+                "key": "388b6f31-0ef0-41ac-a2e2-4c81ea11952c",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "kratos",
+                "key": "c5f0788d-6081-4d97-8003-bf875f9a4b68",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "+591 74633152",
+                "key": "ffa32d0f-f1ec-472c-aefe-29ece922a2fc",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:51:23.319308",
+                "dato": "perfil.png",
+                "key": "da14ebd0-369e-4f33-b902-5395c2f1884f",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "Bolivia",
+                "key": "264e1bad-ce53-4f13-b6f4-783d9f29be93",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "{\"estado\":1,\"resultado\":4.617968919147596E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "0c017e03-b083-4e79-8a2c-f8a875ccad3c",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "Hombre",
+                "key": "1497cb3b-ac3c-42b5-844f-6f533685ce0a",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2",
+                "fecha_on": "2021-01-24T07:19:15.017188",
+                "dato": "123",
+                "key": "e756c69d-accf-4066-8743-cf97d9ee3688",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-24T07:19:14.987355",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2"
+        },
+        "key": "aeaa4ab3-ea3e-44e3-ba24-c20a480cb4d2"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "fata@gmail.com",
+                "key": "5ef76b02-b9fd-4f7c-8cd9-db60c9534b21",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "ysysys",
+                "key": "984ecd16-ee8c-4892-bef5-b42326cfe66e",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "error",
+                "key": "0f3ad755-f38f-4631-b922-39991c630662",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Codigo de referencia": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "gaga",
+                "key": "2eb05a14-0ad7-4c48-954e-c358f0a311a1",
+                "key_dato": "d6315264-f107-400f-9800-08f5feed449c"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "Invalid date",
+                "key": "798b72d0-f947-48bb-a44e-11b3e90ae12f",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "ysysy",
+                "key": "d9ee9c16-00f4-451b-a8e4-2c410597b811",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "+591 54562626",
+                "key": "c9ec1aec-e2c6-405c-9e89-c18f113f8046",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "Bolivia",
+                "key": "8942d294-9753-4eb0-b07f-92cf9ea4c6e3",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "{\"estado\":1,\"resultado\":3.552713678800501E-15,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "1da5aca4-446a-4a59-adc1-ca79e793fd0f",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "Hombre",
+                "key": "9885e011-185e-4a39-afe4-dba2231f9da8",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2",
+                "fecha_on": "2020-12-09T07:19:10.330422",
+                "dato": "ASGNPL",
+                "key": "d0973fb1-160f-4e8b-9d05-e3eaa7b5f667",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-09T07:18:58.29293",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2"
+        },
+        "key": "dc316680-79cd-4a4b-a7a7-14ac8843b1f2"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "ricky.paz.d.97@gmail.com",
+                "key": "078a8a2d-d26b-42b8-b1eb-6471effc316e",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "Paz D.",
+                "key": "38759525-b3db-4475-aa6e-4f203997385a",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "0b665cbf-6c13-42ac-8547-0c921711ab31",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "1967-09-14",
+                "key": "6689406c-d5cd-4f2e-ad6f-01e6461d9fa1",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "Ricky",
+                "key": "6c77618e-b872-4a4b-8b74-a9ed5327b8f5",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "+591 75555436",
+                "key": "5d8f92a7-6d34-430b-ae40-d36607338c84",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:43:28.394621",
+                "dato": "perfil.png",
+                "key": "f8b3ec4a-f114-429c-b47d-82373e97316c",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "Bolivia",
+                "key": "d612873c-9b30-43d1-9489-987d8fa01323",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Gmail key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "111208985089009915152",
+                "key": "a1184c4a-a7bc-4201-90ce-bda88c68661b",
+                "key_dato": "9bc848a3-5a61-4763-8926-776e877ff812"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "{\"estado\":1,\"resultado\":9.524398419804736E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "43c4ad15-3d46-4890-961e-c973d25aa370",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "Hombre",
+                "key": "23521244-ea51-46dd-9a08-15d470dcc304",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5606f9be-e087-4b64-8879-fa052bdad5a2",
+                "fecha_on": "2020-12-15T23:35:16.59033",
+                "dato": "RFNGNO",
+                "key": "b6c7967a-fc4f-4f53-84ed-a833912bb980",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-15T23:35:16.555298",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "5606f9be-e087-4b64-8879-fa052bdad5a2"
+        },
+        "key": "5606f9be-e087-4b64-8879-fa052bdad5a2"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "sjdjdkddk@gmail.com",
+                "key": "8e3d8be6-e504-445d-941e-84e092746f5f",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "Olmos",
+                "key": "42c965d7-ec59-4834-86b0-cc20ea2ec3c6",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "231a0c51-27e7-44ba-bd26-623cdcbb9530",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "1900-08-02",
+                "key": "8f352d26-7a0b-4add-93df-d813248067db",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "Rolando",
+                "key": "89a40e07-5561-4524-b247-511fa86a71f1",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "+591 66666666",
+                "key": "e8ef7f91-bcb4-433a-bede-d2137bb51514",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "Bolivia",
+                "key": "4aef4a0d-6a40-463d-b511-81ef187baafe",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.804044026007276,\"direccion\":\"Plácido Molina 78, Santa Cruz de la Sierra, Bolivia\",\"key\":\"b475d39b-2fce-4bd1-a8be-a0fe83696a8c\",\"longitude\":-63.174975011497736}",
+                "key": "cb75ec64-180e-4326-961f-87b730aff0be",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "Mujer",
+                "key": "503c4906-0418-439e-8aeb-5a5c20e5632b",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "5839712a-f587-4419-ae0e-a64b33cb9b79",
+                "fecha_on": "2020-12-23T19:33:03.583774",
+                "dato": "EEULNO",
+                "key": "9c1c7567-a645-41d5-950c-79ba91b9d85d",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-23T19:33:03.552767",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "5839712a-f587-4419-ae0e-a64b33cb9b79"
+        },
+        "key": "5839712a-f587-4419-ae0e-a64b33cb9b79"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "aaa@gmail.com",
+                "key": "6f0f42df-aabc-4955-90f3-aab7da7186f9",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "AAAA",
+                "key": "9d1d3312-4be9-4367-afdf-1d0304267e41",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "90669122-fa80-494e-b5fd-f0c58efb63c5",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Codigo de referencia": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "zzaa",
+                "key": "79a27665-affd-47a1-804e-65a3b26a6770",
+                "key_dato": "d6315264-f107-400f-9800-08f5feed449c"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "Invalid date",
+                "key": "d67b8568-c032-4f04-a180-38c96e31ae69",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "aaaa",
+                "key": "7a4be47d-4a9c-4716-acdf-f654ac35b3a1",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "+591 53626222",
+                "key": "82423643-9af5-4c41-9224-88aec9edebab",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "Bolivia",
+                "key": "0a39405f-8cf0-4645-bff8-067ba53a11da",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "{\"estado\":1,\"resultado\":3.552713678800501E-15,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "ead9ae6b-e43b-48b4-aa96-62e07450da8e",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "Hombre",
+                "key": "39b9c326-9817-4df9-903c-9f8e5221b9f5",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4f6c70c6-a857-4a84-8f77-1af204011ec6",
+                "fecha_on": "2020-12-09T07:21:45.89366",
+                "dato": "RJNDQR",
+                "key": "d251c4e5-4bf1-48c0-b5be-86ac1550e927",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-09T07:21:45.845183",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "4f6c70c6-a857-4a84-8f77-1af204011ec6"
+        },
+        "key": "4f6c70c6-a857-4a84-8f77-1af204011ec6"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "edson@gmail.com",
+                "key": "bb4ee715-5923-4f3d-987a-0e3b9ca6c940",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "djdk",
+                "key": "1c19f5c1-5f91-4d8b-bdc8-4f15777fe154",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "49feba0e-7283-45fe-955f-5dc80c5e85d9",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "2002-12-22",
+                "key": "6113a743-8a3c-4a1f-a1f8-c845d623bf04",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "edson",
+                "key": "e5ef3b93-81ea-41fe-9b18-2af4aab88fd9",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "+591 72929292",
+                "key": "c041f157-36dd-4a28-83b9-eacc990e18ed",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2021-02-12T23:20:19.195382",
+                "dato": "perfil.png",
+                "key": "e634d623-20fe-40d5-93ba-59181c6a8035",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "Bolivia",
+                "key": "a9dc34b7-bd90-4c99-9aea-a21f3613c060",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "{\"estado\":1,\"resultado\":9.524398419804736E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "b3e7c1e4-cd0a-41e6-95f8-1dd74be629b7",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "Hombre",
+                "key": "b5c66b03-355d-4133-aecc-eeed51ab515c",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "174fd225-b3a3-4818-8b8f-5629e39c2b71",
+                "fecha_on": "2020-12-22T13:08:36.359176",
+                "dato": "123",
+                "key": "adf184d2-f949-4267-81cc-16b35ee45688",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-22T13:08:36.34052",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "174fd225-b3a3-4818-8b8f-5629e39c2b71"
+        },
+        "key": "174fd225-b3a3-4818-8b8f-5629e39c2b71"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "edson.123@gmail.com",
+                "key": "4b0247fd-1926-4633-96c4-c90731a410fe",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "djdj",
+                "key": "8bedfd9f-ff2f-462a-a04f-47b71b2a83ee",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "ef66272a-2ae5-4331-8a2f-23ec5efe3649",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "2000-12-22",
+                "key": "f5ecc43b-cfb3-4239-8e60-e60c5e78d0d6",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "susud",
+                "key": "9f58a0f5-023f-4a30-a641-79d084380fcd",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "+591 72626262",
+                "key": "3f65e687-b1e0-4640-9033-9acfeedb6fd4",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "Bolivia",
+                "key": "33d34d69-6ce7-4f3b-b6a4-b2757f51a156",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "{\"estado\":1,\"resultado\":9.524398419804736E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "6edf2153-c868-4fdf-a3b1-ecd99c5678af",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "Hombre",
+                "key": "5e1116a3-f995-4312-9ddb-573324e354e6",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "73dec065-604d-49a1-b642-b62fe80ab69c",
+                "fecha_on": "2020-12-22T23:28:58.732325",
+                "dato": "KYHSLF",
+                "key": "7e3fdb79-8d39-4794-8fc0-6e2a00d8ad75",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-22T23:28:58.691443",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "73dec065-604d-49a1-b642-b62fe80ab69c"
+        },
+        "key": "73dec065-604d-49a1-b642-b62fe80ab69c"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8",
+                "fecha_on": "2021-06-08T16:56:25.642132",
+                "dato": "hola@gmail.com",
+                "key": "cb23d439-60b1-4059-a33c-6c6197b374c0",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8",
+                "fecha_on": "2021-06-08T16:56:25.642132",
+                "dato": "hola2",
+                "key": "d81fa4df-58d0-44b3-aa89-79f5ce0e46d2",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8",
+                "fecha_on": "2021-06-08T16:56:25.642132",
+                "dato": "hola",
+                "key": "59b64f2b-f3f2-47e7-aaa4-11a5cf7fb58d",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8",
+                "fecha_on": "2021-06-08T16:56:25.642132",
+                "dato": "789652",
+                "key": "9b115b3d-e096-4725-a3b9-0a5d2cd3d64b",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8",
+                "fecha_on": "2021-06-08T16:56:25.642132",
+                "dato": "JUEMVH",
+                "key": "a2a00543-4517-4717-a279-189006ccac4a",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 41,
+            "fecha_on": "2021-06-08T16:56:25.640691",
+            "key_cabecera": "2847bb86-dbe7-43d7-92a9-f7d218fc3628",
+            "key": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8"
+        },
+        "key": "79035b7a-8c6c-4d1b-a3ca-a2d7ddcaaab8"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "asd1@gmail.com",
+                "key": "e753bcba-c0ac-4c80-a36a-8cb82da07830",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "asd1",
+                "key": "5037ffd0-2aa9-47d8-8b15-943e2af38b9a",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "9edac163-636f-4579-8c2f-25164d8c2e66",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "1996-01-27",
+                "key": "1e67cab4-f009-4e33-b56c-bcb4a1838fd7",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "asd1",
+                "key": "9099f0f8-717f-4023-b6f8-7b8b65f7f114",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "+591 76634444",
+                "key": "2b0aebb5-4bba-4dfc-a30b-1e84becedf63",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "Bolivia",
+                "key": "e31da4f5-ea3b-48dd-91ba-8c6353c3b381",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "{\"estado\":1,\"resultado\":1.0003385885158509E-5,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "6c675919-296d-4ed7-97c3-8c5206b6f360",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "Hombre",
+                "key": "eca0ce65-848d-482a-b614-c57b8676ca52",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6",
+                "fecha_on": "2021-01-27T06:56:45.934221",
+                "dato": "123",
+                "key": "267aeca1-732a-4ac7-ae4c-1fcfffa40bd3",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-27T06:56:45.889736",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6"
+        },
+        "key": "1962f9ec-5bb9-4733-9fc3-ea93424a9eb6"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "servisofts.srl@gmail.com",
+                "key": "722f3f4c-8723-4385-96d4-d6333850ee6a",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "servisofts",
+                "key": "85c89072-1935-4b46-9db5-908a426edffb",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "0d6b1546-6438-4188-927a-7e2a6d166fa0",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "1983-02-19",
+                "key": "ba0737c1-095d-4497-a4e2-12bab0d8c523",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "servisofts",
+                "key": "72a2c9f8-c47a-4634-a305-3a9ca583ff66",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "+591 75646552",
+                "key": "98e5c6cc-fd4e-463f-b536-5b322232d224",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:13:16.68246",
+                "dato": "perfil.png",
+                "key": "553a7953-74f2-474b-99ef-356b4f1e26d9",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "Bolivia",
+                "key": "efadc9b1-47cc-4cc1-a17b-2f2098e17220",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Gmail key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "101921819290967211529",
+                "key": "a388c51f-7729-4e90-af74-8f59952b1f65",
+                "key_dato": "9bc848a3-5a61-4763-8926-776e877ff812"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.74561226966462,\"direccion\":\"Maria Luisa Castro 28, Santa Cruz de la Sierra, Bolivia\",\"key\":\"b7710baa-97fe-4993-9fea-f45e73d158d3\",\"longitude\":-63.168288599699736}",
+                "key": "aad7a028-5f61-4b8d-ade7-d5d79e939674",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "Sin definir",
+                "key": "19c4e714-210d-4d01-bdb6-e27b0890d045",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "82321c15-abe9-4a84-8083-578edd659b10",
+                "fecha_on": "2021-02-19T18:12:12.371197",
+                "dato": "DYFDWK",
+                "key": "21ffe844-966d-4cce-9729-9fafdd3e6f55",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 38,
+            "fecha_on": "2021-02-19T18:12:12.368519",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "82321c15-abe9-4a84-8083-578edd659b10"
+        },
+        "key": "82321c15-abe9-4a84-8083-578edd659b10"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "Edgeproduccionessc@gmail.com",
+                "key": "b7af24d0-3622-4802-a774-8361cb41ae16",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "perez",
+                "key": "0d354fe9-3431-469f-a5ff-2c24f70ec474",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "9ace6df5-bad4-4939-8a4b-29d43865f5e7",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "1966-12-23",
+                "key": "8edcca4f-e2e6-4018-96c8-31fd54a30699",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "juan",
+                "key": "04f98a84-6dc0-4bc2-8076-cf2bbe3e7576",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "+591 70883923",
+                "key": "5fe1879a-2dd5-4228-b971-b590899bfc54",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "Bolivia",
+                "key": "5e7f56fc-f564-46fb-bb47-a9a07b73e454",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "{\"estado\":1,\"resultado\":1.065725528469001E-5,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "94a58d3e-112e-4b66-bfc2-1595af08daa8",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "Sin definir",
+                "key": "a72c3b5e-349d-4a06-8790-5e02b83e1568",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae",
+                "fecha_on": "2020-12-23T19:00:14.98945",
+                "dato": "HYXNWG",
+                "key": "c0fc0843-41ba-4043-a3cc-cf892740fe4e",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-23T19:00:14.961125",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae"
+        },
+        "key": "2e835a8a-3732-4d03-8dc8-a1ecb28711ae"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "edson.veizaga@gmail.com",
+                "key": "49b23495-89b0-44ae-b64e-be8534f3923d",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "plinio",
+                "key": "0e0ff600-c5d8-40ef-9895-d5e18854e7a1",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "1958-01-20",
+                "key": "97f1b9c0-a009-43ff-98ea-54d10e970447",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "edge",
+                "key": "9503d178-cfd6-4728-b7a2-14f151ccee00",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "+591 70895765",
+                "key": "2a41b4e9-080e-4867-bf34-3e058eed67f4",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "Bolivia",
+                "key": "e05ec344-3c45-4483-b169-95296bc8086f",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.784384007920238,\"direccion\":\"Centro, Santa Cruz de la Sierra, Bolivia\",\"key\":\"a8a590a2-4cb4-4fd2-8b8a-c73228865370\",\"longitude\":-63.178105149418116}",
+                "key": "5629b298-cb1b-4672-bc0f-f8fcfa4feaf2",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "Hombre",
+                "key": "47afcbcd-fa39-462c-a1f0-0125919b44b7",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "2b7e1902-1ddb-4208-85ce-d759f17f36ea",
+                "fecha_on": "2021-04-29T18:02:50.467423",
+                "dato": "123",
+                "key": "a879adfd-84fc-4c97-86ae-9e91462d4336",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 39,
+            "fecha_on": "2021-04-29T18:02:50.466009",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "2b7e1902-1ddb-4208-85ce-d759f17f36ea"
+        },
+        "key": "2b7e1902-1ddb-4208-85ce-d759f17f36ea"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "willams_21@hotmail.com",
+                "key": "ba527318-c792-4687-b790-ea77079be508",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "Flores",
+                "key": "822fe1c1-39e8-4310-811a-7029913cda61",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "e22d0a2d-6904-42bf-9faf-8aa248b3d731",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Facebook key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "4050997688262719",
+                "key": "50c466c7-63e7-41ae-b091-e8f03cd96e61",
+                "key_dato": "ea679dcc-7b70-4cd8-8551-e1bcb6e780a3"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "1989-03-21",
+                "key": "558f15b9-81af-4757-806a-dbf126960cfa",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "Javier W.",
+                "key": "98ee3ee1-5558-4993-a438-a526d3381079",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "+591 76681786",
+                "key": "b2311938-185d-4ee2-8931-d3b9e2abead6",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:46:28.963985",
+                "dato": "perfil.png",
+                "key": "faafabb9-73e7-463d-94e1-31779505a483",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "Bolivia",
+                "key": "f4cbd4de-3479-4edd-bca8-464c8ecc565f",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "{\"estado\":1,\"fecha_on\":\"now()\",\"latitude\":-17.777129717955702,\"direccion\":\"Doctor Terceros Alberto M. 3025, Santa Cruz de la Sierra, Bolivia\",\"key\":\"d82a3b17-d7b9-415e-ae75-75c29114f138\",\"longitude\":-63.20901995524764}",
+                "key": "c847edc3-be3b-488b-88ce-8261c794f17e",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "Hombre",
+                "key": "b6beedc5-3ea1-4342-835c-738afa69e0c7",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1",
+                "fecha_on": "2021-02-02T21:43:45.014815",
+                "dato": "TKXKYS",
+                "key": "099a4093-7ed9-47a2-b76e-363855eba9e7",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": 36,
+            "fecha_on": "2021-02-02T21:43:45.013419",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1"
+        },
+        "key": "ca1b757c-581a-4baf-99d9-9f1e6dde56b1"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "koki@gmail.com",
+                "key": "38d5eafb-c487-4af0-9f7c-0961fbce1475",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "Banzer",
+                "key": "66e8f64e-67f1-4994-884f-0fcd32221622",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "5591be61-3113-4e04-b258-a3e6379140f0",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Facebook key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "105812024765197",
+                "key": "6116b710-4545-4be5-a7f8-d7bf65271919",
+                "key_dato": "ea679dcc-7b70-4cd8-8551-e1bcb6e780a3"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "1988-12-23",
+                "key": "a2269a73-a86e-4abd-9a11-575e6cb4b92e",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "José Maria",
+                "key": "8bb43692-696f-4245-968e-ce70455ba4ce",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "+591 76391632",
+                "key": "3d077ea2-f455-44bb-b3f4-f5a99afe6dc1",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:53.199773",
+                "dato": "perfil.png",
+                "key": "ce79e9d3-2d19-47c8-8b0f-16948f633521",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "Bolivia",
+                "key": "71875019-632f-48c4-9ddb-f7d7081ad3f0",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "{\"estado\":1,\"resultado\":8.051992394937223E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "7980fe77-aac1-429c-b27e-e470a9eb17e0",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "Hombre",
+                "key": "e3c43e00-c794-4d1e-a255-f5bf7cc142f4",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb",
+                "fecha_on": "2020-12-23T17:43:13.967078",
+                "dato": "DHTDKP",
+                "key": "f7bc7faf-3fb7-435a-a0d4-7e9bf41ac1cb",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-23T17:43:13.917006",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb"
+        },
+        "key": "27b7ad37-bfdb-49c4-92c0-e9119a529cfb"
+    },
+    {
+        "data": {
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "rolando.olmos.jrot@gmail.com",
+                "key": "f7f33e86-69ba-44fc-955c-2fe3677301ce",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "Olmos Trigo",
+                "key": "93c90f91-37e8-49d9-8625-6c78916641be",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "bcee4a84-8fab-457a-be0f-09f8020bedfd",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "1982-01-20",
+                "key": "297ac651-614e-42ee-a6cb-4845c73e068c",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "Javier Rolando",
+                "key": "e57a0515-dce5-4ecb-ae9e-5d1bfdc906d6",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "+591 70883925",
+                "key": "857f6dea-8c6d-4ddf-adc2-b3ed3cd79878",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:24:46.938541",
+                "dato": "perfil.png",
+                "key": "b9a8bde3-cd4b-43f7-a314-16cc205b3d77",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "Bolivia",
+                "key": "88601f99-fa26-479b-a59a-c086831b7e97",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Gmail key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "101451500218918116666",
+                "key": "9bb69f97-05f1-4d6a-9aec-a681d789f8ee",
+                "key_dato": "9bc848a3-5a61-4763-8926-776e877ff812"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "{\"estado\":1,\"resultado\":9.268835421099263E-6,\"fecha_on\":\"2020-10-28T16:24:02.286726\",\"latitude\":-17.77999983333332,\"direccion\":\"calle beni #340 entre calle Charcas y Caballero, Santa Cruz de la Sierra, Bolivia\",\"key\":\"ad11b398-147d-411e-8682-0165df1103dd\",\"longitude\":-63.180598333333336}",
+                "key": "553c5670-a3fe-4467-9c72-a5dccac31480",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "Hombre",
+                "key": "5448db8a-74ab-4e9a-a706-5d659531999c",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "1237987d-22ff-4085-8f2b-a3360c375f10",
+                "fecha_on": "2021-01-26T20:16:51.576575",
+                "dato": "123",
+                "key": "f342df6a-b40e-4a6d-9bb0-df5054f6063a",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2021-01-26T20:16:51.520563",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "1237987d-22ff-4085-8f2b-a3360c375f10"
+        },
+        "key": "1237987d-22ff-4085-8f2b-a3360c375f10"
+    },
+    {
+        "data": {
+            "Facebook key": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "10223311967013301",
+                "key": "0a27148b-2fc9-48ee-a64c-2659763e4e87",
+                "key_dato": "ea679dcc-7b70-4cd8-8551-e1bcb6e780a3"
+            },
+            "Sexo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "Mujer",
+                "key": "c0eb0e8e-89a1-43f2-a019-137af39243e5",
+                "key_dato": "1e83b4ce-6565-4656-9bcf-be37bfea7116"
+            },
+            "Correo": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "rickypazd@hotmail.com",
+                "key": "2b75705e-61e4-4081-98d2-f03f11c175bf",
+                "key_dato": "74670ace-593d-4df3-b69d-378b57fe5e44"
+            },
+            "Apellidos": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "Paz Demiquel",
+                "key": "19977704-a6bd-4402-b4be-f485f0389cf1",
+                "key_dato": "9c56c476-e3ac-4c80-92f1-2eb4d8e36d22"
+            },
+            "Carnet de identidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "{\"back\":\"back.png\",\"front\":\"front.png\"}",
+                "key": "9c1f8df4-1375-4933-a8b8-14289a88b1d1",
+                "key_dato": "23706702-2f70-4f7c-9cee-db946e608f04"
+            },
+            "Codigo de referencia": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "1111",
+                "key": "c6afb263-ba95-422a-b6fd-8e7f72dd8518",
+                "key_dato": "d6315264-f107-400f-9800-08f5feed449c"
+            },
+            "Fecha de nacimiento": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "14/03/1997",
+                "key": "589a1789-d330-4f8a-8cb0-bdc47a3fc31a",
+                "key_dato": "8022f458-dcb7-4754-b1c9-ed84435dd239"
+            },
+            "Nombres": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "Ricardo",
+                "key": "9ea0d060-4dbf-423f-9af5-e728d1c1cd1d",
+                "key_dato": "41120789-de12-481f-82a0-abed0e606558"
+            },
+            "Telefono": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "+591 7566655455",
+                "key": "89814d9a-68fb-4bfc-8ce8-04574dafcdab",
+                "key_dato": "161236ab-bc96-40a7-a1c5-16cf16ca344a"
+            },
+            "Foto perfil": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:22:23.274388",
+                "dato": "perfil.png",
+                "key": "20b688dd-7b9e-4a4a-84a0-08a9dcf0ba6a",
+                "key_dato": "31f30597-a694-4ebb-a91b-bd4da687511d"
+            },
+            "Nacionalidad": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "Bolivia",
+                "key": "f642701a-b270-43b1-b338-0b3237cd0a0f",
+                "key_dato": "9afeee1c-a94d-4e29-a4aa-718b666ff7cf"
+            },
+            "Domicilio actual": {
+                "estado": 1,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "{\"estado\":1,\"resultado\":2.5563775683371277E-6,\"fecha_on\":\"2020-11-03T18:20:24.276933\",\"latitude\":-17.744502108550385,\"direccion\":\"Avenue Principal 812, Santa Cruz de la Sierra, Bolivia\",\"key\":\"f46bec31-83b0-4d2a-88f2-ed4c81565a27\",\"longitude\":-63.16928302869201}",
+                "key": "1c73a29e-0c9c-4bcc-af9e-24dbd86ad0a6",
+                "key_dato": "27113daa-0214-4bff-9267-b312601a4a0e"
+            },
+            "Password": {
+                "estado": 0,
+                "fecha_off": null,
+                "key_usuario": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432",
+                "fecha_on": "2020-12-13T10:21:21.752681",
+                "dato": "QNFWTY",
+                "key": "0bc6b913-a898-4c83-ae97-07e92d48eecd",
+                "key_dato": "d4100bae-b9d7-4e3b-af0b-94ff6f6a0f46"
+            }
+        },
+        "usuario": {
+            "estado": 1,
+            "numero": null,
+            "fecha_on": "2020-12-13T10:21:21.692793",
+            "key_cabecera": "44486ea1-48d5-40b2-8140-97438a94071b",
+            "key": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432"
+        },
+        "key": "4d4c8c55-c85b-4eb5-ba70-dab4a8d46432"
+    }
+]

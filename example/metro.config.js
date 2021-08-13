@@ -26,9 +26,9 @@ module.exports = (async () => {
         },
       }),
     },
-    // watchFolders: [
-    //   path.resolve(__dirname, '../dist'),
-    // ],
+    watchFolders: [
+      path.resolve(__dirname, '../dist'),
+    ],
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),
       sourceExts: [...sourceExts, "svg",],

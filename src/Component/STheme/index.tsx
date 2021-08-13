@@ -9,6 +9,11 @@ export type SThemeColors = {
     barColor: string,
     primary: string,
     secondary: string,
+    success?: string,
+    warning?: string,
+    danger?: string,
+    error?: string,
+    info?: string,
     background: string,
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -20,12 +25,18 @@ export type SThemeProps = {
 }
 
 export default class STheme extends Component<SThemeProps> {
+    public static colorSelect: SThemeColors;
     public static color: SThemeColors = {
         barStyle: "dark-content",
         barColor: "#000000",
-        background: "#000000",
+        background: "#222222",
         primary: "#000000",
-        secondary: "#000000"
+        secondary: "#ffffff",
+        success: "#71AF4A",
+        warning: "#EF8C38",
+        danger: "#DF2732",
+        error: "#ff0000",
+        info: "#405394",
     };
     public static instance: STheme;
     public static select(theme: SThemeOptions) {
@@ -74,8 +85,12 @@ export default class STheme extends Component<SThemeProps> {
     }
 
     repaint() {
-        if (STheme.color != this.props.themes[this.state.select]) {
-            STheme.color = this.props.themes[this.state.select];
+        if (STheme.colorSelect != this.props.themes[this.state.select]) {
+            STheme.colorSelect = this.props.themes[this.state.select];
+            STheme.color = {
+                ...STheme.color,
+                ...this.props.themes[this.state.select]
+            };
             if (this.state.lastLoad) {
                 new SThread(10, "stheme-change", true).start(() => {
                     this.setState({

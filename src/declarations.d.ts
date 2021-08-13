@@ -34,7 +34,7 @@ declare module '@react-navigation/stack' {
 // }
 
 declare module "\*.json" {
-    const content: string;
+    const content: any;
     export default content;
 }
 
