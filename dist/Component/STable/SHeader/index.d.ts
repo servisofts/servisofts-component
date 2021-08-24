@@ -11,6 +11,7 @@ export declare type SHeaderProps = {
     contentSize: any;
     getScroll: Function;
     loadAnimated: Function;
+    onDelete: Function;
 };
 export default class SHeader extends Component<SHeaderProps> {
     state: any;

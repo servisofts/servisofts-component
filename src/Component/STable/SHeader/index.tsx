@@ -14,6 +14,7 @@ export type SHeaderProps = {
     contentSize: any,
     getScroll: Function,
     loadAnimated: Function,
+    onDelete: Function,
 }
 export default class SHeader extends Component<SHeaderProps> {
     state;
@@ -85,16 +86,12 @@ export default class SHeader extends Component<SHeaderProps> {
                 // this.scroll.setEnabled(false)
             },
             onMove: (e, gs) => {
-
-
                 var anim = this.state.positionHeader[key];
                 var animWidthP = this.state.widthHeaderAnim[key]
                 anim.setValue({ x: this.startPosition.x + gs.dx, y: 0 })
                 var arrKeys = Object.keys(this.state.positionHeader);
-
                 arrKeys.map((keyHeader) => {
                     if (key != keyHeader) {
-
                         var animPosHeader = this.state.positionHeader[keyHeader];
                         var animWidth = this.state.widthHeaderAnim[keyHeader]
                         var center = animPosHeader.x._value + (animWidth.x._value / 2);
@@ -209,7 +206,7 @@ export default class SHeader extends Component<SHeaderProps> {
     getHeaders() {
         let position = this.props.initialPosition;
         var total = 0;
-        return this.state.data.map((obj, key) => {
+        return this.state.data.map((obj, i) => {
             if (obj.hidden) {
                 return <View />
             }
@@ -234,7 +231,7 @@ export default class SHeader extends Component<SHeaderProps> {
                 this.state.panMoveHeader[obj.key] = this.createPanMove(obj.key);
             }
             if (!this.state.animSelect[obj.key]) {
-                this.state.animSelect[obj.key] = new Animated.Value(4);
+                this.state.animSelect[obj.key] = new Animated.Value(4 - i);
             }
 
             position += this.state.widthHeaderAnim[obj.key].x._value + this.props.separation
@@ -246,21 +243,19 @@ export default class SHeader extends Component<SHeaderProps> {
                 }, true)
                 this.state.load = true;
             }
-            
+
             return <SView
                 animated
                 style={{
                     position: "absolute",
-                    left: 0,
+                    left: this.state.positionHeader[obj.key].x,
                     top: 0,
                     width: this.state.widthHeaderAnim[obj.key].x,
                     height: "100%",
                     // overflow: "hidden",
-                    // zIndex: this.state.animSelect[obj.key],
+                    zIndex: this.state.animSelect[obj.key],
                     ...this.props.style,
-                    transform: [
-                        { translateX: this.state.positionHeader[obj.key].x }
-                    ]
+
                 }}>
                 <SView
                     row
@@ -288,10 +283,13 @@ export default class SHeader extends Component<SHeaderProps> {
                             {obj.label}
                         </SText>
                     </SView>
+
                     <SView
                         {...this.state.panHeader[obj.key].getPanHandlers()}
                         animated
                         style={{
+                            position: "absolute",
+                            right: 0,
                             width: 16,
                             zIndex: 99,
                             height: "100%",
@@ -303,7 +301,6 @@ export default class SHeader extends Component<SHeaderProps> {
                             height: "100%",
                             backgroundColor: STheme.color.secondary
                         }}>
-
                         </SView>
 
                     </SView>

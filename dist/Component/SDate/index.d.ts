@@ -1,5 +1,5 @@
 declare type dateParams = "minutes" | "hour" | "day" | "dayOfWeek" | "month" | "year";
-declare type formatsTypes = "yyyy-MM-dd hh:mm:ss" | "yyyy-MONTH-dd hh:mm:ss" | "yyyy-MON-dd hh:mm:ss" | "yyyy-MM-ddThh:mm:ss" | "dd/MM/yyyy" | "dd/MM" | "yyyy/MM" & any;
+declare type formatsTypes = "yyyy-MM-dd" | "yyyy-MM-dd hh:mm" | "yyyy-MM-dd hh:mm:ss" | "yyyy-MONTH-dd hh:mm:ss" | "yyyy-MON-dd hh:mm:ss" | "yyyy-MM-ddThh:mm:ss" | "dd/MM/yyyy" | "dd/MM" | "yyyy/MM" | "yyyy-MM-dd";
 export default class SDate {
     static getMonthsOfYear: () => {
         "1": {
@@ -85,16 +85,16 @@ export default class SDate {
     static getDayOfWeek: (dia: any) => any;
     static isValid: (fecha: any) => boolean;
     static formatCero(val: any): any;
-    static parse(fecha: String, format: formatsTypes): Date;
+    static parse(fecha: String, format: formatsTypes | string): Date;
     date: any;
-    constructor(date?: any, format?: formatsTypes);
+    constructor(date?: any, format?: formatsTypes | string);
     isValid(): boolean;
     clone(): SDate;
     getTime(): any;
     getDay(): any;
-    setDay(val: any): void;
-    addDay(val: any): void;
-    addMonth(val: any): void;
+    setDay(val: any): this;
+    addDay(val: any): this;
+    addMonth(val: any): this;
     getMonth(): any;
     getMonthJson(): any;
     getDayOfWeek(): any;
@@ -104,7 +104,7 @@ export default class SDate {
     isBefore(sdate: any): boolean;
     isCurDate(): boolean;
     formatCero(val: any): any;
-    toString(_format: formatsTypes): any;
+    toString(format?: formatsTypes | String): String;
     get(param: dateParams): any;
     toJson(): {
         minutes: any;

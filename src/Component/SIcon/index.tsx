@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Platform, Text, View } from 'react-native'
-import * as Icon2 from '../../img/Icon2/index';
-import * as Arrow from '../../img/Arrow/index';
-
-type IconNames = "Icon2" | "Arrow" | "engranaje" | "drag"
+import { SAssets } from '../../Types';
+import STheme from '../STheme';
+import LocalImg, { IconNames, IconsVariant } from '../../img/index'
 
 type SIconType = {
     name?: IconNames,
@@ -14,12 +13,25 @@ type SIconType = {
 }
 
 export default class SIcon extends Component<SIconType> {
-    getIconName(name: IconNames) {
-        switch (name) {
-            case "Icon2": return Icon2;
-            case "Arrow": return Arrow;
-            default: return null;
+    static Assets = {};
+    static loadAssets(assets: SAssets) {
+        if (assets.svg) {
+            this.Assets = assets.svg;
         }
+    }
+    getIconName(_name) {
+        var name = _name.split("_")[0];
+        var icon = LocalImg[name]
+        if (icon) {
+            return icon;
+        }
+        if (!SIcon.Assets) return null;
+        return SIcon.Assets[name]
+    }
+    getIconProps(name) {
+        var variant = IconsVariant[name];
+        if (!variant) return {};
+        return variant;
     }
     render() {
         var Select = this.getIconName(this.props.name);
@@ -33,6 +45,6 @@ export default class SIcon extends Component<SIconType> {
         if (!Icon) {
             return <View />
         }
-        return (<Icon width={"100%"} height={"100%"} {...this.props} />)
+        return (<Icon width={"100%"} height={"100%"} {...this.getIconProps(this.props.name)}  {...this.props} />)
     }
 }

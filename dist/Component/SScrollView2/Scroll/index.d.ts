@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { ViewStyle, StyleProp } from 'react-native';
 import Indicator from '../Indicator';
 declare type typeScroll = {
     horizontal?: boolean;
     disableHorizontal?: boolean;
     indicator?: Indicator;
+    contentContainerStyle?: StyleProp<ViewStyle>;
 };
 declare class Scroll extends Component<typeScroll> {
     enabled: any;

@@ -172,14 +172,14 @@ export default class SScrollView extends Component<SType> {
             this.scrollv.scrollToEnd();
         }
     }
-    // scrollToPosition({ x, y }) {
-    //     if (this.scrollv) {
-    //         this.scrollv.scrollTo({ x, y });
-    //     }
-    //     if (this.scrollh) {
-    //         this.scrollh.scrollTo({ x, y });
-    //     }
-    // }
+    scrollToPosition({ x, y }) {
+        if (this.scrollv) {
+            this.scrollv.scrollTo({ x, y });
+        }
+        if (this.scrollh) {
+            this.scrollh.scrollTo({ x, y });
+        }
+    }
     onScrollAnimationEnd() {
         this.props.onScrollEnd(this.scrollInfo())
     }
@@ -225,7 +225,6 @@ export default class SScrollView extends Component<SType> {
 
             }}
         >
-            <View>
                 {this.props.header}
                 <ScrollView
                     nestedScrollEnabled={true}
@@ -245,7 +244,7 @@ export default class SScrollView extends Component<SType> {
                             this.props.onScroll(this.scrollInfo())
                         }
                         if (this.props.onScrollEnd) {
-                            new SThread(350, "scroll_v", true).start(() => {
+                            new SThread(100, "scroll_v", true).start(() => {
                                 this.onScrollAnimationEnd();
                             })
                         }
@@ -267,7 +266,6 @@ export default class SScrollView extends Component<SType> {
                     </View>
                 </ScrollView>
                 {this.props.footer}
-            </View>
         </ScrollView>
     }
     render() {

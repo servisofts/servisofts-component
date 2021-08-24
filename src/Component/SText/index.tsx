@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextStyle } from 'react-native';
+import { View, Text, TextStyle, TextProps } from 'react-native';
 import STheme from '../STheme/index';
 import SView, { SViewProps } from '../SView/index';
 
@@ -12,7 +12,7 @@ export type STextProps = {
     color?: string,
     underLine?: boolean,
     justify?: boolean
-} & SViewProps
+} & SViewProps & TextProps
 
 export default class SText extends Component<STextProps> {
     constructor(props: any) {

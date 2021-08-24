@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import SThread from '../SThread/index';
 import SStorage from '../SStorage';
+import SLoad from '../SLoad';
 
 
 export type SThemeColors = {
@@ -15,6 +16,13 @@ export type SThemeColors = {
     error?: string,
     info?: string,
     background: string,
+    black: string,
+    white: string,
+    gray: string,
+    lightGray: string,
+    darkGray: string,
+    lightBlack: string,
+
 }
 export type SThemeOptions = 'default' | 'dark'
 export type SThemeThemes = { [index in SThemeOptions]: SThemeColors };
@@ -26,6 +34,7 @@ export type SThemeProps = {
 
 export default class STheme extends Component<SThemeProps> {
     public static colorSelect: SThemeColors;
+
     public static color: SThemeColors = {
         barStyle: "dark-content",
         barColor: "#000000",
@@ -37,6 +46,12 @@ export default class STheme extends Component<SThemeProps> {
         danger: "#DF2732",
         error: "#ff0000",
         info: "#405394",
+        black: "#000000",
+        white: "#ffffff",
+        gray: "#888888",
+        lightGray: "#aaaaaa",
+        darkGray: "#444444",
+        lightBlack: "#666666",
     };
     public static instance: STheme;
     public static select(theme: SThemeOptions) {
@@ -50,6 +65,12 @@ export default class STheme extends Component<SThemeProps> {
             return "error";
         }
         return this.instance.change();
+    };
+    public static getTheme() {
+        if (!this.instance) {
+            return "error";
+        }
+        return this.instance.state.select;
     };
 
     state: any = {};
@@ -98,7 +119,7 @@ export default class STheme extends Component<SThemeProps> {
                     })
 
                 })
-                return <View />
+                return (<SLoad />)
             } else {
                 this.state.lastLoad = new Date().getTime();
             }

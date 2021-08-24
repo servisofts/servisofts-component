@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ViewStyle } from 'react-native';
 import { SText, STheme, SView } from '../../../index';
+import SIcon from '../../SIcon';
 import Opciones from './Opciones';
 
 type SType = {
@@ -8,6 +9,7 @@ type SType = {
     header: [Object],
     style: ViewStyle,
     setHeader: (data: Object) => void,
+    reload: () => void,
 }
 
 export default class SFooter extends Component<SType> {
@@ -28,7 +30,7 @@ export default class SFooter extends Component<SType> {
                 ...this.props.style
             }}>
                 <SView row style={{
-                    width: "100%", height: "100%"
+                    width: "100%", height: "100%",
                 }}>
                     <SView col={"xs-3"} style={{
                         height: "100%",
@@ -39,13 +41,25 @@ export default class SFooter extends Component<SType> {
                         <SText style={{
                         }}>Total: {Object.keys(this.props.data).length}</SText>
                     </SView>
-                    <SView row center col={"xs-6"}>
+                    <SView row center col={"xs-3"}>
 
                     </SView>
-                    <SView row col={"xs-3"} style={{
+
+                    <SView row col={"xs-3"} style={{}}>
+
+                    </SView>
+                    <SView row center col={"xs-3"} style={{
                         justifyContent: "flex-end",
-                        paddingEnd: 8,
                     }}>
+                        <SView style={{
+                            width: 30,
+                            height: 24,
+                            padding: 3,
+                        }} onPress={() => {
+                            this.props.reload();
+                        }}>
+                            <SIcon name={"Reload"} fill={STheme.color.secondary} />
+                        </SView>
                         <Opciones {...this.props} />
                     </SView>
                 </SView>

@@ -39,45 +39,38 @@ export default class SHeadBar extends Component<SHeadBarProps> {
                 style={{
                     width: "100%",
                     // backgroundColor:"#f0f",.
-                    height: 32,
+                    height: 24,
                     justifyContent: "center",
                 }}>
 
-                <SView col={"xs-9 md-8"} style={{
+                <SView col={"xs-12"} style={{
                     height: "100%",
                     alignItems: "flex-start",
-                    paddingStart: 8,
+                    // paddingStart: 8,
                 }}>
                     <SInput
-                        col={"xs-12 md-6"}
+                        col={"xs-12"}
                         style={{
                             margin: 0,
-                            height: 28,
+                            height: 24,
+                            // backgroundColor: "#f0f",
                         }}
+                        autoFocus={true}
                         placeholder={"Buscar..."}
                         onChangeText={(text) => {
-                            new SThread(600, "buscadorTabla", true).start(() => {
+                            new SThread(300, "buscadorTabla", true).start(() => {
                                 this.props.buscar(text);
                             })
                         }}
                     />
                 </SView>
-                <SView center row col={"xs-3 md-4"} style={{
+                {/* <SView center row col={"xs-3 md-4"} style={{
                     height: 24,
-                    justifyContent: "flex-end"
+                    justifyContent: "flex-end",
+                    paddingRight: 4,
                 }}>
-                    <SView style={{
-                        width: 24,
-                        height: 24,
-                        marginEnd: 8,
-                    }} onPress={() => {
-                        this.props.reload();
-                    }}>
-                        <SIcon name={"Arrow"} fill={STheme.color.primary} />
-                    </SView>
                     {this.getAdd()}
-
-                </SView>
+                </SView> */}
             </SView>
         );
     }

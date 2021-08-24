@@ -31,6 +31,10 @@ import SData from './SData';
 import SFooter from './SFooter';
 import SHeadBar from './SHeadBar';
 import { SView, SScrollView2, STheme } from '../../index';
+import SThread from '../SThread';
+import SLoad from '../SLoad';
+import SIcon from '../SIcon';
+import SPopup from '../SPopup';
 var STable = /** @class */ (function (_super) {
     __extends(STable, _super);
     function STable(props) {
@@ -44,6 +48,7 @@ var STable = /** @class */ (function (_super) {
             }
             return 0;
         });
+        _this.initDelete(lista);
         _this.state = {
             header: lista,
             buscador: {
@@ -55,44 +60,32 @@ var STable = /** @class */ (function (_super) {
         _this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 });
         return _this;
     }
-    STable.prototype.buscar = function (data) {
-        if (typeof data != "object") {
-            return Object.keys(data);
+    STable.prototype.initDelete = function (lista) {
+        var _this = this;
+        if (!this.props.onDelete) {
+            return null;
         }
-        var lista_keys = Object.keys(data);
-        var val = this.state.buscador.value.trim() || "";
-        // var arrPalabras = val.replaceAll(" ", "|");
-        var arrPalabras = val.split(" ");
-        var arr2 = [];
-        var objFinal = {};
-        lista_keys.map(function (key) {
-            var obj = data[key];
-            var str = JSON.stringify(obj);
-            var isValid = false;
-            var peso = 0;
-            for (var i = 0; i < arrPalabras.length; i++) {
-                var txtTest = arrPalabras[i];
-                var expreg = new RegExp(":.*?" + txtTest + ".*?(,|})", "i");
-                var expreg2 = new RegExp("dato.:.*?" + txtTest + ".*?(,|})", "i");
-                if (expreg.test(str) || expreg2.test(str)) {
-                    isValid = true;
-                    peso++;
-                }
-            }
-            // if (!this.state.verEliminados) {
-            //     if (obj.estado == 0) {
-            //         isValid = false;
-            //     }
-            // }
-            if (isValid) {
-                arr2.push(key);
-                if (!objFinal[key]) {
-                    objFinal[key] = data[key];
-                }
-                objFinal[key]["Peso"] = peso;
+        lista.push({
+            key: "key", label: "Eliminar", width: 100, render: function (key) {
+                return React.createElement(SView, { style: {
+                        width: "100%",
+                        height: "100%"
+                    }, center: true, onPress: function () {
+                        SPopup.confirm({
+                            title: "Eliminar",
+                            message: "Esta seguro de eliminar?",
+                            onClose: function () {
+                                // input.setValue(data);
+                            },
+                            onPress: function () {
+                                // this.props.data[key];
+                                _this.props.onDelete(key);
+                            }
+                        });
+                    } },
+                    React.createElement(SIcon, { name: "Delete", width: 25, height: 25 }));
             }
         });
-        return objFinal;
     };
     STable.prototype.filterData = function () {
         var _this = this;
@@ -108,7 +101,7 @@ var STable = /** @class */ (function (_super) {
             i++;
             data.push(obj);
         });
-        return this.buscar(data);
+        return data;
     };
     STable.prototype.render = function () {
         var _this = this;
@@ -116,8 +109,10 @@ var STable = /** @class */ (function (_super) {
             this.state.reload = false;
             this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 8, y: 0 });
             this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 });
-            this.setState(__assign({}, this.state));
-            return React.createElement(View, null);
+            new SThread(300, "reloadTable", true).start(function () {
+                _this.setState(__assign({}, _this.state));
+            });
+            return React.createElement(SLoad, null);
         }
         return (React.createElement(View, { style: {
                 width: "100%",
@@ -126,17 +121,20 @@ var STable = /** @class */ (function (_super) {
             React.createElement(SHeadBar, __assign({}, this.props.headerProps, { reload: function () {
                     _this.setState({ reload: true });
                 }, onAdd: this.props.onAdd, buscar: function (text) {
+                    _this.state.buscador = __assign(__assign({}, _this.state.buscador), { value: text });
                     _this.setState({
-                        buscador: __assign(__assign({}, _this.state.buscador), { value: text })
+                        buscador: __assign({}, _this.state.buscador)
                     });
                 } })),
             React.createElement(SView, { style: {
                     width: "100%",
                     flex: 1
                 } },
-                React.createElement(SScrollView2, { ref: function (ref) { _this.scroll = ref; }, header: {
+                React.createElement(SScrollView2, { ref: function (ref) { _this.scroll = ref; }, contentContainerStyle: {
+                        minWidth: "100%"
+                    }, header: {
                         style: {
-                            height: 30
+                            height: 25
                         },
                         content: (React.createElement(SHeader, __assign({ style: {
                                 backgroundColor: STheme.color.barColor
@@ -152,7 +150,7 @@ var STable = /** @class */ (function (_super) {
                             height: "100%",
                             flex: 1
                         } },
-                        React.createElement(SData, __assign({}, this.props.dataProps, { actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, data: this.filterData(), header: this.state.header, animates: this.state.animates })),
+                        React.createElement(SData, __assign({}, this.props.dataProps, { actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, buscador: this.state.buscador, data: this.filterData(), header: this.state.header, animates: this.state.animates, onEdit: this.props.onEdit })),
                         React.createElement(View, { style: {
                                 width: "100%",
                                 height: 20
@@ -160,14 +158,16 @@ var STable = /** @class */ (function (_super) {
             React.createElement(SFooter, { data: this.filterData(), header: this.state.header, setHeader: function (header) {
                     _this.state.header = header;
                     // this.setState({ header: [...header]})
+                }, reload: function () {
+                    _this.setState({ reload: true });
                 }, style: {
                     backgroundColor: STheme.color.primary
                 } })));
     };
     STable.defaultProps = {
         headerProps: {
-            minWidth: 200,
-            initialPosition: 50
+            minWidth: 500,
+            initialPosition: 8
         },
         dataProps: {}
     };

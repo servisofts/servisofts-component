@@ -28,6 +28,8 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, StatusBar } from 'react-native';
 import STheme from '../STheme/index';
 import DebugBar from './DebugBar/index';
+import SIcon from '../SIcon/index';
+import SPopup from '../SPopup';
 var SComponentContainer = /** @class */ (function (_super) {
     __extends(SComponentContainer, _super);
     function SComponentContainer(props) {
@@ -39,6 +41,8 @@ var SComponentContainer = /** @class */ (function (_super) {
             barStyle: "default"
         };
         SComponentContainer.Instance = _this;
+        SComponentContainer.SSocket = props.socket;
+        SIcon.loadAssets(_this.props.assets);
         return _this;
     }
     SComponentContainer.registerGrid = function (key, grid) {
@@ -97,14 +101,15 @@ var SComponentContainer = /** @class */ (function (_super) {
                         flex: 1
                     } },
                     React.createElement(StatusBar, { barStyle: this.state.theme.barStyle, animated: true, backgroundColor: this.state.theme.barColor }),
-                    React.createElement(DebugBar, { debug: this.props.debug }),
                     React.createElement(View, { style: {
                             width: "100%",
                             flex: 1
                         }, onLayout: function (evt) {
                             // this.setState({ layout: evt.nativeEvent.layout })
                             _this.onChangeSize(evt.nativeEvent.layout);
-                        } }, this.props.children)))));
+                        } }, this.props.children),
+                    React.createElement(DebugBar, { debug: this.props.debug }),
+                    React.createElement(SPopup, null)))));
     };
     SComponentContainer.prototype.render = function () {
         var _this = this;

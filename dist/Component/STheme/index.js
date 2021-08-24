@@ -25,9 +25,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import SThread from '../SThread/index';
 import SStorage from '../SStorage';
+import SLoad from '../SLoad';
 var STheme = /** @class */ (function (_super) {
     __extends(STheme, _super);
     function STheme(props) {
@@ -62,6 +62,13 @@ var STheme = /** @class */ (function (_super) {
         return this.instance.change();
     };
     ;
+    STheme.getTheme = function () {
+        if (!this.instance) {
+            return "error";
+        }
+        return this.instance.state.select;
+    };
+    ;
     STheme.prototype.select = function (theme) {
         if (!this.props.themes[theme]) {
             return "Theme not found ";
@@ -88,7 +95,7 @@ var STheme = /** @class */ (function (_super) {
                         lastLoad: new Date().getTime()
                     });
                 });
-                return React.createElement(View, null);
+                return (React.createElement(SLoad, null));
             }
             else {
                 this.state.lastLoad = new Date().getTime();
@@ -114,7 +121,13 @@ var STheme = /** @class */ (function (_super) {
         warning: "#EF8C38",
         danger: "#DF2732",
         error: "#ff0000",
-        info: "#405394"
+        info: "#405394",
+        black: "#000000",
+        white: "#ffffff",
+        gray: "#888888",
+        lightGray: "#aaaaaa",
+        darkGray: "#444444",
+        lightBlack: "#666666"
     };
     return STheme;
 }(Component));

@@ -44,19 +44,53 @@ var SView = /** @class */ (function (_super) {
         };
         return _this;
     }
+    SView.prototype.getLayout = function () {
+        return this.layout;
+    };
+    SView.prototype.getProp = function (prop) {
+        return this.props[prop];
+    };
     SView.prototype.getData = function () {
         return this.props.data;
     };
     SView.prototype.render = function () {
+        var _this = this;
+        var otherProps = {};
         var Element = View;
         if (this.props.onPress) {
             Element = TouchableOpacity;
         }
+        if (this.props.withoutFeedback) {
+            Element = TouchableOpacity;
+            otherProps.activeOpacity = 1;
+            // if (this.props.animated) {
+            // Component = Animated.createAnimatedComponent(Component);
+            // }
+        }
         if (this.props.animated) {
             Element = Animated.createAnimatedComponent(Element);
         }
-        return (React.createElement(SGrid, { colSquare: this.props.colSquare, col: this.state.params.col, style: this.state.params.style },
-            React.createElement(Element, __assign({}, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+        var style = this.props.style;
+        if (style) {
+            delete style["top"];
+            delete style["left"];
+            delete style["right"];
+            delete style["bottom"];
+            delete style["position"];
+            delete style["margin"];
+            delete style["marginBottom"];
+            delete style["marginTop"];
+            delete style["marginLeft"];
+            delete style["marginStart"];
+            delete style["marginRight"];
+            delete style["marginEnd"];
+        }
+        return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: this.state.params.style, onLayout: function (evt) {
+                _this.layout = evt.nativeEvent.layout;
+                if (_this.props.onLayout)
+                    _this.props.onLayout(evt);
+            } },
+            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -71,7 +105,9 @@ var SView = /** @class */ (function (_super) {
                     justifyContent: 'center'
                 })), (!this.props.flex ? {} : {
                     flex: this.props.flex == true ? 1 : this.props.flex
-                })), (!this.state.params.style ? {} : this.state.params.style)), this.props.style) }), this.props.children)));
+                })), (!this.props.height ? {} : {
+                    height: this.props.height == true ? "100%" : this.props.height
+                })), style) }), this.props.children)));
     };
     return SView;
 }(Component));

@@ -5,6 +5,7 @@ declare type SType = {
     header: [Object];
     style: ViewStyle;
     setHeader: (data: Object) => void;
+    reload: () => void;
 };
 export default class SFooter extends Component<SType> {
     constructor(props: any);

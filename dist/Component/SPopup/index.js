@@ -28,6 +28,8 @@ import React, { Component } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 // import Svg from '../../Svg';
 import SPopupComponent from './SPopupComponent';
+import Confirm from './SPopupVariants/Confirm/index';
+import Alert from './SPopupVariants/Alert/index';
 var INSTANCE;
 export var SPopupOpen = function (_a) {
     var key = _a.key, content = _a.content, style = _a.style;
@@ -47,6 +49,26 @@ var SPopup = /** @class */ (function (_super) {
         INSTANCE = _this;
         return _this;
     }
+    SPopup.confirm = function (props) {
+        // alert(obj)
+        INSTANCE.open({ key: "confirm", content: React.createElement(Confirm, __assign({}, props)), style: {} });
+    };
+    SPopup.alert = function (props) {
+        // alert(obj)
+        INSTANCE.open({ key: "alert", content: React.createElement(Alert, __assign({}, props)), style: {} });
+    };
+    SPopup.open = function (obj) {
+        var key = obj.key;
+        if (!obj.key)
+            key = 'default';
+        INSTANCE.open({ key: key, content: obj.content, style: obj.style });
+    };
+    SPopup.close = function (key) {
+        if (!key) {
+            INSTANCE.closeAll();
+        }
+        INSTANCE.close(key);
+    };
     SPopup.prototype.componentDidMount = function () {
         INSTANCE = this;
     };
@@ -61,6 +83,9 @@ var SPopup = /** @class */ (function (_super) {
             this.state.style[key] = {};
         }
         this.setState(__assign({}, this.state));
+    };
+    SPopup.prototype.closeAll = function () {
+        this.setState({ data: {} });
     };
     SPopup.prototype.close = function (key) {
         delete this.state.data[key];

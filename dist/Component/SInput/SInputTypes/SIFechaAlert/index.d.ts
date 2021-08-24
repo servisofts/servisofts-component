@@ -10,6 +10,7 @@ declare type typeProps = {
     style: ViewStyle;
     props: typeConfig;
     onChange: (value: SDate) => any;
+    onClose?: () => any;
 };
 export default class SIFechaAlert extends Component<typeProps> {
     sdate: any;
@@ -21,6 +22,7 @@ export default class SIFechaAlert extends Component<typeProps> {
         style: {};
     };
     constructor(props: any);
+    componentWillUnmount(): void;
     inital(): void;
     onScrollEnd: (key: any, evt: any) => void;
     selectIten(key: any, y: any): boolean;

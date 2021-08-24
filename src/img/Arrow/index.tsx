@@ -17,4 +17,4 @@ const Web = props => (
     </svg>
 )
 
-export { Native, Web }
+export default { Native, Web }

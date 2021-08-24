@@ -3,15 +3,18 @@ import { View, Text, TouchableWithoutFeedback, TouchableOpacity, ScrollView } fr
 // import Svg from '../../Svg';
 import SPopupComponent from './SPopupComponent';
 
-type SPopupOpen = {
-    key: string,
+import Confirm, { PropsType as ConfirmProps } from './SPopupVariants/Confirm/index';
+import Alert, { PropsType as AlertProps } from './SPopupVariants/Alert/index';
+
+type SPopupOpenProps = {
+    key?: string,
     content: any,
     style?: any,
 }
 
 var INSTANCE;
 
-export const SPopupOpen = ({ key, content, style }: SPopupOpen) => {
+export const SPopupOpen = ({ key, content, style }: SPopupOpenProps) => {
     INSTANCE.open({ key, content, style });
 }
 export const SPopupClose = (key) => {
@@ -19,6 +22,25 @@ export const SPopupClose = (key) => {
 }
 export default class SPopup extends Component {
 
+    static confirm(props: ConfirmProps) {
+        // alert(obj)
+        INSTANCE.open({ key: "confirm", content: <Confirm {...props} />, style: {} });
+    }
+    static alert(props: AlertProps) {
+        // alert(obj)
+        INSTANCE.open({ key: "alert", content: <Alert {...props} />, style: {} });
+    }
+    static open(obj: SPopupOpenProps) {
+        var key = obj.key;
+        if (!obj.key) key = 'default';
+        INSTANCE.open({ key, content: obj.content, style: obj.style });
+    }
+    static close(key?: string) {
+        if (!key) {
+            INSTANCE.closeAll();
+        }
+        INSTANCE.close(key);
+    }
     state
     constructor(props) {
         super(props);
@@ -42,6 +64,9 @@ export default class SPopup extends Component {
             this.state.style[key] = {};
         }
         this.setState({ ...this.state });
+    }
+    closeAll() {
+        this.setState({ data: {} });
     }
     close(key) {
         delete this.state.data[key];

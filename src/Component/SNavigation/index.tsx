@@ -4,8 +4,7 @@ import STheme from '../STheme/index';
 import SPage from '../SPage/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
+import Pages from '../../Pages/index';
 export type SPageProps = {
     params?: [string],
     component: any,
@@ -95,7 +94,10 @@ export default class SNavigation extends Component<SNavigationProps> {
                 screens: {}
             },
         };
-        var pages = this.props.props.pages;
+        var pages = {
+            ...this.props.props.pages,
+            ...Pages,
+        };
         SNavigation.root = "";
         Object.keys(pages).map((key) => {
             var url = key;
@@ -115,7 +117,10 @@ export default class SNavigation extends Component<SNavigationProps> {
         return linking;
     }
     getPages(Stack) {
-        var pages = this.props.props.pages;
+        var pages = {
+            ...this.props.props.pages,
+            ...Pages,
+        };
         return Object.keys(pages).map((key) => {
             var Page = (props) => {
                 try {

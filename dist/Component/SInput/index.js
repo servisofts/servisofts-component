@@ -79,7 +79,14 @@ var SInput = /** @class */ (function (_super) {
         return isValid;
     };
     SInput.prototype.setValue = function (val) {
+        this.state.value = val;
         this.setState({ value: val });
+    };
+    SInput.prototype.notifyBlur = function () {
+        if (this.props.onBlur) {
+            this.props.onBlur(null);
+        }
+        // this.setState({ value: val });
     };
     SInput.prototype.getValue = function () {
         return this.state.value;
@@ -104,7 +111,6 @@ var SInput = /** @class */ (function (_super) {
             return React.createElement(View, null);
         }
         return React.createElement(SView, { center: true, style: {
-                width: 60,
                 height: "100%"
             } }, ITEM);
     };
@@ -112,10 +118,7 @@ var SInput = /** @class */ (function (_super) {
         if (!this.props.props.label) {
             return React.createElement(View, null);
         }
-        return React.createElement(SText, { style: [
-                this.customStyle.LabelStyle,
-                this.type.style.LabelStyle,
-            ] }, this.props.props.label);
+        return React.createElement(SText, { style: __assign(__assign({}, this.customStyle.LabelStyle), this.type.style.LabelStyle) }, this.props.props.label);
     };
     SInput.prototype.render = function () {
         var _this = this;
@@ -184,6 +187,7 @@ var SInput = /** @class */ (function (_super) {
                         type.style.InputText,
                         {
                             flex: 1,
+                            width: "100%",
                             height: "100%",
                             outline: "none"
                         }

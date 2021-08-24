@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { SView, SText, STheme, SPage, SNavigation, SIcon, SStorage } from 'servisofts-component'
+import SSocket from '../../SSocket/index';
 
 export default class InicioPage extends Component {
     constructor(props) {
@@ -12,8 +13,9 @@ export default class InicioPage extends Component {
         return (
             <SPage
                 hidden
+                disableScroll
             >
-                <SView col={"xs-12"} style={{ padding: 8, }}>
+                <SView col={"xs-12"} style={{ padding: 8}}>
                     <SText center col={"xs-12"} fontSize={24} bold justify>Servisofts - Component</SText>
                     <SView style={{ height: 16 }}></SView>
                     <SText col={"xs-12"} bold fontSize={18} justify>Sobre SComponent!</SText>
@@ -52,6 +54,15 @@ export default class InicioPage extends Component {
                         onPress={() => {
                             SNavigation.navigate("Componentes/STable")
                         }}>{"Ver Tabla"}</SText>
+                    <SView style={{ height: 8 }}></SView>
+                    <SText
+                        col={"xs-12"}
+                        fontSize={16}
+                        bold
+                        underLine
+                        onPress={() => {
+                            SSocket.send("hola")
+                        }}>{"Socket init"}</SText>
                 </SView>
             </SPage>
         );

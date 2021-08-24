@@ -25,10 +25,25 @@ type SColType =
     { [index in TColKey]?: TColVal }
     | TColStr
     | TColCovination
-    | TColSujestPage;
+    | TColSujestPage
+    | `${TColKey}-${any}`
+    ;
 
 //Direcciones
 type SDirectionType = "row" | "column";
+
+
+
+//Assets
+
+type SAssets = {
+    svg: {
+        [index: string]: {
+            Native: any,
+            Web: any
+        }
+    }
+}
 
 
 export type {
@@ -37,5 +52,6 @@ export type {
     STextProps,
     SComponentContainerProps,
     SNavigationProps, SPageProps, SPageListProps,
-    SThemeColors, SThemeOptions, SThemeProps, SThemeThemes
+    SThemeColors, SThemeOptions, SThemeProps, SThemeThemes,
+    SAssets
 }

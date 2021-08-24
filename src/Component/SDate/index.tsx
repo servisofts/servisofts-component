@@ -1,14 +1,17 @@
 import CalendarParams from './data';
-
 type dateParams = "minutes" | "hour" | "day" | "dayOfWeek" | "month" | "year";
+
 type formatsTypes =
-    "yyyy-MM-dd hh:mm:ss"
+    | "yyyy-MM-dd"
+    | "yyyy-MM-dd hh:mm"
+    | "yyyy-MM-dd hh:mm:ss"
     | "yyyy-MONTH-dd hh:mm:ss"
     | "yyyy-MON-dd hh:mm:ss"
     | "yyyy-MM-ddThh:mm:ss"
     | "dd/MM/yyyy"
     | "dd/MM"
-    | "yyyy/MM" & any
+    | "yyyy/MM"
+    | "yyyy-MM-dd"
 
 export default class SDate {
 
@@ -54,12 +57,15 @@ export default class SDate {
         }
         return "0" + val
     }
-    static parse(fecha: String, format: formatsTypes) {
+
+    static parse(fecha: String, format: formatsTypes | string) {
         if (!format) {
             format = "yyyy-MM-dd hh:mm"
         }
         var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(mm)|(ss)', 'g');
-        var res = [...format.matchAll(myRe)];
+        // var res = [...format.matchAll(myRe)];
+        var res = Array.from(format.matchAll(myRe));
+        // res = [...res];
         var date = {}
         res.map((obj) => {
             var temp = fecha.substring(obj.index, obj.index + obj[0].length);
@@ -78,7 +84,7 @@ export default class SDate {
 
     //CLASS
     date
-    constructor(date?, format?: formatsTypes) {
+    constructor(date?: any, format?: formatsTypes | string) {
         if (!date) {
             this.date = new Date();
             return;
@@ -100,7 +106,7 @@ export default class SDate {
         return true;
     }
     clone() {
-        return new SDate(new Date(this.date.getTime()), null);
+        return new SDate(new Date(this.date.getTime()));
     }
     getTime() {
         return this.date.getTime();
@@ -110,12 +116,15 @@ export default class SDate {
     }
     setDay(val) {
         this.date.setDate(val);
+        return this;
     }
     addDay(val) {
         this.date.setDate(this.getDay() + val);
+        return this;
     }
     addMonth(val) {
         this.date.setMonth(this.getMonth() - 1 + val);
+        return this;
     }
     getMonth() {
         return this.date.getMonth() + 1;
@@ -161,8 +170,10 @@ export default class SDate {
         return "0" + val
     }
 
-    toString(_format: formatsTypes) {
-        var format = _format || "yyyy-MM-dd hh:mm";
+    toString(format?: formatsTypes | String) {
+        if (!format) {
+            format = "yyyy-MM-dd hh:mm:ss"
+        }
         var json = this.toJson();
         format = format.replace("yyyy", json.year);
         format = format.replace("MM", this.formatCero(json.month));

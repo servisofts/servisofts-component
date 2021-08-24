@@ -14,7 +14,7 @@ export type TypeStyles = Typesp | [Typesp]
 const getType = (type: TypeStyles) => {
     switch (type) {
         case "calistenia":
-            return StyleSheet.create({
+            return {
                 "View": {
                     backgroundColor: STheme.color.primary + "22",
                     borderWidth: 1,
@@ -46,9 +46,9 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.danger,
                     // color: STheme.color.primary + "66"
                 },
-            })
+            }
         case "secondary":
-            return StyleSheet.create({
+            return {
                 "View": {
                     backgroundColor: STheme.color.secondary,
                     borderWidth: 1,
@@ -70,9 +70,9 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.danger,
                     // color: STheme.color.primary + "66"
                 },
-            })
+            }
         case "primary":
-            return StyleSheet.create({
+            return {
                 "View": {
                     borderWidth: 1,
                     borderColor: STheme.color.primary,
@@ -83,8 +83,7 @@ const getType = (type: TypeStyles) => {
                 },
                 "LabelStyle": {
                     position: "absolute",
-                    top: -22,
-                    left: 8,
+                    top: -10,
                     fontSize: 14,
                     color: STheme.color.secondary,
 
@@ -105,24 +104,24 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.danger
                     // color: STheme.color.primary + "66"
                 },
-            })
+            }
         default:
-            return StyleSheet.create({
+            return {
                 "View": {
 
                 },
                 "LabelStyle": {
-
+                    color: STheme.color.secondary,
                 },
                 "InputText": {
-
+                    color: STheme.color.secondary,
                 },
                 "placeholder": {
                 },
                 "error": {
                     borderColor: STheme.color.danger,
                 },
-            })
+            }
     }
 }
 
@@ -131,10 +130,16 @@ export const CustomStyles = (type: TypeStyles) => {
     if (typeof type == "string") {
         arrStyles = type.split(" ");
     }
-    var styleTemp = []
-    for (let i = 0; i < arrStyles.length; i++) {
-        styleTemp.push(getType(arrStyles[i]));
+    if (!arrStyles) {
+        arrStyles = ["default"]
     }
-    return StyleSheet.flatten(styleTemp)
+    var styleTemp = {}
+    for (let i = 0; i < arrStyles.length; i++) {
+        styleTemp = {
+            ...styleTemp,
+            ...getType(arrStyles[i])
+        };
+    }
+    return styleTemp
 }
 

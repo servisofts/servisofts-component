@@ -10,6 +10,14 @@ declare type TColCovination = `${TColStr} ${TColStr}`;
 declare type TColSujestPage = `xs-${number}` | `xs-${number} sm-${number} ` | `xs-${number} sm-${number} md-${number}` | `xs-${number} sm-${number} md-${number} lg-${number}` | `xs-${number} sm-${number} md-${number} lg-${number} xl-${number}`;
 declare type SColType = {
     [index in TColKey]?: TColVal;
-} | TColStr | TColCovination | TColSujestPage;
+} | TColStr | TColCovination | TColSujestPage | `${TColKey}-${any}`;
 declare type SDirectionType = "row" | "column";
-export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes };
+declare type SAssets = {
+    svg: {
+        [index: string]: {
+            Native: any;
+            Web: any;
+        };
+    };
+};
+export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes, SAssets };

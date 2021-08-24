@@ -61,31 +61,31 @@ var SNavBar = /** @class */ (function (_super) {
                 return React.createElement(View, null);
             }
         }
-        return React.createElement(SView, { onPress: function () {
-                if (SNavigation.lastRoute) {
-                    if (SNavigation.lastRoute.navigation.canGoBack()) {
-                        SNavigation.goBack();
-                        return;
-                    }
-                }
-                if (Platform.OS == "web") {
-                    var locstr = window.location.pathname;
-                    var locations = locstr.split("/");
-                    locations = locations.slice(0, locations.length - 1);
-                    var navTo = "";
-                    locations.map(function (rout) {
-                        if (navTo) {
-                            navTo += "/";
+        return React.createElement(SView, { col: "xs-12" },
+            React.createElement(SView, { onPress: function () {
+                    if (SNavigation.lastRoute) {
+                        if (SNavigation.lastRoute.navigation.canGoBack()) {
+                            SNavigation.goBack();
+                            return;
                         }
-                        navTo += rout;
-                    });
-                    if (!navTo) {
-                        navTo = SNavigation.root;
                     }
-                    SNavigation.replace(navTo);
-                }
-            }, col: "xs-12" },
-            React.createElement(SView, { style: {
+                    if (Platform.OS == "web") {
+                        var locstr = window.location.pathname;
+                        var locations = locstr.split("/");
+                        locations = locations.slice(0, locations.length - 1);
+                        var navTo = "";
+                        locations.map(function (rout) {
+                            if (navTo) {
+                                navTo += "/";
+                            }
+                            navTo += rout;
+                        });
+                        if (!navTo) {
+                            navTo = SNavigation.root;
+                        }
+                        SNavigation.replace(navTo);
+                    }
+                }, style: {
                     maxWidth: 35,
                     height: 25
                 }, center: true },
@@ -100,7 +100,7 @@ var SNavBar = /** @class */ (function (_super) {
             } },
             React.createElement(SView, { col: "xs-2", center: true, flex: true }, this.getBack()),
             React.createElement(SView, { col: "xs-8", center: true, flex: true },
-                React.createElement(SText, null, this.props.title)),
+                React.createElement(SText, { center: true }, this.props.title)),
             React.createElement(SView, { col: "xs-2", center: true, flex: true, onPress: function () {
                     STheme.change();
                 } })));

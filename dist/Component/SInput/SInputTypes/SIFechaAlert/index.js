@@ -49,7 +49,7 @@ var SIFechaAlert = /** @class */ (function (_super) {
             var arr = [];
             switch (key) {
                 case "year":
-                    for (var i = (!_this.props.props.minYear ? 1888 : _this.props.props.minYear); i <= (!_this.props.props.maxYear ? (new SDate(new Date()).toJson().year) : _this.props.props.maxYear); i++) {
+                    for (var i = (!_this.props.props.minYear ? 1900 : _this.props.props.minYear); i <= (!_this.props.props.maxYear ? (new SDate(new Date()).toJson().year) : _this.props.props.maxYear); i++) {
                         arr.push({
                             type: key,
                             val: i,
@@ -83,18 +83,14 @@ var SIFechaAlert = /** @class */ (function (_super) {
                         return React.createElement(View, null);
                     }
                 }
-                return (React.createElement(SView, { center: true, style: {
+                return (React.createElement(SView, { center: true, col: "xs-12", style: {
                         width: "100%",
                         height: 40
-                    }, data: obj, ref: function (ref) { _this.refItens[obj.type][obj.val + ""] = ref; }, onPress: function (evt) {
-                        _this.scroll[key].scrollTo({ x: evt.layout.x + 50, y: evt.layout.y + 20 });
+                    }, data: obj, ref: function (ref) { _this.refItens[obj.type][obj.val + ""] = ref; }, onPress: function () {
+                        var layout = _this.refItens[obj.type][obj.val + ""].getLayout();
+                        _this.scroll[key].scrollTo({ x: layout.x + 50, y: layout.y + 20 });
                     } },
-                    React.createElement(SText
-                    // options={{
-                    //     variant: "h3",
-                    //     type: "primary"
-                    // }}
-                    , null, obj.data)));
+                    React.createElement(SText, null, obj.data)));
             });
         };
         // componentDidMount() {
@@ -105,11 +101,7 @@ var SIFechaAlert = /** @class */ (function (_super) {
         // }, 2000)
         // }
         _this.getLista = function (key) {
-            return React.createElement(SView, { props: {
-                    col: "xs-4",
-                    height: "100%",
-                    variant: "center"
-                } },
+            return React.createElement(SView, { col: "xs-4", center: true, flex: true },
                 React.createElement(SView, { style: {
                         position: "absolute",
                         width: "100%",
@@ -118,10 +110,12 @@ var SIFechaAlert = /** @class */ (function (_super) {
                     } }),
                 React.createElement(SSCrollView, { disableHorizontal: true, ref: function (ref) { _this.scroll[key] = ref; }, 
                     // reverse
-                    onScrollEnd: function (evt) {
+                    contentContainerStyle: {
+                        width: "100%"
+                    }, onScrollEnd: function (evt) {
                         _this.onScrollEnd(key, evt);
                     } },
-                    React.createElement(SView, { style: {
+                    React.createElement(SView, { col: "xs-12", style: {
                             width: "100%"
                         } },
                         React.createElement(SView, { style: {
@@ -157,9 +151,13 @@ var SIFechaAlert = /** @class */ (function (_super) {
         _this.inital();
         return _this;
     }
+    SIFechaAlert.prototype.componentWillUnmount = function () {
+        if (this.props.onClose)
+            this.props.onClose();
+    };
     SIFechaAlert.prototype.inital = function () {
         var _this = this;
-        new SThread(100, "moveDate", true).start(function () {
+        new SThread(10, "moveDate", true).start(function () {
             var ready = true;
             if (!_this.state.select["year"]) {
                 _this.selectIten("year", _this.state.initial["year"]);
@@ -180,6 +178,12 @@ var SIFechaAlert = /** @class */ (function (_super) {
     };
     SIFechaAlert.prototype.selectIten = function (key, y) {
         if (this.refItens[key][y]) {
+            if (!this.refItens[key][y]) {
+                return;
+            }
+            if (!this.refItens[key][y].getLayout) {
+                return;
+            }
             var lay = this.refItens[key][y].getLayout();
             if (!lay) {
                 return false;
@@ -197,24 +201,18 @@ var SIFechaAlert = /** @class */ (function (_super) {
         return false;
     };
     SIFechaAlert.prototype.getInfo = function () {
-        return React.createElement(SView, { props: {
-                direction: "row"
-            }, style: {
+        return React.createElement(SView, { row: true, style: {
                 flex: 1
             } }, JSON.stringify(this.state.select));
     };
     SIFechaAlert.prototype.render = function () {
-        return React.createElement(SView, { props: {
-                col: "xs-6",
-                variant: "center",
-                withoutFeedback: true
-            }, style: {
+        return React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, style: {
                 height: 200,
-                borderRadius: 8
+                borderRadius: 8,
+                backgroundColor: STheme.color.background,
+                overflow: "hidden"
             } },
-            React.createElement(SView, { props: {
-                    direction: "row"
-                }, style: {
+            React.createElement(SView, { row: true, style: {
                     width: "100%",
                     height: 200
                 } },

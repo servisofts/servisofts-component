@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ViewStyle, Platform } from 'react-native';
+import { View, Text, ScrollView, ViewStyle, Platform, StyleProp } from 'react-native';
 import Indicator from '../Indicator';
 
 type typeScroll = {
     horizontal?: boolean,
     disableHorizontal?: boolean,
-    indicator?: Indicator
+    indicator?: Indicator,
+    contentContainerStyle?: StyleProp<ViewStyle>,
 }
 const preventDefault = e => e.preventDefault();
 
@@ -107,12 +108,13 @@ class Scroll extends Component<typeScroll> {
                     } : {})
 
                 }}
-                contentContainerStyle={{
+                contentContainerStyle={[{
                     ...(this.props.disableHorizontal ? {
-                        maxWidth:"100%",
-                        minWidth:"100%",
+                        maxWidth: "100%",
+                        minWidth: "100%",
                     } : {}),
-                }}
+
+                }, this.props.contentContainerStyle]}
             >
                 {this.props.children}
             </ScrollView>

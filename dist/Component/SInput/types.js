@@ -3,12 +3,17 @@ import SDate from "../SDate";
 import { SText, SView, SPopupOpen } from "../../index";
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert";
 import SIFechaAlert from "./SInputTypes/SIFechaAlert";
+import SISelect from "./SInputTypes/SISelect";
 var buildResp = function (data) {
     return data;
 };
 export var Type = function (type, Parent) {
     switch (type) {
+        case "select":
+            return select(type, Parent);
         case "fecha":
+            return fecha(type, Parent);
+        case "date":
             return fecha(type, Parent);
         case "password":
             return password(type, Parent);
@@ -116,6 +121,7 @@ var phone = function (type, Parent) {
             else {
                 Parent.setValue(dial.dialCode + " " + "");
             }
+            Parent.notifyBlur();
         })),
         style: {
             View: {},
@@ -169,13 +175,46 @@ var fecha = function (type, Parent) {
             pointerEvents: "none"
         },
         onPress: function () {
+            var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
             SPopupOpen({
                 key: "fechaPicker",
                 content: React.createElement(SIFechaAlert, { props: {
-                        defaultValue: new SDate(Parent.getValue(), format)
+                        defaultValue: value
+                    }, onClose: function () {
+                        Parent.notifyBlur();
                     }, onChange: function (val) {
                         // console.log(val);
                         Parent.setValue(val.toString(format));
+                    } })
+            });
+        },
+        style: {
+            View: {},
+            InputText: {},
+            LabelStyle: {}
+        }
+    });
+};
+var select = function (type, Parent) {
+    // var format = "yyyy-MM-dd";
+    return buildResp({
+        props: {
+            editable: false,
+            // focusable: false,
+            pointerEvents: "none"
+        },
+        onPress: function () {
+            // var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
+            var options = Parent.getOption("options");
+            SPopupOpen({
+                key: "fechaPicker",
+                content: React.createElement(SISelect, { props: {
+                        defaultValue: Parent.getValue()
+                    }, options: options, onClose: function () {
+                        Parent.notifyBlur();
+                    }, onChange: function (val) {
+                        // console.log(val);
+                        Parent.setValue(val);
                     } })
             });
         },
@@ -199,8 +238,9 @@ var number = function (type, Parent) {
             if (!_value)
                 return _value;
             var value = _value;
-            value = value.trim();
-            value = value.replace(/\D/, "");
+            if (typeof value === 'string') {
+                value = value.replace(/[^\d]/g, '');
+            }
             return value;
         },
         verify: function (value) {
@@ -216,22 +256,23 @@ var money = function (type, Parent) {
             keyboardType: "number-pad"
         },
         style: {
-            View: {},
+            View: {
+            // alignItems:"flex-start",
+            // justifyContent:"flex-start",
+            },
             InputText: {
                 flex: 1,
+                width: "100%",
                 marginEnd: 4,
                 textAlign: "right",
                 fontSize: 16
             }
         },
         icon: (React.createElement(SView, { style: {
-                width: 35,
+                width: 30,
                 height: "100%"
             }, center: true },
-            React.createElement(SText, { style: {
-                    color: "#fff",
-                    fontSize: 16
-                } }, "Bs."))),
+            React.createElement(SText, null, "Bs."))),
         filter: function (_value) {
             if (!_value)
                 return _value;

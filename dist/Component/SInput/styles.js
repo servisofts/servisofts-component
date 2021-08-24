@@ -9,12 +9,12 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import { STheme } from "../../index";
 var getType = function (type) {
     switch (type) {
         case "calistenia":
-            return StyleSheet.create({
+            return {
                 "View": {
                     backgroundColor: STheme.color.primary + "22",
                     borderWidth: 1,
@@ -37,9 +37,9 @@ var getType = function (type) {
                 "error": {
                     borderColor: STheme.color.danger
                 }
-            });
+            };
         case "secondary":
-            return StyleSheet.create({
+            return {
                 "View": {
                     backgroundColor: STheme.color.secondary,
                     borderWidth: 1,
@@ -54,9 +54,9 @@ var getType = function (type) {
                 "error": {
                     borderColor: STheme.color.danger
                 }
-            });
+            };
         case "primary":
-            return StyleSheet.create({
+            return {
                 "View": {
                     borderWidth: 1,
                     borderColor: STheme.color.primary,
@@ -67,8 +67,7 @@ var getType = function (type) {
                 },
                 "LabelStyle": {
                     position: "absolute",
-                    top: -22,
-                    left: 8,
+                    top: -10,
                     fontSize: 14,
                     color: STheme.color.secondary
                 },
@@ -80,17 +79,21 @@ var getType = function (type) {
                     borderColor: STheme.color.danger
                     // color: STheme.color.primary + "66"
                 }
-            });
+            };
         default:
-            return StyleSheet.create({
+            return {
                 "View": {},
-                "LabelStyle": {},
-                "InputText": {},
+                "LabelStyle": {
+                    color: STheme.color.secondary
+                },
+                "InputText": {
+                    color: STheme.color.secondary
+                },
                 "placeholder": {},
                 "error": {
                     borderColor: STheme.color.danger
                 }
-            });
+            };
     }
 };
 export var CustomStyles = function (type) {
@@ -98,9 +101,12 @@ export var CustomStyles = function (type) {
     if (typeof type == "string") {
         arrStyles = type.split(" ");
     }
-    var styleTemp = [];
-    for (var i = 0; i < arrStyles.length; i++) {
-        styleTemp.push(getType(arrStyles[i]));
+    if (!arrStyles) {
+        arrStyles = ["default"];
     }
-    return StyleSheet.flatten(styleTemp);
+    var styleTemp = {};
+    for (var i = 0; i < arrStyles.length; i++) {
+        styleTemp = __assign(__assign({}, styleTemp), getType(arrStyles[i]));
+    }
+    return styleTemp;
 };

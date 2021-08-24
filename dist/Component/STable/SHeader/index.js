@@ -195,7 +195,7 @@ var SHeader = /** @class */ (function (_super) {
         var _this = this;
         var position = this.props.initialPosition;
         var total = 0;
-        return this.state.data.map(function (obj, key) {
+        return this.state.data.map(function (obj, i) {
             if (obj.hidden) {
                 return React.createElement(View, null);
             }
@@ -219,7 +219,7 @@ var SHeader = /** @class */ (function (_super) {
                 _this.state.panMoveHeader[obj.key] = _this.createPanMove(obj.key);
             }
             if (!_this.state.animSelect[obj.key]) {
-                _this.state.animSelect[obj.key] = new Animated.Value(4);
+                _this.state.animSelect[obj.key] = new Animated.Value(4 - i);
             }
             position += _this.state.widthHeaderAnim[obj.key].x._value + _this.props.separation;
             if (!_this.state.load) {
@@ -230,9 +230,9 @@ var SHeader = /** @class */ (function (_super) {
                 }, true);
                 _this.state.load = true;
             }
-            return React.createElement(SView, { animated: true, style: __assign(__assign({ position: "absolute", left: 0, top: 0, width: _this.state.widthHeaderAnim[obj.key].x, height: "100%" }, _this.props.style), { transform: [
-                        { translateX: _this.state.positionHeader[obj.key].x }
-                    ] }) },
+            return React.createElement(SView, { animated: true, style: __assign({ position: "absolute", left: _this.state.positionHeader[obj.key].x, top: 0, width: _this.state.widthHeaderAnim[obj.key].x, height: "100%", 
+                    // overflow: "hidden",
+                    zIndex: _this.state.animSelect[obj.key] }, _this.props.style) },
                 React.createElement(SView, { row: true, col: "xs-12", style: {
                         height: "100%",
                         overflow: "hidden"
@@ -244,6 +244,8 @@ var SHeader = /** @class */ (function (_super) {
                         } }),
                         React.createElement(SText, { style: __assign({ textAlign: "center", fontWeight: "700", fontSize: 14 }, _this.props.styleText) }, obj.label)),
                     React.createElement(SView, __assign({}, _this.state.panHeader[obj.key].getPanHandlers(), { animated: true, style: {
+                            position: "absolute",
+                            right: 0,
                             width: 16,
                             zIndex: 99,
                             height: "100%",

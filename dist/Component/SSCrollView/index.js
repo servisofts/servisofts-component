@@ -163,14 +163,15 @@ var SScrollView = /** @class */ (function (_super) {
             this.scrollv.scrollToEnd();
         }
     };
-    // scrollToPosition({ x, y }) {
-    //     if (this.scrollv) {
-    //         this.scrollv.scrollTo({ x, y });
-    //     }
-    //     if (this.scrollh) {
-    //         this.scrollh.scrollTo({ x, y });
-    //     }
-    // }
+    SScrollView.prototype.scrollToPosition = function (_a) {
+        var x = _a.x, y = _a.y;
+        if (this.scrollv) {
+            this.scrollv.scrollTo({ x: x, y: y });
+        }
+        if (this.scrollh) {
+            this.scrollh.scrollTo({ x: x, y: y });
+        }
+    };
     SScrollView.prototype.onScrollAnimationEnd = function () {
         this.props.onScrollEnd(this.scrollInfo());
     };
@@ -203,24 +204,23 @@ var SScrollView = /** @class */ (function (_super) {
             //     }
             // }}
             contentContainerStyle: __assign(__assign({}, this.props.contentContainerStyle), (this.props.disableHorizontal ? { width: "100%" } : {})) },
-            React.createElement(View, null,
-                this.props.header,
-                React.createElement(ScrollView, { nestedScrollEnabled: true, ref: function (ref) { _this.scrollv = ref; }, style: __assign({ width: "100%" }, this.props.style), scrollEventThrottle: 16, disableScrollViewPanResponder: true, onLayout: function (evt) {
-                        // this.setState({ scrollv: evt.nativeEvent.layout })
-                    }, onScroll: function (evt) {
-                        _this.scroll_v = evt.nativeEvent;
-                        if (_this.props.onScroll) {
-                            _this.props.onScroll(_this.scrollInfo());
-                        }
-                        if (_this.props.onScrollEnd) {
-                            new SThread(350, "scroll_v", true).start(function () {
-                                _this.onScrollAnimationEnd();
-                            });
-                        }
-                        // this.setState({ scroll_v: evt.nativeEvent })
-                    }, contentContainerStyle: __assign({}, this.props.contentContainerStyle) },
-                    React.createElement(View, { style: __assign({ width: "100%", height: "100%" }, this.props.contentContainerStyle) }, this.props.children)),
-                this.props.footer));
+            this.props.header,
+            React.createElement(ScrollView, { nestedScrollEnabled: true, ref: function (ref) { _this.scrollv = ref; }, style: __assign({ width: "100%" }, this.props.style), scrollEventThrottle: 16, disableScrollViewPanResponder: true, onLayout: function (evt) {
+                    // this.setState({ scrollv: evt.nativeEvent.layout })
+                }, onScroll: function (evt) {
+                    _this.scroll_v = evt.nativeEvent;
+                    if (_this.props.onScroll) {
+                        _this.props.onScroll(_this.scrollInfo());
+                    }
+                    if (_this.props.onScrollEnd) {
+                        new SThread(100, "scroll_v", true).start(function () {
+                            _this.onScrollAnimationEnd();
+                        });
+                    }
+                    // this.setState({ scroll_v: evt.nativeEvent })
+                }, contentContainerStyle: __assign({}, this.props.contentContainerStyle) },
+                React.createElement(View, { style: __assign({ width: "100%", height: "100%" }, this.props.contentContainerStyle) }, this.props.children)),
+            this.props.footer);
     };
     SScrollView.prototype.render = function () {
         var _this = this;

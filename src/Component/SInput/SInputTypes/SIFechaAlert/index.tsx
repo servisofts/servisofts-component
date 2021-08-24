@@ -16,7 +16,8 @@ type typeConfig = {
 type typeProps = {
     style: ViewStyle,
     props: typeConfig,
-    onChange: (value: SDate) => any
+    onChange: (value: SDate) => any,
+    onClose?: () => any
     // ViewPropTypes,
     // TouchableOpacityProps,
     //callBack:Function,
@@ -57,8 +58,11 @@ export default class SIFechaAlert extends Component<typeProps> {
         };
         this.inital();
     }
+    componentWillUnmount() {
+        if (this.props.onClose) this.props.onClose();
+    }
     inital() {
-        new SThread(100, "moveDate", true).start(() => {
+        new SThread(10, "moveDate", true).start(() => {
             var ready = true;
             if (!this.state.select["year"]) {
                 this.selectIten("year", this.state.initial["year"])
@@ -93,10 +97,17 @@ export default class SIFechaAlert extends Component<typeProps> {
     }
     selectIten(key, y) {
         if (this.refItens[key][y]) {
+            if (!this.refItens[key][y]) {
+                return;
+            }
+            if (!this.refItens[key][y].getLayout) {
+                return;
+            }
             var lay = this.refItens[key][y].getLayout();
             if (!lay) {
                 return false;
             }
+
             this.scroll[key].scrollTo({ x: lay.x + 50, y: lay.y + 20 });
             this.state.select[key] = y;
             this.setState({ select: { ...this.state.select } })
@@ -112,7 +123,7 @@ export default class SIFechaAlert extends Component<typeProps> {
         var arr = [];
         switch (key) {
             case "year":
-                for (let i: number = (!this.props.props.minYear ? 1888 : this.props.props.minYear); i <= (!this.props.props.maxYear ? (new SDate(new Date()).toJson().year) : this.props.props.maxYear); i++) {
+                for (let i: number = (!this.props.props.minYear ? 1900 : this.props.props.minYear); i <= (!this.props.props.maxYear ? (new SDate(new Date()).toJson().year) : this.props.props.maxYear); i++) {
                     arr.push({
                         type: key,
                         val: i,
@@ -149,24 +160,21 @@ export default class SIFechaAlert extends Component<typeProps> {
 
             return (<SView
                 center
+                col={"xs-12"}
                 style={{
                     width: "100%",
                     height: 40,
                 }}
                 data={obj}
                 ref={(ref) => { this.refItens[obj.type][obj.val + ""] = ref }}
-                onPress={(evt) => {
-                    this.scroll[key].scrollTo({ x: evt.layout.x + 50, y: evt.layout.y + 20 });
+                onPress={() => {
+                    var layout = this.refItens[obj.type][obj.val + ""].getLayout();
+                    this.scroll[key].scrollTo({ x: layout.x + 50, y: layout.y + 20 });
                 }}>
 
                 <SText
-                // options={{
-                //     variant: "h3",
-                //     type: "primary"
-                // }}
                 >
                     {obj.data}
-
                 </SText>
             </SView>)
         });
@@ -179,12 +187,11 @@ export default class SIFechaAlert extends Component<typeProps> {
     // }, 2000)
     // }
     getLista = (key) => {
-        return <SView props={{
-            col: "xs-4",
-            height: "100%",
-            variant: "center"
-        }}>
-
+        return <SView
+            col={"xs-4"}
+            center
+            flex
+        >
             <SView style={{
                 position: "absolute",
                 width: "100%",
@@ -196,11 +203,14 @@ export default class SIFechaAlert extends Component<typeProps> {
             <SSCrollView disableHorizontal
                 ref={(ref) => { this.scroll[key] = ref }}
                 // reverse
+                contentContainerStyle={{
+                    width: "100%",
+                }}
                 onScrollEnd={(evt) => {
                     this.onScrollEnd(key, evt);
                 }}
             >
-                <SView style={{
+                <SView col={"xs-12"} style={{
                     width: "100%",
                 }}>
                     <SView style={{
@@ -216,9 +226,7 @@ export default class SIFechaAlert extends Component<typeProps> {
         </SView>;
     }
     getInfo() {
-        return <SView props={{
-            direction: "row",
-        }} style={{
+        return <SView row style={{
             flex: 1,
         }}>
             {JSON.stringify(this.state.select)}
@@ -226,27 +234,24 @@ export default class SIFechaAlert extends Component<typeProps> {
     }
     render() {
         return <SView
-            props={{
-                col: "xs-6",
-                variant: "center",
-                withoutFeedback: true
-            }}
+            col={"xs-11 md-6 xl-4"}
+            center
             style={{
                 height: 200,
                 borderRadius: 8,
-                // overflow:"hidden"
-            }}>
+                backgroundColor: STheme.color.background,
+                overflow: "hidden"
+            }
+            }>
             {/* <SBackground /> */}
-            <SView props={{
-                direction: "row"
-            }} style={{
+            < SView row style={{
                 width: "100%",
                 height: 200,
             }}>
                 {this.getLista("day")}
                 {this.getLista("month")}
                 {this.getLista("year")}
-            </SView>
-        </SView>
+            </SView >
+        </SView >
     }
 }

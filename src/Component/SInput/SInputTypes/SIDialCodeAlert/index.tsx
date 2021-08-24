@@ -5,6 +5,7 @@ import { SText, SView, SThread, STheme } from '../../../../index';
 import SDate from '../../../SDate';
 import Countries from './Countries';
 import { SPopupClose, SPopupOpen } from '../../../SPopup';
+import { SInput } from '../..';
 // import SBackground from '../../../SBackground';
 
 type typeConfig = {
@@ -32,9 +33,7 @@ export default class SIDialCodeAlert extends Component<typeProps> {
         //     return <View />;
         // }
         return <SView
-            props={{
-                variant: "center"
-            }} style={{
+            center style={{
                 width: 60,
                 height: "100%"
             }}
@@ -52,12 +51,12 @@ export default class SIDialCodeAlert extends Component<typeProps> {
                 })
             }}
         >
-            <SView props={{
-                direction: "row",
-                variant: "center"
-            }} style={{
-                width: "100%",
-            }}>
+            <SView
+                row
+                center
+                style={{
+                    width: "100%",
+                }}>
                 <SText style={style}>{defaultCountry.flag}</SText>
                 <View style={{
                     width: 4,
@@ -87,7 +86,7 @@ export default class SIDialCodeAlert extends Component<typeProps> {
             height: "100%",
             alignItems: "center"
         }}>
-            <View style={{
+            {/* <View style={{
                 width: "100%",
                 marginTop: 4,
                 height: 40,
@@ -95,8 +94,11 @@ export default class SIDialCodeAlert extends Component<typeProps> {
                 alignItems: "center",
                 flexDirection: "row",
             }}>
+                <SInput props={{
 
-            </View>
+                    customStyle: "secondary"
+                }} />
+            </View> */}
             {/* <SScrollView disableHorizontal> */}
             <FlatList
                 style={{
@@ -133,15 +135,15 @@ export default class SIDialCodeAlert extends Component<typeProps> {
                                     }} >{item.flag}</SText>
                                     <SText style={{
                                         flex: 8,
-                                    }} props={{ type: "primary" }}>{item.en}</SText>
+                                    }}>{item.en}</SText>
                                     <SText style={{
                                         flex: 2,
-                                    }} props={{ type: "primary" }}>{item.dialCode}</SText>
+                                    }}>{item.dialCode}</SText>
                                 </View>
 
                                 <SView
                                     style={{
-                                        backgroundColor: STheme.color.background + "33",
+                                        backgroundColor: STheme.color.secondary + "33",
                                         height: 1
                                     }}></SView>
                             </TouchableOpacity>
@@ -155,13 +157,12 @@ export default class SIDialCodeAlert extends Component<typeProps> {
     }
     render() {
         return <SView
-            props={{
-                col: "xs-11 md-8 xl-6",
-                variant: "center",
-                withoutFeedback: true,
-            }}
+            col={"xs-11 md-8 xl-6"}
+            center
+            withoutFeedback
             style={{
                 // width: "100%",
+                backgroundColor: STheme.color.background,
                 height: "100%",
                 borderRadius: 8,
             }}>

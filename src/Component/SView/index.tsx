@@ -9,17 +9,21 @@ export type SViewProps = {
   dir?: SDirectionType,
   row?: boolean,
   // props?: SViewProps,
+  data?: any,
   style?: any,
   onPress?: Function,
   colSquare?: boolean,
   center?: boolean,
   animated?: boolean,
   backgroundColor?: string,
-  flex?: Number | boolean
-} & ViewProps & any
+  flex?: Number | boolean,
+  height?: Number | boolean | string,
+  withoutFeedback?: Boolean
+} & ViewProps
 
 export default class SView extends Component<SViewProps> {
   state: any;
+  layout: any;
   constructor(props: SViewProps) {
     super(props);
     var propsP: any;
@@ -34,21 +38,61 @@ export default class SView extends Component<SViewProps> {
       }
     };
   }
+  getLayout() {
+    return this.layout;
+  }
+  getProp(prop: string) {
+    return this.props[prop];
+  }
   getData() {
     return this.props.data;
   }
   render() {
+    var otherProps: any = {};
     var Element: any = View;
     if (this.props.onPress) {
       Element = TouchableOpacity;
     }
+    if (this.props.withoutFeedback) {
+      Element = TouchableOpacity;
+      otherProps.activeOpacity = 1;
+      // if (this.props.animated) {
+      // Component = Animated.createAnimatedComponent(Component);
+      // }
+    }
     if (this.props.animated) {
       Element = Animated.createAnimatedComponent(Element);
     }
+    var style = this.props.style;
+    if (style) {
+      delete style["top"];
+      delete style["left"];
+      delete style["right"];
+      delete style["bottom"];
+      delete style["position"];
+      delete style["margin"];
+      delete style["marginBottom"];
+      delete style["marginTop"];
+      delete style["marginLeft"];
+      delete style["marginStart"];
+      delete style["marginRight"];
+      delete style["marginEnd"];
+    }
     return (
-      <SGrid colSquare={this.props.colSquare} col={this.state.params.col} style={this.state.params.style}>
+      <SGrid
+        colSquare={this.props.colSquare}
+        height={this.props.height}
+        flex={this.props.flex}
+        col={this.state.params.col}
+        style={this.state.params.style}
+        onLayout={(evt) => {
+          this.layout = evt.nativeEvent.layout;
+          if (this.props.onLayout) this.props.onLayout(evt);
+        }}>
         <Element
+          {...otherProps}
           {...this.props}
+
           style={{
             width: "100%",
             ...(this.state.params.dir != "row" ? {} : {
@@ -75,8 +119,10 @@ export default class SView extends Component<SViewProps> {
             ...(!this.props.flex ? {} : {
               flex: this.props.flex == true ? 1 : this.props.flex
             }),
-            ...(!this.state.params.style ? {} : this.state.params.style),
-            ...this.props.style
+            ...(!this.props.height ? {} : {
+              height: this.props.height == true ? "100%" : this.props.height
+            }),
+            ...style
           }}>
           {this.props.children}
         </Element>

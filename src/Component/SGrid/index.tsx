@@ -8,7 +8,10 @@ import { SViewProps } from '../SView/index';
 export type SGridProps = {
     col: SColType,
     style: ViewStyle,
-    colSquare?: boolean
+    colSquare?: boolean,
+    flex?: Number | boolean,
+    height?: Number | boolean | string,
+    onLayout?: (event: any) => void,
 }
 
 export default class SGrid extends Component<SGridProps> {
@@ -66,31 +69,37 @@ export default class SGrid extends Component<SGridProps> {
     render() {
         return (
             <Animated.View style={{
-
-                ...(!this.props.style.position ? {} : {
-                    position: this.props.style.position,
-                }),
-                ...(!this.props.style.flex ? {} : {
-                    flex: this.props.style.flex,
-                }),
-                ...(!this.props.style.height ? {} : {
-                    height: this.props.style.height,
-                }),
+                ...(!this.props.style.position ? {} : { position: this.props.style.position, }),
+                ...(!this.props.style.flex ? {} : { flex: this.props.style.flex, }),
+                ...(!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : this.props.flex }),
+                ...(!this.props.style.height ? {} : { height: this.props.style.height, }),
+                ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
+                ...(!this.props.style.width ? {} : { width: this.props.style.width, }),
+                ...(!this.props.colSquare ? {} : { height: this.animSize.y, }),
+                ...(!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex, }),
+                ...(this.props.style.margin == null ? {} : { top: this.props.style.margin }),
+                ...(this.props.style.marginBottom == null ? {} : { top: this.props.style.marginBottom }),
+                ...(this.props.style.marginTop == null ? {} : { top: this.props.style.marginTop }),
+                ...(this.props.style.marginLeft == null ? {} : { top: this.props.style.marginLeft }),
+                ...(this.props.style.marginRight == null ? {} : { top: this.props.style.marginRight }),
+                ...(this.props.style.marginStart == null ? {} : { top: this.props.style.marginStart }),
+                ...(this.props.style.marginEnd == null ? {} : { top: this.props.style.marginEnd }),
+                ...(this.props.style.top == null ? {} : { top: this.props.style.top }),
+                ...(this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom }),
+                ...(this.props.style.left == null ? {} : { left: this.props.style.left }),
+                ...(this.props.style.right == null ? {} : { right: this.props.style.right }),
                 ...(!this.props.col ? {} : {
                     width: this.animSize.x.interpolate({
                         inputRange: [0, 100],
                         outputRange: ["0%", "100%"]
                     }),
                 }),
-                ...(!this.props.colSquare ? {} : {
-                    height: this.animSize.y,
-                }),
-                ...(!this.props.style.width ? {} : {
-                    width: this.props.style.width,
-                }),
+
             }} onLayout={(evt) => {
                 this.layout = evt.nativeEvent.layout;
+                if (this.props.onLayout) this.props.onLayout(evt);
                 this.animSize.setValue({ x: this.animSize.x._value, y: this.layout.width });
+
             }}>
                 {this.props.children}
             </Animated.View>

@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SComponentContainer, SIcon, SNavigation, SView } from 'servisofts-component';
 import Pages from './Pages';
+import SSocket from './SSocket/index';
 const App = (props) => {
+    SSocket.init();
     return (
         <SComponentContainer
             // debug

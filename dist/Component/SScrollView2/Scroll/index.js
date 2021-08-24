@@ -106,10 +106,10 @@ var Scroll = /** @class */ (function (_super) {
                 }
             }, style: __assign({}, (this.props.disableHorizontal ? {
                 width: "100%"
-            } : {})), contentContainerStyle: __assign({}, (this.props.disableHorizontal ? {
-                maxWidth: "100%",
-                minWidth: "100%"
-            } : {})) }, this.props.children));
+            } : {})), contentContainerStyle: [__assign({}, (this.props.disableHorizontal ? {
+                    maxWidth: "100%",
+                    minWidth: "100%"
+                } : {})), this.props.contentContainerStyle] }, this.props.children));
     };
     return Scroll;
 }(Component));

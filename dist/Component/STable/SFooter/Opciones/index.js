@@ -74,7 +74,7 @@ var Opciones = /** @class */ (function (_super) {
     Opciones.prototype.render = function () {
         var _this = this;
         return (React.createElement(SView, { style: {
-                width: 24,
+                width: 30,
                 height: 24,
                 padding: 2
             }, onPress: function () {
@@ -83,7 +83,7 @@ var Opciones = /** @class */ (function (_super) {
                     content: (_this.getOpcionesPopup())
                 });
             } },
-            React.createElement(SIcon, { name: 'engranaje', fill: "#fff" })));
+            React.createElement(SIcon, { name: 'Engranaje', fill: STheme.color.secondary })));
     };
     return Opciones;
 }(Component));

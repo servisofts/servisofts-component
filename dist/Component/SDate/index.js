@@ -9,11 +9,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-};
 import CalendarParams from './data';
 var SDate = /** @class */ (function () {
     function SDate(date, format) {
@@ -45,7 +40,9 @@ var SDate = /** @class */ (function () {
             format = "yyyy-MM-dd hh:mm";
         }
         var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(mm)|(ss)', 'g');
-        var res = __spreadArray([], format.matchAll(myRe));
+        // var res = [...format.matchAll(myRe)];
+        var res = Array.from(format.matchAll(myRe));
+        // res = [...res];
         var date = {};
         res.map(function (obj) {
             var temp = fecha.substring(obj.index, obj.index + obj[0].length);
@@ -68,7 +65,7 @@ var SDate = /** @class */ (function () {
         return true;
     };
     SDate.prototype.clone = function () {
-        return new SDate(new Date(this.date.getTime()), null);
+        return new SDate(new Date(this.date.getTime()));
     };
     SDate.prototype.getTime = function () {
         return this.date.getTime();
@@ -78,12 +75,15 @@ var SDate = /** @class */ (function () {
     };
     SDate.prototype.setDay = function (val) {
         this.date.setDate(val);
+        return this;
     };
     SDate.prototype.addDay = function (val) {
         this.date.setDate(this.getDay() + val);
+        return this;
     };
     SDate.prototype.addMonth = function (val) {
         this.date.setMonth(this.getMonth() - 1 + val);
+        return this;
     };
     SDate.prototype.getMonth = function () {
         return this.date.getMonth() + 1;
@@ -128,8 +128,10 @@ var SDate = /** @class */ (function () {
         }
         return "0" + val;
     };
-    SDate.prototype.toString = function (_format) {
-        var format = _format || "yyyy-MM-dd hh:mm";
+    SDate.prototype.toString = function (format) {
+        if (!format) {
+            format = "yyyy-MM-dd hh:mm:ss";
+        }
         var json = this.toJson();
         format = format.replace("yyyy", json.year);
         format = format.replace("MM", this.formatCero(json.month));

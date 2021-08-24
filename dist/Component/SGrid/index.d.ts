@@ -5,6 +5,9 @@ export declare type SGridProps = {
     col: SColType;
     style: ViewStyle;
     colSquare?: boolean;
+    flex?: Number | boolean;
+    height?: Number | boolean | string;
+    onLayout?: (event: any) => void;
 };
 export default class SGrid extends Component<SGridProps> {
     key: string;

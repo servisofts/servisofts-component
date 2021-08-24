@@ -10,6 +10,12 @@ export declare type SThemeColors = {
     error?: string;
     info?: string;
     background: string;
+    black: string;
+    white: string;
+    gray: string;
+    lightGray: string;
+    darkGray: string;
+    lightBlack: string;
 };
 export declare type SThemeOptions = 'default' | 'dark';
 export declare type SThemeThemes = {
@@ -26,6 +32,7 @@ export default class STheme extends Component<SThemeProps> {
     static instance: STheme;
     static select(theme: SThemeOptions): string;
     static change(): void | "error";
+    static getTheme(): any;
     state: any;
     constructor(props: any);
     select(theme: SThemeOptions): string;

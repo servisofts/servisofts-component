@@ -23,6 +23,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-web": "^0.17.1",
+    "servisofts-socket": "1.2.1",
     "servisofts-component": "file:../dist"
   },
   "devDependencies": {

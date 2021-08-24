@@ -27,6 +27,7 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { SText, STheme, SView } from '../../../index';
+import SIcon from '../../SIcon';
 import Opciones from './Opciones';
 var SFooter = /** @class */ (function (_super) {
     __extends(SFooter, _super);
@@ -36,6 +37,7 @@ var SFooter = /** @class */ (function (_super) {
         return _this;
     }
     SFooter.prototype.render = function () {
+        var _this = this;
         return (React.createElement(View, { style: __assign({ width: "100%", height: 24, backgroundColor: STheme.color.background, borderTopEndRadius: 8, borderTopStartRadius: 8 }, this.props.style) },
             React.createElement(SView, { row: true, style: {
                     width: "100%", height: "100%"
@@ -49,11 +51,19 @@ var SFooter = /** @class */ (function (_super) {
                     React.createElement(SText, { style: {} },
                         "Total: ",
                         Object.keys(this.props.data).length)),
-                React.createElement(SView, { row: true, center: true, col: "xs-6" }),
-                React.createElement(SView, { row: true, col: "xs-3", style: {
-                        justifyContent: "flex-end",
-                        paddingEnd: 8
+                React.createElement(SView, { row: true, center: true, col: "xs-3" }),
+                React.createElement(SView, { row: true, col: "xs-3", style: {} }),
+                React.createElement(SView, { row: true, center: true, col: "xs-3", style: {
+                        justifyContent: "flex-end"
                     } },
+                    React.createElement(SView, { style: {
+                            width: 30,
+                            height: 24,
+                            padding: 3
+                        }, onPress: function () {
+                            _this.props.reload();
+                        } },
+                        React.createElement(SIcon, { name: "Reload", fill: STheme.color.secondary })),
                     React.createElement(Opciones, __assign({}, this.props))))));
     };
     return SFooter;

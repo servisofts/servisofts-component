@@ -5,8 +5,19 @@ import SDate from "../SDate"
 import { SText, STheme, SView, SPopupOpen, SPopupClose } from "../../index"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
+import SISelect from "./SInputTypes/SISelect"
 
-export type TypeType = "default" | "fecha" | "password" | "email" | "phone" | "number" | "money" | "telefono"
+export type TypeType =
+    "default"
+    | "select"
+    | "fecha"
+    | "date"
+    | "password"
+    | "email"
+    | "phone"
+    | "number"
+    | "money"
+    | "telefono"
 
 type returnType = {
     props?: TextInputProps,
@@ -28,7 +39,11 @@ const buildResp = (data: returnType) => {
 }
 export const Type = (type: TypeType, Parent: SInput): returnType => {
     switch (type) {
+        case "select":
+            return select(type, Parent);
         case "fecha":
+            return fecha(type, Parent);
+        case "date":
             return fecha(type, Parent);
         case "password":
             return password(type, Parent);
@@ -136,6 +151,7 @@ const phone = (type: TypeType, Parent: SInput) => {
                 } else {
                     Parent.setValue(dial.dialCode + " " + "")
                 }
+                Parent.notifyBlur();
             })
         ),
         style: {
@@ -159,6 +175,7 @@ const email = (type: TypeType, Parent: SInput) => {
             InputText: {}
         },
         filter: (_value: String) => {
+
             if (!_value) return _value;
             var value = _value;
             value = value.trim();
@@ -196,15 +213,57 @@ const fecha = (type: TypeType, Parent: SInput) => {
             pointerEvents: "none",
         },
         onPress: () => {
+            var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
             SPopupOpen({
                 key: "fechaPicker",
                 content: <SIFechaAlert
                     props={{
-                        defaultValue: new SDate(Parent.getValue(), format)
+                        defaultValue: value,
+                    }}
+                    onClose={() => {
+                        Parent.notifyBlur();
                     }}
                     onChange={(val) => {
                         // console.log(val);
                         Parent.setValue(val.toString(format));
+                    }} />
+            })
+        },
+        style: {
+            View: {
+
+            },
+            InputText: {
+
+            },
+            LabelStyle: {}
+        }
+    })
+}
+const select = (type: TypeType, Parent: SInput) => {
+    // var format = "yyyy-MM-dd";
+    return buildResp({
+        props: {
+            editable: false,
+            // focusable: false,
+            pointerEvents: "none",
+        },
+        onPress: () => {
+            // var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
+            var options = Parent.getOption("options");
+            SPopupOpen({
+                key: "fechaPicker",
+                content: <SISelect
+                    props={{
+                        defaultValue: Parent.getValue(),
+                    }}
+                    options={options}
+                    onClose={() => {
+                        Parent.notifyBlur();
+                    }}
+                    onChange={(val) => {
+                        // console.log(val);
+                        Parent.setValue(val);
                     }} />
             })
         },
@@ -232,8 +291,9 @@ const number = (type: TypeType, Parent: SInput) => {
         filter: (_value: String) => {
             if (!_value) return _value;
             var value = _value;
-            value = value.trim();
-            value = value.replace(/\D/, "");
+            if (typeof value === 'string') {
+                value = value.replace(/[^\d]/g, '');
+            }
             return value;
         },
         verify: (value) => {
@@ -250,22 +310,22 @@ const money = (type: TypeType, Parent: SInput) => {
         },
         style: {
             View: {
+                // alignItems:"flex-start",
+                // justifyContent:"flex-start",
             },
             InputText: {
                 flex: 1,
+                width: "100%",
                 marginEnd: 4,
                 textAlign: "right",
                 fontSize: 16,
             }
         },
         icon: (<SView style={{
-            width: 35,
+            width: 30,
             height: "100%",
         }} center >
-            <SText style={{
-                color: "#fff",
-                fontSize: 16,
-            }}>Bs.</SText>
+            <SText >Bs.</SText>
         </SView>
         ),
         filter: (_value: String) => {

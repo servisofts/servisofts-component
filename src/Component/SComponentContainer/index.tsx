@@ -4,16 +4,22 @@ import SText from '../SText/index';
 import SGrid from '../SGrid/index';
 import STheme, { SThemeColors, SThemeProps } from '../STheme/index';
 import DebugBar from './DebugBar/index';
+import { SAssets } from '../../Types';
+import SIcon from '../SIcon/index';
+import SPopup from '../SPopup';
 
 export type SComponentContainerProps = {
-    theme: SThemeProps,
-    debug: boolean
+    theme?: SThemeProps,
+    debug?: boolean,
+    socket?: any,
+    assets?: SAssets,
 }
 
 
 export default class SComponentContainer extends Component<SComponentContainerProps> {
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
+    static SSocket: any;
     public static registerGrid(key: string, grid: SGrid) {
         if (!this.Instance) return;
         this.GridListen[key] = grid;
@@ -34,6 +40,8 @@ export default class SComponentContainer extends Component<SComponentContainerPr
             barStyle: "default",
         };
         SComponentContainer.Instance = this;
+        SComponentContainer.SSocket = props.socket;
+        SIcon.loadAssets(this.props.assets);
     }
     onChangeSize(layout) {
         this.layout = layout;
@@ -75,7 +83,6 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         flex: 1,
                     }} >
                         <StatusBar barStyle={this.state.theme.barStyle} animated backgroundColor={this.state.theme.barColor} />
-                        <DebugBar debug={this.props.debug} />
                         <View style={{
                             width: "100%",
                             flex: 1,
@@ -85,6 +92,8 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         }}>
                             {this.props.children}
                         </View>
+                        <DebugBar debug={this.props.debug} />
+                        <SPopup />
                     </View>
                 </SafeAreaView>
             </View>

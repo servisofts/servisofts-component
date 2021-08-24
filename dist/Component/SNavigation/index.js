@@ -29,6 +29,7 @@ import { View } from 'react-native';
 import STheme from '../STheme/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Pages from '../../Pages/index';
 var Stack = createStackNavigator();
 var stateNavigator;
 var SNavigation = /** @class */ (function (_super) {
@@ -76,7 +77,7 @@ var SNavigation = /** @class */ (function (_super) {
                 screens: {}
             }
         };
-        var pages = this.props.props.pages;
+        var pages = __assign(__assign({}, this.props.props.pages), Pages);
         SNavigation.root = "";
         Object.keys(pages).map(function (key) {
             var url = key;
@@ -94,7 +95,7 @@ var SNavigation = /** @class */ (function (_super) {
         return linking;
     };
     SNavigation.prototype.getPages = function (Stack) {
-        var pages = this.props.props.pages;
+        var pages = __assign(__assign({}, this.props.props.pages), Pages);
         return Object.keys(pages).map(function (key) {
             var Page = function (props) {
                 try {

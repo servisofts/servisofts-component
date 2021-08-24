@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import * as Icon2 from '../../img/Icon2/index';
-declare type IconNames = "Icon2" | "Arrow" | "engranaje" | "drag";
+import { SAssets } from '../../Types';
+import { IconNames } from '../../img/index';
 declare type SIconType = {
     name?: IconNames;
     width?: number;
@@ -9,7 +9,10 @@ declare type SIconType = {
     stroke?: string;
 };
 export default class SIcon extends Component<SIconType> {
-    getIconName(name: IconNames): typeof Icon2;
+    static Assets: {};
+    static loadAssets(assets: SAssets): void;
+    getIconName(_name: any): any;
+    getIconProps(name: any): any;
     render(): JSX.Element;
 }
 export {};

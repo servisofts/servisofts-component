@@ -40,6 +40,9 @@ export var Variant = function (type) {
     if (typeof type == "string") {
         arrStyles = type.split(" ");
     }
+    if (!arrStyles) {
+        arrStyles = ["default"];
+    }
     var styleTemp = [getType("default")];
     for (var i = 0; i < arrStyles.length; i++) {
         styleTemp.push(getType(arrStyles[i]));

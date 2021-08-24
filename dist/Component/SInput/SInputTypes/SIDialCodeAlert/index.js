@@ -42,9 +42,7 @@ var SIDialCodeAlert = /** @class */ (function (_super) {
         // if (!defaultCountry) {
         //     return <View />;
         // }
-        return React.createElement(SView, { props: {
-                variant: "center"
-            }, style: {
+        return React.createElement(SView, { center: true, style: {
                 width: 60,
                 height: "100%"
             }, onPress: function () {
@@ -59,10 +57,7 @@ var SIDialCodeAlert = /** @class */ (function (_super) {
                         } })
                 });
             } },
-            React.createElement(SView, { props: {
-                    direction: "row",
-                    variant: "center"
-                }, style: {
+            React.createElement(SView, { row: true, center: true, style: {
                     width: "100%"
                 } },
                 React.createElement(SText, { style: style }, defaultCountry.flag),
@@ -78,14 +73,6 @@ var SIDialCodeAlert = /** @class */ (function (_super) {
                 height: "100%",
                 alignItems: "center"
             } },
-            React.createElement(View, { style: {
-                    width: "100%",
-                    marginTop: 4,
-                    height: 40,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "row"
-                } }),
             React.createElement(FlatList, { style: {
                     width: "100%",
                     height: "100%"
@@ -115,23 +102,20 @@ var SIDialCodeAlert = /** @class */ (function (_super) {
                                     } }, item.flag),
                                 React.createElement(SText, { style: {
                                         flex: 8
-                                    }, props: { type: "primary" } }, item.en),
+                                    } }, item.en),
                                 React.createElement(SText, { style: {
                                         flex: 2
-                                    }, props: { type: "primary" } }, item.dialCode)),
+                                    } }, item.dialCode)),
                             React.createElement(SView, { style: {
-                                    backgroundColor: STheme.color.background + "33",
+                                    backgroundColor: STheme.color.secondary + "33",
                                     height: 1
                                 } }))));
                 } }));
     };
     SIDialCodeAlert.prototype.render = function () {
-        return React.createElement(SView, { props: {
-                col: "xs-11 md-8 xl-6",
-                variant: "center",
-                withoutFeedback: true
-            }, style: {
+        return React.createElement(SView, { col: "xs-11 md-8 xl-6", center: true, withoutFeedback: true, style: {
                 // width: "100%",
+                backgroundColor: STheme.color.background,
                 height: "100%",
                 borderRadius: 8
             } }, this.getLista());

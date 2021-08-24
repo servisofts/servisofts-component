@@ -4,6 +4,7 @@ import SNavBar from '../SNavBar/index';
 import SSCrollView from '../SSCrollView/index';
 import STheme from '../STheme/index';
 import SView from '../SView/index';
+import SScrollView2 from '../SScrollView2/index';
 
 
 export type SPageProps = {
@@ -28,9 +29,11 @@ export default class SPage extends Component<SPageProps> {
     }
     getScroll() {
         if (this.props.disableScroll) return this.props.children
-        return <SSCrollView>
+        return <SScrollView2 disableHorizontal contentContainerStyle={{
+            minHeight: "100%",
+        }}>
             {this.props.children}
-        </SSCrollView>
+        </SScrollView2>
     }
     render() {
         return (

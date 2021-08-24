@@ -15,28 +15,91 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import SText from '../../SText/index';
+import SComponentContainer from '..';
+import SIcon from '../../SIcon';
+import SNavigation from '../../SNavigation';
 import STheme from '../../STheme/index';
+import SThread from '../../SThread';
 import SView from '../../SView/index';
 var DebugBar = /** @class */ (function (_super) {
     __extends(DebugBar, _super);
     function DebugBar(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            register: false,
+            stateSocket: false
+        };
+        return _this;
     }
+    DebugBar.prototype.register = function () {
+        var _this = this;
+        new SThread(100, "", true).start(function () {
+            if (SComponentContainer.SSocket) {
+                if (SComponentContainer.SSocket.getSession() != null) {
+                    SComponentContainer.SSocket.register("DebugBar", function (instance) {
+                        _this.register();
+                    });
+                    if (_this.state.stateSocket != SComponentContainer.SSocket.getSession().isOpen()) {
+                        _this.setState({
+                            stateSocket: SComponentContainer.SSocket.getSession().isOpen()
+                        });
+                    }
+                    if (!_this.state.register)
+                        _this.setState({ register: true });
+                    return;
+                }
+            }
+            _this.register();
+        });
+    };
     DebugBar.prototype.render = function () {
         if (!this.props.debug)
             return React.createElement(View, null);
-        return (React.createElement(SView, { style: {
-                width: "100%",
-                height: 20,
-                backgroundColor: STheme.color.barColor
-            }, dir: "row" },
-            React.createElement(SView, { col: "xs-4" }),
-            React.createElement(SView, { col: "xs-4" }),
-            React.createElement(SView, { col: "xs-4", onPress: function () {
+        this.register();
+        return (React.createElement(React.Fragment, null,
+            React.createElement(SView, { style: {
+                    position: "absolute",
+                    width: 25,
+                    height: 25,
+                    backgroundColor: STheme.color.secondary,
+                    right: 10,
+                    top: 0,
+                    borderBottomLeftRadius: 5,
+                    borderBottomRightRadius: 5,
+                    padding: 4
+                }, onPress: function () {
+                    // STheme.change();
+                } }, this.state.stateSocket ?
+                React.createElement(SIcon, { name: "Wifi", fill: STheme.color.primary }) :
+                React.createElement(SIcon, { name: "WifiDisconnect", fill: STheme.color.primary + "99", stroke: STheme.color.primary })),
+            React.createElement(SView, { style: {
+                    position: "absolute",
+                    width: 25,
+                    height: 25,
+                    backgroundColor: STheme.color.secondary,
+                    right: 40,
+                    top: 0,
+                    borderBottomLeftRadius: 5,
+                    borderBottomRightRadius: 5,
+                    padding: 4
+                }, onPress: function () {
                     STheme.change();
                 } },
-                React.createElement(SText, null, "Theme"))));
+                React.createElement(SIcon, { name: STheme.getTheme() == "default" ? "Sun" : "Moon", fill: STheme.color.primary })),
+            React.createElement(SView, { style: {
+                    position: "absolute",
+                    width: 25,
+                    height: 25,
+                    backgroundColor: STheme.color.secondary,
+                    right: 70,
+                    top: 0,
+                    borderBottomLeftRadius: 5,
+                    borderBottomRightRadius: 5,
+                    padding: 1
+                }, onPress: function () {
+                    SNavigation.navigate("scomponent");
+                } },
+                React.createElement(SIcon, { name: "AlertOutline", fill: STheme.color.primary }))));
     };
     return DebugBar;
 }(Component));

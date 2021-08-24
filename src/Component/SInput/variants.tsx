@@ -52,6 +52,9 @@ export const Variant = (type: TypeVariant) => {
     if (typeof type == "string") {
         arrStyles = type.split(" ");
     }
+    if(!arrStyles){
+        arrStyles=["default"];
+    }
     var styleTemp = [getType("default")]
     for (let i = 0; i < arrStyles.length; i++) {
         styleTemp.push(getType(arrStyles[i]));

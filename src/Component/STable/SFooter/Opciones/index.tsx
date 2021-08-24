@@ -68,7 +68,7 @@ export default class Opciones extends Component<OpcionesProps> {
         return (
             <SView
                 style={{
-                    width: 24,
+                    width: 30,
                     height: 24,
                     padding: 2,
                 }}
@@ -78,8 +78,8 @@ export default class Opciones extends Component<OpcionesProps> {
                         content: (this.getOpcionesPopup())
                     })
                 }}>
-                <SIcon name={'engranaje'}
-                    fill={"#fff"}
+                <SIcon name={'Engranaje'}
+                    fill={STheme.color.secondary}
                 />
             </SView>
         );

@@ -6,14 +6,25 @@ import SData, { SDataType } from './SData'
 import SFooter from './SFooter';
 import SHeadBar from './SHeadBar';
 import { SView, SScrollView2, STheme } from '../../index';
+import { SInputType } from '../SInput';
+import SThread from '../SThread';
+import SLoad from '../SLoad';
+import SOrdenador, { TypeOrdenar } from '../SOrdenador';
+import SIcon from '../SIcon';
+import SPopup from '../SPopup';
 
 type typeHeader = {
     label: String,
     key: String,
-    width: Number,
-    index: Number,
-    hidden: Boolean,
-    render: (data: String) => {}
+    width?: Number,
+    index?: Number,
+    hidden?: Boolean,
+    editable?: Boolean,
+    order?: "asc" | "desc",
+    orderPriority?: Number,
+    type?: SInputType,
+    options?: Array<any>,
+    render?: (data: String) => {}
 }
 type typeAction = "edit" | "delete";
 type SType = {
@@ -26,9 +37,12 @@ type SType = {
     onSelectRow: (obj: Object, index: typeHeader) => {},
     actionTypes: [typeAction],
     onAction: (type: typeAction, obj: Object) => {},
+    onEdit?: (obj: Object) => {},
+    onDelete?: (obj: Object) => {},
     style: {
 
-    }
+    },
+
 }
 
 export default class STable extends Component<SType> {
@@ -39,8 +53,8 @@ export default class STable extends Component<SType> {
     refData;
     static defaultProps = {
         headerProps: {
-            minWidth: 200,
-            initialPosition: 50,
+            minWidth: 500,
+            initialPosition: 8,
         },
         dataProps: {
 
@@ -57,6 +71,8 @@ export default class STable extends Component<SType> {
             }
             return 0;
         });
+        this.initDelete(lista);
+
         this.state = {
             header: lista,
             buscador: {
@@ -67,46 +83,35 @@ export default class STable extends Component<SType> {
         };
         this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 20, y: 0 })
         this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 })
+
     }
-    buscar(data) {
-        if (typeof data != "object") {
-            return Object.keys(data);
+    initDelete(lista) {
+        if (!this.props.onDelete) {
+            return null;
         }
-        var lista_keys = Object.keys(data);
-        var val = this.state.buscador.value.trim() || "";
-        // var arrPalabras = val.replaceAll(" ", "|");
-        var arrPalabras = val.split(" ");
-        var arr2 = [];
-        var objFinal = {};
-        lista_keys.map((key) => {
-            var obj = data[key];
-            var str = JSON.stringify(obj);
-            var isValid = false;
-            var peso = 0;
-            for (let i = 0; i < arrPalabras.length; i++) {
-                const txtTest = arrPalabras[i];
-                var expreg = new RegExp(":.*?" + txtTest + ".*?(,|})", "i");
-                var expreg2 = new RegExp("dato.:.*?" + txtTest + ".*?(,|})", "i");
-                if (expreg.test(str) || expreg2.test(str)) {
-                    isValid = true;
-                    peso++;
-                }
-            }
-            // if (!this.state.verEliminados) {
-            //     if (obj.estado == 0) {
-            //         isValid = false;
-            //     }
-            // }
-            if (isValid) {
-                arr2.push(key);
-                if (!objFinal[key]) {
-                    objFinal[key] = data[key];
-                }
-                objFinal[key]["Peso"] = peso;
+        lista.push({
+            key: "key", label: "Eliminar", width: 100, render: (key) => {
+                return <SView style={{
+                    width: "100%",
+                    height: "100%",
+                }} center onPress={() => {
+
+                    SPopup.confirm({
+                        title: `Eliminar`,
+                        message: `Esta seguro de eliminar?`,
+                        onClose: () => {
+                            // input.setValue(data);
+                        },
+                        onPress: () => {
+                            // this.props.data[key];
+                            this.props.onDelete(key);
+                        }
+                    })
+                }}>
+                    <SIcon name={"Delete"} width={25} height={25} />
+                </SView>
             }
         })
-
-        return objFinal;
     }
     filterData() {
         var data = [];
@@ -121,15 +126,17 @@ export default class STable extends Component<SType> {
             i++;
             data.push(obj);
         })
-        return this.buscar(data);
+        return data;
     }
     render() {
         if (this.state.reload) {
             this.state.reload = false;
             this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 8, y: 0 })
             this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 })
-            this.setState({ ...this.state })
-            return <View />
+            new SThread(300, "reloadTable", true).start(() => {
+                this.setState({ ...this.state })
+            });
+            return <SLoad />
         }
         return (
             <View style={{
@@ -141,10 +148,13 @@ export default class STable extends Component<SType> {
                 }}
                     onAdd={this.props.onAdd}
                     buscar={(text) => {
+                        this.state.buscador = {
+                            ...this.state.buscador,
+                            value: text
+                        }
                         this.setState({
                             buscador: {
                                 ...this.state.buscador,
-                                value: text
                             },
                         });
                     }} />
@@ -154,9 +164,13 @@ export default class STable extends Component<SType> {
                 }}>
                     <SScrollView2
                         ref={(ref) => { this.scroll = ref; }}
+                        contentContainerStyle={{
+                            minWidth: "100%",
+                        }}
                         header={{
                             style: {
-                                height: 30,
+
+                                height: 25,
                             },
                             content: (
                                 <SHeader
@@ -194,9 +208,11 @@ export default class STable extends Component<SType> {
                                 onAction={this.props.onAction}
                                 onSelectRow={this.props.onSelectRow}
                                 ref={(ref) => { this.refData = ref }}
+                                buscador={this.state.buscador}
                                 data={this.filterData()}
                                 header={this.state.header}
                                 animates={this.state.animates}
+                                onEdit={this.props.onEdit}
                             />
                             <View style={{
                                 width: "100%",
@@ -212,6 +228,9 @@ export default class STable extends Component<SType> {
                     setHeader={(header) => {
                         this.state.header = header;
                         // this.setState({ header: [...header]})
+                    }}
+                    reload={() => {
+                        this.setState({ reload: true, });
                     }}
                     style={{
                         backgroundColor: STheme.color.primary

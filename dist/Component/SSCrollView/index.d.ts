@@ -61,6 +61,10 @@ export default class SScrollView extends Component<SType> {
         y: any;
     }): void;
     scrollToEnd(): void;
+    scrollToPosition({ x, y }: {
+        x: any;
+        y: any;
+    }): void;
     onScrollAnimationEnd(): void;
     getScroll(): JSX.Element;
     render(): JSX.Element;

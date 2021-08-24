@@ -33,7 +33,7 @@ export default class SNavBar extends Component<SPageProps> {
             if (SNavigation.lastRoute) {
                 if (!SNavigation.lastRoute.navigation.canGoBack()) {
                     if (SNavigation.lastRoute.route.name == SNavigation.root) {
-                        return <View/>
+                        return <View />
                     }
                     var locstr = window.location.pathname;
                     if (locstr == "/") {
@@ -52,32 +52,31 @@ export default class SNavBar extends Component<SPageProps> {
             }
         }
 
-        return <SView onPress={() => {
-
-            if (SNavigation.lastRoute) {
-                if (SNavigation.lastRoute.navigation.canGoBack()) {
-                    SNavigation.goBack();
-                    return;
-                }
-            }
-            if (Platform.OS == "web") {
-                var locstr = window.location.pathname;
-                var locations = locstr.split("/");
-                locations = locations.slice(0, locations.length - 1);
-                var navTo = "";
-                locations.map((rout) => {
-                    if (navTo) {
-                        navTo += "/";
+        return <SView col={"xs-12"}>
+            <SView onPress={() => {
+                if (SNavigation.lastRoute) {
+                    if (SNavigation.lastRoute.navigation.canGoBack()) {
+                        SNavigation.goBack();
+                        return;
                     }
-                    navTo += rout;
-                });
-                if (!navTo) {
-                    navTo = SNavigation.root;
                 }
-                SNavigation.replace(navTo);
-            }
-        }} col={"xs-12"}>
-            <SView style={{
+                if (Platform.OS == "web") {
+                    var locstr = window.location.pathname;
+                    var locations = locstr.split("/");
+                    locations = locations.slice(0, locations.length - 1);
+                    var navTo = "";
+                    locations.map((rout) => {
+                        if (navTo) {
+                            navTo += "/";
+                        }
+                        navTo += rout;
+                    });
+                    if (!navTo) {
+                        navTo = SNavigation.root;
+                    }
+                    SNavigation.replace(navTo);
+                }
+            }} style={{
                 maxWidth: 35,
                 height: 25,
             }} center>
@@ -100,7 +99,7 @@ export default class SNavBar extends Component<SPageProps> {
                     {this.getBack()}
                 </SView>
                 <SView col={"xs-8"} center flex>
-                    <SText>{this.props.title}</SText>
+                    <SText center>{this.props.title}</SText>
                 </SView>
                 <SView col={"xs-2"} center flex onPress={() => {
                     STheme.change();

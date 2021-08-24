@@ -26,19 +26,32 @@ var __assign = (this && this.__assign) || function () {
 };
 import React, { Component } from 'react';
 import { Platform, View } from 'react-native';
-import * as Icon2 from '../../img/Icon2/index';
-import * as Arrow from '../../img/Arrow/index';
+import LocalImg, { IconsVariant } from '../../img/index';
 var SIcon = /** @class */ (function (_super) {
     __extends(SIcon, _super);
     function SIcon() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    SIcon.prototype.getIconName = function (name) {
-        switch (name) {
-            case "Icon2": return Icon2;
-            case "Arrow": return Arrow;
-            default: return null;
+    SIcon.loadAssets = function (assets) {
+        if (assets.svg) {
+            this.Assets = assets.svg;
         }
+    };
+    SIcon.prototype.getIconName = function (_name) {
+        var name = _name.split("_")[0];
+        var icon = LocalImg[name];
+        if (icon) {
+            return icon;
+        }
+        if (!SIcon.Assets)
+            return null;
+        return SIcon.Assets[name];
+    };
+    SIcon.prototype.getIconProps = function (name) {
+        var variant = IconsVariant[name];
+        if (!variant)
+            return {};
+        return variant;
     };
     SIcon.prototype.render = function () {
         var Select = this.getIconName(this.props.name);
@@ -54,8 +67,9 @@ var SIcon = /** @class */ (function (_super) {
         if (!Icon) {
             return React.createElement(View, null);
         }
-        return (React.createElement(Icon, __assign({ width: "100%", height: "100%" }, this.props)));
+        return (React.createElement(Icon, __assign({ width: "100%", height: "100%" }, this.getIconProps(this.props.name), this.props)));
     };
+    SIcon.Assets = {};
     return SIcon;
 }(Component));
 export default SIcon;

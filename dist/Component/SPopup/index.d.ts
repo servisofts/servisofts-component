@@ -1,12 +1,18 @@
 import { Component } from 'react';
-declare type SPopupOpen = {
-    key: string;
+import { PropsType as ConfirmProps } from './SPopupVariants/Confirm/index';
+import { PropsType as AlertProps } from './SPopupVariants/Alert/index';
+declare type SPopupOpenProps = {
+    key?: string;
     content: any;
     style?: any;
 };
-export declare const SPopupOpen: ({ key, content, style }: SPopupOpen) => void;
+export declare const SPopupOpen: ({ key, content, style }: SPopupOpenProps) => void;
 export declare const SPopupClose: (key: any) => void;
 export default class SPopup extends Component {
+    static confirm(props: ConfirmProps): void;
+    static alert(props: AlertProps): void;
+    static open(obj: SPopupOpenProps): void;
+    static close(key?: string): void;
     state: any;
     constructor(props: any);
     componentDidMount(): void;
@@ -15,6 +21,7 @@ export default class SPopup extends Component {
         content: any;
         style: any;
     }): void;
+    closeAll(): void;
     close(key: any): void;
     getPopups(): JSX.Element[];
     render(): JSX.Element;

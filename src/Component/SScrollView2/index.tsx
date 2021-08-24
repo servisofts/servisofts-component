@@ -28,7 +28,7 @@ export default class SScrollView2 extends Component<SType> {
 
     static defaultProps = {
         disableHorizontal: false,
-        header: { style: {}, content: <View/> },
+        header: { style: {}, content: <View /> },
         footer: null,
     }
     constructor(props) {
@@ -78,14 +78,17 @@ export default class SScrollView2 extends Component<SType> {
                     <View style={{
                         maxWidth: "100%",
                         height: "100%",
+                        minWidth: "100%",
                         ...(this.props.disableHorizontal ? {
                             minWidth: "100%",
+                            alignItems:"center",
                         } : {}),
                     }}>
                         <Scroll
                             disableHorizontal={this.props.disableHorizontal}
                             ref={(ref) => { this.setRef("scrollh", ref) }}
                             horizontal={true}
+                            contentContainerStyle={this.props.contentContainerStyle}
                         >
                             <View style={{
                                 width: "100%",
@@ -93,10 +96,12 @@ export default class SScrollView2 extends Component<SType> {
                                 <Scroll
                                     disableHorizontal={this.props.disableHorizontal}
                                     ref={(ref) => { this.setRef("scrollv", ref) }}
+                                    contentContainerStyle={this.props.contentContainerStyle}
                                 >
                                     <View style={{
                                         width: "100%",
                                         height: "100%",
+
                                     }}>
                                         <View style={{ width: "100%", height: this.props.header.style.height, }}></View>
                                         {this.props.children}

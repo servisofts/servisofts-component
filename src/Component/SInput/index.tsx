@@ -8,16 +8,19 @@ import { SColType } from '../../Types';
 // import SSize from '../SSize';
 // import { SText } from '../SText';
 // import { SView } from '../SView';
-
+export type SInputType = TypeType;
 export type TypeInputProps = {
-    style: ViewStyle,
-    customStyle: TypeStyles,
-    type: TypeType,
-    isRequired: Boolean,
-    variant: TypeVariant,
+    style?: ViewStyle,
+    customStyle?: TypeStyles,
+    type?: TypeType,
+    options?: Array<any>,
+    isRequired?: Boolean,
+    variant?: TypeVariant,
     // col: TypeCol,
-    icon: Component,
-    label: String,
+    defaultValue?: any,
+    placeholder?: any,
+    icon?: Component,
+    label?: String,
 }
 
 interface IProps extends TextInputProps {
@@ -87,7 +90,14 @@ export class SInput extends Component<IProps> {
         return isValid
     }
     setValue(val) {
+        this.state.value = val;
         this.setState({ value: val });
+    }
+    notifyBlur() {
+        if (this.props.onBlur) {
+            this.props.onBlur(null);
+        }
+        // this.setState({ value: val });
     }
     getValue() {
         return this.state.value;
@@ -113,8 +123,7 @@ export class SInput extends Component<IProps> {
         return <SView
             center
             style={{
-                width: 60,
-                height: "100%"
+                height: "100%",
             }}>
             {ITEM}
         </SView>
@@ -126,10 +135,10 @@ export class SInput extends Component<IProps> {
         if (!this.props.props.label) {
             return <View />
         }
-        return <SText style={[
-            this.customStyle.LabelStyle,
-            this.type.style.LabelStyle,
-        ]}>{this.props.props.label}</SText>
+        return <SText style={{
+            ...this.customStyle.LabelStyle,
+            ...this.type.style.LabelStyle,
+        }}>{this.props.props.label}</SText>
     }
     render() {
         this.buildStyle();
@@ -184,7 +193,6 @@ export class SInput extends Component<IProps> {
                     style={{ flex: 1, height: "100%" }}>
                     {this.getIcon()}
                     <TextInput
-
                         value={valueFilter}
                         {...type.props}
                         {...this.props}
@@ -211,6 +219,7 @@ export class SInput extends Component<IProps> {
                             type.style.InputText,
                             {
                                 flex: 1,
+                                width: "100%",
                                 height: "100%",
                                 outline: "none",
 

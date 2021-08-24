@@ -15,11 +15,18 @@ import SStorage from './Component/SStorage/index';
 import SScrollView2 from "./Component/SScrollView2";
 import { SInput } from "./Component/SInput";
 import SInfo from "./SInfo";
-import { SPopupOpen , SPopupClose } from "./Component/SPopup";
+import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
+import SForm from './Component/SForm/index';
+import { SButtom } from './Component/SButtom/index';
+import SLoad from "./Component/SLoad";
+import SOrdenador from "./Component/SOrdenador/index";
+import SDate from "./Component/SDate";
 export * from './Types/index'
 export {
+    SDate,
     SInfo,
+    SOrdenador,
     SComponentContainer,
     SGrid,
     SIcon,
@@ -33,9 +40,13 @@ export {
     SThread,
     SUuid,
     SView,
+    SLoad,
     SStorage,
+    SPopup,
     SPopupOpen,
     SPopupClose,
     STable,
-    SInput
+    SInput,
+    SForm,
+    SButtom
 }

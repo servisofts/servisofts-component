@@ -4,14 +4,18 @@ import { TypeVariant } from './variants';
 import { TypeType } from './types';
 import { TypeStyles } from './styles';
 import { SColType } from '../../Types';
+export declare type SInputType = TypeType;
 export declare type TypeInputProps = {
-    style: ViewStyle;
-    customStyle: TypeStyles;
-    type: TypeType;
-    isRequired: Boolean;
-    variant: TypeVariant;
-    icon: Component;
-    label: String;
+    style?: ViewStyle;
+    customStyle?: TypeStyles;
+    type?: TypeType;
+    options?: Array<any>;
+    isRequired?: Boolean;
+    variant?: TypeVariant;
+    defaultValue?: any;
+    placeholder?: any;
+    icon?: Component;
+    label?: String;
 };
 interface IProps extends TextInputProps {
     style?: ViewStyle;
@@ -38,6 +42,7 @@ export declare class SInput extends Component<IProps> {
     buildStyle(): void;
     verify(noStateChange?: boolean): boolean;
     setValue(val: any): void;
+    notifyBlur(): void;
     getValue(): any;
     setData(val: any): void;
     getData(): any;

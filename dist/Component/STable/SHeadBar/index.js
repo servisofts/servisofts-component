@@ -43,35 +43,21 @@ var SHeadBar = /** @class */ (function (_super) {
         return (React.createElement(SView, { row: true, style: {
                 width: "100%",
                 // backgroundColor:"#f0f",.
-                height: 32,
+                height: 24,
                 justifyContent: "center"
             } },
-            React.createElement(SView, { col: "xs-9 md-8", style: {
+            React.createElement(SView, { col: "xs-12", style: {
                     height: "100%",
-                    alignItems: "flex-start",
-                    paddingStart: 8
+                    alignItems: "flex-start"
                 } },
-                React.createElement(SInput, { col: "xs-12 md-6", style: {
+                React.createElement(SInput, { col: "xs-12", style: {
                         margin: 0,
-                        height: 28
-                    }, placeholder: "Buscar...", onChangeText: function (text) {
-                        new SThread(600, "buscadorTabla", true).start(function () {
+                        height: 24
+                    }, autoFocus: true, placeholder: "Buscar...", onChangeText: function (text) {
+                        new SThread(300, "buscadorTabla", true).start(function () {
                             _this.props.buscar(text);
                         });
-                    } })),
-            React.createElement(SView, { center: true, row: true, col: "xs-3 md-4", style: {
-                    height: 24,
-                    justifyContent: "flex-end"
-                } },
-                React.createElement(SView, { style: {
-                        width: 24,
-                        height: 24,
-                        marginEnd: 8
-                    }, onPress: function () {
-                        _this.props.reload();
-                    } },
-                    React.createElement(SIcon, { name: "Arrow", fill: STheme.color.primary })),
-                this.getAdd())));
+                    } }))));
     };
     return SHeadBar;
 }(Component));
