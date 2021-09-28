@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 export declare type SThemeColors = {
     barStyle: "dark-content" | "light-content";
     barColor: string;
     primary: string;
+    card?: string;
     secondary: string;
     success?: string;
     warning?: string;
     danger?: string;
     error?: string;
     info?: string;
-    background: string;
-    black: string;
-    white: string;
-    gray: string;
-    lightGray: string;
-    darkGray: string;
-    lightBlack: string;
+    background?: string;
+    black?: string;
+    white?: string;
+    gray?: string;
+    lightGray?: string;
+    darkGray?: string;
+    lightBlack?: string;
+    mapStyle?: any[];
 };
 export declare type SThemeOptions = 'default' | 'dark';
 export declare type SThemeThemes = {
@@ -34,9 +36,14 @@ export default class STheme extends Component<SThemeProps> {
     static change(): void | "error";
     static getTheme(): any;
     state: any;
+    animFadeOut: any;
     constructor(props: any);
     select(theme: SThemeOptions): string;
     change(): void;
-    repaint(): React.ReactNode;
-    render(): React.ReactNode;
+    componentDidMount(): void;
+    onAnim: any;
+    animar(): void;
+    fadeOut(): JSX.Element;
+    repaint(): JSX.Element;
+    render(): JSX.Element;
 }

@@ -77,13 +77,16 @@ var SScrollView2 = /** @class */ (function (_super) {
                         alignItems: "center"
                     } : {})) },
                     React.createElement(Scroll, { disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollh", ref); }, horizontal: true, contentContainerStyle: this.props.contentContainerStyle },
-                        React.createElement(View, { style: {
-                                width: "100%"
-                            } },
-                            React.createElement(Scroll, { disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollv", ref); }, contentContainerStyle: this.props.contentContainerStyle },
+                        React.createElement(View, { style: __assign({ width: "100%" }, (this.props.disableHorizontal ? {
+                                // minWidth: "100%",
+                                minHeight: "100%",
+                                alignItems: "center"
+                            } : {})) },
+                            React.createElement(Scroll, { disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollv", ref); }, contentContainerStyle: this.props.contentContainerStyle, onScroll: this.props.onScroll, onPageFinish: this.props.onPageFinish },
                                 React.createElement(View, { style: {
                                         width: "100%",
-                                        height: "100%"
+                                        height: "100%",
+                                        flex: 1
                                     } },
                                     React.createElement(View, { style: { width: "100%", height: this.props.header.style.height } }),
                                     this.props.children)),

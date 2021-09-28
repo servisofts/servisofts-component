@@ -27,7 +27,9 @@ export default class SScrollView extends Component<SType> {
     scrollv: any;
     scrollh: any;
     state: any;
+    animValueV: any;
     constructor(props: any);
+    componentDidMount(): void;
     getScrollCalc: (data: any) => {
         width: any;
         height: any;
@@ -51,7 +53,7 @@ export default class SScrollView extends Component<SType> {
     scrollTo({ x, y }: {
         x: any;
         y: any;
-    }): void;
+    }, duration: any): void;
     moveScrollVertical({ x, y }: {
         x: any;
         y: any;

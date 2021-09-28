@@ -3,10 +3,11 @@ import { SAssets } from '../../Types';
 import { IconNames } from '../../img/index';
 declare type SIconType = {
     name?: IconNames;
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
     fill?: string;
     stroke?: string;
+    opacity?: number | string;
 };
 export default class SIcon extends Component<SIconType> {
     static Assets: {};

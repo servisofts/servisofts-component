@@ -4,6 +4,7 @@ import { SThemeProps } from '../STheme/index';
 import { SAssets } from '../../Types';
 export declare type SComponentContainerProps = {
     theme?: SThemeProps;
+    background?: any;
     debug?: boolean;
     socket?: any;
     assets?: SAssets;

@@ -9,6 +9,8 @@ export declare type SDataType = {
     animates: any;
     buscador: any;
     onEdit: Function;
+    limit?: number;
+    page?: number;
 };
 export default class SData extends Component<SDataType> {
     animHeight: any;
@@ -17,6 +19,8 @@ export default class SData extends Component<SDataType> {
     static defaultProps: {
         defaultHeight: number;
         ordenador: any[];
+        limit: number;
+        page: number;
     };
     constructor(props: any);
     initialiceData(): void;
@@ -31,5 +35,5 @@ export default class SData extends Component<SDataType> {
     recursiveDataReplace(data: any, key: any, newValue: any): any;
     getDataEditable(_data: any, header: any, position: any, key: any): JSX.Element;
     getRow(obj: any, key: any, position: any): JSX.Element[];
-    render(): JSX.Element | JSX.Element[];
+    render(): JSX.Element[];
 }

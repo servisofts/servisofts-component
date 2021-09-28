@@ -7,21 +7,23 @@ interface InputsTp {
     [index: string]: TypeInputProps;
 }
 export declare type SFromProps = {
-    style: ViewStyle;
-    props: SViewProps;
-    inputProps: TypeInputProps;
+    style?: ViewStyle;
+    props?: SViewProps;
+    inputProps?: TypeInputProps;
     inputs: InputsTp;
-    onSubmit: Function;
-    onSubmitName: String;
-    onSubmitProps: onSubmitProps;
-};
+    onSubmit?: Function;
+    onSubmitName?: String;
+    onSubmitProps?: onSubmitProps;
+} & SViewProps;
 export default class SForm extends Component<SFromProps> {
     static defaultProps: {
         props: {};
-        onSubmitName: string;
     };
     _ref: any;
     constructor(props: any);
+    verify(): boolean;
+    focus(key: any): void;
+    submit(): {};
     getButtom(): JSX.Element;
     getInputs(): JSX.Element | JSX.Element[];
     render(): JSX.Element;

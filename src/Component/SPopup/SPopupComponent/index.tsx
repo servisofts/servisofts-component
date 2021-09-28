@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback, ScrollView, TouchableOpacity } from 'react-native';
+import STheme from '../../STheme';
 
 export type SPopupComponentProps = {
     style?: any,
@@ -42,7 +43,7 @@ export default class SPopupComponent extends Component<SPopupComponentProps> {
                 width: "100%",
                 height: "100%",
                 position: "absolute",
-                backgroundColor: "#00000099",
+                backgroundColor: STheme.color.secondary+"22",
                 justifyContent: "center",
                 alignItems: "center",
                 // ...this.props.style

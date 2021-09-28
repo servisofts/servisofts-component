@@ -20,7 +20,8 @@ type SType = ScrollViewProps & {
     onScrollEnd?: (evt: onSrollEndEvt) => {},
     onScroll?: (evt: onSrollEndEvt) => {},
     header?: { style: ViewStyle, content: any },
-    footer?: Component
+    footer?: Component,
+    onPageFinish?: () => {},
 
 }
 export default class SScrollView2 extends Component<SType> {
@@ -79,9 +80,11 @@ export default class SScrollView2 extends Component<SType> {
                         maxWidth: "100%",
                         height: "100%",
                         minWidth: "100%",
+
                         ...(this.props.disableHorizontal ? {
                             minWidth: "100%",
-                            alignItems:"center",
+                            alignItems: "center",
+
                         } : {}),
                     }}>
                         <Scroll
@@ -92,16 +95,25 @@ export default class SScrollView2 extends Component<SType> {
                         >
                             <View style={{
                                 width: "100%",
+                                ...(this.props.disableHorizontal ? {
+                                    // minWidth: "100%",
+                                    minHeight: "100%",
+                                    alignItems: "center",
+                                } : {}),
                             }}>
                                 <Scroll
                                     disableHorizontal={this.props.disableHorizontal}
                                     ref={(ref) => { this.setRef("scrollv", ref) }}
                                     contentContainerStyle={this.props.contentContainerStyle}
+                                    onScroll={this.props.onScroll}
+                                    onPageFinish={this.props.onPageFinish}
+                                    // onScrollEnd={this.props.onScrollEnd}
                                 >
                                     <View style={{
                                         width: "100%",
                                         height: "100%",
-
+                                        flex: 1,
+                                        // backgroundColor: "#f0f",
                                     }}>
                                         <View style={{ width: "100%", height: this.props.header.style.height, }}></View>
                                         {this.props.children}

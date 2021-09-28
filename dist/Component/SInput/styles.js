@@ -16,23 +16,53 @@ var getType = function (type) {
         case "calistenia":
             return {
                 "View": {
-                    backgroundColor: STheme.color.primary + "22",
+                    backgroundColor: STheme.color.secondary + "22",
                     borderWidth: 1,
                     borderColor: STheme.color.background + "44",
-                    borderRadius: 4,
+                    borderRadius: 6,
                     marginTop: 32,
+                    paddingStart: 8,
+                    height: 50
+                },
+                "LabelStyle": {
+                    position: "absolute",
+                    top: -10,
+                    left: 0,
+                    fontSize: 14,
+                    width: "100%",
+                    color: STheme.color.secondary
+                },
+                "InputText": __assign({ fontSize: 14, color: STheme.color.secondary }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.secondary + "66" })),
+                "placeholder": {
+                    color: STheme.color.secondary + "66"
+                },
+                "error": {
+                    borderColor: STheme.color.danger
+                }
+            };
+        case "bateon":
+            return {
+                "View": {
+                    backgroundColor: STheme.color.secondary + "88",
+                    borderWidth: 1,
+                    borderColor: STheme.color.background + "44",
+                    borderRadius: 32,
+                    marginTop: 16,
+                    height: 50,
                     paddingStart: 8
                 },
                 "LabelStyle": {
                     position: "absolute",
-                    top: -22,
-                    left: 8,
+                    display: 'none',
+                    // top: -10,
+                    // left: 0,
                     fontSize: 14,
-                    color: STheme.color.primary
+                    width: "100%",
+                    color: STheme.color.secondary
                 },
-                "InputText": __assign({ fontSize: 14, color: STheme.color.primary }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.background })),
+                "InputText": __assign({ fontSize: 14, color: STheme.color.secondary, alignItems: 'center', textAlign: "center" }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.secondary })),
                 "placeholder": {
-                    color: STheme.color.background
+                    color: STheme.color.secondary
                 },
                 "error": {
                     borderColor: STheme.color.danger

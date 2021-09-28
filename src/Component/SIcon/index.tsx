@@ -6,10 +6,11 @@ import LocalImg, { IconNames, IconsVariant } from '../../img/index'
 
 type SIconType = {
     name?: IconNames,
-    width?: number,
-    height?: number,
+    width?: number | string,
+    height?: number | string,
     fill?: string,
     stroke?: string,
+    opacity?: number | string,
 }
 
 export default class SIcon extends Component<SIconType> {

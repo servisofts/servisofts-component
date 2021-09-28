@@ -33,16 +33,64 @@ var SFooter = /** @class */ (function (_super) {
     __extends(SFooter, _super);
     function SFooter(props) {
         var _this = _super.call(this, props) || this;
+        _this.getPageItens = function () {
+            var _a = _this.props, limit = _a.limit, data = _a.data;
+            if (limit) {
+                return Math.ceil(Object.keys(data).length / limit);
+            }
+            return 1;
+        };
         _this.state = {};
         return _this;
     }
+    SFooter.prototype.getPagination = function () {
+        var _this = this;
+        var cantPages = this.getPageItens();
+        var ITEMS = [];
+        if (this.props.page > 1) {
+            ITEMS.push(React.createElement(SView, { style: {
+                    width: 20,
+                    height: 20,
+                    borderRadius: 100
+                }, center: true, onPress: function () {
+                    _this.props.setPage(_this.props.page - 1);
+                } },
+                React.createElement(SText, null, "<")));
+        }
+        var _loop_1 = function (index) {
+            ITEMS.push(React.createElement(SView, { style: {
+                    width: 22,
+                    height: 22,
+                    borderRadius: 40,
+                    backgroundColor: (index == this_1.props.page ? STheme.color.secondary + "66" : "transparent")
+                }, center: true, onPress: function () {
+                    _this.props.setPage(index);
+                } },
+                React.createElement(SText, { fontSize: 12, center: true, flex: true }, index)));
+        };
+        var this_1 = this;
+        for (var index = 1; index <= cantPages; index++) {
+            _loop_1(index);
+        }
+        if (this.props.page < cantPages) {
+            ITEMS.push(React.createElement(SView, { style: {
+                    width: 20,
+                    height: 20,
+                    borderRadius: 100
+                }, center: true, onPress: function () {
+                    _this.props.setPage(_this.props.page + 1);
+                } },
+                React.createElement(SText, null, ">")));
+        }
+        return React.createElement(SView, { col: "xs-12", center: true, height: true, row: true }, ITEMS);
+    };
     SFooter.prototype.render = function () {
         var _this = this;
         return (React.createElement(View, { style: __assign({ width: "100%", height: 24, backgroundColor: STheme.color.background, borderTopEndRadius: 8, borderTopStartRadius: 8 }, this.props.style) },
             React.createElement(SView, { row: true, style: {
                     width: "100%", height: "100%"
                 } },
-                React.createElement(SView, { col: "xs-3", style: {
+                React.createElement(SView, { col: "xs-4", style: {
                         height: "100%",
                         paddingLeft: 8,
                         justifyContent: "center"
@@ -51,9 +99,8 @@ var SFooter = /** @class */ (function (_super) {
                     React.createElement(SText, { style: {} },
                         "Total: ",
                         Object.keys(this.props.data).length)),
-                React.createElement(SView, { row: true, center: true, col: "xs-3" }),
-                React.createElement(SView, { row: true, col: "xs-3", style: {} }),
-                React.createElement(SView, { row: true, center: true, col: "xs-3", style: {
+                React.createElement(SView, { row: true, col: "xs-4", height: true, center: true }, this.getPagination()),
+                React.createElement(SView, { row: true, center: true, col: "xs-4", style: {
                         justifyContent: "flex-end"
                     } },
                     React.createElement(SView, { style: {

@@ -53,9 +53,9 @@ var SPopup = /** @class */ (function (_super) {
         // alert(obj)
         INSTANCE.open({ key: "confirm", content: React.createElement(Confirm, __assign({}, props)), style: {} });
     };
-    SPopup.alert = function (props) {
+    SPopup.alert = function (text) {
         // alert(obj)
-        INSTANCE.open({ key: "alert", content: React.createElement(Alert, __assign({}, props)), style: {} });
+        INSTANCE.open({ key: "alert", content: React.createElement(Alert, { title: text }), style: {} });
     };
     SPopup.open = function (obj) {
         var key = obj.key;

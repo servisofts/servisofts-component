@@ -14,6 +14,7 @@ declare type SType = ScrollViewProps & {
         content: any;
     };
     footer?: Component;
+    onPageFinish?: () => {};
 };
 export default class SScrollView2 extends Component<SType> {
     state: any;

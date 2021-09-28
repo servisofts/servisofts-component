@@ -12,21 +12,20 @@ interface InputsTp {
     [index: string]: TypeInputProps;
 }
 export type SFromProps = {
-    style: ViewStyle,
-    props: SViewProps,
-    inputProps: TypeInputProps,
+    style?: ViewStyle,
+    props?: SViewProps,
+    inputProps?: TypeInputProps,
     inputs: InputsTp,
-    onSubmit: Function,
-    onSubmitName: String,
-    onSubmitProps: onSubmitProps,
-}
+    onSubmit?: Function,
+    onSubmitName?: String,
+    onSubmitProps?: onSubmitProps,
+} & SViewProps
 export default class SForm extends Component<SFromProps> {
 
     static defaultProps = {
         props: {
 
         },
-        onSubmitName: "Registro"
     }
     _ref;
     constructor(props) {
@@ -35,8 +34,41 @@ export default class SForm extends Component<SFromProps> {
         };
         this._ref = {};
     }
+    verify() {
+        var isValid = true;
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            if (!input.verify()) {
+                isValid = false;
+            }
+        })
+        return isValid;
+    }
+    focus(key) {
+        if (this._ref[key]) {
+            this._ref[key].focus();
+        }
+    }
+    submit() {
+        var data = {};
+        var isValid = true;
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            if (!input.verify()) {
+                isValid = false;
+            }
+            data[key] = input.getValue();
+        })
+        if (isValid) {
+            if (this.props.onSubmit) {
+                this.props.onSubmit(data);
+            }
+            return data;
+        }
+        return null;
+    }
     getButtom() {
-        if (!this.props.onSubmit) return <View />
+        // if (!this.props.onSubmit) return <View />
         if (!this.props.onSubmitName) return <View />
         return <SButtom
             props={{
@@ -45,18 +77,7 @@ export default class SForm extends Component<SFromProps> {
                 ...this.props.onSubmitProps,
                 // customStyle: "primary",
             }} onPress={() => {
-                var data = {};
-                var isValid = true;
-                Object.keys(this._ref).map((key) => {
-                    var input: SInput = this._ref[key];
-                    if (!input.verify()) {
-                        isValid = false;
-                    }
-                    data[key] = input.getValue();
-                })
-                if (isValid) {
-                    this.props.onSubmit(data);
-                }
+                this.submit()
             }}>
             {this.props.onSubmitName}
         </SButtom>
@@ -71,12 +92,8 @@ export default class SForm extends Component<SFromProps> {
             return <SInput
                 ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
+                {...this.props.inputProps}
                 {...inputProps}
-                props={{
-                    ...this.props.inputProps,
-                    ...inputProps
-                }}
-                //defaultValue={(inputProps.defaultValue) ? inputProps.defaultValue : ""}
                 defaultValue={inputProps.defaultValue}
             />
         })
@@ -84,12 +101,16 @@ export default class SForm extends Component<SFromProps> {
 
     render() {
         return (
-            <SView {...this.props.props}>
+            <SView
+                col="xs-12"
+                {...this.props} {...this.props.props}>
                 {this.getInputs()}
-                <SView style={{
+                <SView col={"xs-12"} style={{
                     height: 14,
                 }}></SView>
-                {this.getButtom()}
+                <SView col={"xs-12"} center>
+                    {this.getButtom()}
+                </SView>
             </SView>
         );
     }

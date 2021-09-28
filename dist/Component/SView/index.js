@@ -70,7 +70,7 @@ var SView = /** @class */ (function (_super) {
         if (this.props.animated) {
             Element = Animated.createAnimatedComponent(Element);
         }
-        var style = this.props.style;
+        var style = __assign({}, this.props.style);
         if (style) {
             delete style["top"];
             delete style["left"];
@@ -85,7 +85,7 @@ var SView = /** @class */ (function (_super) {
             delete style["marginRight"];
             delete style["marginEnd"];
         }
-        return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: this.state.params.style, onLayout: function (evt) {
+        return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: (!this.props.style ? {} : this.props.style), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
@@ -98,15 +98,13 @@ var SView = /** @class */ (function (_super) {
                 })), (!this.props.row ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
-                })), (!this.props.colSquare ? {} : {
-                    height: "100%"
-                })), (!this.props.center ? {} : {
+                })), { height: "100%" }), (!this.props.center ? {} : {
                     alignItems: 'center',
                     justifyContent: 'center'
                 })), (!this.props.flex ? {} : {
                     flex: this.props.flex == true ? 1 : this.props.flex
-                })), (!this.props.height ? {} : {
-                    height: this.props.height == true ? "100%" : this.props.height
+                })), (!this.props.width ? {} : {
+                    width: this.props.width == true ? "100%" : this.props.width
                 })), style) }), this.props.children)));
     };
     return SView;

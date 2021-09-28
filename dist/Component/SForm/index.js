@@ -39,25 +39,48 @@ var SForm = /** @class */ (function (_super) {
         _this._ref = {};
         return _this;
     }
+    SForm.prototype.verify = function () {
+        var _this = this;
+        var isValid = true;
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            if (!input.verify()) {
+                isValid = false;
+            }
+        });
+        return isValid;
+    };
+    SForm.prototype.focus = function (key) {
+        if (this._ref[key]) {
+            this._ref[key].focus();
+        }
+    };
+    SForm.prototype.submit = function () {
+        var _this = this;
+        var data = {};
+        var isValid = true;
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            if (!input.verify()) {
+                isValid = false;
+            }
+            data[key] = input.getValue();
+        });
+        if (isValid) {
+            if (this.props.onSubmit) {
+                this.props.onSubmit(data);
+            }
+            return data;
+        }
+        return null;
+    };
     SForm.prototype.getButtom = function () {
         var _this = this;
-        if (!this.props.onSubmit)
-            return React.createElement(View, null);
+        // if (!this.props.onSubmit) return <View />
         if (!this.props.onSubmitName)
             return React.createElement(View, null);
         return React.createElement(SButtom, { props: __assign({ type: "danger" }, this.props.onSubmitProps), onPress: function () {
-                var data = {};
-                var isValid = true;
-                Object.keys(_this._ref).map(function (key) {
-                    var input = _this._ref[key];
-                    if (!input.verify()) {
-                        isValid = false;
-                    }
-                    data[key] = input.getValue();
-                });
-                if (isValid) {
-                    _this.props.onSubmit(data);
-                }
+                _this.submit();
             } }, this.props.onSubmitName);
     };
     SForm.prototype.getInputs = function () {
@@ -67,22 +90,19 @@ var SForm = /** @class */ (function (_super) {
         }
         return Object.keys(this.props.inputs).map(function (key) {
             var inputProps = _this.props.inputs[key];
-            return React.createElement(SInput, __assign({ ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, inputProps, { props: __assign(__assign({}, _this.props.inputProps), inputProps), 
-                //defaultValue={(inputProps.defaultValue) ? inputProps.defaultValue : ""}
-                defaultValue: inputProps.defaultValue }));
+            return React.createElement(SInput, __assign({ ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
         });
     };
     SForm.prototype.render = function () {
-        return (React.createElement(SView, __assign({}, this.props.props),
+        return (React.createElement(SView, __assign({ col: "xs-12" }, this.props, this.props.props),
             this.getInputs(),
-            React.createElement(SView, { style: {
+            React.createElement(SView, { col: "xs-12", style: {
                     height: 14
                 } }),
-            this.getButtom()));
+            React.createElement(SView, { col: "xs-12", center: true }, this.getButtom())));
     };
     SForm.defaultProps = {
-        props: {},
-        onSubmitName: "Registro"
+        props: {}
     };
     return SForm;
 }(Component));

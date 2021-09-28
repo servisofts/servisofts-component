@@ -24,20 +24,44 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Background: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Box: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Caja: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Card: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Carrito: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Cheque: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Delete: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Egreso: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Engranaje: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Ingreso: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Lock: {
@@ -50,6 +74,18 @@ declare const Icons: {
     };
     Moon: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Money: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    NoDelete: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Paquete: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Parameter: {
@@ -70,6 +106,14 @@ declare const Icons: {
     };
     Sun: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Tranfer: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Traspaso: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Usuarios: {

@@ -30,6 +30,7 @@ type SType = ScrollViewProps & {
 
 }
 const preventDefault = e => e.preventDefault();
+const ASCroll: any = Animated.ScrollView
 export default class SScrollView extends Component<SType> {
     scroll_h
     scroll_v
@@ -37,12 +38,24 @@ export default class SScrollView extends Component<SType> {
     scrollv
     scrollh
     state
+    animValueV
     constructor(props) {
         super(props);
         this.state = {
         };
+        this.animValueV = new Animated.Value(0);
+
     }
 
+    componentDidMount() {
+        this.animValueV.addListener((animation) => {
+            this.scrollv &&
+                this.scrollv.scrollTo({
+                    y: animation.value,
+                    animated: false,
+                })
+        })
+    }
     getScrollCalc = (data) => {
 
         return {
@@ -141,16 +154,24 @@ export default class SScrollView extends Component<SType> {
             this.scrollh.scrollTo({ x: 1, y: 1 }, true);
         }
     }
-    scrollTo({ x, y }) {
+    scrollTo({ x, y }, duration) {
         if (!this.layout) {
             return;
         }
         var { width, height } = this.layout;
         if (this.scrollv) {
-            this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, true);
+            Animated.timing(this.animValueV, {
+                toValue: y - height / 2,
+                duration: !duration ? 10 : duration,
+            }).start();
+            // this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, false);
         }
         if (this.scrollh) {
-            this.scrollh.scrollTo({ x: 1, y: 1 }, true);
+            // Animated.timing(this.scrollh, {
+            //     toValue: { x: 1, y: 1 },
+            //     duration: 10,
+            // }).start();
+            // this.scrollh.scrollTo({ x: 1, y: 1 }, false);
         }
     }
     moveScrollVertical({ x, y }) {
@@ -187,8 +208,8 @@ export default class SScrollView extends Component<SType> {
         if (!this.layout) {
             return <View />
         }
-        return <ScrollView
 
+        return <ASCroll
             ref={(ref) => { this.scrollh = ref }}
             horizontal={true}
             style={{
@@ -225,48 +246,48 @@ export default class SScrollView extends Component<SType> {
 
             }}
         >
-                {this.props.header}
-                <ScrollView
-                    nestedScrollEnabled={true}
-                    ref={(ref) => { this.scrollv = ref }}
-                    style={{
-                        width: "100%",
-                        ...this.props.style
-                    }}
-                    scrollEventThrottle={16}
-                    disableScrollViewPanResponder={true}
-                    onLayout={(evt) => {
-                        // this.setState({ scrollv: evt.nativeEvent.layout })
-                    }}
-                    onScroll={(evt) => {
-                        this.scroll_v = evt.nativeEvent;
-                        if (this.props.onScroll) {
-                            this.props.onScroll(this.scrollInfo())
-                        }
-                        if (this.props.onScrollEnd) {
-                            new SThread(100, "scroll_v", true).start(() => {
-                                this.onScrollAnimationEnd();
-                            })
-                        }
-                        // this.setState({ scroll_v: evt.nativeEvent })
-                    }}
-                    contentContainerStyle={{ ...this.props.contentContainerStyle }}
-                // onContentSizeChange={() => {
-                //     if (this.props.reverse) {
-                //         this.scrollv.scrollToEnd({ amimated: false });
-                //     }
-                // }}
-                >
-                    <View style={{
-                        width: "100%",
-                        height: "100%",
-                        ...this.props.contentContainerStyle
-                    }}>
-                        {this.props.children}
-                    </View>
-                </ScrollView>
-                {this.props.footer}
-        </ScrollView>
+            {this.props.header}
+            <ASCroll
+                nestedScrollEnabled={true}
+                ref={(ref) => { this.scrollv = ref }}
+                style={{
+                    width: "100%",
+                    ...this.props.style
+                }}
+                scrollEventThrottle={16}
+                disableScrollViewPanResponder={true}
+                onLayout={(evt) => {
+                    // this.setState({ scrollv: evt.nativeEvent.layout })
+                }}
+                onScroll={(evt) => {
+                    this.scroll_v = evt.nativeEvent;
+                    if (this.props.onScroll) {
+                        this.props.onScroll(this.scrollInfo())
+                    }
+                    if (this.props.onScrollEnd) {
+                        new SThread(150, "scroll_v", true).start(() => {
+                            this.onScrollAnimationEnd();
+                        })
+                    }
+                    // this.setState({ scroll_v: evt.nativeEvent })
+                }}
+                contentContainerStyle={{ ...this.props.contentContainerStyle }}
+            // onContentSizeChange={() => {
+            //     if (this.props.reverse) {
+            //         this.scrollv.scrollToEnd({ amimated: false });
+            //     }
+            // }}
+            >
+                <View style={{
+                    width: "100%",
+                    height: "100%",
+                    ...this.props.contentContainerStyle
+                }}>
+                    {this.props.children}
+                </View>
+            </ASCroll>
+            {this.props.footer}
+        </ASCroll >
     }
     render() {
 

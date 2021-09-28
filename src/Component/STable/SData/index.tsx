@@ -17,6 +17,8 @@ export type SDataType = {
     animates: any,
     buscador: any,
     onEdit: Function,
+    limit?: number,
+    page?: number,
 }
 export default class SData extends Component<SDataType> {
     animHeight
@@ -25,11 +27,14 @@ export default class SData extends Component<SDataType> {
     static defaultProps = {
         defaultHeight: 30,
         ordenador: [],
+        limit: 25,
+        page: 1,
     }
     constructor(props) {
         super(props);
         this.state = {
             data: props.data,
+            renderData: {},
             colorSelect: STheme.color.primary,
             select: {
                 x: -1,
@@ -52,7 +57,22 @@ export default class SData extends Component<SDataType> {
                 if (!header) return;
                 Object.keys(this.state.data).map((key) => {
                     var obj = this.state.data[key];
-                    var data = header.render(this.getData(obj, header.key));
+                    var valor = this.getData(obj, header.key);
+                    var data = null;
+                    if (!this.state.renderData[key]) this.state.renderData[key] = {};
+                    if (!this.state.renderData[key][header.key]) this.state.renderData[key][header.key] = {};
+                    if (this.state.renderData[key][header.key].data != valor) {
+                        data = header.render(valor);
+                        this.state.renderData[key][header.key] = {
+                            comp: data,
+                            data: valor
+                        };
+                    } else {
+                        data = this.state.renderData[key][header.key].comp;
+                    }
+
+
+
                     if (typeof data != "object") {
                         this.state.data[key][header.key] = data;
                     }
@@ -85,6 +105,12 @@ export default class SData extends Component<SDataType> {
             var str = JSON.stringify(obj);
             var isValid = false;
             var peso = 0;
+            val = val.toLowerCase();
+            if (str.indexOf(val) > -1) {
+                peso = 100;
+                isValid = true;
+            }
+
             for (let i = 0; i < arrPalabras.length; i++) {
                 const txtTest = arrPalabras[i];
                 // stric += txtTest.length;
@@ -145,7 +171,7 @@ export default class SData extends Component<SDataType> {
         // if ((this.state.select.x == x || this.state.select.y == y)) {
         //     return this.state.colorSelect + "22";
         // }
-        if (position % 2 == 0) {
+        if (position % 2 != 0) {
             return STheme.color.secondary + "11"
         }
         return "transparent";
@@ -184,7 +210,7 @@ export default class SData extends Component<SDataType> {
             return <SInput
                 ref={ref => this._inputs[header.key + position] = ref}
                 defaultValue={data}
-
+                selectTextOnFocus
                 props={{
                     type: header.type,
                     options: header.options,
@@ -231,62 +257,49 @@ export default class SData extends Component<SDataType> {
         return this.props.header.map((header, i) => {
             if (header.hidden) return <View />
             var Anims = this.props.animates;
-            if (!Anims) {
-                return <View />
-            }
-            if (!Anims.widthHeaderAnim) {
-                return <View />
-            }
+            // if (!Anims) {
+            //     return <View />
+            // }
+            // if (!Anims.widthHeaderAnim) {
+            //     return <View />
+            // }
             var DATA = this.getData(obj, header.key);
             if (header.key == "index") {
                 DATA = position;
             }
             if (header.render) {
-                DATA = header.render(this.getData(obj, header.key))
+                if (!this.state.renderData[key]) this.state.renderData[key] = {};
+                if (!this.state.renderData[key][header.key]) this.state.renderData[key][header.key] = {};
+                if (this.state.renderData[key][header.key].data != DATA) {
+                    DATA = header.render(DATA, obj)
+                } else {
+                    DATA = this.state.renderData[key][header.key].comp;
+                }
             }
             DATA = this.getDataEditable(DATA, header, position, key);
 
             return (
                 <SView animated center style={{
                     position: "absolute",
-                    left: (Anims.positionHeader[header.key] ? Anims.positionHeader[header.key].x : 0),
                     height: "100%",
                     borderWidth: 1,
                     borderColor: STheme.color.background + "22",
                     backgroundColor: this.getColorHover({ x: header.key, y: key, position }),
-                    width: (Anims.widthHeaderAnim[header.key] ? Anims.widthHeaderAnim[header.key].x : header.width),
-                    zIndex: (Anims.animSelect[header.key] ? Anims.animSelect[header.key] : 1),
+                    ...(!Anims ? {} : {
+                        ...(!Anims.widthHeaderAnim ? {} : {
+                            left: (Anims.positionHeader[header.key] ? Anims.positionHeader[header.key].x : 0),
+                            width: (Anims.widthHeaderAnim[header.key] ? Anims.widthHeaderAnim[header.key].x : header.width),
+                            zIndex: (Anims.animSelect[header.key] ? Anims.animSelect[header.key] : 1),
+                        })
+
+                    })
+
                 }} >
                     <SView center style={{
                         width: "100%",
                         height: "100%",
                         overflow: 'hidden',
                     }}
-                    // {...this.state.select.x == header.key && this.state.select.y == key ? {} : {
-                    //     onPress: () => {
-                    //         // Anims.animHover[header.key].setValue(1);
-                    //         if (this.props.onSelectRow) {
-                    //             this.props.onSelectRow(obj, header);
-                    //         }
-                    //         if (this.props.onAction) {
-                    //             SPopupOpen({
-                    //                 "key": "SelectTableAlert",
-                    //                 content: <SelectAlert data={obj} actionTypes={this.props.actionTypes} onAction={(type) => {
-                    //                     SPopupClose("SelectTableAlert");
-                    //                     if (this.props.onAction) {
-                    //                         this.props.onAction(type, obj);
-                    //                     }
-                    //                 }} />
-                    //             })
-                    //         }
-                    //         this.setState({
-                    //             select: {
-                    //                 x: header.key,
-                    //                 y: key
-                    //             }
-                    //         })
-                    //     }
-                    // }}
                     >
                         {DATA}
                     </SView>
@@ -296,9 +309,9 @@ export default class SData extends Component<SDataType> {
 
     }
     render() {
-        if (!this.props.animates) {
-            return <View />
-        }
+        // if (!this.props.animates) {
+        //     return <View />
+        // }
         var i = 0;
         var orderArr = []
         orderArr.push({ key: "Peso", order: "desc", peso: 4 });
@@ -308,9 +321,10 @@ export default class SData extends Component<SDataType> {
             }
         })
 
-        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).map((key) => {
+        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map((key) => {
             var obj = this.state.data[key];
             i++;
+
             return (
                 <SView
                     animated

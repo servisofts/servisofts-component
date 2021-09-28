@@ -5,6 +5,8 @@ import SSCrollView from '../SSCrollView/index';
 import STheme from '../STheme/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
+import SImage from '../SImage';
+import SIcon from '../SIcon';
 
 
 export type SPageProps = {
@@ -17,6 +19,20 @@ export type SPageProps = {
 }
 
 export default class SPage extends Component<SPageProps> {
+    static backgroundComponent = (
+        <View style={{
+            position: "absolute",
+            width: "120%",
+            height: "120%",
+            // backgroundColor: "#f0ff0f",
+            transform: [{ translateX: -50 }, { translateY: -50 }],
+        }}>
+            <SIcon name={"Background"} width={"100%"} opacity={"0.3"} stroke={STheme.color.primary} />
+        </View>
+    );
+    static setBackground(background) {
+        SPage.backgroundComponent = background;
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -29,10 +45,22 @@ export default class SPage extends Component<SPageProps> {
     }
     getScroll() {
         if (this.props.disableScroll) return this.props.children
-        return <SScrollView2 disableHorizontal contentContainerStyle={{
-            minHeight: "100%",
-        }}>
-            {this.props.children}
+        return <SScrollView2 disableHorizontal
+            style={{
+                // minHeight: '100%',
+            }}
+            contentContainerStyle={{
+                minHeight: "100%",
+
+            }}>
+            <SView style={{
+                width: '100%',
+                height: '100%',
+                flex: 1,
+                // backgroundColor: "#f0f",
+            }}>
+                {this.props.children}
+            </SView>
         </SScrollView2>
     }
     render() {
@@ -41,6 +69,7 @@ export default class SPage extends Component<SPageProps> {
                 col={"xs-12"}
                 style={{
                     flex: 1,
+                    height: '100%',
                 }}
             >
                 {this.getNavBar()}
@@ -48,9 +77,13 @@ export default class SPage extends Component<SPageProps> {
                     style={{
                         flex: 1,
                         height: "100%",
+                        overflow: "hidden",
                     }}>
+                    {SPage.backgroundComponent}
                     {this.getScroll()}
+
                 </SView>
+
             </SView>
         );
 

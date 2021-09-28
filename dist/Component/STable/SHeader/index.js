@@ -27,7 +27,9 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 import SAPanResponder from '../../SAnimated/SAPanResponder';
-import { SText, STheme, SView } from '../../../index';
+import SIcon from '../../SIcon';
+import { SPopupOpen, SText, STheme, SView } from '../../../index';
+import SHAjustes from './SHAjustes';
 var SHeader = /** @class */ (function (_super) {
     __extends(SHeader, _super);
     function SHeader(props) {
@@ -191,6 +193,41 @@ var SHeader = /** @class */ (function (_super) {
             }
         });
     };
+    SHeader.prototype.getOrder = function (header, i) {
+        var _this = this;
+        if (header.key == "index") {
+            return React.createElement(View, null);
+        }
+        if (!header.order) {
+            return React.createElement(View, null);
+        }
+        return React.createElement(SView, { style: {
+                width: 16,
+                height: 14
+            }, center: true },
+            React.createElement(SView, { style: {
+                    width: 10,
+                    height: 10,
+                    transform: [
+                        { rotate: header.order == "desc" ? "-90deg" : "90deg" },
+                    ]
+                }, onPress: function () {
+                    if (_this.state.data[i].order == "asc") {
+                        _this.state.data[i].order = "desc";
+                    }
+                    else if (_this.state.data[i].order == "desc") {
+                        delete _this.state.data[i].order;
+                    }
+                    else {
+                        _this.state.data[i].order = "asc";
+                    }
+                    if (_this.props.changeHeader) {
+                        _this.props.changeHeader(_this.state.data);
+                    }
+                    _this.setState(__assign({}, _this.state));
+                } },
+                React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary })));
+    };
     SHeader.prototype.getHeaders = function () {
         var _this = this;
         var position = this.props.initialPosition;
@@ -237,12 +274,16 @@ var SHeader = /** @class */ (function (_super) {
                         height: "100%",
                         overflow: "hidden"
                     } },
-                    React.createElement(SView, __assign({}, _this.state.panMoveHeader[obj.key].getPanHandlers(), { animated: true, center: true, style: {
+                    React.createElement(SView, __assign({}, _this.state.panMoveHeader[obj.key].getPanHandlers(), { animated: true, center: true, row: true, style: {
                             flex: 1,
                             height: "100%",
-                            cursor: "move"
+                            cursor: "move",
+                            flexWrap: "nowrap",
+                            alignItems: "flex-end",
+                            paddingBottom: 1
                         } }),
-                        React.createElement(SText, { style: __assign({ textAlign: "center", fontWeight: "700", fontSize: 14 }, _this.props.styleText) }, obj.label)),
+                        React.createElement(SText, { style: __assign({ textAlign: "center", fontWeight: "700", fontSize: 12 }, _this.props.styleText) }, obj.label),
+                        _this.getOrder(obj, i)),
                     React.createElement(SView, __assign({}, _this.state.panHeader[obj.key].getPanHandlers(), { animated: true, style: {
                             position: "absolute",
                             right: 0,
@@ -255,8 +296,42 @@ var SHeader = /** @class */ (function (_super) {
                         React.createElement(SView, { style: {
                                 width: 2,
                                 height: "100%",
-                                backgroundColor: STheme.color.secondary
-                            } }))));
+                                backgroundColor: STheme.color.secondary + "66"
+                            } })),
+                    React.createElement(SView, { style: {
+                            left: 2,
+                            top: 2,
+                            width: 16,
+                            position: "absolute",
+                            height: 16
+                        }, onPress: function () {
+                            SPopupOpen({
+                                key: "SHeaderAjuste",
+                                content: React.createElement(SHAjustes, { data: __assign(__assign({}, obj), { width: _this.state.widthHeaderAnim[obj.key].x._value }), changeFiltro: function (data) {
+                                        if (_this.props.changeHeader) {
+                                            _this.state.data[i].filtro = data;
+                                            _this.props.changeHeader(_this.state.data);
+                                        }
+                                    }, changeOrder: function (order) {
+                                        if (order == "no") {
+                                            _this.state.data[i].order = false;
+                                        }
+                                        else {
+                                            _this.state.data[i].order = order;
+                                        }
+                                        if (_this.props.changeHeader) {
+                                            _this.props.changeHeader(_this.state.data);
+                                        }
+                                        // this.setState({ ...this.state });
+                                    } })
+                            });
+                        } },
+                        React.createElement(SIcon, __assign({ name: "Engranaje", width: 10, height: 10 }, (obj.filtro ? {
+                            fill: STheme.color.secondary,
+                            stroke: STheme.color.secondary
+                        } : {
+                            stroke: STheme.color.secondary
+                        }))))));
         });
     };
     SHeader.prototype.render = function () {

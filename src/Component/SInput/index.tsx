@@ -1,39 +1,32 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform } from 'react-native';
 import { STheme, SText, SView } from '../../index';
+
 import { Variant, TypeVariant } from './variants';
 import { Type, TypeType } from './types';
 import { CustomStyles, TypeStyles } from './styles';
 import { SColType } from '../../Types';
-// import SSize from '../SSize';
-// import { SText } from '../SText';
-// import { SView } from '../SView';
+
 export type SInputType = TypeType;
 export type TypeInputProps = {
-    style?: ViewStyle,
     customStyle?: TypeStyles,
     type?: TypeType,
     options?: Array<any>,
     isRequired?: Boolean,
     variant?: TypeVariant,
-    // col: TypeCol,
+    col?: SColType,
     defaultValue?: any,
     placeholder?: any,
     icon?: Component,
     label?: String,
-}
-
-interface IProps extends TextInputProps {
-    style?: ViewStyle,
-    props?: TypeInputProps,
-    col?: SColType,
+    props?: any,
+    separation?: number,
     onPress?: (val: any) => void,
     onStateChange?: (value: any) => void,
+} & TextInputProps
 
-}
-// export type SInputProps = IProps;
 
-export class SInput extends Component<IProps> {
+export class SInput extends Component<TypeInputProps> {
     static TYPE(type: TypeType) { return type };
     layout
     style
@@ -41,7 +34,7 @@ export class SInput extends Component<IProps> {
     state
     customStyle
     variant
-
+    _ref
 
     static defaultProps = {
         props: {},
@@ -51,23 +44,40 @@ export class SInput extends Component<IProps> {
 
     constructor(props) {
         super(props);
+
+        // props;
+        // constructor(_props) {
+        //     super(_props);
+        //     this.props = {
+        //         ..._props,
+        //         ..._props.props
+        //     };
+
+
         this.state = {
             value: this.props.defaultValue,
             error: false,
             data: {}
         };
     }
-    getOption(option) {
-        return !this.props.props[option] ? 'default' : this.props.props[option]
+    getComponent() {
+        return <SInput {...this.props} onChangeText={(vak) => {
+            this.state.value = vak;
+        }} />
     }
-    buildStyle() {
-        this.style = {
-            ...(this.props.props.style ? this.props.props.style : {}),
-            ...this.props.style,
-        }
+    getStyle() {
+        return this.style;
+    }
+    getOption(option) {
+        return !this.props[option] ? 'default' : this.props[option]
+    }
+    getData() {
+        return this.state.data;
     }
     verify(noStateChange?: boolean) {
-        if (!this.props.props.isRequired) return true;
+        if (this.props) {
+            if (!this.props.isRequired) return true;
+        }
         var isValid = true;
         if (!this.getValue()) {
             isValid = false;
@@ -82,32 +92,62 @@ export class SInput extends Component<IProps> {
         }
         if (!isValid != this.state.error) {
             if (!noStateChange) {
-                this.props.onStateChange(isValid)
+                if (this.props.onStateChange) this.props.onStateChange(isValid)
+
             }
             this.state.error = !isValid;
             this.setState({ error: this.state.error });
         }
         return isValid
     }
-    setValue(val) {
-        this.state.value = val;
-        this.setState({ value: val });
-    }
     notifyBlur() {
         if (this.props.onBlur) {
             this.props.onBlur(null);
         }
-        // this.setState({ value: val });
     }
+    setValue(value) {
+        this.setState({ value });
+        this.onChangeText(value);
+    }
+
     getValue() {
         return this.state.value;
     }
-    setData(val) {
-        this.setState({ data: { ...this.state.data, ...val } });
+
+    isRender(type) {
+        if (type.render) {
+            return <View style={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                {type.render(this)}
+            </View>
+        }
     }
-    getData() {
-        return this.state.data;
+    onChangeText = (_text) => {
+        var text = _text;
+        if (this.type) {
+            if (this.type.onChangeText) {
+                text = this.type.onChangeText(text)
+            }
+            if (this.type.filter) {
+                text = this.type.filter(text)
+            }
+        }
+        if (this.props.onChangeText) {
+            this.props.onChangeText(text)
+        }
+        this.state.value = text
+        this.setState({ value: this.state.value })
+        this.verify()
     }
+    getLabel() {
+        if (!this.props.label) return null;
+        return <SText style={{ ...this.customStyle["LabelStyle"] }}>{this.props.label}</SText>
+    }
+
     getIcon() {
         if (!this.type) return <View />
         var ITEM: any = false;
@@ -128,29 +168,14 @@ export class SInput extends Component<IProps> {
             {ITEM}
         </SView>
     }
-    getStyle = () => {
-        return this.customStyle
-    }
-    getLabel() {
-        if (!this.props.props.label) {
-            return <View />
-        }
-        return <SText style={{
-            ...this.customStyle.LabelStyle,
-            ...this.type.style.LabelStyle,
-        }}>{this.props.props.label}</SText>
-    }
     render() {
-        this.buildStyle();
-        this.variant = Variant(this.getOption("variant"));
-        this.customStyle = CustomStyles(this.getOption("customStyle"))
-        var size = { width: "100%" }
-        var type = Type(this.getOption("type"), this);
+        var customStyle = CustomStyles(this.props.customStyle);
+        this.customStyle = customStyle;
+        this.style = this.props.style;
+        var type = Type(this.props.type, this);
         this.type = type;
-        var Component: any = View;
-        if (this.props.onPress || type.onPress) {
-            Component = TouchableOpacity;
-        }
+        var isOnPress = this.props.onPress || type.onPress;
+
         var valueFilter = this.state.value;
         if (this.type) {
             if (this.type.filter) {
@@ -163,29 +188,27 @@ export class SInput extends Component<IProps> {
             }
         }
         return (
-            <Component
-                onLayout={(evt) => {
-                    this.layout = evt.nativeEvent.layout
-                    if (this.props.onLayout) this.props.onLayout(evt);
-                }}
-                onPress={() => {
-                    if (this.props.onPress) this.props.onPress({
-                        layout: this.layout
-                    });
-                    if (type.onPress) type.onPress({
-                        layout: this.layout
-                    });
-                }}
-                style={[
-                    this.variant.View,
-                    this.customStyle.View,
-                    type.style.View,
-                    (this.state.error ? this.customStyle.error : {}),
-                    {
-                        ...size,
-                        ...this.style,
+            <SView
+                col={"xs-12"}
+                {... (isOnPress ? {
+                    onPress: () => {
+                        if (this.props.onPress) this.props.onPress({
+                            layout: this.layout
+                        });
+                        if (type.onPress) type.onPress({
+                            layout: this.layout
+                        });
                     }
-                ]} >
+                } : {})}
+                {...this.props}
+                style={{
+                    ...customStyle["View"],
+                    ...type.style.View,
+                    ...(this.state.error ? customStyle.error : {}),
+                    ...this.style,
+                    ...(!this.props.label ? { marginTop: this.props.separation } : {})
+                }}
+            >
                 {this.getLabel()}
                 <SView
                     col={"xs-12"}
@@ -194,41 +217,20 @@ export class SInput extends Component<IProps> {
                     {this.getIcon()}
                     <TextInput
                         value={valueFilter}
-                        {...type.props}
                         {...this.props}
-                        onChangeText={(_text) => {
-                            var text = _text;
-                            if (this.type) {
-                                if (this.type.onChangeText) {
-                                    text = this.type.onChangeText(text)
-                                }
-                                if (this.type.filter) {
-                                    text = this.type.filter(text)
-                                }
-
-                            }
-                            if (this.props.onChangeText) {
-                                this.props.onChangeText(text)
-                            }
-                            this.state.value = text
-                            this.setState({ value: this.state.value })
-                            this.verify()
+                        {...type.props}
+                        style={{
+                            flex: 1,
+                            outline: "none",
+                            ...customStyle["InputText"],
+                            ...type.style.InputText
                         }}
-                        style={[
-                            this.customStyle.InputText,
-                            type.style.InputText,
-                            {
-                                flex: 1,
-                                width: "100%",
-                                height: "100%",
-                                outline: "none",
-
-                            }]}
-                        placeholderTextColor={this.customStyle.placeholder.color}
+                        onChangeText={this.onChangeText}
 
                     />
                 </SView>
-            </Component >
+                {this.isRender(type)}
+            </SView>
         );
     }
 }

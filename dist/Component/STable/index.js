@@ -31,14 +31,32 @@ import SData from './SData';
 import SFooter from './SFooter';
 import SHeadBar from './SHeadBar';
 import { SView, SScrollView2, STheme } from '../../index';
-import SThread from '../SThread';
-import SLoad from '../SLoad';
 import SIcon from '../SIcon';
 import SPopup from '../SPopup';
 var STable = /** @class */ (function (_super) {
     __extends(STable, _super);
     function STable(props) {
         var _this = _super.call(this, props) || this;
+        _this.getData = function (obj, key) {
+            var path = key.split("/");
+            var data = obj;
+            path.map(function (dir) {
+                dir = dir.replace(/-.*/, "");
+                if (dir == "") {
+                    return;
+                }
+                if (!data)
+                    data = {};
+                if (typeof data == "string") {
+                    try {
+                        data = JSON.parse(data);
+                    }
+                    catch (e) { }
+                }
+                data = data[dir];
+            });
+            return data;
+        };
         var lista = _this.props.header.sort(function (a, b) {
             if (a.index > b.index) {
                 return 1;
@@ -54,7 +72,8 @@ var STable = /** @class */ (function (_super) {
             buscador: {
                 value: ""
             },
-            animates: {}
+            animates: {},
+            page: 1
         };
         _this.contentSize = new Animated.ValueXY({ x: _this.props.headerProps.minWidth ? _this.props.headerProps.minWidth : 20, y: 0 });
         _this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 });
@@ -98,6 +117,25 @@ var STable = /** @class */ (function (_super) {
                     return;
                 }
             }
+            var isValid = true;
+            _this.state.header.map(function (objH) {
+                if (objH.filtro) {
+                    var valueFinal = _this.getData(obj, objH.key);
+                    if (!valueFinal) {
+                        isValid = false;
+                        return;
+                    }
+                    if (typeof valueFinal != "string") {
+                        isValid = false;
+                        return;
+                    }
+                    if (valueFinal.toString().toLowerCase().indexOf(objH.filtro.toLowerCase()) == -1) {
+                        isValid = false;
+                    }
+                }
+            });
+            if (!isValid)
+                return;
             i++;
             data.push(obj);
         });
@@ -109,11 +147,12 @@ var STable = /** @class */ (function (_super) {
             this.state.reload = false;
             this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 8, y: 0 });
             this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 });
-            new SThread(300, "reloadTable", true).start(function () {
-                _this.setState(__assign({}, _this.state));
-            });
-            return React.createElement(SLoad, null);
+            // new SThread(300, "reloadTable", true).start(() => {
+            //     this.setState({ ...this.state })
+            // });
+            // return <SLoad />
         }
+        var dataFiltrada = this.filterData();
         return (React.createElement(View, { style: {
                 width: "100%",
                 height: "100%"
@@ -137,8 +176,12 @@ var STable = /** @class */ (function (_super) {
                             height: 25
                         },
                         content: (React.createElement(SHeader, __assign({ style: {
-                                backgroundColor: STheme.color.barColor
-                            }, minWidth: 20, initialPosition: 8, separation: 2 }, this.props.headerProps, { header: this.state.header, contentSize: this.contentSize, getScroll: function () { return _this.scroll; }, loadAnimated: function (animates, reset) {
+                                backgroundColor: STheme.color.barColor,
+                                borderRadius: 4,
+                                overflow: "hidden"
+                            }, minWidth: 20, initialPosition: 8, separation: 2 }, this.props.headerProps, { header: this.state.header, changeHeader: function (header) {
+                                _this.setState({ header: header });
+                            }, contentSize: this.contentSize, getScroll: function () { return _this.scroll; }, loadAnimated: function (animates, reset) {
                                 _this.state.animates = animates;
                                 if (!animates["widthHeaderAnim"] || reset) {
                                     _this.setState({ animates: _this.state.animates });
@@ -150,12 +193,14 @@ var STable = /** @class */ (function (_super) {
                             height: "100%",
                             flex: 1
                         } },
-                        React.createElement(SData, __assign({}, this.props.dataProps, { actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, buscador: this.state.buscador, data: this.filterData(), header: this.state.header, animates: this.state.animates, onEdit: this.props.onEdit })),
+                        React.createElement(SData, __assign({}, this.props.dataProps, { page: this.state.page, actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, buscador: this.state.buscador, data: dataFiltrada, header: this.state.header, limit: this.props.limit, animates: this.state.animates, onEdit: this.props.onEdit })),
                         React.createElement(View, { style: {
                                 width: "100%",
                                 height: 20
                             } })))),
-            React.createElement(SFooter, { data: this.filterData(), header: this.state.header, setHeader: function (header) {
+            React.createElement(SFooter, { data: dataFiltrada, limit: this.props.limit, page: this.state.page, setPage: function (page) {
+                    _this.setState({ page: page });
+                }, header: this.state.header, setHeader: function (header) {
                     _this.state.header = header;
                     // this.setState({ header: [...header]})
                 }, reload: function () {
@@ -165,6 +210,7 @@ var STable = /** @class */ (function (_super) {
                 } })));
     };
     STable.defaultProps = {
+        limit: 20,
         headerProps: {
             minWidth: 500,
             initialPosition: 8

@@ -1,6 +1,6 @@
 {
   "name": "servisofts-component",
-  "version": "1.0.10",
+  "version": "2.0.2",
   "description": "Servisofts-component is a library for React Native Web.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -36,7 +36,7 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "up": "cd dist && npm publish",
+    "up": "npm run build && cd dist && npm publish",
     "start": "rm -rf dist  && mkdir dist && cp package.json dist/package.json  && cp -r src/img/ dist/img && tsc -p ./run.tsconfig.json",
     "build": "rm -rf dist  && mkdir dist  && cp package.json dist/package.json  && cp -r src/img/ dist/img && cp README.md dist/README.md && tsc -p ./tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"

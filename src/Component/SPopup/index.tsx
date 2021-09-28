@@ -26,9 +26,9 @@ export default class SPopup extends Component {
         // alert(obj)
         INSTANCE.open({ key: "confirm", content: <Confirm {...props} />, style: {} });
     }
-    static alert(props: AlertProps) {
+    static alert(text) {
         // alert(obj)
-        INSTANCE.open({ key: "alert", content: <Alert {...props} />, style: {} });
+        INSTANCE.open({ key: "alert", content: <Alert title={text} />, style: {} });
     }
     static open(obj: SPopupOpenProps) {
         var key = obj.key;

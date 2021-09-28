@@ -7,9 +7,11 @@ import DebugBar from './DebugBar/index';
 import { SAssets } from '../../Types';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
+import SPage from '../SPage';
 
 export type SComponentContainerProps = {
     theme?: SThemeProps,
+    background?: any,
     debug?: boolean,
     socket?: any,
     assets?: SAssets,
@@ -42,6 +44,10 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         SComponentContainer.Instance = this;
         SComponentContainer.SSocket = props.socket;
         SIcon.loadAssets(this.props.assets);
+        if (this.props.background) {
+            SPage.setBackground(this.props.background);
+
+        }
     }
     onChangeSize(layout) {
         this.layout = layout;
@@ -72,6 +78,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
             <View style={{
                 width: "100%",
                 flex: 1,
+                height: "100%",
                 backgroundColor: this.state.theme.barColor
             }} >
                 <SafeAreaView style={{

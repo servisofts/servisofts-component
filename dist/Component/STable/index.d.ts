@@ -13,7 +13,7 @@ declare type typeHeader = {
     orderPriority?: Number;
     type?: SInputType;
     options?: Array<any>;
-    render?: (data: String) => {};
+    render?: (data: String, id?: any) => {};
 };
 declare type typeAction = "edit" | "delete";
 declare type SType = {
@@ -29,6 +29,7 @@ declare type SType = {
     onEdit?: (obj: Object) => {};
     onDelete?: (obj: Object) => {};
     style: {};
+    limit?: number;
 };
 export default class STable extends Component<SType> {
     state: any;
@@ -37,6 +38,7 @@ export default class STable extends Component<SType> {
     scroll: any;
     refData: any;
     static defaultProps: {
+        limit: number;
         headerProps: {
             minWidth: number;
             initialPosition: number;
@@ -45,6 +47,7 @@ export default class STable extends Component<SType> {
     };
     constructor(props: any);
     initDelete(lista: any): any;
+    getData: (obj: any, key: any) => any;
     filterData(): any[];
     render(): JSX.Element;
 }

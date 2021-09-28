@@ -6,6 +6,8 @@ declare type typeScroll = {
     disableHorizontal?: boolean;
     indicator?: Indicator;
     contentContainerStyle?: StyleProp<ViewStyle>;
+    onScroll?: (e: any) => void;
+    onPageFinish?: () => {};
 };
 declare class Scroll extends Component<typeScroll> {
     enabled: any;

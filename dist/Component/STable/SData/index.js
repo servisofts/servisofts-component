@@ -60,6 +60,7 @@ var SData = /** @class */ (function (_super) {
         };
         _this.state = {
             data: props.data,
+            renderData: {},
             colorSelect: STheme.color.primary,
             select: {
                 x: -1,
@@ -85,7 +86,22 @@ var SData = /** @class */ (function (_super) {
                     return;
                 Object.keys(_this.state.data).map(function (key) {
                     var obj = _this.state.data[key];
-                    var data = header.render(_this.getData(obj, header.key));
+                    var valor = _this.getData(obj, header.key);
+                    var data = null;
+                    if (!_this.state.renderData[key])
+                        _this.state.renderData[key] = {};
+                    if (!_this.state.renderData[key][header.key])
+                        _this.state.renderData[key][header.key] = {};
+                    if (_this.state.renderData[key][header.key].data != valor) {
+                        data = header.render(valor);
+                        _this.state.renderData[key][header.key] = {
+                            comp: data,
+                            data: valor
+                        };
+                    }
+                    else {
+                        data = _this.state.renderData[key][header.key].comp;
+                    }
                     if (typeof data != "object") {
                         _this.state.data[key][header.key] = data;
                     }
@@ -115,6 +131,11 @@ var SData = /** @class */ (function (_super) {
             var str = JSON.stringify(obj);
             var isValid = false;
             var peso = 0;
+            val = val.toLowerCase();
+            if (str.indexOf(val) > -1) {
+                peso = 100;
+                isValid = true;
+            }
             for (var i = 0; i < arrPalabras.length; i++) {
                 var txtTest = arrPalabras[i];
                 // stric += txtTest.length;
@@ -154,7 +175,7 @@ var SData = /** @class */ (function (_super) {
         // if ((this.state.select.x == x || this.state.select.y == y)) {
         //     return this.state.colorSelect + "22";
         // }
-        if (position % 2 == 0) {
+        if (position % 2 != 0) {
             return STheme.color.secondary + "11";
         }
         return "transparent";
@@ -191,7 +212,7 @@ var SData = /** @class */ (function (_super) {
             // if (typeof data != "string") {
             //     return "Editable no string"
             // }
-            return React.createElement(SInput, { ref: function (ref) { return _this._inputs[header.key + position] = ref; }, defaultValue: data, props: {
+            return React.createElement(SInput, { ref: function (ref) { return _this._inputs[header.key + position] = ref; }, defaultValue: data, selectTextOnFocus: true, props: {
                     type: header.type,
                     options: header.options
                 }, onBlur: function () {
@@ -233,30 +254,34 @@ var SData = /** @class */ (function (_super) {
             if (header.hidden)
                 return React.createElement(View, null);
             var Anims = _this.props.animates;
-            if (!Anims) {
-                return React.createElement(View, null);
-            }
-            if (!Anims.widthHeaderAnim) {
-                return React.createElement(View, null);
-            }
+            // if (!Anims) {
+            //     return <View />
+            // }
+            // if (!Anims.widthHeaderAnim) {
+            //     return <View />
+            // }
             var DATA = _this.getData(obj, header.key);
             if (header.key == "index") {
                 DATA = position;
             }
             if (header.render) {
-                DATA = header.render(_this.getData(obj, header.key));
+                if (!_this.state.renderData[key])
+                    _this.state.renderData[key] = {};
+                if (!_this.state.renderData[key][header.key])
+                    _this.state.renderData[key][header.key] = {};
+                if (_this.state.renderData[key][header.key].data != DATA) {
+                    DATA = header.render(DATA, obj);
+                }
+                else {
+                    DATA = _this.state.renderData[key][header.key].comp;
+                }
             }
             DATA = _this.getDataEditable(DATA, header, position, key);
-            return (React.createElement(SView, { animated: true, center: true, style: {
-                    position: "absolute",
+            return (React.createElement(SView, { animated: true, center: true, style: __assign({ position: "absolute", height: "100%", borderWidth: 1, borderColor: STheme.color.background + "22", backgroundColor: _this.getColorHover({ x: header.key, y: key, position: position }) }, (!Anims ? {} : __assign({}, (!Anims.widthHeaderAnim ? {} : {
                     left: (Anims.positionHeader[header.key] ? Anims.positionHeader[header.key].x : 0),
-                    height: "100%",
-                    borderWidth: 1,
-                    borderColor: STheme.color.background + "22",
-                    backgroundColor: _this.getColorHover({ x: header.key, y: key, position: position }),
                     width: (Anims.widthHeaderAnim[header.key] ? Anims.widthHeaderAnim[header.key].x : header.width),
                     zIndex: (Anims.animSelect[header.key] ? Anims.animSelect[header.key] : 1)
-                } },
+                })))) },
                 React.createElement(SView, { center: true, style: {
                         width: "100%",
                         height: "100%",
@@ -266,9 +291,9 @@ var SData = /** @class */ (function (_super) {
     };
     SData.prototype.render = function () {
         var _this = this;
-        if (!this.props.animates) {
-            return React.createElement(View, null);
-        }
+        // if (!this.props.animates) {
+        //     return <View />
+        // }
         var i = 0;
         var orderArr = [];
         orderArr.push({ key: "Peso", order: "desc", peso: 4 });
@@ -277,7 +302,7 @@ var SData = /** @class */ (function (_super) {
                 orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority });
             }
         });
-        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).map(function (key) {
+        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map(function (key) {
             var obj = _this.state.data[key];
             i++;
             return (React.createElement(SView, { animated: true, row: true, style: {
@@ -288,7 +313,9 @@ var SData = /** @class */ (function (_super) {
     };
     SData.defaultProps = {
         defaultHeight: 30,
-        ordenador: []
+        ordenador: [],
+        limit: 25,
+        page: 1
     };
     return SData;
 }(Component));

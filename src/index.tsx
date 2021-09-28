@@ -17,13 +17,17 @@ import { SInput } from "./Component/SInput";
 import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
+import STable2 from "./Component/STable2";
 import SForm from './Component/SForm/index';
 import { SButtom } from './Component/SButtom/index';
 import SLoad from "./Component/SLoad";
 import SOrdenador from "./Component/SOrdenador/index";
 import SDate from "./Component/SDate";
+import SImage from "./Component/SImage";
+import SHr from "./Component/SHr";
 export * from './Types/index'
 export {
+    SHr,
     SDate,
     SInfo,
     SOrdenador,
@@ -39,6 +43,7 @@ export {
     STheme,
     SThread,
     SUuid,
+    SImage,
     SView,
     SLoad,
     SStorage,
@@ -46,6 +51,7 @@ export {
     SPopupOpen,
     SPopupClose,
     STable,
+    STable2,
     SInput,
     SForm,
     SButtom

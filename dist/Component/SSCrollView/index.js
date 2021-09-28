@@ -25,9 +25,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, Animated, Platform } from 'react-native';
 import { SThread, SView } from '../../index';
 var preventDefault = function (e) { return e.preventDefault(); };
+var ASCroll = Animated.ScrollView;
 var SScrollView = /** @class */ (function (_super) {
     __extends(SScrollView, _super);
     function SScrollView(props) {
@@ -80,8 +81,19 @@ var SScrollView = /** @class */ (function (_super) {
             // </View>
         };
         _this.state = {};
+        _this.animValueV = new Animated.Value(0);
         return _this;
     }
+    SScrollView.prototype.componentDidMount = function () {
+        var _this = this;
+        this.animValueV.addListener(function (animation) {
+            _this.scrollv &&
+                _this.scrollv.scrollTo({
+                    y: animation.value,
+                    animated: false
+                });
+        });
+    };
     SScrollView.prototype.getLayout = function () {
         if (this.layout) {
             return this.layout;
@@ -130,17 +142,25 @@ var SScrollView = /** @class */ (function (_super) {
             this.scrollh.scrollTo({ x: 1, y: 1 }, true);
         }
     };
-    SScrollView.prototype.scrollTo = function (_a) {
+    SScrollView.prototype.scrollTo = function (_a, duration) {
         var x = _a.x, y = _a.y;
         if (!this.layout) {
             return;
         }
         var _b = this.layout, width = _b.width, height = _b.height;
         if (this.scrollv) {
-            this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, true);
+            Animated.timing(this.animValueV, {
+                toValue: y - height / 2,
+                duration: !duration ? 10 : duration
+            }).start();
+            // this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, false);
         }
         if (this.scrollh) {
-            this.scrollh.scrollTo({ x: 1, y: 1 }, true);
+            // Animated.timing(this.scrollh, {
+            //     toValue: { x: 1, y: 1 },
+            //     duration: 10,
+            // }).start();
+            // this.scrollh.scrollTo({ x: 1, y: 1 }, false);
         }
     };
     SScrollView.prototype.moveScrollVertical = function (_a) {
@@ -180,7 +200,7 @@ var SScrollView = /** @class */ (function (_super) {
         if (!this.layout) {
             return React.createElement(View, null);
         }
-        return React.createElement(ScrollView, { ref: function (ref) { _this.scrollh = ref; }, horizontal: true, style: {
+        return React.createElement(ASCroll, { ref: function (ref) { _this.scrollh = ref; }, horizontal: true, style: {
                 width: this.layout.width
             }, scrollEventThrottle: 16, 
             // nestedScrollEnabled={true}
@@ -205,7 +225,7 @@ var SScrollView = /** @class */ (function (_super) {
             // }}
             contentContainerStyle: __assign(__assign({}, this.props.contentContainerStyle), (this.props.disableHorizontal ? { width: "100%" } : {})) },
             this.props.header,
-            React.createElement(ScrollView, { nestedScrollEnabled: true, ref: function (ref) { _this.scrollv = ref; }, style: __assign({ width: "100%" }, this.props.style), scrollEventThrottle: 16, disableScrollViewPanResponder: true, onLayout: function (evt) {
+            React.createElement(ASCroll, { nestedScrollEnabled: true, ref: function (ref) { _this.scrollv = ref; }, style: __assign({ width: "100%" }, this.props.style), scrollEventThrottle: 16, disableScrollViewPanResponder: true, onLayout: function (evt) {
                     // this.setState({ scrollv: evt.nativeEvent.layout })
                 }, onScroll: function (evt) {
                     _this.scroll_v = evt.nativeEvent;
@@ -213,7 +233,7 @@ var SScrollView = /** @class */ (function (_super) {
                         _this.props.onScroll(_this.scrollInfo());
                     }
                     if (_this.props.onScrollEnd) {
-                        new SThread(100, "scroll_v", true).start(function () {
+                        new SThread(150, "scroll_v", true).start(function () {
                             _this.onScrollAnimationEnd();
                         });
                     }

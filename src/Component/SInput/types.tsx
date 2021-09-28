@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet, TextInputProps, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { StyleSheet, TextInputProps, TextStyle, TouchableOpacity, View, ViewStyle, Text } from "react-native"
 import { SInput } from "."
 import SDate from "../SDate"
 import { SText, STheme, SView, SPopupOpen, SPopupClose } from "../../index"
@@ -18,6 +18,7 @@ export type TypeType =
     | "number"
     | "money"
     | "telefono"
+    | "image"
 
 type returnType = {
     props?: TextInputProps,
@@ -25,6 +26,7 @@ type returnType = {
     verify?: Function,
     filter?: Function,
     onChangeText?: Function,
+    render?: Function,
     icon?: any,
     style?: {
         View?: ViewStyle,
@@ -57,6 +59,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return number(type, Parent);
         case "money":
             return money(type, Parent);
+        case "image":
+            return image(type, Parent);
         default:
             return buildResp({
                 props: {
@@ -248,6 +252,24 @@ const select = (type: TypeType, Parent: SInput) => {
             // focusable: false,
             pointerEvents: "none",
         },
+        render: (_Parent: SInput) => {
+            var value = _Parent.getValue();
+            var options = _Parent.getOption("options");
+            options.map((option) => {
+                if (option.key == value) {
+                    value = option;
+                }
+            })
+            if (!value) return <View />
+            if (typeof value != "object") {
+                return <SText col={"xs-12"}>{value}</SText>
+            }
+            if (!value.content) return <View />
+            if (typeof value.content != "object") {
+                return <SText col={"xs-12"}>{value.content}</SText>
+            }
+            return value.content;
+        },
         onPress: () => {
             // var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
             var options = Parent.getOption("options");
@@ -269,10 +291,11 @@ const select = (type: TypeType, Parent: SInput) => {
         },
         style: {
             View: {
-
+                justifyContent: "center",
+                // alignItems:"center",
             },
             InputText: {
-
+                fontSize: 0,
             },
             LabelStyle: {}
         }
@@ -307,6 +330,7 @@ const money = (type: TypeType, Parent: SInput) => {
     return buildResp({
         props: {
             keyboardType: "number-pad",
+            placeholder: "0.00",
         },
         style: {
             View: {
@@ -330,16 +354,60 @@ const money = (type: TypeType, Parent: SInput) => {
         ),
         filter: (_value: String) => {
             if (!_value) return _value;
-            var value = _value + "";
+            var value: any = _value + "";
             value = value.trim();
             if (value.indexOf("\.") >= 0) {
                 var arr = value.split("\.");
-                value = arr[0].replace(/\D/, "") + "." + arr[1].replace(/\D/, "");
+                var int: any = arr[0].replace(/\D/, "");
+                var dec = arr[1].replace(/\D/, "");
+
+                var num = parseInt(int +  dec)/100;
+                value = num.toFixed(2);
+                // if (dec > 99) {
+                //     int += "" + Math.round(dec / 100)
+                //     dec = dec % 100;
+                // }
             } else {
                 value = value.replace(/\D/, "");
+                value = parseFloat(value);
+                // value = value.toFixed(2);
+                value = "0.0" + value;
+
             }
-            return value;
+            return value + "";
         },
+        verify: (value) => {
+            if (!value) return false;
+            return true;
+        }
+    })
+}
+
+const image = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            keyboardType: "number-pad",
+        },
+        style: {
+            View: {
+                // alignItems:"flex-start",
+                // justifyContent:"flex-start",
+            },
+            InputText: {
+                flex: 1,
+                width: "100%",
+                marginEnd: 4,
+                textAlign: "right",
+                fontSize: 16,
+            }
+        },
+        icon: (<SView style={{
+            width: 30,
+            height: "100%",
+        }} center >
+            <SText >Bs.</SText>
+        </SView>
+        ),
         verify: (value) => {
             if (!value) return false;
             return true;

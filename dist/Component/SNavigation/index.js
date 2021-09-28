@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import STheme from '../STheme/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -56,7 +56,28 @@ var SNavigation = /** @class */ (function (_super) {
         SNavigation.lastRoute.navigation.replace(route, params);
     };
     SNavigation.goBack = function () {
-        SNavigation.lastRoute.navigation.goBack();
+        if (SNavigation.lastRoute) {
+            if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                if (SNavigation.lastRoute.route.name == SNavigation.root) {
+                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                }
+                if (Platform.OS == "web") {
+                    var locstr = window.location.pathname;
+                    locstr = locstr.substring(1, locstr.lastIndexOf("/"));
+                    if (locstr == "/") {
+                        SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                    }
+                    SNavigation.lastRoute.navigation.replace(locstr);
+                }
+                else {
+                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                }
+                // if (locstr.split("/").length <= 2) {
+                //     return <View />
+                // }
+            }
+            SNavigation.lastRoute.navigation.goBack();
+        }
     };
     SNavigation.getParam = function (key, valDef) {
         var route = SNavigation.lastRoute.route;
@@ -103,6 +124,9 @@ var SNavigation = /** @class */ (function (_super) {
                         SNavigation.lastRoute = props;
                     }
                     var Page = pages[key].component;
+                    if (!Page) {
+                        Page = pages[key];
+                    }
                     return React.createElement(Page, __assign({}, props));
                 }
                 catch (e) {

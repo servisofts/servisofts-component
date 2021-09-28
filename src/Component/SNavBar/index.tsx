@@ -39,6 +39,9 @@ export default class SNavBar extends Component<SPageProps> {
                     if (locstr == "/") {
                         return <View />
                     }
+                    // if (locstr.split("/").length <= 2) {
+                    //     return <View />
+                    // }
                 }
             }
 
@@ -52,7 +55,9 @@ export default class SNavBar extends Component<SPageProps> {
             }
         }
 
-        return <SView col={"xs-12"}>
+        return <SView col={"xs-12"} height style={{
+            justifyContent: 'center',
+        }}>
             <SView onPress={() => {
                 if (SNavigation.lastRoute) {
                     if (SNavigation.lastRoute.navigation.canGoBack()) {
@@ -78,8 +83,7 @@ export default class SNavBar extends Component<SPageProps> {
                 }
             }} style={{
                 maxWidth: 35,
-                height: 25,
-            }} center>
+            }} center height>
                 <SIcon width={25} height={25} name={"Arrow"} fill={STheme.color.secondary} />
             </SView>
         </SView>
@@ -88,20 +92,21 @@ export default class SNavBar extends Component<SPageProps> {
         return (
             <SView
                 col={"xs-12"}
-                dir={"row"}
+                row
+                center
                 style={{
                     height: 40,
                     backgroundColor: STheme.color.barColor,
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                <SView col={"xs-2"} center flex>
+                <SView col={"xs-2"} center height>
                     {this.getBack()}
                 </SView>
                 <SView col={"xs-8"} center flex>
                     <SText center>{this.props.title}</SText>
                 </SView>
-                <SView col={"xs-2"} center flex onPress={() => {
+                <SView col={"xs-2"} center onPress={() => {
                     STheme.change();
                 }}>
 

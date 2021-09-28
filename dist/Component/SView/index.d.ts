@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ViewProps } from 'react-native';
+import { ViewProps, TouchableOpacityProps } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 export declare type SViewProps = {
     col?: SColType;
@@ -14,8 +14,9 @@ export declare type SViewProps = {
     backgroundColor?: string;
     flex?: Number | boolean;
     height?: Number | boolean | string;
+    width?: Number | boolean | string;
     withoutFeedback?: Boolean;
-} & ViewProps;
+} & ViewProps & TouchableOpacityProps;
 export default class SView extends Component<SViewProps> {
     state: any;
     layout: any;

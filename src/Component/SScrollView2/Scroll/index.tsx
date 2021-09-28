@@ -7,6 +7,9 @@ type typeScroll = {
     disableHorizontal?: boolean,
     indicator?: Indicator,
     contentContainerStyle?: StyleProp<ViewStyle>,
+    onScroll?: (e: any) => void,
+    onPageFinish?: () => {},
+
 }
 const preventDefault = e => e.preventDefault();
 
@@ -91,6 +94,16 @@ class Scroll extends Component<typeScroll> {
                 }}
                 onScroll={(evt) => {
                     this.scrolldata = evt.nativeEvent;
+                    if (this.props.onScroll) this.props.onScroll(evt);
+
+                    if (this.props.onPageFinish) {
+                        var evn = evt.nativeEvent;
+                        var posy = evn.contentOffset.y + evn.layoutMeasurement.height;
+                        var heigth = evn.contentSize.height;
+                        if (heigth - posy <= 0) {
+                            this.props.onPageFinish();
+                        }
+                    }
                     if (!this.enabled) {
                         return;
                     }
@@ -105,6 +118,7 @@ class Scroll extends Component<typeScroll> {
                 style={{
                     ...(this.props.disableHorizontal ? {
                         width: "100%",
+                        height: "100%",
                     } : {})
 
                 }}
@@ -112,6 +126,7 @@ class Scroll extends Component<typeScroll> {
                     ...(this.props.disableHorizontal ? {
                         maxWidth: "100%",
                         minWidth: "100%",
+                        minHeight: "100%",
                     } : {}),
 
                 }, this.props.contentContainerStyle]}

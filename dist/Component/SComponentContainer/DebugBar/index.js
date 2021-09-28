@@ -33,7 +33,7 @@ var DebugBar = /** @class */ (function (_super) {
     }
     DebugBar.prototype.register = function () {
         var _this = this;
-        new SThread(100, "", true).start(function () {
+        new SThread(100, "hiloeste", true).start(function () {
             if (SComponentContainer.SSocket) {
                 if (SComponentContainer.SSocket.getSession() != null) {
                     SComponentContainer.SSocket.register("DebugBar", function (instance) {
@@ -61,7 +61,7 @@ var DebugBar = /** @class */ (function (_super) {
                     position: "absolute",
                     width: 25,
                     height: 25,
-                    backgroundColor: STheme.color.secondary,
+                    backgroundColor: STheme.color.secondary + "66",
                     right: 10,
                     top: 0,
                     borderBottomLeftRadius: 5,
@@ -69,14 +69,14 @@ var DebugBar = /** @class */ (function (_super) {
                     padding: 4
                 }, onPress: function () {
                     // STheme.change();
-                } }, this.state.stateSocket ?
-                React.createElement(SIcon, { name: "Wifi", fill: STheme.color.primary }) :
-                React.createElement(SIcon, { name: "WifiDisconnect", fill: STheme.color.primary + "99", stroke: STheme.color.primary })),
+                } }, !this.state.stateSocket ?
+                React.createElement(SIcon, { name: "WifiDisconnect", fill: STheme.color.primary + "99", stroke: STheme.color.primary }) :
+                React.createElement(SIcon, { name: "Wifi", fill: STheme.color.primary })),
             React.createElement(SView, { style: {
                     position: "absolute",
                     width: 25,
                     height: 25,
-                    backgroundColor: STheme.color.secondary,
+                    backgroundColor: STheme.color.secondary + "66",
                     right: 40,
                     top: 0,
                     borderBottomLeftRadius: 5,
@@ -90,12 +90,12 @@ var DebugBar = /** @class */ (function (_super) {
                     position: "absolute",
                     width: 25,
                     height: 25,
-                    backgroundColor: STheme.color.secondary,
+                    backgroundColor: STheme.color.secondary + "66",
                     right: 70,
                     top: 0,
                     borderBottomLeftRadius: 5,
                     borderBottomRightRadius: 5,
-                    padding: 1
+                    padding: 3
                 }, onPress: function () {
                     SNavigation.navigate("scomponent");
                 } },

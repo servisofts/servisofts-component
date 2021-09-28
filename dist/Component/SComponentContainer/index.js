@@ -30,6 +30,7 @@ import STheme from '../STheme/index';
 import DebugBar from './DebugBar/index';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
+import SPage from '../SPage';
 var SComponentContainer = /** @class */ (function (_super) {
     __extends(SComponentContainer, _super);
     function SComponentContainer(props) {
@@ -43,6 +44,9 @@ var SComponentContainer = /** @class */ (function (_super) {
         SComponentContainer.Instance = _this;
         SComponentContainer.SSocket = props.socket;
         SIcon.loadAssets(_this.props.assets);
+        if (_this.props.background) {
+            SPage.setBackground(_this.props.background);
+        }
         return _this;
     }
     SComponentContainer.registerGrid = function (key, grid) {
@@ -90,6 +94,7 @@ var SComponentContainer = /** @class */ (function (_super) {
         return (React.createElement(View, { style: {
                 width: "100%",
                 flex: 1,
+                height: "100%",
                 backgroundColor: this.state.theme.barColor
             } },
             React.createElement(SafeAreaView, { style: {

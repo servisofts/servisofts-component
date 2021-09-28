@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SPopup from '../..'
 import { SButtom } from '../../../SButtom'
 import SIcon from '../../../SIcon'
+import SPage from '../../../SPage'
 import SText from '../../../SText'
 import STheme from '../../../STheme'
 import SView from '../../../SView'
@@ -40,7 +41,9 @@ export default class Confirm extends Component<PropsType> {
                 style={{
                     height: 260,
                     borderRadius: 8,
+                    overflow: 'hidden',
                 }}>
+                {SPage.backgroundComponent}
                 <SView col={"xs-12"} center>
                     <SView col={"xs-12"} height={90}>
                         <SIcon name={"AlertOutline"} fill={STheme.color.danger} />

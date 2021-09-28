@@ -4,22 +4,32 @@ import Ajustes from "./Ajustes"
 import AlertOutline from "./AlertOutline"
 import Alert from "./Alert"
 import Arrow from "./Arrow"
+import Background from "./Background"
 import Box from "./Box"
+import Caja from "./Caja"
 import Carrito from "./Carrito"
+import Card from "./Card"
+import Cheque from "./Cheque"
 import Delete from "./Delete"
+import Egreso from "./Egreso"
 import Engranaje from "./Engranaje"
+import Ingreso from "./Ingreso"
 import Lock from "./Lock"
 import LockOutline from "./LockOutline"
 import Moon from "./Moon"
+import Money from "./Money"
+import NoDelete from "./NoDelete"
+import Paquete from "./Paquete"
 import Parameter from "./Parameter"
 import Profanity from "./Profanity"
 import Reload from "./Reload"
 import Salir from "./Salir"
 import Sun from "./Sun"
+import Tranfer from "./Tranfer"
+import Traspaso from "./Traspaso"
 import Usuarios from "./Usuarios"
 import Wifi from "./Wifi"
 import WifiDisconnect from "./WifiDisconnect"
-
 import Svg from "./Svg";
 const Icons = {
     Add,
@@ -27,18 +37,29 @@ const Icons = {
     AlertOutline,
     Alert,
     Arrow,
+    Background,
     Box,
+    Caja,
+    Card,
     Carrito,
+    Cheque,
     Delete,
+    Egreso,
     Engranaje,
+    Ingreso,
     Lock,
     LockOutline,
     Moon,
+    Money,
+    NoDelete,
+    Paquete,
     Parameter,
     Profanity,
     Reload,
     Salir,
     Sun,
+    Tranfer,
+    Traspaso,
     Usuarios,
     "Icon2": Alert,
     Wifi,

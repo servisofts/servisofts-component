@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps } from 'react-native';
+import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 import SGrid from '../SGrid/index';
 
@@ -18,8 +18,9 @@ export type SViewProps = {
   backgroundColor?: string,
   flex?: Number | boolean,
   height?: Number | boolean | string,
+  width?: Number | boolean | string,
   withoutFeedback?: Boolean
-} & ViewProps
+} & ViewProps & TouchableOpacityProps
 
 export default class SView extends Component<SViewProps> {
   state: any;
@@ -48,6 +49,8 @@ export default class SView extends Component<SViewProps> {
     return this.props.data;
   }
   render() {
+
+   
     var otherProps: any = {};
     var Element: any = View;
     if (this.props.onPress) {
@@ -63,7 +66,7 @@ export default class SView extends Component<SViewProps> {
     if (this.props.animated) {
       Element = Animated.createAnimatedComponent(Element);
     }
-    var style = this.props.style;
+    var style = {...this.props.style};
     if (style) {
       delete style["top"];
       delete style["left"];
@@ -84,7 +87,7 @@ export default class SView extends Component<SViewProps> {
         height={this.props.height}
         flex={this.props.flex}
         col={this.state.params.col}
-        style={this.state.params.style}
+        style={(!this.props.style ? {} : this.props.style) }
         onLayout={(evt) => {
           this.layout = evt.nativeEvent.layout;
           if (this.props.onLayout) this.props.onLayout(evt);
@@ -107,9 +110,7 @@ export default class SView extends Component<SViewProps> {
               flexDirection: "row",
               flexWrap: 'wrap',
             }),
-            ...(!this.props.colSquare ? {} : {
-              height: "100%",
-            }),
+            height: "100%",
             ...(!this.props.center ? {
 
             } : {
@@ -119,8 +120,9 @@ export default class SView extends Component<SViewProps> {
             ...(!this.props.flex ? {} : {
               flex: this.props.flex == true ? 1 : this.props.flex
             }),
-            ...(!this.props.height ? {} : {
-              height: this.props.height == true ? "100%" : this.props.height
+
+            ...(!this.props.width ? {} : {
+              width: this.props.width == true ? "100%" : this.props.width
             }),
             ...style
           }}>

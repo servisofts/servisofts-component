@@ -25,19 +25,38 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, TouchableOpacity, TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { SText, SView } from '../../index';
-import { Variant } from './variants';
 import { Type } from './types';
 import { CustomStyles } from './styles';
-// export type SInputProps = IProps;
 var SInput = /** @class */ (function (_super) {
     __extends(SInput, _super);
     function SInput(props) {
         var _this = _super.call(this, props) || this;
-        _this.getStyle = function () {
-            return _this.customStyle;
+        _this.onChangeText = function (_text) {
+            var text = _text;
+            if (_this.type) {
+                if (_this.type.onChangeText) {
+                    text = _this.type.onChangeText(text);
+                }
+                if (_this.type.filter) {
+                    text = _this.type.filter(text);
+                }
+            }
+            if (_this.props.onChangeText) {
+                _this.props.onChangeText(text);
+            }
+            _this.state.value = text;
+            _this.setState({ value: _this.state.value });
+            _this.verify();
         };
+        // props;
+        // constructor(_props) {
+        //     super(_props);
+        //     this.props = {
+        //         ..._props,
+        //         ..._props.props
+        //     };
         _this.state = {
             value: _this.props.defaultValue,
             error: false,
@@ -47,15 +66,26 @@ var SInput = /** @class */ (function (_super) {
     }
     SInput.TYPE = function (type) { return type; };
     ;
-    SInput.prototype.getOption = function (option) {
-        return !this.props.props[option] ? 'default' : this.props.props[option];
+    SInput.prototype.getComponent = function () {
+        var _this = this;
+        return React.createElement(SInput, __assign({}, this.props, { onChangeText: function (vak) {
+                _this.state.value = vak;
+            } }));
     };
-    SInput.prototype.buildStyle = function () {
-        this.style = __assign(__assign({}, (this.props.props.style ? this.props.props.style : {})), this.props.style);
+    SInput.prototype.getStyle = function () {
+        return this.style;
+    };
+    SInput.prototype.getOption = function (option) {
+        return !this.props[option] ? 'default' : this.props[option];
+    };
+    SInput.prototype.getData = function () {
+        return this.state.data;
     };
     SInput.prototype.verify = function (noStateChange) {
-        if (!this.props.props.isRequired)
-            return true;
+        if (this.props) {
+            if (!this.props.isRequired)
+                return true;
+        }
         var isValid = true;
         if (!this.getValue()) {
             isValid = false;
@@ -71,31 +101,40 @@ var SInput = /** @class */ (function (_super) {
         }
         if (!isValid != this.state.error) {
             if (!noStateChange) {
-                this.props.onStateChange(isValid);
+                if (this.props.onStateChange)
+                    this.props.onStateChange(isValid);
             }
             this.state.error = !isValid;
             this.setState({ error: this.state.error });
         }
         return isValid;
     };
-    SInput.prototype.setValue = function (val) {
-        this.state.value = val;
-        this.setState({ value: val });
-    };
     SInput.prototype.notifyBlur = function () {
         if (this.props.onBlur) {
             this.props.onBlur(null);
         }
-        // this.setState({ value: val });
+    };
+    SInput.prototype.setValue = function (value) {
+        this.setState({ value: value });
+        this.onChangeText(value);
     };
     SInput.prototype.getValue = function () {
         return this.state.value;
     };
-    SInput.prototype.setData = function (val) {
-        this.setState({ data: __assign(__assign({}, this.state.data), val) });
+    SInput.prototype.isRender = function (type) {
+        if (type.render) {
+            return React.createElement(View, { style: {
+                    width: "100%",
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                } }, type.render(this));
+        }
     };
-    SInput.prototype.getData = function () {
-        return this.state.data;
+    SInput.prototype.getLabel = function () {
+        if (!this.props.label)
+            return null;
+        return React.createElement(SText, { style: __assign({}, this.customStyle["LabelStyle"]) }, this.props.label);
     };
     SInput.prototype.getIcon = function () {
         if (!this.type)
@@ -114,24 +153,14 @@ var SInput = /** @class */ (function (_super) {
                 height: "100%"
             } }, ITEM);
     };
-    SInput.prototype.getLabel = function () {
-        if (!this.props.props.label) {
-            return React.createElement(View, null);
-        }
-        return React.createElement(SText, { style: __assign(__assign({}, this.customStyle.LabelStyle), this.type.style.LabelStyle) }, this.props.props.label);
-    };
     SInput.prototype.render = function () {
         var _this = this;
-        this.buildStyle();
-        this.variant = Variant(this.getOption("variant"));
-        this.customStyle = CustomStyles(this.getOption("customStyle"));
-        var size = { width: "100%" };
-        var type = Type(this.getOption("type"), this);
+        var customStyle = CustomStyles(this.props.customStyle);
+        this.customStyle = customStyle;
+        this.style = this.props.style;
+        var type = Type(this.props.type, this);
         this.type = type;
-        var Component = View;
-        if (this.props.onPress || type.onPress) {
-            Component = TouchableOpacity;
-        }
+        var isOnPress = this.props.onPress || type.onPress;
         var valueFilter = this.state.value;
         if (this.type) {
             if (this.type.filter) {
@@ -143,11 +172,8 @@ var SInput = /** @class */ (function (_super) {
                 this.verify();
             }
         }
-        return (React.createElement(Component, { onLayout: function (evt) {
-                _this.layout = evt.nativeEvent.layout;
-                if (_this.props.onLayout)
-                    _this.props.onLayout(evt);
-            }, onPress: function () {
+        return (React.createElement(SView, __assign({ col: "xs-12" }, (isOnPress ? {
+            onPress: function () {
                 if (_this.props.onPress)
                     _this.props.onPress({
                         layout: _this.layout
@@ -156,42 +182,13 @@ var SInput = /** @class */ (function (_super) {
                     type.onPress({
                         layout: _this.layout
                     });
-            }, style: [
-                this.variant.View,
-                this.customStyle.View,
-                type.style.View,
-                (this.state.error ? this.customStyle.error : {}),
-                __assign(__assign({}, size), this.style)
-            ] },
+            }
+        } : {}), this.props, { style: __assign(__assign(__assign(__assign(__assign({}, customStyle["View"]), type.style.View), (this.state.error ? customStyle.error : {})), this.style), (!this.props.label ? { marginTop: this.props.separation } : {})) }),
             this.getLabel(),
             React.createElement(SView, { col: "xs-12", row: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
-                React.createElement(TextInput, __assign({ value: valueFilter }, type.props, this.props, { onChangeText: function (_text) {
-                        var text = _text;
-                        if (_this.type) {
-                            if (_this.type.onChangeText) {
-                                text = _this.type.onChangeText(text);
-                            }
-                            if (_this.type.filter) {
-                                text = _this.type.filter(text);
-                            }
-                        }
-                        if (_this.props.onChangeText) {
-                            _this.props.onChangeText(text);
-                        }
-                        _this.state.value = text;
-                        _this.setState({ value: _this.state.value });
-                        _this.verify();
-                    }, style: [
-                        this.customStyle.InputText,
-                        type.style.InputText,
-                        {
-                            flex: 1,
-                            width: "100%",
-                            height: "100%",
-                            outline: "none"
-                        }
-                    ], placeholderTextColor: this.customStyle.placeholder.color })))));
+                React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+            this.isRender(type)));
     };
     SInput.defaultProps = {
         props: {},

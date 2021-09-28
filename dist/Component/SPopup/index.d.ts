@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { PropsType as ConfirmProps } from './SPopupVariants/Confirm/index';
-import { PropsType as AlertProps } from './SPopupVariants/Alert/index';
 declare type SPopupOpenProps = {
     key?: string;
     content: any;
@@ -10,7 +9,7 @@ export declare const SPopupOpen: ({ key, content, style }: SPopupOpenProps) => v
 export declare const SPopupClose: (key: any) => void;
 export default class SPopup extends Component {
     static confirm(props: ConfirmProps): void;
-    static alert(props: AlertProps): void;
+    static alert(text: any): void;
     static open(obj: SPopupOpenProps): void;
     static close(key?: string): void;
     state: any;

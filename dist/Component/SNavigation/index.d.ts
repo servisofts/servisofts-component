@@ -2,12 +2,14 @@ import { Component } from 'react';
 export declare type SPageProps = {
     params?: [string];
     component: any;
+    page?: any;
+    header?: any;
     options?: {
         headerShown: boolean;
     };
 };
 export declare type SPageListProps = {
-    [name in string]?: SPageProps;
+    [name in string]?: SPageProps | object;
 };
 export declare type SNavigationProps = {
     props: {

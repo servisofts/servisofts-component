@@ -50,6 +50,9 @@ var SNavBar = /** @class */ (function (_super) {
                     if (locstr == "/") {
                         return React.createElement(View, null);
                     }
+                    // if (locstr.split("/").length <= 2) {
+                    //     return <View />
+                    // }
                 }
             }
         }
@@ -61,7 +64,9 @@ var SNavBar = /** @class */ (function (_super) {
                 return React.createElement(View, null);
             }
         }
-        return React.createElement(SView, { col: "xs-12" },
+        return React.createElement(SView, { col: "xs-12", height: true, style: {
+                justifyContent: 'center'
+            } },
             React.createElement(SView, { onPress: function () {
                     if (SNavigation.lastRoute) {
                         if (SNavigation.lastRoute.navigation.canGoBack()) {
@@ -86,22 +91,21 @@ var SNavBar = /** @class */ (function (_super) {
                         SNavigation.replace(navTo);
                     }
                 }, style: {
-                    maxWidth: 35,
-                    height: 25
-                }, center: true },
+                    maxWidth: 35
+                }, center: true, height: true },
                 React.createElement(SIcon, { width: 25, height: 25, name: "Arrow", fill: STheme.color.secondary })));
     };
     SNavBar.prototype.render = function () {
-        return (React.createElement(SView, { col: "xs-12", dir: "row", style: {
+        return (React.createElement(SView, { col: "xs-12", row: true, center: true, style: {
                 height: 40,
                 backgroundColor: STheme.color.barColor,
                 justifyContent: "center",
                 alignItems: "center"
             } },
-            React.createElement(SView, { col: "xs-2", center: true, flex: true }, this.getBack()),
+            React.createElement(SView, { col: "xs-2", center: true, height: true }, this.getBack()),
             React.createElement(SView, { col: "xs-8", center: true, flex: true },
                 React.createElement(SText, { center: true }, this.props.title)),
-            React.createElement(SView, { col: "xs-2", center: true, flex: true, onPress: function () {
+            React.createElement(SView, { col: "xs-2", center: true, onPress: function () {
                     STheme.change();
                 } })));
     };

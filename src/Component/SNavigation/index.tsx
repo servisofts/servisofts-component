@@ -8,12 +8,14 @@ import Pages from '../../Pages/index';
 export type SPageProps = {
     params?: [string],
     component: any,
+    page?: any,
+    header?: any,
     options?: {
         headerShown: boolean
     }
 }
 export declare type SPageListProps = {
-    [name in string]?: SPageProps;
+    [name in string]?: SPageProps | object;
 }
 export type SNavigationProps = {
     props: {
@@ -64,7 +66,31 @@ export default class SNavigation extends Component<SNavigationProps> {
         SNavigation.lastRoute.navigation.replace(route, params);
     }
     static goBack() {
-        SNavigation.lastRoute.navigation.goBack();
+
+        if (SNavigation.lastRoute) {
+            if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                if (SNavigation.lastRoute.route.name == SNavigation.root) {
+                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                }
+                if (Platform.OS == "web") {
+                    var locstr = window.location.pathname;
+                    locstr = locstr.substring(1, locstr.lastIndexOf("/"));
+                    
+                    if (locstr == "/") {
+                        SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                    }
+                 
+                    SNavigation.lastRoute.navigation.replace(locstr);
+                } else {
+                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                }
+                // if (locstr.split("/").length <= 2) {
+                //     return <View />
+                // }
+            }
+            SNavigation.lastRoute.navigation.goBack();
+        }
+
     }
     static getParam(key: string, valDef: any) {
         var route = SNavigation.lastRoute.route;
@@ -94,7 +120,7 @@ export default class SNavigation extends Component<SNavigationProps> {
                 screens: {}
             },
         };
-        var pages = {
+        var pages: any = {
             ...this.props.props.pages,
             ...Pages,
         };
@@ -117,7 +143,7 @@ export default class SNavigation extends Component<SNavigationProps> {
         return linking;
     }
     getPages(Stack) {
-        var pages = {
+        var pages: any = {
             ...this.props.props.pages,
             ...Pages,
         };
@@ -128,6 +154,10 @@ export default class SNavigation extends Component<SNavigationProps> {
                         SNavigation.lastRoute = props;
                     }
                     var Page = pages[key].component;
+                    if (!Page) {
+                        Page = pages[key];
+                    }
+
                     return <Page {...props} />
                 } catch (e) {
                     return <View />

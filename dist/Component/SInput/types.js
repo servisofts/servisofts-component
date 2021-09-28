@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import SDate from "../SDate";
 import { SText, SView, SPopupOpen } from "../../index";
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert";
@@ -27,6 +28,8 @@ export var Type = function (type, Parent) {
             return number(type, Parent);
         case "money":
             return money(type, Parent);
+        case "image":
+            return image(type, Parent);
         default:
             return buildResp({
                 props: {},
@@ -203,6 +206,26 @@ var select = function (type, Parent) {
             // focusable: false,
             pointerEvents: "none"
         },
+        render: function (_Parent) {
+            var value = _Parent.getValue();
+            var options = _Parent.getOption("options");
+            options.map(function (option) {
+                if (option.key == value) {
+                    value = option;
+                }
+            });
+            if (!value)
+                return React.createElement(View, null);
+            if (typeof value != "object") {
+                return React.createElement(SText, { col: "xs-12" }, value);
+            }
+            if (!value.content)
+                return React.createElement(View, null);
+            if (typeof value.content != "object") {
+                return React.createElement(SText, { col: "xs-12" }, value.content);
+            }
+            return value.content;
+        },
         onPress: function () {
             // var value = new SDate(Parent.getValue() + "", "yyyy-MM-dd");
             var options = Parent.getOption("options");
@@ -219,8 +242,12 @@ var select = function (type, Parent) {
             });
         },
         style: {
-            View: {},
-            InputText: {},
+            View: {
+                justifyContent: "center"
+            },
+            InputText: {
+                fontSize: 0
+            },
             LabelStyle: {}
         }
     });
@@ -253,7 +280,8 @@ var number = function (type, Parent) {
 var money = function (type, Parent) {
     return buildResp({
         props: {
-            keyboardType: "number-pad"
+            keyboardType: "number-pad",
+            placeholder: "0.00"
         },
         style: {
             View: {
@@ -280,13 +308,53 @@ var money = function (type, Parent) {
             value = value.trim();
             if (value.indexOf("\.") >= 0) {
                 var arr = value.split("\.");
-                value = arr[0].replace(/\D/, "") + "." + arr[1].replace(/\D/, "");
+                var int = arr[0].replace(/\D/, "");
+                var dec = arr[1].replace(/\D/, "");
+                var num = parseInt(int + dec) / 100;
+                value = num.toFixed(2);
+                // if (dec > 99) {
+                //     int += "" + Math.round(dec / 100)
+                //     dec = dec % 100;
+                // }
             }
             else {
                 value = value.replace(/\D/, "");
+                value = parseFloat(value);
+                // value = value.toFixed(2);
+                value = "0.0" + value;
             }
-            return value;
+            return value + "";
         },
+        verify: function (value) {
+            if (!value)
+                return false;
+            return true;
+        }
+    });
+};
+var image = function (type, Parent) {
+    return buildResp({
+        props: {
+            keyboardType: "number-pad"
+        },
+        style: {
+            View: {
+            // alignItems:"flex-start",
+            // justifyContent:"flex-start",
+            },
+            InputText: {
+                flex: 1,
+                width: "100%",
+                marginEnd: 4,
+                textAlign: "right",
+                fontSize: 16
+            }
+        },
+        icon: (React.createElement(SView, { style: {
+                width: 30,
+                height: "100%"
+            }, center: true },
+            React.createElement(SText, null, "Bs."))),
         verify: function (value) {
             if (!value)
                 return false;

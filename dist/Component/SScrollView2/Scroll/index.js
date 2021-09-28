@@ -95,6 +95,16 @@ var Scroll = /** @class */ (function (_super) {
                 }
             }, onScroll: function (evt) {
                 _this.scrolldata = evt.nativeEvent;
+                if (_this.props.onScroll)
+                    _this.props.onScroll(evt);
+                if (_this.props.onPageFinish) {
+                    var evn = evt.nativeEvent;
+                    var posy = evn.contentOffset.y + evn.layoutMeasurement.height;
+                    var heigth = evn.contentSize.height;
+                    if (heigth - posy <= 0) {
+                        _this.props.onPageFinish();
+                    }
+                }
                 if (!_this.enabled) {
                     return;
                 }
@@ -105,10 +115,12 @@ var Scroll = /** @class */ (function (_super) {
                     _this.indicator.onScroll(evt.nativeEvent);
                 }
             }, style: __assign({}, (this.props.disableHorizontal ? {
-                width: "100%"
+                width: "100%",
+                height: "100%"
             } : {})), contentContainerStyle: [__assign({}, (this.props.disableHorizontal ? {
                     maxWidth: "100%",
-                    minWidth: "100%"
+                    minWidth: "100%",
+                    minHeight: "100%"
                 } : {})), this.props.contentContainerStyle] }, this.props.children));
     };
     return Scroll;

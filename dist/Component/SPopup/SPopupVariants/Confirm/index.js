@@ -17,6 +17,7 @@ import React, { Component } from 'react';
 import SPopup from '../..';
 import { SButtom } from '../../../SButtom';
 import SIcon from '../../../SIcon';
+import SPage from '../../../SPage';
 import SText from '../../../SText';
 import STheme from '../../../STheme';
 import SView from '../../../SView';
@@ -36,8 +37,10 @@ var Confirm = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, backgroundColor: STheme.color.background, withoutFeedback: true, style: {
                 height: 260,
-                borderRadius: 8
+                borderRadius: 8,
+                overflow: 'hidden'
             } },
+            SPage.backgroundComponent,
             React.createElement(SView, { col: "xs-12", center: true },
                 React.createElement(SView, { col: "xs-12", height: 90 },
                     React.createElement(SIcon, { name: "AlertOutline", fill: STheme.color.danger })),

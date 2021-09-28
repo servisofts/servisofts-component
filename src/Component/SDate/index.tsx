@@ -156,6 +156,22 @@ export default class SDate {
         }
         return false;
     }
+    diffTime(sdate) {
+        var date1 = this.date;
+        var date2 = sdate.date;
+        if (!date2) return 0;
+        var timeDiff = date2.getTime() - date1.getTime();
+        return timeDiff;
+    }
+
+    diff(sdate) {
+        var date1 = this.date;
+        var date2 = sdate.date;
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        return diffDays;
+    }
+
     isCurDate() {
         if (this.toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")) {
             return true;

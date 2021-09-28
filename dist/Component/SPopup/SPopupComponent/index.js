@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import STheme from '../../STheme';
 var SPopupComponent = /** @class */ (function (_super) {
     __extends(SPopupComponent, _super);
     function SPopupComponent(props) {
@@ -45,7 +46,7 @@ var SPopupComponent = /** @class */ (function (_super) {
                     width: "100%",
                     height: "100%",
                     position: "absolute",
-                    backgroundColor: "#00000099",
+                    backgroundColor: STheme.color.secondary + "22",
                     justifyContent: "center",
                     alignItems: "center"
                 } },

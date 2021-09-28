@@ -15,6 +15,7 @@ export type SHeaderProps = {
     getScroll: Function,
     loadAnimated: Function,
     onDelete: Function,
+    changeHeader: Function,
 }
 export default class SHeader extends Component<SHeaderProps> {
     state;
@@ -203,6 +204,44 @@ export default class SHeader extends Component<SHeaderProps> {
         });
 
     }
+    getOrder(header, i) {
+        if (header.key == "index") {
+            return <View />
+        }
+        if (!header.order) {
+            return <View />
+        }
+        return <SView style={{
+            width: 16,
+            height: 14,
+            
+        }} center>
+            <SView style={{
+                width: 10,
+                height: 10,
+                transform: [
+                    { rotate: header.order == "desc" ? "-90deg" : "90deg" },
+                ],
+            }}
+                onPress={() => {
+                    if (this.state.data[i].order == "asc") {
+                        this.state.data[i].order = "desc"
+                    } else if (this.state.data[i].order == "desc") {
+                        delete this.state.data[i].order;
+                    } else {
+                        this.state.data[i].order = "asc"
+                    }
+                    if (this.props.changeHeader) {
+                        this.props.changeHeader(this.state.data);
+                    }
+                    this.setState({ ...this.state });
+                }}
+            >
+                <SIcon name={"Arrow"} fill={STheme.color.secondary} />
+
+            </SView>
+        </SView>
+    }
     getHeaders() {
         let position = this.props.initialPosition;
         var total = 0;
@@ -268,20 +307,26 @@ export default class SHeader extends Component<SHeaderProps> {
                         {...this.state.panMoveHeader[obj.key].getPanHandlers()}
                         animated
                         center
+                        row
                         style={{
                             flex: 1,
                             height: "100%",
-                            cursor: "move"
+                            cursor: "move",
+                            flexWrap: "nowrap",
+                            alignItems: "flex-end",
+                            paddingBottom: 1,
                         }}
+
                     >
                         <SText style={{
                             textAlign: "center",
                             fontWeight: "700",
-                            fontSize: 14,
+                            fontSize: 12,
                             ...this.props.styleText
                         }}>
                             {obj.label}
                         </SText>
+                        {this.getOrder(obj, i)}
                     </SView>
 
                     <SView
@@ -299,12 +344,12 @@ export default class SHeader extends Component<SHeaderProps> {
                         <SView style={{
                             width: 2,
                             height: "100%",
-                            backgroundColor: STheme.color.secondary
+                            backgroundColor: STheme.color.secondary + "66"
                         }}>
                         </SView>
 
                     </SView>
-                    {/* <SView style={{
+                    <SView style={{
                         left: 2,
                         top: 2,
                         width: 16,
@@ -313,17 +358,42 @@ export default class SHeader extends Component<SHeaderProps> {
                     }} onPress={() => {
                         SPopupOpen({
                             key: "SHeaderAjuste",
-                            content: <SHAjustes data={{ ...obj, width: this.state.widthHeaderAnim[obj.key].x._value }} />
+                            content: <SHAjustes
+                                data={{ ...obj, width: this.state.widthHeaderAnim[obj.key].x._value }}
+                                changeFiltro={(data) => {
+                                    if (this.props.changeHeader) {
+                                        this.state.data[i].filtro = data;
+                                        this.props.changeHeader(this.state.data);
+                                    }
+                                }}
+                                changeOrder={(order) => {
+                                    if (order == "no") {
+                                        this.state.data[i].order = false;
+                                    } else {
+                                        this.state.data[i].order = order;
+                                    }
+                                    if (this.props.changeHeader) {
+                                        this.props.changeHeader(this.state.data);
+                                    }
+                                    // this.setState({ ...this.state });
+                                }}
+                            />
                         })
                     }}>
-                        <SIcon name={"drag"}
+                        <SIcon name={"Engranaje"}
                             width={10}
                             height={10}
-                        // stroke={this.props.styleText.color} 
+                            {...(obj.filtro ? {
+                                fill: STheme.color.secondary,
+                                stroke: STheme.color.secondary
+                            } : {
+                                stroke: STheme.color.secondary
+                            })}
+                        // 
                         />
-                    </SView> */}
+                    </SView>
                 </SView>
-            </SView>
+            </SView >
         });
     }
     render() {

@@ -102,6 +102,8 @@ export default class SDate {
     equalDay(sdate: any): boolean;
     isAfter(sdate: any): boolean;
     isBefore(sdate: any): boolean;
+    diffTime(sdate: any): number;
+    diff(sdate: any): number;
     isCurDate(): boolean;
     formatCero(val: any): any;
     toString(format?: formatsTypes | String): String;

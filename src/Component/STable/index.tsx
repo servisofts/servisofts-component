@@ -24,7 +24,7 @@ type typeHeader = {
     orderPriority?: Number,
     type?: SInputType,
     options?: Array<any>,
-    render?: (data: String) => {}
+    render?: (data: String, id?: any) => {}
 }
 type typeAction = "edit" | "delete";
 type SType = {
@@ -42,7 +42,7 @@ type SType = {
     style: {
 
     },
-
+    limit?: number,
 }
 
 export default class STable extends Component<SType> {
@@ -52,6 +52,7 @@ export default class STable extends Component<SType> {
     scroll;
     refData;
     static defaultProps = {
+        limit: 20,
         headerProps: {
             minWidth: 500,
             initialPosition: 8,
@@ -80,6 +81,7 @@ export default class STable extends Component<SType> {
             },
             animates: {
             },
+            page: 1,
         };
         this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 20, y: 0 })
         this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 })
@@ -113,6 +115,23 @@ export default class STable extends Component<SType> {
             }
         })
     }
+    getData = (obj, key) => {
+        var path = key.split("/");
+        var data = obj;
+        path.map((dir) => {
+            dir = dir.replace(/-.*/, "")
+            if (dir == "") {
+                return;
+            }
+            if (!data) data = {};
+            if (typeof data == "string") {
+                try { data = JSON.parse(data) } catch (e) { }
+            }
+
+            data = data[dir];
+        })
+        return data;
+    }
     filterData() {
         var data = [];
         var i = 0;
@@ -123,6 +142,24 @@ export default class STable extends Component<SType> {
                     return;
                 }
             }
+            var isValid = true;
+            this.state.header.map((objH) => {
+                if (objH.filtro) {
+                    var valueFinal = this.getData(obj, objH.key);
+                    if (!valueFinal) {
+                        isValid = false;
+                        return;
+                    }
+                    if (typeof valueFinal != "string") {
+                        isValid = false;
+                        return;
+                    }
+                    if (valueFinal.toString().toLowerCase().indexOf(objH.filtro.toLowerCase()) == -1) {
+                        isValid = false;
+                    }
+                }
+            })
+            if (!isValid) return;
             i++;
             data.push(obj);
         })
@@ -133,11 +170,12 @@ export default class STable extends Component<SType> {
             this.state.reload = false;
             this.contentSize = new Animated.ValueXY({ x: this.props.headerProps.minWidth ? this.props.headerProps.minWidth : 8, y: 0 })
             this.headerPosition = new Animated.ValueXY({ x: 0, y: 0 })
-            new SThread(300, "reloadTable", true).start(() => {
-                this.setState({ ...this.state })
-            });
-            return <SLoad />
+            // new SThread(300, "reloadTable", true).start(() => {
+            //     this.setState({ ...this.state })
+            // });
+            // return <SLoad />
         }
+        var dataFiltrada = this.filterData();
         return (
             <View style={{
                 width: "100%",
@@ -176,12 +214,17 @@ export default class STable extends Component<SType> {
                                 <SHeader
                                     style={{
                                         backgroundColor: STheme.color.barColor,
+                                        borderRadius: 4,
+                                        overflow: "hidden",
                                     }}
                                     minWidth={20}
                                     initialPosition={8}
                                     separation={2}
                                     {...this.props.headerProps}
                                     header={this.state.header}
+                                    changeHeader={(header) => {
+                                        this.setState({ header: header });
+                                    }}
                                     contentSize={this.contentSize}
                                     getScroll={() => { return this.scroll }}
                                     loadAnimated={(animates, reset) => {
@@ -204,13 +247,15 @@ export default class STable extends Component<SType> {
                             }}>
                             <SData
                                 {...this.props.dataProps}
+                                page={this.state.page}
                                 actionTypes={this.props.actionTypes}
                                 onAction={this.props.onAction}
                                 onSelectRow={this.props.onSelectRow}
                                 ref={(ref) => { this.refData = ref }}
                                 buscador={this.state.buscador}
-                                data={this.filterData()}
+                                data={dataFiltrada}
                                 header={this.state.header}
+                                limit={this.props.limit}
                                 animates={this.state.animates}
                                 onEdit={this.props.onEdit}
                             />
@@ -223,7 +268,12 @@ export default class STable extends Component<SType> {
                         </SView>
                     </SScrollView2>
                 </SView>
-                <SFooter data={this.filterData()}
+                <SFooter data={dataFiltrada}
+                    limit={this.props.limit}
+                    page={this.state.page}
+                    setPage={(page) => {
+                        this.setState({ page: page });
+                    }}
                     header={this.state.header}
                     setHeader={(header) => {
                         this.state.header = header;

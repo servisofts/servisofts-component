@@ -12,6 +12,7 @@ export declare type SHeaderProps = {
     getScroll: Function;
     loadAnimated: Function;
     onDelete: Function;
+    changeHeader: Function;
 };
 export default class SHeader extends Component<SHeaderProps> {
     state: any;
@@ -34,6 +35,7 @@ export default class SHeader extends Component<SHeaderProps> {
     }): void;
     createPanMove(key: any): SAPanResponder;
     createPan(key: any): SAPanResponder;
+    getOrder(header: any, i: any): JSX.Element;
     getHeaders(): any;
     render(): JSX.Element;
 }

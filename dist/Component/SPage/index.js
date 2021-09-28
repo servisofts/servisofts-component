@@ -27,8 +27,10 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import SNavBar from '../SNavBar/index';
+import STheme from '../STheme/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
+import SIcon from '../SIcon';
 var SPage = /** @class */ (function (_super) {
     __extends(SPage, _super);
     function SPage(props) {
@@ -36,6 +38,9 @@ var SPage = /** @class */ (function (_super) {
         _this.state = {};
         return _this;
     }
+    SPage.setBackground = function (background) {
+        SPage.backgroundComponent = background;
+    };
     SPage.prototype.getNavBar = function () {
         if (this.props.hidden)
             return React.createElement(View, null);
@@ -44,20 +49,39 @@ var SPage = /** @class */ (function (_super) {
     SPage.prototype.getScroll = function () {
         if (this.props.disableScroll)
             return this.props.children;
-        return React.createElement(SScrollView2, { disableHorizontal: true, contentContainerStyle: {
+        return React.createElement(SScrollView2, { disableHorizontal: true, style: {
+            // minHeight: '100%',
+            }, contentContainerStyle: {
                 minHeight: "100%"
-            } }, this.props.children);
+            } },
+            React.createElement(SView, { style: {
+                    width: '100%',
+                    height: '100%',
+                    flex: 1
+                } }, this.props.children));
     };
     SPage.prototype.render = function () {
         return (React.createElement(SView, { col: "xs-12", style: {
-                flex: 1
+                flex: 1,
+                height: '100%'
             } },
             this.getNavBar(),
             React.createElement(SView, { col: "xs-12", style: {
                     flex: 1,
-                    height: "100%"
-                } }, this.getScroll())));
+                    height: "100%",
+                    overflow: "hidden"
+                } },
+                SPage.backgroundComponent,
+                this.getScroll())));
     };
+    SPage.backgroundComponent = (React.createElement(View, { style: {
+            position: "absolute",
+            width: "120%",
+            height: "120%",
+            // backgroundColor: "#f0ff0f",
+            transform: [{ translateX: -50 }, { translateY: -50 }]
+        } },
+        React.createElement(SIcon, { name: "Background", width: "100%", opacity: "0.3", stroke: STheme.color.primary })));
     return SPage;
 }(Component));
 export default SPage;

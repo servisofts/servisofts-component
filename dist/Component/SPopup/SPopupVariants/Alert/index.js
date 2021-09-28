@@ -14,22 +14,33 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import SIcon from '../../../SIcon';
+import SPage from '../../../SPage';
+import SText from '../../../SText';
+import STheme from '../../../STheme';
+import SView from '../../../SView';
 var Alert = /** @class */ (function (_super) {
     __extends(Alert, _super);
     function Alert(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {
-            title: '',
-            message: '',
-            onConfirm: function () { },
-            onCancel: function () { }
-        };
+        _this.state = {};
         return _this;
     }
     Alert.prototype.render = function () {
-        return (React.createElement(View, null,
-            React.createElement(Text, null, " textInComponent ")));
+        return (React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, backgroundColor: STheme.color.background, withoutFeedback: true, style: {
+                height: 260,
+                borderRadius: 8,
+                overflow: 'hidden'
+            } },
+            SPage.backgroundComponent,
+            React.createElement(SView, { col: "xs-12", center: true },
+                React.createElement(SView, { col: "xs-12", height: 90 },
+                    React.createElement(SIcon, { name: "AlertOutline", fill: STheme.color.danger })),
+                React.createElement(SView, { col: "xs-10", center: true, height: 40 },
+                    React.createElement(SText, { fontSize: 12, center: true },
+                        " ",
+                        this.props.title,
+                        " ")))));
     };
     return Alert;
 }(Component));
