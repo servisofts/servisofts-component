@@ -19,6 +19,7 @@ import LockOutline from "./LockOutline"
 import Moon from "./Moon"
 import Money from "./Money"
 import NoDelete from "./NoDelete"
+import Off from "./Off"
 import Paquete from "./Paquete"
 import Parameter from "./Parameter"
 import Profanity from "./Profanity"
@@ -52,6 +53,7 @@ const Icons = {
     Moon,
     Money,
     NoDelete,
+    Off,
     Paquete,
     Parameter,
     Profanity,

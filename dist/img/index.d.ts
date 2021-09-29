@@ -84,6 +84,10 @@ declare const Icons: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
+    Off: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Paquete: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;

@@ -30,6 +30,7 @@ export declare class SButtom extends Component<typeProps> {
         };
         outline: {
             touchable: {
+                backgroundColor: string;
                 borderRadius: number;
                 borderWidth: number;
                 borderColor: string;

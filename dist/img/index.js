@@ -29,6 +29,7 @@ import LockOutline from "./LockOutline";
 import Moon from "./Moon";
 import Money from "./Money";
 import NoDelete from "./NoDelete";
+import Off from "./Off";
 import Paquete from "./Paquete";
 import Parameter from "./Parameter";
 import Profanity from "./Profanity";
@@ -41,7 +42,7 @@ import Usuarios from "./Usuarios";
 import Wifi from "./Wifi";
 import WifiDisconnect from "./WifiDisconnect";
 import Svg from "./Svg";
-var Icons = __assign({ Add: Add, Ajustes: Ajustes, AlertOutline: AlertOutline, Alert: Alert, Arrow: Arrow, Background: Background, Box: Box, Caja: Caja, Card: Card, Carrito: Carrito, Cheque: Cheque, Delete: Delete, Egreso: Egreso, Engranaje: Engranaje, Ingreso: Ingreso, Lock: Lock, LockOutline: LockOutline, Moon: Moon, Money: Money, NoDelete: NoDelete, Paquete: Paquete, Parameter: Parameter, Profanity: Profanity, Reload: Reload, Salir: Salir, Sun: Sun, Tranfer: Tranfer, Traspaso: Traspaso, Usuarios: Usuarios, "Icon2": Alert, Wifi: Wifi, WifiDisconnect: WifiDisconnect }, Svg);
+var Icons = __assign({ Add: Add, Ajustes: Ajustes, AlertOutline: AlertOutline, Alert: Alert, Arrow: Arrow, Background: Background, Box: Box, Caja: Caja, Card: Card, Carrito: Carrito, Cheque: Cheque, Delete: Delete, Egreso: Egreso, Engranaje: Engranaje, Ingreso: Ingreso, Lock: Lock, LockOutline: LockOutline, Moon: Moon, Money: Money, NoDelete: NoDelete, Off: Off, Paquete: Paquete, Parameter: Parameter, Profanity: Profanity, Reload: Reload, Salir: Salir, Sun: Sun, Tranfer: Tranfer, Traspaso: Traspaso, Usuarios: Usuarios, "Icon2": Alert, Wifi: Wifi, WifiDisconnect: WifiDisconnect }, Svg);
 export default Icons;
 // Lo que viente antes del _ es el nombre de la imagen ejemplo: {name}_blue
 export var IconsVariant = {

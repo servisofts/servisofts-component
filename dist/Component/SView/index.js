@@ -27,6 +27,7 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Animated } from 'react-native';
 import SGrid from '../SGrid/index';
+import STheme from '../STheme';
 var SView = /** @class */ (function (_super) {
     __extends(SView, _super);
     function SView(props) {
@@ -90,7 +91,7 @@ var SView = /** @class */ (function (_super) {
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
             } },
-            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -105,7 +106,7 @@ var SView = /** @class */ (function (_super) {
                     flex: this.props.flex == true ? 1 : this.props.flex
                 })), (!this.props.width ? {} : {
                     width: this.props.width == true ? "100%" : this.props.width
-                })), style) }), this.props.children)));
+                })), (this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {})), style) }), this.props.children)));
     };
     return SView;
 }(Component));

@@ -52,9 +52,10 @@ var SButtom = /** @class */ (function (_super) {
             },
             outline: {
                 touchable: {
+                    backgroundColor: STheme.color.primary + "88",
                     borderRadius: 4,
                     borderWidth: 1,
-                    borderColor: STheme.color.secondary,
+                    borderColor: STheme.color.secondary + "45",
                     justifyContent: 'center',
                     alignItems: 'center'
                 },
@@ -85,7 +86,7 @@ var SButtom = /** @class */ (function (_super) {
             "default": {
                 touchable: {
                     width: 100,
-                    height: 40
+                    height: 50
                 },
                 text: {
                     fontSize: 12
@@ -94,7 +95,7 @@ var SButtom = /** @class */ (function (_super) {
             "confirm": {
                 touchable: {
                     width: 100,
-                    height: 40
+                    height: 50
                 },
                 text: {
                     fontSize: 12

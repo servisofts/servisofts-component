@@ -77,9 +77,10 @@ export class SButtom extends Component<typeProps> {
             },
             outline: {
                 touchable: {
+                    backgroundColor: STheme.color.primary + "88",
                     borderRadius: 4,
                     borderWidth: 1,
-                    borderColor: STheme.color.secondary,
+                    borderColor: STheme.color.secondary + "45",
                     justifyContent: 'center',
                     alignItems: 'center',
                 },
@@ -119,7 +120,7 @@ export class SButtom extends Component<typeProps> {
             "default": {
                 touchable: {
                     width: 100,
-                    height: 40,
+                    height: 50,
                 },
                 text: {
                     fontSize: 12,
@@ -128,7 +129,7 @@ export class SButtom extends Component<typeProps> {
             "confirm": {
                 touchable: {
                     width: 100,
-                    height: 40,
+                    height: 50,
                 },
                 text: {
                     fontSize: 12,

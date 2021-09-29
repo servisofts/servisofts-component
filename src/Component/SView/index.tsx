@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 import SGrid from '../SGrid/index';
+import STheme from '../STheme';
 
 
 export type SViewProps = {
@@ -19,7 +20,8 @@ export type SViewProps = {
   flex?: Number | boolean,
   height?: Number | boolean | string,
   width?: Number | boolean | string,
-  withoutFeedback?: Boolean
+  withoutFeedback?: Boolean,
+  card?: boolean,
 } & ViewProps & TouchableOpacityProps
 
 export default class SView extends Component<SViewProps> {
@@ -124,6 +126,7 @@ export default class SView extends Component<SViewProps> {
             ...(!this.props.width ? {} : {
               width: this.props.width == true ? "100%" : this.props.width
             }),
+            ...(this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {}),
             ...style
           }}>
           {this.props.children}

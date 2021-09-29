@@ -44,6 +44,7 @@ var getType = function (type) {
             return {
                 "View": {
                     backgroundColor: STheme.color.secondary + "88",
+                    // backgroundColor: "#ff0",
                     borderWidth: 1,
                     borderColor: STheme.color.background + "44",
                     borderRadius: 32,
