@@ -137,6 +137,7 @@ var STable = /** @class */ (function (_super) {
             if (!isValid)
                 return;
             i++;
+            obj.key = key;
             data.push(obj);
         });
         return data;
@@ -193,13 +194,21 @@ var STable = /** @class */ (function (_super) {
                             height: "100%",
                             flex: 1
                         } },
-                        React.createElement(SData, __assign({}, this.props.dataProps, { page: this.state.page, actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, buscador: this.state.buscador, data: dataFiltrada, header: this.state.header, limit: this.props.limit, animates: this.state.animates, onEdit: this.props.onEdit })),
+                        React.createElement(SData, __assign({}, this.props.dataProps, { page: this.state.page, actionTypes: this.props.actionTypes, onAction: this.props.onAction, onSelectRow: this.props.onSelectRow, ref: function (ref) { _this.refData = ref; }, buscador: this.state.buscador, data: dataFiltrada, header: this.state.header, limit: this.props.limit, animates: this.state.animates, onEdit: this.props.onEdit, onLoadEnd: function () {
+                                if (_this.refFooter) {
+                                    _this.refFooter.onChangeData();
+                                }
+                            } })),
                         React.createElement(View, { style: {
                                 width: "100%",
                                 height: 20
                             } })))),
-            React.createElement(SFooter, { data: dataFiltrada, limit: this.props.limit, page: this.state.page, setPage: function (page) {
+            React.createElement(SFooter, { data: dataFiltrada, limit: this.props.limit, ref: function (ref) { _this.refFooter = ref; }, page: this.state.page, buscador: this.state.buscador, setPage: function (page) {
                     _this.setState({ page: page });
+                }, getDataProcesada: function () {
+                    if (!_this.refData)
+                        return null;
+                    return _this.refData.getDataProcesada();
                 }, header: this.state.header, setHeader: function (header) {
                     _this.state.header = header;
                     // this.setState({ header: [...header]})

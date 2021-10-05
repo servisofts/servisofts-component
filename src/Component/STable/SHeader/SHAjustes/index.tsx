@@ -19,14 +19,14 @@ export default class SHAjustes extends Component<SHeaderProps> {
     getOrder() {
         return <SView col={"xs-12"} row center>
             <SText>Order: </SText>
-            <SInput props={{
-                type: "select",
-                options: ["no", "asc", "desc"],
-            }}
+            <SInput
+                type="select"
+                options={["no", "asc", "desc"]}
+                customStyle={"calistenia"}
                 style={{
                     flex: 1,
                     height: 30,
-                    backgroundColor: STheme.color.primary + "44",
+                    // backgroundColor: STheme.color.primary + "44",
                     borderRadius: 4,
                 }}
                 defaultValue={this.data.order ? this.data.order : "no"}
@@ -42,13 +42,12 @@ export default class SHAjustes extends Component<SHeaderProps> {
     }
     getFiltros() {
         return <SView flex row >
-            <SInput props={{
-                type: "default"
-            }}
+            <SInput
+                customStyle={"calistenia"}
                 style={{
                     flex: 1,
                     height: 30,
-                    backgroundColor: STheme.color.primary + "44",
+                    // backgroundColor: STheme.color.primary + "44",
                     borderRadius: 4,
                 }}
                 defaultValue={this.data.filtro}

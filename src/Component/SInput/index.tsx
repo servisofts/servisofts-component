@@ -221,7 +221,9 @@ export class SInput extends Component<TypeInputProps> {
                         {...type.props}
                         style={{
                             flex: 1,
+                            height: "100%",
                             outline: "none",
+                        
                             ...customStyle["InputText"],
                             ...type.style.InputText
                         }}

@@ -127,8 +127,13 @@ var phone = function (type, Parent) {
             Parent.notifyBlur();
         })),
         style: {
-            View: {},
-            InputText: {},
+            View: {
+            // backgroundColor:"#f0f"
+            },
+            InputText: {
+                // padding:10,
+                paddingEnd: 55
+            },
             LabelStyle: {}
         }
     });

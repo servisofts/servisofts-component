@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, ViewStyle } from 'react-native';
 import { SText, STheme, SView } from '../../../index';
 import SIcon from '../../SIcon';
+import SLoad from '../../SLoad';
+import SThread from '../../SThread';
+import ExportExcel from './ExportExcel';
 import Opciones from './Opciones';
 
 type SType = {
@@ -13,16 +16,25 @@ type SType = {
     setHeader: (data: Object) => void,
     reload: () => void,
     setPage: (page: any) => void,
+    getDataProcesada: () => any,
+    buscador?: any
 }
 
 export default class SFooter extends Component<SType> {
+    state
     constructor(props) {
         super(props);
         this.state = {
+            reload: true,
         };
     }
+    onChangeData = (data) => {
+
+        this.setState({ reload: true });
+    }
     getPageItens = () => {
-        const { limit, data } = this.props;
+        const { limit } = this.props;
+        const data = this.props.getDataProcesada();
         if (limit) {
             return Math.ceil(Object.keys(data).length / limit);
         }
@@ -44,17 +56,54 @@ export default class SFooter extends Component<SType> {
                 </SView>
             );
         }
-        for (let index = 1; index <= cantPages; index++) {
+        var cant = cantPages > 7 ? 7 : cantPages;
+        var vals = {};
+        for (let index = 1; index <= cant; index++) {
+            var val: any = index;
+
+            if (cantPages > this.props.page + 3) {
+                if (index == cant) {
+                    val = cantPages + "";
+                }
+                if (index == 2 && this.props.page > 4) {
+                    val = "...";
+                }
+                if (index == 6) {
+                    val = "...";
+                }
+                if (index == 3 && this.props.page > 4) {
+                    val = this.props.page - 1;
+                }
+                if (index == 4 && this.props.page > 4) {
+                    val = this.props.page;
+                }
+                if (index == 5 && this.props.page > 4) {
+                    val = this.props.page + 1;
+                }
+            } else {
+                if (index == 2 && this.props.page > 4) {
+                    val = "...";
+                }
+                if (index > 2 && this.props.page > 4) {
+                    val = cantPages + (index - 7);
+                }
+                if (index == cant) {
+                    val = cantPages + "";
+                }
+            }
+
+            vals[index] = val;
             ITEMS.push(
                 <SView style={{
                     width: 22,
                     height: 22,
                     borderRadius: 40,
-                    backgroundColor: (index == this.props.page ? STheme.color.secondary + "66" : "transparent")
-                }} center onPress={()=>{
-                    this.props.setPage(index);
+                    backgroundColor: (val == this.props.page ? STheme.color.secondary + "66" : "transparent")
+                }} center onPress={() => {
+                    if (vals[index] == "...") return null;
+                    this.props.setPage(vals[index]);
                 }}>
-                    <SText fontSize={12} center flex>{index}</SText>
+                    <SText fontSize={12} center flex>{val}</SText>
                 </SView>
             );
         }
@@ -78,10 +127,18 @@ export default class SFooter extends Component<SType> {
     }
 
     render() {
+        if (!this.props.getDataProcesada) return <SLoad />
+        var data = this.props.getDataProcesada();
+        if (!data) return <SLoad />;
+        var buscador = this.props.buscador;
+        if (this.state.reload) {
+            this.setState({ reload: false });
+            return <SLoad />
+        }
         return (
             <View style={{
                 width: "100%",
-                height: 24,
+                height: 30,
                 backgroundColor: STheme.color.background,
                 borderTopEndRadius: 8,
                 borderTopStartRadius: 8,
@@ -97,16 +154,18 @@ export default class SFooter extends Component<SType> {
                         // alignItems: "center",
                     }}>
                         <SText style={{
-                        }}>Total: {Object.keys(this.props.data).length}</SText>
+                        }}>Total: {Object.keys(this.props.getDataProcesada()).length}</SText>
                     </SView>
 
 
                     <SView row col={"xs-4"} height center>
                         {this.getPagination()}
                     </SView>
-                    <SView row center col={"xs-4"} style={{
+                    <SView row center height col={"xs-4"} style={{
                         justifyContent: "flex-end",
                     }}>
+                        <ExportExcel {...this.props} />
+
                         <SView style={{
                             width: 30,
                             height: 24,

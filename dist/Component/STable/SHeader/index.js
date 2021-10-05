@@ -282,6 +282,7 @@ var SHeader = /** @class */ (function (_super) {
                             alignItems: "flex-end",
                             paddingBottom: 1
                         } }),
+                        React.createElement(SView, { style: { padding: 2 }, center: true }, obj.icon),
                         React.createElement(SText, { style: __assign({ textAlign: "center", fontWeight: "700", fontSize: 12 }, _this.props.styleText) }, obj.label),
                         _this.getOrder(obj, i)),
                     React.createElement(SView, __assign({}, _this.state.panHeader[obj.key].getPanHandlers(), { animated: true, style: {

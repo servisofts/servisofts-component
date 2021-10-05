@@ -25,7 +25,7 @@ var SLoad = /** @class */ (function (_super) {
         return _this;
     }
     SLoad.prototype.render = function () {
-        return (React.createElement(SView, { flex: true, center: true, backgroundColor: STheme.color.background },
+        return (React.createElement(SView, { flex: true, center: true },
             React.createElement(ActivityIndicator, { color: STheme.color.secondary })));
     };
     return SLoad;

@@ -52,10 +52,14 @@ var SData = /** @class */ (function (_super) {
                     try {
                         data = JSON.parse(data);
                     }
-                    catch (e) { }
+                    catch (e) {
+                        data = {};
+                    }
                 }
                 data = data[dir];
             });
+            if (!data)
+                data = "";
             return data;
         };
         _this.state = {
@@ -72,6 +76,9 @@ var SData = /** @class */ (function (_super) {
         return _this;
         // this.initialiceData();
     }
+    SData.prototype.getDataProcesada = function () {
+        return this.dataProcesada;
+    };
     SData.prototype.initialiceData = function () {
         var _this = this;
         var headerRender = this.props.header.map(function (header, i) {
@@ -202,10 +209,16 @@ var SData = /** @class */ (function (_super) {
         }
         if (this.state.data[key]) {
             if (!this.state.data[key].finded) {
+                // if (typeof this.state.data[key] == "object") {
                 this.state.data[key].finded = {};
+                // }
             }
             if (typeof data != "object") {
-                this.state.data[key].finded[header.key] = data;
+                if (this.state.data[key].finded) {
+                    // if (this.state.data[key].finded[header.key]) {
+                    this.state.data[key].finded[header.key] = data;
+                    // }
+                }
             }
         }
         if (header.editable) {
@@ -264,6 +277,9 @@ var SData = /** @class */ (function (_super) {
             if (header.key == "index") {
                 DATA = position;
             }
+            // if (header.key == "key") {
+            //     DATA = key;
+            // }
             if (header.render) {
                 if (!_this.state.renderData[key])
                     _this.state.renderData[key] = {};
@@ -294,7 +310,7 @@ var SData = /** @class */ (function (_super) {
         // if (!this.props.animates) {
         //     return <View />
         // }
-        var i = 0;
+        var i = (this.props.page - 1) * this.props.limit;
         var orderArr = [];
         orderArr.push({ key: "Peso", order: "desc", peso: 4 });
         this.props.header.map(function (header, i) {
@@ -302,7 +318,9 @@ var SData = /** @class */ (function (_super) {
                 orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority });
             }
         });
-        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map(function (key) {
+        this.dataProcesada = this.buscar(this.state.data);
+        this.props.onLoadEnd(this.dataProcesada);
+        return new SOrdenador(orderArr).ordernarObject(this.dataProcesada).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map(function (key) {
             var obj = _this.state.data[key];
             i++;
             return (React.createElement(SView, { animated: true, row: true, style: {

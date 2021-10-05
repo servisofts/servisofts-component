@@ -14,34 +14,33 @@ import SIcon from '../SIcon';
 import SPopup from '../SPopup';
 
 type typeHeader = {
-    label: String,
-    key: String,
-    width?: Number,
-    index?: Number,
+    label: string,
+    key: string,
+    width?: number,
+    index?: number,
     hidden?: Boolean,
     editable?: Boolean,
     order?: "asc" | "desc",
-    orderPriority?: Number,
+    orderPriority?: number,
     type?: SInputType,
+    icon?: any,
     options?: Array<any>,
     render?: (data: String, id?: any) => {}
 }
 type typeAction = "edit" | "delete";
 type SType = {
-    header: [typeHeader],
-    headerProps: SHeaderProps,
-    data: [Object],
-    dataProps: SDataType,
-    onAdd: Function,
-    filter: (obj: Object, index: Number) => {},
-    onSelectRow: (obj: Object, index: typeHeader) => {},
-    actionTypes: [typeAction],
-    onAction: (type: typeAction, obj: Object) => {},
+    header:Array<typeHeader>,
+    headerProps?: SHeaderProps,
+    data: [Object] | Object,
+    dataProps?: SDataType,
+    onAdd?: Function,
+    filter?: (obj: Object, index: Number) => {},
+    onSelectRow?: (obj: Object, index: typeHeader) => {},
+    actionTypes?: [typeAction],
+    onAction?: (type: typeAction, obj: Object) => {},
     onEdit?: (obj: Object) => {},
     onDelete?: (obj: Object) => {},
-    style: {
-
-    },
+    style?: {},
     limit?: number,
 }
 
@@ -50,6 +49,7 @@ export default class STable extends Component<SType> {
     contentSize
     headerPosition;
     scroll;
+    refFooter;
     refData;
     static defaultProps = {
         limit: 20,
@@ -161,6 +161,7 @@ export default class STable extends Component<SType> {
             })
             if (!isValid) return;
             i++;
+            obj.key = key;
             data.push(obj);
         })
         return data;
@@ -258,6 +259,11 @@ export default class STable extends Component<SType> {
                                 limit={this.props.limit}
                                 animates={this.state.animates}
                                 onEdit={this.props.onEdit}
+                                onLoadEnd={() => {
+                                    if(this.refFooter){
+                                        this.refFooter.onChangeData();
+                                    }
+                                }}
                             />
                             <View style={{
                                 width: "100%",
@@ -270,9 +276,15 @@ export default class STable extends Component<SType> {
                 </SView>
                 <SFooter data={dataFiltrada}
                     limit={this.props.limit}
+                    ref={(ref) => { this.refFooter = ref }}
                     page={this.state.page}
+                    buscador={this.state.buscador}
                     setPage={(page) => {
                         this.setState({ page: page });
+                    }}
+                    getDataProcesada={() => {
+                        if (!this.refData) return null;
+                        return this.refData.getDataProcesada();
                     }}
                     header={this.state.header}
                     setHeader={(header) => {

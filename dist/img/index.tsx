@@ -8,15 +8,19 @@ import Background from "./Background"
 import Box from "./Box"
 import Caja from "./Caja"
 import Carrito from "./Carrito"
+import Check from './Check'
 import Card from "./Card"
 import Cheque from "./Cheque"
 import Delete from "./Delete"
 import Egreso from "./Egreso"
 import Engranaje from "./Engranaje"
+import Entrenamiento from "./Entrenamiento"
+import Excel from "./Excel"
 import Ingreso from "./Ingreso"
 import Lock from "./Lock"
 import LockOutline from "./LockOutline"
 import Moon from "./Moon"
+import Menu from "./Menu"
 import Money from "./Money"
 import NoDelete from "./NoDelete"
 import Off from "./Off"
@@ -25,6 +29,7 @@ import Parameter from "./Parameter"
 import Profanity from "./Profanity"
 import Reload from "./Reload"
 import Salir from "./Salir"
+import Servisofts from "./Servisofts"
 import Sun from "./Sun"
 import Tranfer from "./Tranfer"
 import Traspaso from "./Traspaso"
@@ -43,14 +48,18 @@ const Icons = {
     Caja,
     Card,
     Carrito,
+    Check,
     Cheque,
     Delete,
     Egreso,
     Engranaje,
+    Entrenamiento,
+    Excel,
     Ingreso,
     Lock,
     LockOutline,
     Moon,
+    Menu,
     Money,
     NoDelete,
     Off,
@@ -59,6 +68,7 @@ const Icons = {
     Profanity,
     Reload,
     Salir,
+    Servisofts,
     Sun,
     Tranfer,
     Traspaso,

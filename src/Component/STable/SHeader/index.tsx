@@ -214,7 +214,7 @@ export default class SHeader extends Component<SHeaderProps> {
         return <SView style={{
             width: 16,
             height: 14,
-            
+
         }} center>
             <SView style={{
                 width: 10,
@@ -318,6 +318,9 @@ export default class SHeader extends Component<SHeaderProps> {
                         }}
 
                     >
+                        <SView style={{ padding: 2, }} center>
+                            {obj.icon}
+                        </SView>
                         <SText style={{
                             textAlign: "center",
                             fontWeight: "700",

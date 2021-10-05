@@ -37,7 +37,7 @@ var SText = /** @class */ (function (_super) {
     }
     SText.prototype.render = function () {
         return (React.createElement(SView, __assign({}, this.props),
-            React.createElement(Text, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ color: STheme.color.secondary }, (!this.props.center ? {} : {
+            React.createElement(Text, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ color: STheme.color.secondary }, (!this.props.center ? {} : {
                     textAlign: "center"
                 })), (!this.props.primary ? {} : {
                     color: STheme.color.primary
@@ -49,6 +49,8 @@ var SText = /** @class */ (function (_super) {
                     fontSize: this.props.fontSize
                 })), (!this.props.underLine ? {} : {
                     textDecorationLine: "underline"
+                })), (!this.props.capitalize ? {} : {
+                    textTransform: "capitalize"
                 })), (!this.props.justify ? {} : {
                     textAlign: "justify"
                 })), this.props.style) }, this.props.children)));

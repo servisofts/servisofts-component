@@ -187,7 +187,7 @@ var SInput = /** @class */ (function (_super) {
             this.getLabel(),
             React.createElement(SView, { col: "xs-12", row: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
-                React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+                React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
             this.isRender(type)));
     };
     SInput.defaultProps = {

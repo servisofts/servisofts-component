@@ -91,7 +91,7 @@ var SView = /** @class */ (function (_super) {
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
             } },
-            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -99,7 +99,7 @@ var SView = /** @class */ (function (_super) {
                 })), (!this.props.row ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
-                })), { height: "100%" }), (!this.props.center ? {} : {
+                })), (!this.props.colSquare ? {} : { height: "100%" })), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.center ? {} : {
                     alignItems: 'center',
                     justifyContent: 'center'
                 })), (!this.props.flex ? {} : {

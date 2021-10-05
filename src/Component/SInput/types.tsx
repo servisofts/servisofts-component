@@ -160,10 +160,12 @@ const phone = (type: TypeType, Parent: SInput) => {
         ),
         style: {
             View: {
-
+                // backgroundColor:"#f0f"
             },
             InputText: {
-
+                // padding:10,
+                paddingEnd:55,
+                // backgroundColor:"#f0f"
             },
             LabelStyle: {}
         }

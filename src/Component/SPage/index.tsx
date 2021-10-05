@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, KeyboardAvoidingView, Platform, } from 'react-native';
 import SNavBar from '../SNavBar/index';
 import SSCrollView from '../SSCrollView/index';
 import STheme from '../STheme/index';
@@ -7,6 +7,7 @@ import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
 import SImage from '../SImage';
 import SIcon from '../SIcon';
+import SNavigation from '../SNavigation';
 
 
 export type SPageProps = {
@@ -41,6 +42,7 @@ export default class SPage extends Component<SPageProps> {
     }
     getNavBar() {
         if (this.props.hidden) return <View />
+        if (SNavigation.navBar) return <SNavigation.navBar {...this.props} />
         return <SNavBar {...this.props} />
     }
     getScroll() {
@@ -53,6 +55,7 @@ export default class SPage extends Component<SPageProps> {
                 minHeight: "100%",
 
             }}>
+
             <SView style={{
                 width: '100%',
                 height: '100%',
@@ -61,6 +64,7 @@ export default class SPage extends Component<SPageProps> {
             }}>
                 {this.props.children}
             </SView>
+
         </SScrollView2>
     }
     render() {
@@ -72,18 +76,23 @@ export default class SPage extends Component<SPageProps> {
                     height: '100%',
                 }}
             >
-                {this.getNavBar()}
-                <SView col={"xs-12"}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
                     style={{
                         flex: 1,
-                        height: "100%",
-                        overflow: "hidden",
                     }}>
-                    {SPage.backgroundComponent}
-                    {this.getScroll()}
+                    {this.getNavBar()}
+                    <SView col={"xs-12"}
+                        style={{
+                            flex: 1,
+                            height: "100%",
+                            overflow: "hidden",
+                        }}>
+                        {SPage.backgroundComponent}
+                        {this.getScroll()}
 
-                </SView>
-
+                    </SView>
+                </KeyboardAvoidingView>
             </SView>
         );
 

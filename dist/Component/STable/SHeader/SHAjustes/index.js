@@ -28,13 +28,10 @@ var SHAjustes = /** @class */ (function (_super) {
         var _this = this;
         return React.createElement(SView, { col: "xs-12", row: true, center: true },
             React.createElement(SText, null, "Order: "),
-            React.createElement(SInput, { props: {
-                    type: "select",
-                    options: ["no", "asc", "desc"]
-                }, style: {
+            React.createElement(SInput, { type: "select", options: ["no", "asc", "desc"], customStyle: "calistenia", style: {
                     flex: 1,
                     height: 30,
-                    backgroundColor: STheme.color.primary + "44",
+                    // backgroundColor: STheme.color.primary + "44",
                     borderRadius: 4
                 }, defaultValue: this.data.order ? this.data.order : "no", onChangeText: function (val) {
                     new SThread(300, "buscadorTablaProps", true).start(function () {
@@ -46,12 +43,10 @@ var SHAjustes = /** @class */ (function (_super) {
     SHAjustes.prototype.getFiltros = function () {
         var _this = this;
         return React.createElement(SView, { flex: true, row: true },
-            React.createElement(SInput, { props: {
-                    type: "default"
-                }, style: {
+            React.createElement(SInput, { customStyle: "calistenia", style: {
                     flex: 1,
                     height: 30,
-                    backgroundColor: STheme.color.primary + "44",
+                    // backgroundColor: STheme.color.primary + "44",
                     borderRadius: 4
                 }, defaultValue: this.data.filtro, onChangeText: function (val) {
                     new SThread(300, "buscadorTablaProps", true).start(function () {

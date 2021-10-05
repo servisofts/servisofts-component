@@ -11,11 +11,13 @@ export declare type SDataType = {
     onEdit: Function;
     limit?: number;
     page?: number;
+    onLoadEnd: (data: any) => void;
 };
 export default class SData extends Component<SDataType> {
     animHeight: any;
     state: any;
     _inputs: any;
+    dataProcesada: any;
     static defaultProps: {
         defaultHeight: number;
         ordenador: any[];
@@ -23,6 +25,7 @@ export default class SData extends Component<SDataType> {
         page: number;
     };
     constructor(props: any);
+    getDataProcesada(): any;
     initialiceData(): void;
     buscar(data: any): any;
     reloadAnimate: () => void;

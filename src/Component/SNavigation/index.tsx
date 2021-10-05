@@ -20,8 +20,8 @@ export declare type SPageListProps = {
 export type SNavigationProps = {
     props: {
         prefixes: [string],
-        pages: { [name in string]: SPageProps }
-
+        pages: { [name in string]: SPageProps },
+        navBar?: any,
     }
 }
 
@@ -47,6 +47,7 @@ var stateNavigator;
 export default class SNavigation extends Component<SNavigationProps> {
     static navigation: any = null;
     static lastRoute: any;
+    static navBar: any = null;
     static root: any;
     static routes = [];
     static navigate(route: string, params?: object) {
@@ -75,11 +76,11 @@ export default class SNavigation extends Component<SNavigationProps> {
                 if (Platform.OS == "web") {
                     var locstr = window.location.pathname;
                     locstr = locstr.substring(1, locstr.lastIndexOf("/"));
-                    
+
                     if (locstr == "/") {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
-                 
+
                     SNavigation.lastRoute.navigation.replace(locstr);
                 } else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
@@ -109,6 +110,7 @@ export default class SNavigation extends Component<SNavigationProps> {
         super(props);
         this.state = {
         };
+        SNavigation.navBar = props.props.navBar;
 
     }
 

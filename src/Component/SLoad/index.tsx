@@ -15,7 +15,7 @@ export default class SLoad extends Component<typeProps> {
     }
     render() {
         return (
-            <SView flex center backgroundColor={STheme.color.background}>
+            <SView flex center >
                 <ActivityIndicator color={STheme.color.secondary} />
             </SView>
         );

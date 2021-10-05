@@ -37,6 +37,7 @@ var SNavigation = /** @class */ (function (_super) {
     function SNavigation(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {};
+        SNavigation.navBar = props.props.navBar;
         return _this;
     }
     SNavigation.navigate = function (route, params) {
@@ -152,6 +153,7 @@ var SNavigation = /** @class */ (function (_super) {
             React.createElement(Stack.Navigator, null, this.getPages(Stack))));
     };
     SNavigation.navigation = null;
+    SNavigation.navBar = null;
     SNavigation.routes = [];
     return SNavigation;
 }(Component));

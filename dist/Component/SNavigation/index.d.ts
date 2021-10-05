@@ -17,11 +17,13 @@ export declare type SNavigationProps = {
         pages: {
             [name in string]: SPageProps;
         };
+        navBar?: any;
     };
 };
 export default class SNavigation extends Component<SNavigationProps> {
     static navigation: any;
     static lastRoute: any;
+    static navBar: any;
     static root: any;
     static routes: any[];
     static navigate(route: string, params?: object): void;

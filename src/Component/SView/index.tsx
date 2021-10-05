@@ -52,7 +52,7 @@ export default class SView extends Component<SViewProps> {
   }
   render() {
 
-   
+
     var otherProps: any = {};
     var Element: any = View;
     if (this.props.onPress) {
@@ -68,7 +68,7 @@ export default class SView extends Component<SViewProps> {
     if (this.props.animated) {
       Element = Animated.createAnimatedComponent(Element);
     }
-    var style = {...this.props.style};
+    var style = { ...this.props.style };
     if (style) {
       delete style["top"];
       delete style["left"];
@@ -89,7 +89,7 @@ export default class SView extends Component<SViewProps> {
         height={this.props.height}
         flex={this.props.flex}
         col={this.state.params.col}
-        style={(!this.props.style ? {} : this.props.style) }
+        style={(!this.props.style ? {} : this.props.style)}
         onLayout={(evt) => {
           this.layout = evt.nativeEvent.layout;
           if (this.props.onLayout) this.props.onLayout(evt);
@@ -100,6 +100,7 @@ export default class SView extends Component<SViewProps> {
 
           style={{
             width: "100%",
+            
             ...(this.state.params.dir != "row" ? {} : {
               flexDirection: "row",
               flexWrap: 'wrap',
@@ -112,7 +113,9 @@ export default class SView extends Component<SViewProps> {
               flexDirection: "row",
               flexWrap: 'wrap',
             }),
-            height: "100%",
+            ...(!this.props.colSquare ? {} : { height: "100%" }),
+            ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
+            // height: "100%",
             ...(!this.props.center ? {
 
             } : {

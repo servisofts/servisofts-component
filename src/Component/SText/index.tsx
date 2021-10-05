@@ -11,7 +11,8 @@ export type STextProps = {
     bold?: boolean,
     color?: string,
     underLine?: boolean,
-    justify?: boolean
+    justify?: boolean,
+    capitalize?: boolean,
 } & SViewProps & TextProps
 
 export default class SText extends Component<STextProps> {
@@ -43,6 +44,9 @@ export default class SText extends Component<STextProps> {
                     }),
                     ...(!this.props.underLine ? {} : {
                         textDecorationLine: "underline",
+                    }),
+                    ...(!this.props.capitalize ? {} : {
+                        textTransform: "capitalize",
                     }),
                     ...(!this.props.justify ? {} : {
                         textAlign: "justify",

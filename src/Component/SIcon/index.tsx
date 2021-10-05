@@ -46,6 +46,6 @@ export default class SIcon extends Component<SIconType> {
         if (!Icon) {
             return <View />
         }
-        return (<Icon width={"100%"} height={"100%"} {...this.getIconProps(this.props.name)}  {...this.props} />)
+        return (<Icon width={"100%"} height={"100%"} fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} />)
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "servisofts-component",
-  "version": "2.0.2",
+  "version": "2.0.7",
   "description": "Servisofts-component is a library for React Native Web.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,8 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@react-navigation/native": "^5.9.6",
-    "@react-navigation/stack": "^5.14.7",
-    "react-native-svg": "^12.1.1"
+    "@react-navigation/stack": "^5.14.7"
   },
   "peerDependencies": {
     "react": "*",
@@ -26,7 +25,10 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^3.4.0"
+    "react-native-screens": "^3.4.0",
+    "react-native-file-viewer": "^2.1.4",
+    "react-native-fs": "^2.18.0",
+    "xlsx-color": "^0.14.30"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",

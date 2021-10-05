@@ -25,12 +25,13 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, } from 'react-native';
 import SNavBar from '../SNavBar/index';
 import STheme from '../STheme/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
 import SIcon from '../SIcon';
+import SNavigation from '../SNavigation';
 var SPage = /** @class */ (function (_super) {
     __extends(SPage, _super);
     function SPage(props) {
@@ -44,6 +45,8 @@ var SPage = /** @class */ (function (_super) {
     SPage.prototype.getNavBar = function () {
         if (this.props.hidden)
             return React.createElement(View, null);
+        if (SNavigation.navBar)
+            return React.createElement(SNavigation.navBar, __assign({}, this.props));
         return React.createElement(SNavBar, __assign({}, this.props));
     };
     SPage.prototype.getScroll = function () {
@@ -65,14 +68,17 @@ var SPage = /** @class */ (function (_super) {
                 flex: 1,
                 height: '100%'
             } },
-            this.getNavBar(),
-            React.createElement(SView, { col: "xs-12", style: {
-                    flex: 1,
-                    height: "100%",
-                    overflow: "hidden"
+            React.createElement(KeyboardAvoidingView, { behavior: Platform.OS === "ios" ? "padding" : "height", style: {
+                    flex: 1
                 } },
-                SPage.backgroundComponent,
-                this.getScroll())));
+                this.getNavBar(),
+                React.createElement(SView, { col: "xs-12", style: {
+                        flex: 1,
+                        height: "100%",
+                        overflow: "hidden"
+                    } },
+                    SPage.backgroundComponent,
+                    this.getScroll()))));
     };
     SPage.backgroundComponent = (React.createElement(View, { style: {
             position: "absolute",

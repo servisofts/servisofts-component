@@ -67,7 +67,7 @@ var SIcon = /** @class */ (function (_super) {
         if (!Icon) {
             return React.createElement(View, null);
         }
-        return (React.createElement(Icon, __assign({ width: "100%", height: "100%" }, this.getIconProps(this.props.name), this.props)));
+        return (React.createElement(Icon, __assign({ width: "100%", height: "100%", fill: "#000" }, this.getIconProps(this.props.name), this.props)));
     };
     SIcon.Assets = {};
     return SIcon;

@@ -44,6 +44,10 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Check: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Cheque: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
@@ -60,6 +64,14 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Entrenamiento: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Excel: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Ingreso: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
@@ -74,6 +86,10 @@ declare const Icons: {
     };
     Moon: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Menu: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Money: {
@@ -106,6 +122,10 @@ declare const Icons: {
     };
     Salir: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Servisofts: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Sun: {

@@ -9,6 +9,7 @@ export declare type STextProps = {
     color?: string;
     underLine?: boolean;
     justify?: boolean;
+    capitalize?: boolean;
 } & SViewProps & TextProps;
 export default class SText extends Component<STextProps> {
     constructor(props: any);

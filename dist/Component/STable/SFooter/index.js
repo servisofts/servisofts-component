@@ -28,19 +28,27 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { SText, STheme, SView } from '../../../index';
 import SIcon from '../../SIcon';
+import SLoad from '../../SLoad';
+import ExportExcel from './ExportExcel';
 import Opciones from './Opciones';
 var SFooter = /** @class */ (function (_super) {
     __extends(SFooter, _super);
     function SFooter(props) {
         var _this = _super.call(this, props) || this;
+        _this.onChangeData = function (data) {
+            _this.setState({ reload: true });
+        };
         _this.getPageItens = function () {
-            var _a = _this.props, limit = _a.limit, data = _a.data;
+            var limit = _this.props.limit;
+            var data = _this.props.getDataProcesada();
             if (limit) {
                 return Math.ceil(Object.keys(data).length / limit);
             }
             return 1;
         };
-        _this.state = {};
+        _this.state = {
+            reload: true
+        };
         return _this;
     }
     SFooter.prototype.getPagination = function () {
@@ -57,19 +65,56 @@ var SFooter = /** @class */ (function (_super) {
                 } },
                 React.createElement(SText, null, "<")));
         }
+        var cant = cantPages > 7 ? 7 : cantPages;
+        var vals = {};
         var _loop_1 = function (index) {
+            val = index;
+            if (cantPages > this_1.props.page + 3) {
+                if (index == cant) {
+                    val = cantPages + "";
+                }
+                if (index == 2 && this_1.props.page > 4) {
+                    val = "...";
+                }
+                if (index == 6) {
+                    val = "...";
+                }
+                if (index == 3 && this_1.props.page > 4) {
+                    val = this_1.props.page - 1;
+                }
+                if (index == 4 && this_1.props.page > 4) {
+                    val = this_1.props.page;
+                }
+                if (index == 5 && this_1.props.page > 4) {
+                    val = this_1.props.page + 1;
+                }
+            }
+            else {
+                if (index == 2 && this_1.props.page > 4) {
+                    val = "...";
+                }
+                if (index > 2 && this_1.props.page > 4) {
+                    val = cantPages + (index - 7);
+                }
+                if (index == cant) {
+                    val = cantPages + "";
+                }
+            }
+            vals[index] = val;
             ITEMS.push(React.createElement(SView, { style: {
                     width: 22,
                     height: 22,
                     borderRadius: 40,
-                    backgroundColor: (index == this_1.props.page ? STheme.color.secondary + "66" : "transparent")
+                    backgroundColor: (val == this_1.props.page ? STheme.color.secondary + "66" : "transparent")
                 }, center: true, onPress: function () {
-                    _this.props.setPage(index);
+                    if (vals[index] == "...")
+                        return null;
+                    _this.props.setPage(vals[index]);
                 } },
-                React.createElement(SText, { fontSize: 12, center: true, flex: true }, index)));
+                React.createElement(SText, { fontSize: 12, center: true, flex: true }, val)));
         };
-        var this_1 = this;
-        for (var index = 1; index <= cantPages; index++) {
+        var this_1 = this, val;
+        for (var index = 1; index <= cant; index++) {
             _loop_1(index);
         }
         if (this.props.page < cantPages) {
@@ -86,7 +131,17 @@ var SFooter = /** @class */ (function (_super) {
     };
     SFooter.prototype.render = function () {
         var _this = this;
-        return (React.createElement(View, { style: __assign({ width: "100%", height: 24, backgroundColor: STheme.color.background, borderTopEndRadius: 8, borderTopStartRadius: 8 }, this.props.style) },
+        if (!this.props.getDataProcesada)
+            return React.createElement(SLoad, null);
+        var data = this.props.getDataProcesada();
+        if (!data)
+            return React.createElement(SLoad, null);
+        var buscador = this.props.buscador;
+        if (this.state.reload) {
+            this.setState({ reload: false });
+            return React.createElement(SLoad, null);
+        }
+        return (React.createElement(View, { style: __assign({ width: "100%", height: 30, backgroundColor: STheme.color.background, borderTopEndRadius: 8, borderTopStartRadius: 8 }, this.props.style) },
             React.createElement(SView, { row: true, style: {
                     width: "100%", height: "100%"
                 } },
@@ -98,11 +153,12 @@ var SFooter = /** @class */ (function (_super) {
                     } },
                     React.createElement(SText, { style: {} },
                         "Total: ",
-                        Object.keys(this.props.data).length)),
+                        Object.keys(this.props.getDataProcesada()).length)),
                 React.createElement(SView, { row: true, col: "xs-4", height: true, center: true }, this.getPagination()),
-                React.createElement(SView, { row: true, center: true, col: "xs-4", style: {
+                React.createElement(SView, { row: true, center: true, height: true, col: "xs-4", style: {
                         justifyContent: "flex-end"
                     } },
+                    React.createElement(ExportExcel, __assign({}, this.props)),
                     React.createElement(SView, { style: {
                             width: 30,
                             height: 24,

@@ -35,7 +35,8 @@ var Inicio = /** @class */ (function (_super) {
         return React.createElement(SView, { col: "xs-12", row: true },
             this.getIcon({ name: "Create SVG", page: "scomponent/SvgToReact", icon: "Cheque" }),
             this.getIcon({ name: "Iconos", page: "scomponent/SIcon", icon: "Profanity" }),
-            this.getIcon({ name: "Formulario", page: "scomponent/Formulario", icon: "Alert" }));
+            this.getIcon({ name: "Formulario", page: "scomponent/Formulario", icon: "Alert" }),
+            this.getIcon({ name: "STable", page: "scomponent/STable", icon: "Excel" }));
     };
     Inicio.prototype.render = function () {
         return (React.createElement(SPage, { title: "Servisofts Component" },

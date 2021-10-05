@@ -3,32 +3,33 @@ import { SHeaderProps } from './SHeader';
 import { SDataType } from './SData';
 import { SInputType } from '../SInput';
 declare type typeHeader = {
-    label: String;
-    key: String;
-    width?: Number;
-    index?: Number;
+    label: string;
+    key: string;
+    width?: number;
+    index?: number;
     hidden?: Boolean;
     editable?: Boolean;
     order?: "asc" | "desc";
-    orderPriority?: Number;
+    orderPriority?: number;
     type?: SInputType;
+    icon?: any;
     options?: Array<any>;
     render?: (data: String, id?: any) => {};
 };
 declare type typeAction = "edit" | "delete";
 declare type SType = {
-    header: [typeHeader];
-    headerProps: SHeaderProps;
-    data: [Object];
-    dataProps: SDataType;
-    onAdd: Function;
-    filter: (obj: Object, index: Number) => {};
-    onSelectRow: (obj: Object, index: typeHeader) => {};
-    actionTypes: [typeAction];
-    onAction: (type: typeAction, obj: Object) => {};
+    header: Array<typeHeader>;
+    headerProps?: SHeaderProps;
+    data: [Object] | Object;
+    dataProps?: SDataType;
+    onAdd?: Function;
+    filter?: (obj: Object, index: Number) => {};
+    onSelectRow?: (obj: Object, index: typeHeader) => {};
+    actionTypes?: [typeAction];
+    onAction?: (type: typeAction, obj: Object) => {};
     onEdit?: (obj: Object) => {};
     onDelete?: (obj: Object) => {};
-    style: {};
+    style?: {};
     limit?: number;
 };
 export default class STable extends Component<SType> {
@@ -36,6 +37,7 @@ export default class STable extends Component<SType> {
     contentSize: any;
     headerPosition: any;
     scroll: any;
+    refFooter: any;
     refData: any;
     static defaultProps: {
         limit: number;

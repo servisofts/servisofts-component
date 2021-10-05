@@ -19,9 +19,18 @@ declare module '@react-navigation/stack' {
 }
 declare module 'react-native-svg' {
     import Svg, { Line, Rect, Svg, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Path, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath } from 'react-native-svg';
-    export { Svg, Line,Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath };
+    export { Svg, Line, Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath };
     export default Svg;
 }
+declare module 'xlsx-color' {
+    import xlsx from 'xlsx-color';
+    export default xlsx;
+}
+declare module 'react-native-file-viewer' {
+    import FileViewer from 'react-native-file-viewer';
+    export default FileViewer;
+}
+
 // declare module "*.svg" {
 //     // export const ReactComponent: (props: React.SVGProps<SVGElement>) => ReactElement
 //     // import { SvgProps } from 'react-native-svg';

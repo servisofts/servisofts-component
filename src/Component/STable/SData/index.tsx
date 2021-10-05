@@ -19,11 +19,13 @@ export type SDataType = {
     onEdit: Function,
     limit?: number,
     page?: number,
+    onLoadEnd: (data: any) => void,
 }
 export default class SData extends Component<SDataType> {
     animHeight
     state
     _inputs
+    dataProcesada;
     static defaultProps = {
         defaultHeight: 30,
         ordenador: [],
@@ -44,6 +46,9 @@ export default class SData extends Component<SDataType> {
         this._inputs = {};
         this.animHeight = new Animated.Value(this.props.defaultHeight);
         // this.initialiceData();
+    }
+    getDataProcesada() {
+        return this.dataProcesada;
     }
     initialiceData() {
         var headerRender = this.props.header.map((header, i) => {
@@ -140,7 +145,6 @@ export default class SData extends Component<SDataType> {
                 objFinal[key]["Peso"] = peso;
             }
         })
-
         return objFinal;
     }
     reloadAnimate = () => {
@@ -157,11 +161,14 @@ export default class SData extends Component<SDataType> {
             }
             if (!data) data = {};
             if (typeof data == "string") {
-                try { data = JSON.parse(data) } catch (e) { }
+                try { data = JSON.parse(data) } catch (e) {
+                    data = {};
+                }
             }
 
             data = data[dir];
         })
+        if(!data) data = "";
         return data;
     }
     getColorHover({ x, y, position }) {
@@ -197,10 +204,16 @@ export default class SData extends Component<SDataType> {
         }
         if (this.state.data[key]) {
             if (!this.state.data[key].finded) {
+                // if (typeof this.state.data[key] == "object") {
                 this.state.data[key].finded = {}
+                // }
             }
             if (typeof data != "object") {
-                this.state.data[key].finded[header.key] = data;
+                if (this.state.data[key].finded) {
+                    // if (this.state.data[key].finded[header.key]) {
+                    this.state.data[key].finded[header.key] = data;
+                    // }
+                }
             }
         }
         if (header.editable) {
@@ -267,6 +280,9 @@ export default class SData extends Component<SDataType> {
             if (header.key == "index") {
                 DATA = position;
             }
+            // if (header.key == "key") {
+            //     DATA = key;
+            // }
             if (header.render) {
                 if (!this.state.renderData[key]) this.state.renderData[key] = {};
                 if (!this.state.renderData[key][header.key]) this.state.renderData[key][header.key] = {};
@@ -312,7 +328,7 @@ export default class SData extends Component<SDataType> {
         // if (!this.props.animates) {
         //     return <View />
         // }
-        var i = 0;
+        var i = (this.props.page - 1) * this.props.limit;
         var orderArr = []
         orderArr.push({ key: "Peso", order: "desc", peso: 4 });
         this.props.header.map((header, i) => {
@@ -321,10 +337,11 @@ export default class SData extends Component<SDataType> {
             }
         })
 
-        return new SOrdenador(orderArr).ordernarObject(this.buscar(this.state.data)).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map((key) => {
+        this.dataProcesada = this.buscar(this.state.data);
+        this.props.onLoadEnd(this.dataProcesada);
+        return new SOrdenador(orderArr).ordernarObject(this.dataProcesada).slice(((this.props.page - 1) * this.props.limit), (this.props.page * this.props.limit)).map((key) => {
             var obj = this.state.data[key];
             i++;
-
             return (
                 <SView
                     animated
