@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Animated } from 'react-native';
+import { View, TouchableOpacity, Animated, Platform } from 'react-native';
 import SGrid from '../SGrid/index';
 import STheme from '../STheme';
 var SView = /** @class */ (function (_super) {
@@ -56,7 +56,8 @@ var SView = /** @class */ (function (_super) {
     };
     SView.prototype.render = function () {
         var _this = this;
-        var otherProps = {};
+        var otherProps = __assign({}, this.props);
+        delete otherProps.height;
         var Element = View;
         if (this.props.onPress) {
             Element = TouchableOpacity;
@@ -85,13 +86,15 @@ var SView = /** @class */ (function (_super) {
             delete style["marginStart"];
             delete style["marginRight"];
             delete style["marginEnd"];
+            delete style["maxHeight"];
+            // delete style["maxWidth"];
         }
         return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: (!this.props.style ? {} : this.props.style), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
             } },
-            React.createElement(Element, __assign({}, otherProps, this.props, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, otherProps, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -99,7 +102,7 @@ var SView = /** @class */ (function (_super) {
                 })), (!this.props.row ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
-                })), (!this.props.colSquare ? {} : { height: "100%" })), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.center ? {} : {
+                })), (!this.props.colSquare ? {} : { height: "100%" })), (Platform.OS != "web" ? (this.props.height ? { flex: 1 } : {}) : { height: "100%" })), (!this.props.center ? {} : {
                     alignItems: 'center',
                     justifyContent: 'center'
                 })), (!this.props.flex ? {} : {

@@ -10,6 +10,7 @@ export declare const SPopupClose: (key: any) => void;
 export default class SPopup extends Component {
     static confirm(props: ConfirmProps): void;
     static alert(text: any): void;
+    static dateBetween(text: any, onPress: any): void;
     static open(obj: SPopupOpenProps): void;
     static close(key?: string): void;
     state: any;

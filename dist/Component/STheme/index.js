@@ -99,7 +99,8 @@ var STheme = /** @class */ (function (_super) {
         this.onAnim = true;
         Animated.timing(this.animFadeOut, {
             toValue: 1,
-            duration: 1500
+            duration: 1500,
+            useNativeDriver: false
         }).start(function (end) {
             _this.onAnim = false;
             _this.state.isFadeOut = false;
@@ -167,6 +168,7 @@ var STheme = /** @class */ (function (_super) {
         success: "#71AF4A",
         warning: "#EF8C38",
         danger: "#DF2732",
+        bateon: "#95070C",
         error: "#ff0000",
         info: "#405394",
         black: "#000000",

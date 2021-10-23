@@ -20,7 +20,7 @@ declare type SType = ScrollViewProps & {
     onScroll?: (evt: onSrollEndEvt) => {};
     footer?: Component;
 };
-export default class SScrollView extends Component<SType> {
+export default class SSCrollView extends Component<SType> {
     scroll_h: any;
     scroll_v: any;
     layout: any;

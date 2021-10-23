@@ -1,33 +1,39 @@
 
 import SComponentContainer from "./Component/SComponentContainer";
-import SGrid from "./Component/SGrid/index";
-import SIcon from './Component/SIcon/index';
-import SNavBar from "./Component/SNavBar/index";
-import SNavigation from "./Component/SNavigation/index";
-import SPage from "./Component/SPage/index";
-import SSCrollView from "./Component/SSCrollView/index";
-import SText from "./Component/SText/index";
-import STheme from './Component/STheme/index';
-import SThread from "./Component/SThread/index";
-import { SUuid } from "./Component/SUuid/index";
-import SView from "./Component/SView/index";
-import SStorage from './Component/SStorage/index';
+import SGrid from "./Component/SGrid";
+import SIcon from './Component/SIcon';
+import SNavBar from "./Component/SNavBar";
+import SNavigation from "./Component/SNavigation";
+import SPage from "./Component/SPage";
+import SSCrollView from "./Component/SScrollView";
+import SText from "./Component/SText";
+import STheme from './Component/STheme';
+import SThread from "./Component/SThread";
+import { SUuid } from "./Component/SUuid";
+import SView from "./Component/SView";
+import SStorage from './Component/SStorage';
 import SScrollView2 from "./Component/SScrollView2";
+import SScrollView3 from "./Component/SScrollView3";
 import { SInput } from "./Component/SInput";
 import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
 import STable2 from "./Component/STable2";
-import SForm from './Component/SForm/index';
-import { SButtom } from './Component/SButtom/index';
+import SForm from './Component/SForm';
+import { SButtom } from './Component/SButtom';
 import SLoad from "./Component/SLoad";
-import SOrdenador from "./Component/SOrdenador/index";
+import SOrdenador from "./Component/SOrdenador";
 import SDate from "./Component/SDate";
 import SImage from "./Component/SImage";
 import SHr from "./Component/SHr";
-export * from './Types/index'
+import SGradient from "./Component/SGradient";
+import SMapView from "./Component/SMapView";
+import SMarker from "./Component/SMapView/SMarker";
+import Font from "./font";
+export * from './Types'
 export {
     SHr,
+    SGradient,
     SDate,
     SInfo,
     SOrdenador,
@@ -39,6 +45,7 @@ export {
     SPage,
     SSCrollView,
     SScrollView2,
+    SScrollView3,
     SText,
     STheme,
     SThread,
@@ -54,5 +61,8 @@ export {
     STable2,
     SInput,
     SForm,
-    SButtom
+    SButtom,
+    SMapView,
+    SMarker,
+    Font
 }

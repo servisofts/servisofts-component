@@ -60,9 +60,11 @@ var SStorage = /** @class */ (function (_super) {
         return (React.createElement(View, null,
             React.createElement(Text, null, " SSTorage localStorage web ")));
     };
+    var _a;
+    _a = SStorage;
     SStorage.getItem = function (key, callback) { return __awaiter(void 0, void 0, void 0, function () {
         var text;
-        return __generator(this, function (_a) {
+        return __generator(_a, function (_b) {
             text = localStorage.getItem(key);
             callback(text);
             return [2 /*return*/];

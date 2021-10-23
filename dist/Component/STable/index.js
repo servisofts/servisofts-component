@@ -142,6 +142,21 @@ var STable = /** @class */ (function (_super) {
         });
         return data;
     };
+    STable.prototype.getAdd = function () {
+        var _this = this;
+        if (!this.props.onAdd)
+            return null;
+        return React.createElement(SView, { style: {
+                position: "absolute",
+                bottom: 45,
+                right: 8,
+                width: 50,
+                height: 50
+            }, onPress: function () {
+                _this.props.onAdd();
+            } },
+            React.createElement(SIcon, { name: "Add" }));
+    };
     STable.prototype.render = function () {
         var _this = this;
         if (this.state.reload) {
@@ -216,7 +231,8 @@ var STable = /** @class */ (function (_super) {
                     _this.setState({ reload: true });
                 }, style: {
                     backgroundColor: STheme.color.primary
-                } })));
+                } }),
+            this.getAdd()));
     };
     STable.defaultProps = {
         limit: 20,

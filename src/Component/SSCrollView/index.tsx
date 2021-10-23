@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TextInput, Dimensions, Animated, NativeScrollEvent, ScrollViewProps, Platform } from 'react-native';
+import { View, Animated, NativeScrollEvent, ScrollViewProps, Platform } from 'react-native';
 import { SText, STheme, SThread, SView } from '../../index';
 type typeHeader = {
     label: String,
@@ -31,7 +31,7 @@ type SType = ScrollViewProps & {
 }
 const preventDefault = e => e.preventDefault();
 const ASCroll: any = Animated.ScrollView
-export default class SScrollView extends Component<SType> {
+export default class SSCrollView extends Component<SType> {
     scroll_h
     scroll_v
     layout
@@ -163,6 +163,7 @@ export default class SScrollView extends Component<SType> {
             Animated.timing(this.animValueV, {
                 toValue: y - height / 2,
                 duration: !duration ? 10 : duration,
+                useNativeDriver:false,
             }).start();
             // this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, false);
         }

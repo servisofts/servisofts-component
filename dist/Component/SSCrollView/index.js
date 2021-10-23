@@ -29,9 +29,9 @@ import { View, Animated, Platform } from 'react-native';
 import { SThread, SView } from '../../index';
 var preventDefault = function (e) { return e.preventDefault(); };
 var ASCroll = Animated.ScrollView;
-var SScrollView = /** @class */ (function (_super) {
-    __extends(SScrollView, _super);
-    function SScrollView(props) {
+var SSCrollView = /** @class */ (function (_super) {
+    __extends(SSCrollView, _super);
+    function SSCrollView(props) {
         var _this = _super.call(this, props) || this;
         _this.getScrollCalc = function (data) {
             return {
@@ -84,7 +84,7 @@ var SScrollView = /** @class */ (function (_super) {
         _this.animValueV = new Animated.Value(0);
         return _this;
     }
-    SScrollView.prototype.componentDidMount = function () {
+    SSCrollView.prototype.componentDidMount = function () {
         var _this = this;
         this.animValueV.addListener(function (animation) {
             _this.scrollv &&
@@ -94,18 +94,18 @@ var SScrollView = /** @class */ (function (_super) {
                 });
         });
     };
-    SScrollView.prototype.getLayout = function () {
+    SSCrollView.prototype.getLayout = function () {
         if (this.layout) {
             return this.layout;
         }
     };
-    SScrollView.prototype.componentWillUnmount = function () {
+    SSCrollView.prototype.componentWillUnmount = function () {
         if (Platform.OS == "web") {
             document.ontouchmove = function () { };
             // document.removeEventListener('touchmove', preventDefault);
         }
     };
-    SScrollView.prototype.setEnabled = function (en) {
+    SSCrollView.prototype.setEnabled = function (en) {
         if (Platform.OS == "web") {
             if (!en) {
                 document.ontouchmove = preventDefault;
@@ -123,7 +123,7 @@ var SScrollView = /** @class */ (function (_super) {
             }
         }
     };
-    SScrollView.prototype.scrollIncrement = function (_a) {
+    SSCrollView.prototype.scrollIncrement = function (_a) {
         var x = _a.x, y = _a.y;
         if (!this.layout) {
             return;
@@ -142,7 +142,7 @@ var SScrollView = /** @class */ (function (_super) {
             this.scrollh.scrollTo({ x: 1, y: 1 }, true);
         }
     };
-    SScrollView.prototype.scrollTo = function (_a, duration) {
+    SSCrollView.prototype.scrollTo = function (_a, duration) {
         var x = _a.x, y = _a.y;
         if (!this.layout) {
             return;
@@ -151,7 +151,8 @@ var SScrollView = /** @class */ (function (_super) {
         if (this.scrollv) {
             Animated.timing(this.animValueV, {
                 toValue: y - height / 2,
-                duration: !duration ? 10 : duration
+                duration: !duration ? 10 : duration,
+                useNativeDriver: false
             }).start();
             // this.scrollv.scrollTo({ x: x - width / 2, y: y - height / 2 }, false);
         }
@@ -163,19 +164,19 @@ var SScrollView = /** @class */ (function (_super) {
             // this.scrollh.scrollTo({ x: 1, y: 1 }, false);
         }
     };
-    SScrollView.prototype.moveScrollVertical = function (_a) {
+    SSCrollView.prototype.moveScrollVertical = function (_a) {
         var x = _a.x, y = _a.y;
         if (this.scrollv) {
             this.scrollv.scrollTo({ x: x, y: y }, false);
         }
     };
-    SScrollView.prototype.moveScrollHorizontal = function (_a) {
+    SSCrollView.prototype.moveScrollHorizontal = function (_a) {
         var x = _a.x, y = _a.y;
         if (this.scrollh) {
             this.scrollh.scrollTo({ x: x, y: y }, false);
         }
     };
-    SScrollView.prototype.scrollToEnd = function () {
+    SSCrollView.prototype.scrollToEnd = function () {
         if (this.scrollv) {
             this.scrollv.scrollToEnd();
         }
@@ -183,7 +184,7 @@ var SScrollView = /** @class */ (function (_super) {
             this.scrollv.scrollToEnd();
         }
     };
-    SScrollView.prototype.scrollToPosition = function (_a) {
+    SSCrollView.prototype.scrollToPosition = function (_a) {
         var x = _a.x, y = _a.y;
         if (this.scrollv) {
             this.scrollv.scrollTo({ x: x, y: y });
@@ -192,10 +193,10 @@ var SScrollView = /** @class */ (function (_super) {
             this.scrollh.scrollTo({ x: x, y: y });
         }
     };
-    SScrollView.prototype.onScrollAnimationEnd = function () {
+    SSCrollView.prototype.onScrollAnimationEnd = function () {
         this.props.onScrollEnd(this.scrollInfo());
     };
-    SScrollView.prototype.getScroll = function () {
+    SSCrollView.prototype.getScroll = function () {
         var _this = this;
         if (!this.layout) {
             return React.createElement(View, null);
@@ -242,7 +243,7 @@ var SScrollView = /** @class */ (function (_super) {
                 React.createElement(View, { style: __assign({ width: "100%", height: "100%" }, this.props.contentContainerStyle) }, this.props.children)),
             this.props.footer);
     };
-    SScrollView.prototype.render = function () {
+    SSCrollView.prototype.render = function () {
         var _this = this;
         return (React.createElement(SView, { style: __assign({ width: "100%", flex: 1 }, this.props.style) },
             React.createElement(SView, { style: __assign({ position: "absolute", width: "100%", height: "100%", overflow: "hidden" }, (Platform.OS == "web" ? {
@@ -257,6 +258,6 @@ var SScrollView = /** @class */ (function (_super) {
                     return;
                 } }, this.getScroll())));
     };
-    return SScrollView;
+    return SSCrollView;
 }(Component));
-export default SScrollView;
+export default SSCrollView;

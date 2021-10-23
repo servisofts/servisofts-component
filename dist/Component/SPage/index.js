@@ -27,10 +27,8 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View, KeyboardAvoidingView, Platform, } from 'react-native';
 import SNavBar from '../SNavBar/index';
-import STheme from '../STheme/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
-import SIcon from '../SIcon';
 import SNavigation from '../SNavigation';
 var SPage = /** @class */ (function (_super) {
     __extends(SPage, _super);
@@ -83,11 +81,8 @@ var SPage = /** @class */ (function (_super) {
     SPage.backgroundComponent = (React.createElement(View, { style: {
             position: "absolute",
             width: "120%",
-            height: "120%",
-            // backgroundColor: "#f0ff0f",
-            transform: [{ translateX: -50 }, { translateY: -50 }]
-        } },
-        React.createElement(SIcon, { name: "Background", width: "100%", opacity: "0.3", stroke: STheme.color.primary })));
+            height: "120%"
+        } }));
     return SPage;
 }(Component));
 export default SPage;

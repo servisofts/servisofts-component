@@ -13,7 +13,7 @@ import SIcon from '../SIcon/index';
 // } & SPageProps
 
 export default class SNavBar extends Component<SPageProps> {
-    constructor(props: any) {
+    constructor(props) {
         super(props);
         this.state = {
         };
@@ -28,6 +28,7 @@ export default class SNavBar extends Component<SPageProps> {
         if (this.props.preventBack) {
             return <View />
         }
+   
         if (Platform.OS == "web") {
             var prevent = false;
             if (SNavigation.lastRoute) {
@@ -108,9 +109,7 @@ export default class SNavBar extends Component<SPageProps> {
                 </SView>
                 <SView col={"xs-2"} center onPress={() => {
                     STheme.change();
-                }}>
-
-                </SView>
+                }}></SView>
 
             </SView>
         );

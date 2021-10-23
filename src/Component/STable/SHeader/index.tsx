@@ -135,12 +135,14 @@ export default class SHeader extends Component<SHeaderProps> {
                             y: 0
                         },
                         duration: 100,
+                        useNativeDriver:false,
                     }).start();
                     // this.props.reload();
                 } else {
                     Animated.timing(anim, {
                         toValue: this.lastMoved,
                         duration: 100,
+                        useNativeDriver:false,
                     }).start();
                 }
                 this.state.animSelect[key].setValue(1);

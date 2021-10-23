@@ -30,6 +30,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import SPopupComponent from './SPopupComponent';
 import Confirm from './SPopupVariants/Confirm/index';
 import Alert from './SPopupVariants/Alert/index';
+import DateBetween from './SPopupVariants/DateBetween/index';
 var INSTANCE;
 export var SPopupOpen = function (_a) {
     var key = _a.key, content = _a.content, style = _a.style;
@@ -56,6 +57,10 @@ var SPopup = /** @class */ (function (_super) {
     SPopup.alert = function (text) {
         // alert(obj)
         INSTANCE.open({ key: "alert", content: React.createElement(Alert, { title: text }), style: {} });
+    };
+    SPopup.dateBetween = function (text, onPress) {
+        // alert(obj)
+        INSTANCE.open({ key: "dateBetween", content: React.createElement(DateBetween, { title: text, onPress: onPress }), style: {} });
     };
     SPopup.open = function (obj) {
         var key = obj.key;

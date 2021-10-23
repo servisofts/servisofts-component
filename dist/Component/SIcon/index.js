@@ -27,6 +27,7 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { Platform, View } from 'react-native';
 import LocalImg, { IconsVariant } from '../../img/index';
+import SView from '../SView';
 var SIcon = /** @class */ (function (_super) {
     __extends(SIcon, _super);
     function SIcon() {
@@ -67,7 +68,18 @@ var SIcon = /** @class */ (function (_super) {
         if (!Icon) {
             return React.createElement(View, null);
         }
-        return (React.createElement(Icon, __assign({ width: "100%", height: "100%", fill: "#000" }, this.getIconProps(this.props.name), this.props)));
+        var ICON = (React.createElement(Icon, __assign({ width: "100%", height: "100%", fill: "#000" }, this.getIconProps(this.props.name), this.props)));
+        if (this.props.bgr) {
+            ICON = (React.createElement(SView, { center: true },
+                React.createElement(SIcon, { name: "Box", fill: this.props.bgr }),
+                React.createElement(SView, { style: {
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        padding: "10%"
+                    }, center: true }, ICON)));
+        }
+        return ICON;
     };
     SIcon.Assets = {};
     return SIcon;

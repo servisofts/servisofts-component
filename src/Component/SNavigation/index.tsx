@@ -93,7 +93,7 @@ export default class SNavigation extends Component<SNavigationProps> {
         }
 
     }
-    static getParam(key: string, valDef: any) {
+    static getParam(key: string, valDef?: any) {
         var route = SNavigation.lastRoute.route;
         var params = route.params;
         if (!params) {
@@ -162,6 +162,7 @@ export default class SNavigation extends Component<SNavigationProps> {
 
                     return <Page {...props} />
                 } catch (e) {
+                    console.log(e);
                     return <View />
                 }
 

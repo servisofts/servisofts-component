@@ -62,12 +62,12 @@ var SGrid = /** @class */ (function (_super) {
                     col[cols[2]] = cols[3];
                 }
             });
+            var max = this.getMax(col);
+            this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
         }
         else {
             col = this.props.col;
         }
-        var max = this.getMax(col);
-        this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
     };
     SGrid.prototype.changeMedida = function (medida) {
         this.medida = medida;
@@ -81,16 +81,19 @@ var SGrid = /** @class */ (function (_super) {
     };
     SGrid.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Animated.View, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, (!this.props.style.position ? {} : { position: this.props.style.position })), (!this.props.style.flex ? {} : { flex: this.props.style.flex })), (!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : this.props.flex })), (!this.props.style.height ? {} : { height: this.props.style.height })), (!this.props.style.maxHeight ? {} : { height: this.props.style.maxHeight })), (!this.props.style.maxWidth ? {} : { height: this.props.style.maxWidth })), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.style.width ? {} : { width: this.props.style.width })), (!this.props.colSquare ? {} : { height: this.animSize.y })), (!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex })), (this.props.style.margin == null ? {} : { margin: this.props.style.margin })), (this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom })), (this.props.style.marginTop == null ? {} : { marginTop: this.props.style.marginTop })), (this.props.style.marginLeft == null ? {} : { marginLeft: this.props.style.marginLeft })), (this.props.style.marginRight == null ? {} : { marginRight: this.props.style.marginRight })), (this.props.style.marginStart == null ? {} : { marginStart: this.props.style.marginStart })), (this.props.style.marginEnd == null ? {} : { marginEnd: this.props.style.marginEnd })), (this.props.style.top == null ? {} : { top: this.props.style.top })), (this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom })), (this.props.style.left == null ? {} : { left: this.props.style.left })), (this.props.style.right == null ? {} : { right: this.props.style.right })), (!this.props.col ? {} : {
+        return (React.createElement(Animated.View, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, (!this.props.style.position ? {} : { position: this.props.style.position })), (!this.props.style.flex ? {} : { flex: this.props.style.flex })), (!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : this.props.flex })), (!this.props.style.height ? {} : { height: this.props.style.height })), (!this.props.style.maxHeight ? {} : { height: this.props.style.maxHeight })), (!this.props.style.maxWidth ? {} : { height: this.props.style.maxWidth })), (!this.props.style.width ? {} : { width: this.props.style.width })), (!this.props.colSquare ? {} : (!this.props.col ? { width: this.animSize.x } : { height: this.animSize.y }))), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex })), (this.props.style.margin == null ? {} : { margin: this.props.style.margin })), (this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom })), (this.props.style.marginTop == null ? {} : { marginTop: this.props.style.marginTop })), (this.props.style.marginLeft == null ? {} : { marginLeft: this.props.style.marginLeft })), (this.props.style.marginRight == null ? {} : { marginRight: this.props.style.marginRight })), (this.props.style.marginStart == null ? {} : { marginStart: this.props.style.marginStart })), (this.props.style.marginEnd == null ? {} : { marginEnd: this.props.style.marginEnd })), (this.props.style.top == null ? {} : { top: this.props.style.top })), (this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom })), (this.props.style.left == null ? {} : { left: this.props.style.left })), (this.props.style.right == null ? {} : { right: this.props.style.right })), (!this.props.col ? {} : {
                 width: this.animSize.x.interpolate({
                     inputRange: [0, 100],
                     outputRange: ["0%", "100%"]
                 })
             })), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;
-                if (_this.layout.width != _this.animSize.y._value) {
-                    if (_this.layout.width != 0) {
+                if (_this.props.colSquare) {
+                    if (_this.props.col) {
                         _this.animSize.setValue({ x: _this.animSize.x._value, y: _this.layout.width });
+                    }
+                    else if (_this.layout.height != _this.animSize.x._value) {
+                        _this.animSize.setValue({ x: _this.layout.height, y: _this.layout.height });
                     }
                 }
                 if (_this.props.onLayout)

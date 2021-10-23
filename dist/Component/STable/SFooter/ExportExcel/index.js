@@ -49,10 +49,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 import React, { Component } from 'react';
 import { SView, SIcon } from '../../../../index';
@@ -73,7 +77,7 @@ var ExportExcel = /** @class */ (function (_super) {
                 sheets = {
                     "Hoja 1": __spreadArray([
                         header
-                    ], data)
+                    ], data, true)
                 };
                 for (_i = 0, _a = Object.keys(sheets); _i < _a.length; _i++) {
                     sheet = _a[_i];

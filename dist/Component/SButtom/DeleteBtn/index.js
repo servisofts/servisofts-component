@@ -47,7 +47,8 @@ var DeleteBtn = /** @class */ (function (_super) {
         }
         Animated.timing(this.state.anim, {
             duration: 200,
-            toValue: this.time * 2
+            toValue: this.time * 2,
+            useNativeDriver: false
         }).start(function () {
             if (_this.onAnimCancel) {
                 _this.animCancel();
@@ -66,7 +67,8 @@ var DeleteBtn = /** @class */ (function (_super) {
         // Animated.timing(this.state.anim,).stop();
         Animated.timing(this.state.anim, {
             duration: 200,
-            toValue: this.time
+            toValue: this.time,
+            useNativeDriver: false
         }).start(function () {
             if (_this.props.onCancel) {
                 _this.props.onCancel();
@@ -81,7 +83,8 @@ var DeleteBtn = /** @class */ (function (_super) {
         this.onAnimated = true;
         Animated.timing(this.state.anim, {
             duration: 1000,
-            toValue: this.state.anim._value - 1
+            toValue: this.state.anim._value - 1,
+            useNativeDriver: false
         }).start(function () {
             if (_this.onAnimCancel) {
                 // this.onAnimated(false);

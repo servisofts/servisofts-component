@@ -24,7 +24,15 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Back: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Background: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Background2: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
@@ -44,6 +52,10 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Cerrar: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Check: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
@@ -52,8 +64,16 @@ declare const Icons: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
+    Close: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Delete: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Edit: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Egreso: {
@@ -69,6 +89,22 @@ declare const Icons: {
         Web: (props: any) => JSX.Element;
     };
     Excel: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Eyes: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Favorito: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Favorito2: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Girl: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
@@ -89,6 +125,10 @@ declare const Icons: {
         Web: (props: any) => JSX.Element;
     };
     Menu: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Menu2: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
@@ -120,8 +160,16 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Reserve: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Salir: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
+        Web: (props: any) => JSX.Element;
+    };
+    Search: {
+        Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
     Servisofts: {

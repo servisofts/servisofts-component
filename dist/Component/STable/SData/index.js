@@ -79,43 +79,38 @@ var SData = /** @class */ (function (_super) {
     SData.prototype.getDataProcesada = function () {
         return this.dataProcesada;
     };
-    SData.prototype.initialiceData = function () {
-        var _this = this;
-        var headerRender = this.props.header.map(function (header, i) {
-            if (header.render) {
-                return header;
-            }
-            return null;
-        });
-        if (this.props.data) {
-            headerRender.map(function (header) {
-                if (!header)
-                    return;
-                Object.keys(_this.state.data).map(function (key) {
-                    var obj = _this.state.data[key];
-                    var valor = _this.getData(obj, header.key);
-                    var data = null;
-                    if (!_this.state.renderData[key])
-                        _this.state.renderData[key] = {};
-                    if (!_this.state.renderData[key][header.key])
-                        _this.state.renderData[key][header.key] = {};
-                    if (_this.state.renderData[key][header.key].data != valor) {
-                        data = header.render(valor);
-                        _this.state.renderData[key][header.key] = {
-                            comp: data,
-                            data: valor
-                        };
-                    }
-                    else {
-                        data = _this.state.renderData[key][header.key].comp;
-                    }
-                    if (typeof data != "object") {
-                        _this.state.data[key][header.key] = data;
-                    }
-                });
-            });
-        }
-    };
+    // initialiceData() {
+    //     var headerRender = this.props.header.map((header, i) => {
+    //         if (header.render) {
+    //             return header;
+    //         }
+    //         return null;
+    //     })
+    //     if (this.props.data) {
+    //         headerRender.map((header) => {
+    //             if (!header) return;
+    //             Object.keys(this.state.data).map((key) => {
+    //                 var obj = this.state.data[key];
+    //                 var valor = this.getData(obj, header.key);
+    //                 var data = null;
+    //                 if (!this.state.renderData[key]) this.state.renderData[key] = {};
+    //                 if (!this.state.renderData[key][header.key]) this.state.renderData[key][header.key] = {};
+    //                 if (this.state.renderData[key][header.key].data != valor) {
+    //                     data = header.render(valor);
+    //                     this.state.renderData[key][header.key] = {
+    //                         comp: data,
+    //                         data: valor
+    //                     };
+    //                 } else {
+    //                     data = this.state.renderData[key][header.key].comp;
+    //                 }
+    //                 if (typeof data != "object") {
+    //                     this.state.data[key][header.key] = data;
+    //                 }
+    //             })
+    //         });
+    //     }
+    // }
     SData.prototype.buscar = function (data) {
         if (typeof data != "object") {
             return Object.keys(data);
@@ -225,10 +220,7 @@ var SData = /** @class */ (function (_super) {
             // if (typeof data != "string") {
             //     return "Editable no string"
             // }
-            return React.createElement(SInput, { ref: function (ref) { return _this._inputs[header.key + position] = ref; }, defaultValue: data, selectTextOnFocus: true, props: {
-                    type: header.type,
-                    options: header.options
-                }, onBlur: function () {
+            return React.createElement(SInput, { ref: function (ref) { return _this._inputs[header.key + position] = ref; }, defaultValue: data, selectTextOnFocus: true, type: header.type, options: header.options, onBlur: function () {
                     var input = _this._inputs[header.key + position];
                     if (!input) {
                         return;

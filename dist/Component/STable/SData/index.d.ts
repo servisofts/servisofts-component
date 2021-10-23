@@ -26,7 +26,6 @@ export default class SData extends Component<SDataType> {
     };
     constructor(props: any);
     getDataProcesada(): any;
-    initialiceData(): void;
     buscar(data: any): any;
     reloadAnimate: () => void;
     getData: (obj: any, key: any) => any;

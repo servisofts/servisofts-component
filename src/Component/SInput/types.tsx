@@ -6,6 +6,10 @@ import { SText, STheme, SView, SPopupOpen, SPopupClose } from "../../index"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
 import SISelect from "./SInputTypes/SISelect"
+import DropFile from "./SInputTypes/DropFile"
+import SScrollView2 from "../SScrollView2"
+import SNavigation from "../SNavigation"
+import DropFileSingle from "./SInputTypes/DropFileSingle"
 
 export type TypeType =
     "default"
@@ -19,6 +23,9 @@ export type TypeType =
     | "money"
     | "telefono"
     | "image"
+    | "file"
+    | "direccion"
+    | "textArea"
 
 type returnType = {
     props?: TextInputProps,
@@ -61,6 +68,12 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return money(type, Parent);
         case "image":
             return image(type, Parent);
+        case "file":
+            return file(type, Parent);
+        case "direccion":
+            return direccion(type, Parent);
+        case "textArea":
+            return textArea(type, Parent);
         default:
             return buildResp({
                 props: {
@@ -164,7 +177,7 @@ const phone = (type: TypeType, Parent: SInput) => {
             },
             InputText: {
                 // padding:10,
-                paddingEnd:55,
+                paddingEnd: 55,
                 // backgroundColor:"#f0f"
             },
             LabelStyle: {}
@@ -363,7 +376,7 @@ const money = (type: TypeType, Parent: SInput) => {
                 var int: any = arr[0].replace(/\D/, "");
                 var dec = arr[1].replace(/\D/, "");
 
-                var num = parseInt(int +  dec)/100;
+                var num = parseInt(int + dec) / 100;
                 value = num.toFixed(2);
                 // if (dec > 99) {
                 //     int += "" + Math.round(dec / 100)
@@ -388,31 +401,108 @@ const money = (type: TypeType, Parent: SInput) => {
 const image = (type: TypeType, Parent: SInput) => {
     return buildResp({
         props: {
-            keyboardType: "number-pad",
+            editable: false,
+            placeholder: "",
         },
         style: {
             View: {
-                // alignItems:"flex-start",
-                // justifyContent:"flex-start",
+                backgroundColor: "transparent",
+                height: Parent.getOption("height") || 100,
             },
             InputText: {
-                flex: 1,
-                width: "100%",
-                marginEnd: 4,
-                textAlign: "right",
-                fontSize: 16,
+                display: 'none',
             }
         },
-        icon: (<SView style={{
-            width: 30,
-            height: "100%",
-        }} center >
-            <SText >Bs.</SText>
-        </SView>
-        ),
-        verify: (value) => {
-            if (!value) return false;
-            return true;
+        render: (data) => {
+            var bgColor = "";
+            var customStyle = Parent.getCustomStyle();
+            if (customStyle) {
+                if (customStyle.View) {
+                    bgColor = customStyle.View.backgroundColor;
+                }
+            }
+            return <SView col={"xs-12"} center height>
+                <SView style={{
+                    overflow: 'hidden',
+                    borderRadius: 4,
+                    backgroundColor: bgColor
+                }} height colSquare>
+                    <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                        // console.log(val);
+                        Parent.setValue(val);
+                    }} />
+                </SView>
+            </SView>
         }
+
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    })
+}
+const file = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            editable: false,
+        },
+        style: {
+            View: {
+                height: 100,
+            }
+        },
+        render: (data) => {
+            return <SView style={{
+                width: "100%",
+                height: "100%",
+                overflow: 'hidden',
+            }}>
+                <SScrollView2 disableHorizontal>
+                    <DropFile {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                        // console.log(val);
+                        Parent.setValue(val);
+                    }} />
+                </SScrollView2>
+            </SView>
+        }
+
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    })
+}
+const direccion = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            editable: false,
+        },
+        style: {
+            View: {
+                // height: 100,
+            }
+        },
+        onPress: () => {
+            // alert("asdsa")
+            SNavigation.navigate("sc_direccion", { direccion: Parent.getValue(), lat: Parent.getOption("latLng").latitude, lng: Parent.getOption("latLng").longitude })
+        }
+
+
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    })
+}
+const textArea = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            multiline: true,
+        },
+        style: {
+            View: {
+                height: 100,
+            }
+        },
     })
 }

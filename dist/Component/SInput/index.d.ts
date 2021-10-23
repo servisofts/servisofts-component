@@ -1,5 +1,6 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { TextInputProps } from 'react-native';
+import { SViewProps } from '../../index';
 import { TypeVariant } from './variants';
 import { TypeType } from './types';
 import { TypeStyles } from './styles';
@@ -15,12 +16,18 @@ export declare type TypeInputProps = {
     defaultValue?: any;
     placeholder?: any;
     icon?: Component;
+    iconR?: Component;
     label?: String;
     props?: any;
     separation?: number;
+    onChangeText?: (text: string) => any;
     onPress?: (val: any) => void;
     onStateChange?: (value: any) => void;
-} & TextInputProps;
+    latLng?: {
+        latitude: number;
+        longitude: number;
+    };
+} & TextInputProps & SViewProps;
 export declare class SInput extends Component<TypeInputProps> {
     static TYPE(type: TypeType): TypeType;
     layout: any;
@@ -37,16 +44,22 @@ export declare class SInput extends Component<TypeInputProps> {
     };
     constructor(props: any);
     getComponent(): JSX.Element;
+    getProps(): Readonly<TypeInputProps> & Readonly<{
+        children?: React.ReactNode;
+    }>;
     getStyle(): any;
     getOption(option: any): any;
     getData(): any;
     verify(noStateChange?: boolean): boolean;
     notifyBlur(): void;
     setValue(value: any): void;
+    getType(): TypeType;
     getValue(): any;
+    getCustomStyle(): any;
     isRender(type: any): JSX.Element;
     onChangeText: (_text: any) => void;
     getLabel(): JSX.Element;
+    getIcon_r(): JSX.Element;
     getIcon(): JSX.Element;
     render(): JSX.Element;
 }

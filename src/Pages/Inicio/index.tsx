@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import SGradient from '../../Component/SGradient';
 import { SView, SText, STheme, SPage, SNavigation, SIcon, SHr, } from '../../index';
 export default class Inicio extends Component {
     constructor(props) {
@@ -23,6 +24,9 @@ export default class Inicio extends Component {
             {this.getIcon({ name: "Iconos", page: "scomponent/SIcon", icon: "Profanity" })}
             {this.getIcon({ name: "Formulario", page: "scomponent/Formulario", icon: "Alert" })}
             {this.getIcon({ name: "STable", page: "scomponent/STable", icon: "Excel" })}
+            {this.getIcon({ name: "SGradient", page: "scomponent/SGradient", icon: "Box" })}
+            {this.getIcon({ name: "SGradient", page: "scomponent/SGradient", icon: "Entrenamiento" })}
+            {this.getIcon({ name: "SView", page: "scomponent/SView", icon: "Box" })}
         </SView>
     }
     render() {
@@ -36,6 +40,7 @@ export default class Inicio extends Component {
                     <SText col={"xs-12"} bold fontSize={16} justify>Sobre SComponent!</SText>
                     <SText col={"xs-12"} justify>{"Servisofts Component es una libreria en Android, IOS & Web para facilitar el desarrollo en React-Native-Web. "}</SText>
                     <SHr />
+                    {/* <SGradient/> */}
                     {/* <SText col={"xs-12"} bold fontSize={16}>En que nos ayuda SComponent?</SText> */}
                     {/* <SText col={"xs-12"} justify>{"SComponent tiene bastantes funcionalidades, comensando con un sistema de regillas ( xs - sm - md - lg - xl ) que nos permite crear diseños responsive al modo de bootstrap. "}</SText> */}
                     {/* <SText col={"xs-12"} justify>{"Tambien cuenta con la implementacion de temas ( default - dark ) "}</SText> */}

@@ -29,7 +29,7 @@ type typeHeader = {
 }
 type typeAction = "edit" | "delete";
 type SType = {
-    header:Array<typeHeader>,
+    header: Array<typeHeader>,
     headerProps?: SHeaderProps,
     data: [Object] | Object,
     dataProps?: SDataType,
@@ -166,6 +166,20 @@ export default class STable extends Component<SType> {
         })
         return data;
     }
+    getAdd() {
+        if (!this.props.onAdd) return null;
+        return <SView style={{ 
+            position: "absolute",
+            bottom: 45,
+            right: 8,
+            width:50,
+            height:50,
+        }} onPress={()=>{
+            this.props.onAdd();
+        }}>
+            <SIcon name={"Add"} />
+        </SView>
+    }
     render() {
         if (this.state.reload) {
             this.state.reload = false;
@@ -260,7 +274,7 @@ export default class STable extends Component<SType> {
                                 animates={this.state.animates}
                                 onEdit={this.props.onEdit}
                                 onLoadEnd={() => {
-                                    if(this.refFooter){
+                                    if (this.refFooter) {
                                         this.refFooter.onChangeData();
                                     }
                                 }}
@@ -298,7 +312,7 @@ export default class STable extends Component<SType> {
                         backgroundColor: STheme.color.primary
                     }}
                 />
-
+                {this.getAdd()}
             </View>
         );
     }

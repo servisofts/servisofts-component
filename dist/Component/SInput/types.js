@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React from "react";
 import { View } from "react-native";
 import SDate from "../SDate";
@@ -5,6 +16,10 @@ import { SText, SView, SPopupOpen } from "../../index";
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert";
 import SIFechaAlert from "./SInputTypes/SIFechaAlert";
 import SISelect from "./SInputTypes/SISelect";
+import DropFile from "./SInputTypes/DropFile";
+import SScrollView2 from "../SScrollView2";
+import SNavigation from "../SNavigation";
+import DropFileSingle from "./SInputTypes/DropFileSingle";
 var buildResp = function (data) {
     return data;
 };
@@ -30,6 +45,12 @@ export var Type = function (type, Parent) {
             return money(type, Parent);
         case "image":
             return image(type, Parent);
+        case "file":
+            return file(type, Parent);
+        case "direccion":
+            return direccion(type, Parent);
+        case "textArea":
+            return textArea(type, Parent);
         default:
             return buildResp({
                 props: {},
@@ -340,30 +361,100 @@ var money = function (type, Parent) {
 var image = function (type, Parent) {
     return buildResp({
         props: {
-            keyboardType: "number-pad"
+            editable: false,
+            placeholder: ""
         },
         style: {
             View: {
-            // alignItems:"flex-start",
-            // justifyContent:"flex-start",
+                backgroundColor: "transparent",
+                height: Parent.getOption("height") || 100
             },
             InputText: {
-                flex: 1,
-                width: "100%",
-                marginEnd: 4,
-                textAlign: "right",
-                fontSize: 16
+                display: 'none'
             }
         },
-        icon: (React.createElement(SView, { style: {
-                width: 30,
-                height: "100%"
-            }, center: true },
-            React.createElement(SText, null, "Bs."))),
-        verify: function (value) {
-            if (!value)
-                return false;
-            return true;
+        render: function (data) {
+            var bgColor = "";
+            var customStyle = Parent.getCustomStyle();
+            if (customStyle) {
+                if (customStyle.View) {
+                    bgColor = customStyle.View.backgroundColor;
+                }
+            }
+            return React.createElement(SView, { col: "xs-12", center: true, height: true },
+                React.createElement(SView, { style: {
+                        overflow: 'hidden',
+                        borderRadius: 4,
+                        backgroundColor: bgColor
+                    }, height: true, colSquare: true },
+                    React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
+                            // console.log(val);
+                            Parent.setValue(val);
+                        } }))));
+        }
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    });
+};
+var file = function (type, Parent) {
+    return buildResp({
+        props: {
+            editable: false
+        },
+        style: {
+            View: {
+                height: 100
+            }
+        },
+        render: function (data) {
+            return React.createElement(SView, { style: {
+                    width: "100%",
+                    height: "100%",
+                    overflow: 'hidden'
+                } },
+                React.createElement(SScrollView2, { disableHorizontal: true },
+                    React.createElement(DropFile, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
+                            // console.log(val);
+                            Parent.setValue(val);
+                        } }))));
+        }
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    });
+};
+var direccion = function (type, Parent) {
+    return buildResp({
+        props: {
+            editable: false
+        },
+        style: {
+            View: {
+            // height: 100,
+            }
+        },
+        onPress: function () {
+            // alert("asdsa")
+            SNavigation.navigate("sc_direccion", { direccion: Parent.getValue(), lat: Parent.getOption("latLng").latitude, lng: Parent.getOption("latLng").longitude });
+        }
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    });
+};
+var textArea = function (type, Parent) {
+    return buildResp({
+        props: {
+            multiline: true
+        },
+        style: {
+            View: {
+                height: 100
+            }
         }
     });
 };

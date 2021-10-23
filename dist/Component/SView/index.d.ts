@@ -13,7 +13,7 @@ export declare type SViewProps = {
     animated?: boolean;
     backgroundColor?: string;
     flex?: Number | boolean;
-    height?: Number | boolean | string;
+    height?: any;
     width?: Number | boolean | string;
     withoutFeedback?: Boolean;
     card?: boolean;

@@ -1,6 +1,6 @@
 import { TextInputProps, TextStyle, ViewStyle } from "react-native";
 import { SInput } from ".";
-export declare type TypeType = "default" | "select" | "fecha" | "date" | "password" | "email" | "phone" | "number" | "money" | "telefono" | "image";
+export declare type TypeType = "default" | "select" | "fecha" | "date" | "password" | "email" | "phone" | "number" | "money" | "telefono" | "image" | "file" | "direccion" | "textArea";
 declare type returnType = {
     props?: TextInputProps;
     onPress?: Function;

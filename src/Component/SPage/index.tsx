@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, Platform, } from 'react-native';
 import SNavBar from '../SNavBar/index';
-import SSCrollView from '../SSCrollView/index';
-import STheme from '../STheme/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
-import SImage from '../SImage';
-import SIcon from '../SIcon';
 import SNavigation from '../SNavigation';
 
 
@@ -26,9 +22,9 @@ export default class SPage extends Component<SPageProps> {
             width: "120%",
             height: "120%",
             // backgroundColor: "#f0ff0f",
-            transform: [{ translateX: -50 }, { translateY: -50 }],
+            // transform: [{ translateX: -50 }, { translateY: -50 }],
         }}>
-            <SIcon name={"Background"} width={"100%"} opacity={"0.3"} stroke={STheme.color.primary} />
+            {/* <SIcon name={"Background"} width={"100%"} opacity={"0.3"} stroke={STheme.color.primary} /> */}
         </View>
     );
     static setBackground(background) {
@@ -60,7 +56,8 @@ export default class SPage extends Component<SPageProps> {
                 width: '100%',
                 height: '100%',
                 flex: 1,
-                // backgroundColor: "#f0f",
+
+
             }}>
                 {this.props.children}
             </SView>

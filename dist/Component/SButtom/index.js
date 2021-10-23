@@ -78,6 +78,15 @@ var SButtom = /** @class */ (function (_super) {
                     alignItems: 'center'
                 },
                 text: __assign({ color: STheme.color.primary }, this.props.styleText)
+            },
+            bateonR: {
+                touchable: {
+                    backgroundColor: STheme.color.bateon + "",
+                    borderRadius: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                },
+                text: __assign({ color: STheme.color.secondary }, this.props.styleText)
             }
         };
     };
@@ -128,10 +137,7 @@ var SButtom = /** @class */ (function (_super) {
     };
     SButtom.defaultProps = {
         options: {},
-        style: {
-        // width: 100,
-        // height: 40,
-        },
+        style: {},
         onPressValidation: function () { return true; }
     };
     return SButtom;

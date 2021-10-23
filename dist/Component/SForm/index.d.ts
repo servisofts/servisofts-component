@@ -20,9 +20,11 @@ export default class SForm extends Component<SFromProps> {
         props: {};
     };
     _ref: any;
+    state: any;
     constructor(props: any);
     verify(): boolean;
     focus(key: any): void;
+    submitFiles(data: any, key: any, url: any): void;
     submit(): {};
     getButtom(): JSX.Element;
     getInputs(): JSX.Element | JSX.Element[];

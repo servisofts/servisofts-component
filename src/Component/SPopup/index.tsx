@@ -5,6 +5,7 @@ import SPopupComponent from './SPopupComponent';
 
 import Confirm, { PropsType as ConfirmProps } from './SPopupVariants/Confirm/index';
 import Alert, { PropsType as AlertProps } from './SPopupVariants/Alert/index';
+import DateBetween, { PropsType as DateBetweenProps } from './SPopupVariants/DateBetween/index';
 
 type SPopupOpenProps = {
     key?: string,
@@ -29,6 +30,10 @@ export default class SPopup extends Component {
     static alert(text) {
         // alert(obj)
         INSTANCE.open({ key: "alert", content: <Alert title={text} />, style: {} });
+    }
+    static dateBetween(text, onPress) {
+        // alert(obj)
+        INSTANCE.open({ key: "dateBetween", content: <DateBetween title={text} onPress={onPress} />, style: {} });
     }
     static open(obj: SPopupOpenProps) {
         var key = obj.key;

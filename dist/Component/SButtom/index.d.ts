@@ -1,6 +1,6 @@
 import { Component } from 'react';
 export declare type onSubmitProps = {
-    type?: "default" | "outline" | "secondary" | "danger" | "success";
+    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR";
     variant?: "default" | "confirm";
 };
 export declare type typeProps = {
@@ -52,6 +52,15 @@ export declare class SButtom extends Component<typeProps> {
             touchable: {
                 borderRadius: number;
                 backgroundColor: string;
+                justifyContent: string;
+                alignItems: string;
+            };
+            text: any;
+        };
+        bateonR: {
+            touchable: {
+                backgroundColor: string;
+                borderRadius: number;
                 justifyContent: string;
                 alignItems: string;
             };

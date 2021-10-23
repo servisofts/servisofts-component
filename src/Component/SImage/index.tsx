@@ -25,7 +25,6 @@ export default class SImage extends Component<SImageType> {
     getImage(source, style?) {
         // var key = source.uri;
         if (!style) style = {};
-
         return <Image source={source} style={{ resizeMode: "contain", width:"100%", height:"100%", ...this.props.style, ...style, }} />;
         // if (!SImage.Instances[key]) {
         // SImage.Instances[key] = <Image source={source} style={{ ...this.props.style, ...style }} />;

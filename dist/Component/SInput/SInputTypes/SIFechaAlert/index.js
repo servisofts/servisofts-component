@@ -50,7 +50,7 @@ var SIFechaAlert = /** @class */ (function (_super) {
             var arr = [];
             switch (key) {
                 case "year":
-                    for (var i = (!_this.props.props.minYear ? 1900 : _this.props.props.minYear); i <= (!_this.props.props.maxYear ? (new SDate(new Date()).toJson().year) : _this.props.props.maxYear); i++) {
+                    for (var i = (!_this.props.props.minYear ? 1900 : _this.props.props.minYear); i <= (!_this.props.props.maxYear ? (new SDate(new Date()).toJson().year + 10) : _this.props.props.maxYear); i++) {
                         arr.push({
                             type: key,
                             val: i,

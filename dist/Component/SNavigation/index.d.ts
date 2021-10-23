@@ -29,7 +29,7 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navigate(route: string, params?: object): void;
     static replace(route: string, params?: object): void;
     static goBack(): void;
-    static getParam(key: string, valDef: any): any;
+    static getParam(key: string, valDef?: any): any;
     constructor(props: any);
     getLinking(): {
         prefixes: [string];

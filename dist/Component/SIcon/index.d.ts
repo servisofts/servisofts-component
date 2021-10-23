@@ -8,6 +8,8 @@ declare type SIconType = {
     fill?: string;
     stroke?: string;
     opacity?: number | string;
+    style?: any;
+    bgr?: string;
 };
 export default class SIcon extends Component<SIconType> {
     static Assets: {};

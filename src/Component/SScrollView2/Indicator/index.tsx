@@ -69,6 +69,7 @@ class Indicator extends Component<typeScroll> {
        Animated.timing(this.state.animSize, {
             toValue: { x: width, y: height },
             duration: 10,
+            useNativeDriver:false,
         }).start();
         return;
     }

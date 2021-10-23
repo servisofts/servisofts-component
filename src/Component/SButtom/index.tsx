@@ -5,7 +5,7 @@ import DeleteBtn from './DeleteBtn';
 
 
 export type onSubmitProps = {
-    type?: "default" | "outline" | "secondary" | "danger" | "success",
+    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR",
     variant?: "default" | "confirm",
 }
 
@@ -26,8 +26,6 @@ export class SButtom extends Component<typeProps> {
 
         },
         style: {
-            // width: 100,
-            // height: 40,
         },
         onPressValidation: () => { return true }
     };
@@ -110,6 +108,18 @@ export class SButtom extends Component<typeProps> {
                 },
                 text: {
                     color: STheme.color.primary,
+                    ...this.props.styleText
+                }
+            },
+            bateonR: {
+                touchable: {
+                    backgroundColor: STheme.color.bateon + "",
+                    borderRadius:30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                },
+                text: {
+                    color: STheme.color.secondary,
                     ...this.props.styleText
                 }
             },

@@ -11,14 +11,13 @@ export default class SInfo extends Component {
         { name: 'SNavBar', detail: 'Barra de navegacion de SInfo' },
         { name: 'SNavigation', detail: 'Navegacion de SInfo' },
         { name: 'SPage', detail: 'Pagina de SInfo' },
-        { name: 'SScrollView', detail: 'ScrollView de SInfo' },
         { name: 'SText', detail: 'Texto de SInfo' },
         { name: 'STheme', detail: 'Tema de SInfo' },
         { name: 'SThread', detail: 'Hilo de SInfo' },
         { name: 'SUuid', detail: 'Uuid de SInfo' },
         { name: 'SView', detail: 'Vista de SInfo' },
         { name: 'SStorage', detail: 'Almacenamiento de SInfo' },
-        { name: 'SScrollView', detail: 'Almacenamiento de SScrollView' },
+        { name: 'SSCrollView', detail: 'Almacenamiento de SScrollView' },
         { name: 'SScrollView2', detail: 'Almacenamiento de SScrollView2' },
     ]
 

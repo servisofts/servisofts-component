@@ -44,7 +44,10 @@ var SInput = /** @class */ (function (_super) {
                 }
             }
             if (_this.props.onChangeText) {
-                _this.props.onChangeText(text);
+                var text2 = _this.props.onChangeText(text);
+                if (text2) {
+                    text = text2;
+                }
             }
             _this.state.value = text;
             _this.setState({ value: _this.state.value });
@@ -71,6 +74,9 @@ var SInput = /** @class */ (function (_super) {
         return React.createElement(SInput, __assign({}, this.props, { onChangeText: function (vak) {
                 _this.state.value = vak;
             } }));
+    };
+    SInput.prototype.getProps = function () {
+        return this.props;
     };
     SInput.prototype.getStyle = function () {
         return this.style;
@@ -118,8 +124,14 @@ var SInput = /** @class */ (function (_super) {
         this.setState({ value: value });
         this.onChangeText(value);
     };
+    SInput.prototype.getType = function () {
+        return this.props.type;
+    };
     SInput.prototype.getValue = function () {
         return this.state.value;
+    };
+    SInput.prototype.getCustomStyle = function () {
+        return this.customStyle;
     };
     SInput.prototype.isRender = function (type) {
         if (type.render) {
@@ -136,18 +148,45 @@ var SInput = /** @class */ (function (_super) {
             return null;
         return React.createElement(SText, { style: __assign({}, this.customStyle["LabelStyle"]) }, this.props.label);
     };
-    SInput.prototype.getIcon = function () {
-        if (!this.type)
-            return React.createElement(View, null);
+    SInput.prototype.getIcon_r = function () {
         var ITEM = false;
-        if (this.props.props.icon) {
-            ITEM = this.props.props.icon;
+        if (this.props.iconR) {
+            ITEM = this.props.iconR;
         }
-        if (this.type.icon) {
-            ITEM = this.type.icon;
+        else {
+            if (!this.type)
+                return React.createElement(View, null);
+            if (this.props.props.iconR) {
+                ITEM = this.props.props.iconR;
+            }
+            if (this.type.iconR) {
+                ITEM = this.type.iconR;
+            }
+            if (!ITEM) {
+                return React.createElement(View, null);
+            }
         }
-        if (!ITEM) {
-            return React.createElement(View, null);
+        return React.createElement(SView, { center: true, style: {
+                height: "100%"
+            } }, ITEM);
+    };
+    SInput.prototype.getIcon = function () {
+        var ITEM = false;
+        if (this.props.icon) {
+            ITEM = this.props.icon;
+        }
+        else {
+            if (!this.type)
+                return React.createElement(View, null);
+            if (this.props.props.icon) {
+                ITEM = this.props.props.icon;
+            }
+            if (this.type.icon) {
+                ITEM = this.type.icon;
+            }
+            if (!ITEM) {
+                return React.createElement(View, null);
+            }
         }
         return React.createElement(SView, { center: true, style: {
                 height: "100%"
@@ -187,7 +226,9 @@ var SInput = /** @class */ (function (_super) {
             this.getLabel(),
             React.createElement(SView, { col: "xs-12", row: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
-                React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+                React.createElement(SView, { flex: true },
+                    React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+                this.getIcon_r()),
             this.isRender(type)));
     };
     SInput.defaultProps = {

@@ -15,6 +15,7 @@ export type SThemeColors = {
     success?: string,
     warning?: string,
     danger?: string,
+    bateon?: string,
     error?: string,
     info?: string,
     background?: string,
@@ -48,6 +49,7 @@ export default class STheme extends Component<SThemeProps> {
         success: "#71AF4A",
         warning: "#EF8C38",
         danger: "#DF2732",
+        bateon: "#95070C",
         error: "#ff0000",
         info: "#405394",
         black: "#000000",
@@ -124,6 +126,7 @@ export default class STheme extends Component<SThemeProps> {
         Animated.timing(this.animFadeOut, {
             toValue: 1,
             duration: 1500,
+            useNativeDriver:false,
         }).start((end) => {
             this.onAnim = false;
             this.state.isFadeOut = false;

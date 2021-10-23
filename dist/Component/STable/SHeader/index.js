@@ -125,14 +125,16 @@ var SHeader = /** @class */ (function (_super) {
                             x: _this.startPosition.x + (_this.move * -1),
                             y: 0
                         },
-                        duration: 100
+                        duration: 100,
+                        useNativeDriver: false
                     }).start();
                     // this.props.reload();
                 }
                 else {
                     Animated.timing(anim, {
                         toValue: _this.lastMoved,
-                        duration: 100
+                        duration: 100,
+                        useNativeDriver: false
                     }).start();
                 }
                 _this.state.animSelect[key].setValue(1);

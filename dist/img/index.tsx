@@ -4,23 +4,33 @@ import Ajustes from "./Ajustes"
 import AlertOutline from "./AlertOutline"
 import Alert from "./Alert"
 import Arrow from "./Arrow"
+import Back from "./Back"
 import Background from "./Background"
+import Background2 from "./Background2"
 import Box from "./Box"
 import Caja from "./Caja"
 import Carrito from "./Carrito"
 import Check from './Check'
 import Card from "./Card"
 import Cheque from "./Cheque"
+import Close from "./Close"
+import Cerrar from "./Cerrar"
 import Delete from "./Delete"
+import Edit from "./Edit"
 import Egreso from "./Egreso"
 import Engranaje from "./Engranaje"
 import Entrenamiento from "./Entrenamiento"
 import Excel from "./Excel"
+import Eyes from "./Eyes"
+import Favorito from "./Favorito"
+import Favorito2 from "./Favorito2"
+import Girl from "./Girl"
 import Ingreso from "./Ingreso"
 import Lock from "./Lock"
 import LockOutline from "./LockOutline"
 import Moon from "./Moon"
 import Menu from "./Menu"
+import Menu2 from "./Menu2"
 import Money from "./Money"
 import NoDelete from "./NoDelete"
 import Off from "./Off"
@@ -28,7 +38,9 @@ import Paquete from "./Paquete"
 import Parameter from "./Parameter"
 import Profanity from "./Profanity"
 import Reload from "./Reload"
+import Reserve from "./Reserve"
 import Salir from "./Salir"
+import Search from "./Search"
 import Servisofts from "./Servisofts"
 import Sun from "./Sun"
 import Tranfer from "./Tranfer"
@@ -43,23 +55,33 @@ const Icons = {
     AlertOutline,
     Alert,
     Arrow,
+    Back,
     Background,
+    Background2,
     Box,
     Caja,
     Card,
     Carrito,
+    Cerrar,
     Check,
     Cheque,
+    Close,
     Delete,
+    Edit,
     Egreso,
     Engranaje,
     Entrenamiento,
     Excel,
+    Eyes,
+    Favorito,
+    Favorito2,
+    Girl,
     Ingreso,
     Lock,
     LockOutline,
     Moon,
     Menu,
+    Menu2,
     Money,
     NoDelete,
     Off,
@@ -67,7 +89,9 @@ const Icons = {
     Parameter,
     Profanity,
     Reload,
+    Reserve,
     Salir,
+    Search,
     Servisofts,
     Sun,
     Tranfer,

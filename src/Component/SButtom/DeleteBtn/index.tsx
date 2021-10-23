@@ -34,7 +34,8 @@ export default class DeleteBtn extends Component<tprop> {
 
         Animated.timing(this.state.anim, {
             duration: 200,
-            toValue: this.time * 2
+            toValue: this.time * 2,
+            useNativeDriver:false,
         }).start(() => {
             if (this.onAnimCancel) {
                 this.animCancel();
@@ -50,7 +51,8 @@ export default class DeleteBtn extends Component<tprop> {
         // Animated.timing(this.state.anim,).stop();
         Animated.timing(this.state.anim, {
             duration: 200,
-            toValue: this.time
+            toValue: this.time,
+            useNativeDriver:false,
         }).start(() => {
             if (this.props.onCancel) { this.props.onCancel() }
             this.onAnimated = false;
@@ -62,7 +64,8 @@ export default class DeleteBtn extends Component<tprop> {
         this.onAnimated = true;
         Animated.timing(this.state.anim, {
             duration: 1000,
-            toValue: this.state.anim._value - 1
+            toValue: this.state.anim._value - 1,
+            useNativeDriver:false,
         }).start(() => {
             if (this.onAnimCancel) {
                 // this.onAnimated(false);

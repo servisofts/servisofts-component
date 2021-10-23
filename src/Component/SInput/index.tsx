@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform } from 'react-native';
-import { STheme, SText, SView } from '../../index';
+import { STheme, SText, SView, SViewProps } from '../../index';
 
 import { Variant, TypeVariant } from './variants';
 import { Type, TypeType } from './types';
@@ -18,12 +18,15 @@ export type TypeInputProps = {
     defaultValue?: any,
     placeholder?: any,
     icon?: Component,
+    iconR?: Component,
     label?: String,
     props?: any,
     separation?: number,
+    onChangeText?: (text: string) => any,
     onPress?: (val: any) => void,
     onStateChange?: (value: any) => void,
-} & TextInputProps
+    latLng?: { latitude: number, longitude: number },
+} & TextInputProps & SViewProps
 
 
 export class SInput extends Component<TypeInputProps> {
@@ -64,6 +67,9 @@ export class SInput extends Component<TypeInputProps> {
         return <SInput {...this.props} onChangeText={(vak) => {
             this.state.value = vak;
         }} />
+    }
+    getProps() {
+        return this.props;
     }
     getStyle() {
         return this.style;
@@ -109,11 +115,16 @@ export class SInput extends Component<TypeInputProps> {
         this.setState({ value });
         this.onChangeText(value);
     }
-
+    getType() {
+        return this.props.type;
+    }
     getValue() {
         return this.state.value;
     }
 
+    getCustomStyle() {
+        return this.customStyle;
+    }
     isRender(type) {
         if (type.render) {
             return <View style={{
@@ -137,7 +148,10 @@ export class SInput extends Component<TypeInputProps> {
             }
         }
         if (this.props.onChangeText) {
-            this.props.onChangeText(text)
+            var text2 = this.props.onChangeText(text)
+            if (text2) {
+                text = text2;
+            }
         }
         this.state.value = text
         this.setState({ value: this.state.value })
@@ -148,17 +162,47 @@ export class SInput extends Component<TypeInputProps> {
         return <SText style={{ ...this.customStyle["LabelStyle"] }}>{this.props.label}</SText>
     }
 
-    getIcon() {
-        if (!this.type) return <View />
+    getIcon_r() {
         var ITEM: any = false;
-        if (this.props.props.icon) {
-            ITEM = this.props.props.icon
+
+        if (this.props.iconR) {
+            ITEM = this.props.iconR
+        } else {
+            if (!this.type) return <View />
+            if (this.props.props.iconR) {
+                ITEM = this.props.props.iconR
+            }
+            if (this.type.iconR) {
+                ITEM = this.type.iconR
+            }
+            if (!ITEM) {
+                return <View />
+            }
         }
-        if (this.type.icon) {
-            ITEM = this.type.icon
-        }
-        if (!ITEM) {
-            return <View />
+
+        return <SView
+            center
+            style={{
+                height: "100%",
+            }}>
+            {ITEM}
+        </SView>
+    }
+    getIcon() {
+        var ITEM: any = false;
+        if (this.props.icon) {
+            ITEM = this.props.icon
+        } else {
+            if (!this.type) return <View />
+            if (this.props.props.icon) {
+                ITEM = this.props.props.icon
+            }
+            if (this.type.icon) {
+                ITEM = this.type.icon
+            }
+            if (!ITEM) {
+                return <View />
+            }
         }
         return <SView
             center
@@ -169,6 +213,7 @@ export class SInput extends Component<TypeInputProps> {
         </SView>
     }
     render() {
+
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;
@@ -213,23 +258,26 @@ export class SInput extends Component<TypeInputProps> {
                 <SView
                     col={"xs-12"}
                     row
-                    style={{ flex: 1, height: "100%" }}>
+                    style={{ flex: 1, height: "100%", }}>
                     {this.getIcon()}
-                    <TextInput
-                        value={valueFilter}
-                        {...this.props}
-                        {...type.props}
-                        style={{
-                            flex: 1,
-                            height: "100%",
-                            outline: "none",
-                        
-                            ...customStyle["InputText"],
-                            ...type.style.InputText
-                        }}
-                        onChangeText={this.onChangeText}
+                    <SView flex>
+                        <TextInput
+                            value={valueFilter}
+                            {...this.props}
+                            {...type.props}
+                            style={{
+                                flex: 1,
+                                height: "100%",
+                                outline: "none",
+                                ...customStyle["InputText"],
+                                ...type.style.InputText,
+                                // ...this.props.style,
+                            }}
+                            onChangeText={this.onChangeText}
+                        />
+                    </SView>
+                    {this.getIcon_r()}
 
-                    />
                 </SView>
                 {this.isRender(type)}
             </SView>

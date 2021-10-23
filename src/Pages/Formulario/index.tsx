@@ -36,14 +36,15 @@ export default class Formulario extends Component {
             }}
             inputProps={{
                 customStyle: this.state.customStyle,
-                col: "xs-11 md-3.5"
+                col: "xs-11 md-3.5",
+
             }}
             inputs={{
                 "default": { type: "default", label: "default", isRequired: true },
+                "foto": { type: "image", label: "image", isRequired: true, height: 200, },
                 "date": { type: "date", label: "date", isRequired: true, },
                 "email": { label: "email", type: "email", isRequired: true, },
                 "fecha": { label: "fecha", type: "fecha", isRequired: true, },
-                "image": { label: "image", type: "image", isRequired: true, },
                 "money": { label: "money", type: "money", isRequired: true, },
                 "number": { label: "number", type: "number", isRequired: true, },
                 "password": { label: "password", type: "password", isRequired: true, },
@@ -63,10 +64,13 @@ export default class Formulario extends Component {
                 },
                 "telefono": { label: "telefono", type: "telefono", isRequired: true, },
                 "telefono2": { label: "telefono2", type: "telefono", isRequired: true, },
+                "direccion": { label: "direccion", type: "direccion", isRequired: true, },
+                "file": { label: "file", type: "file", isRequired: true, },
+                "textArea": { label: "textArea", type: "textArea", isRequired: true, },
                 "customStyle": {
-                    label: "customStyle", col: "xs-4", isRequired: true,
+                    label: "customStyle", col: "xs-3", isRequired: true,
                     multiline: true,
-                    value:`{ 
+                    value: `{ 
     label: "customStyle", col: "xs-4", isRequired: true,
     multiline: true,
     value:''
@@ -77,7 +81,7 @@ export default class Formulario extends Component {
 }`,
                     style: {
                         height: 200,
-                        backgroundColor: STheme.color.primary+"bb",
+                        backgroundColor: STheme.color.primary + "bb",
                     }
                 },
             }}

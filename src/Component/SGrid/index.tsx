@@ -10,7 +10,7 @@ export type SGridProps = {
     style: ViewStyle,
     colSquare?: boolean,
     flex?: Number | boolean,
-    height?: Number | boolean | string,
+    height?: any,
     onLayout?: (event: any) => void,
 }
 
@@ -50,11 +50,12 @@ export default class SGrid extends Component<SGridProps> {
                     col[cols[2]] = cols[3];
                 }
             })
+            var max = this.getMax(col);
+            this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
         } else {
             col = this.props.col;
         }
-        var max = this.getMax(col);
-        this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
+
     }
     changeMedida(medida) {
         this.medida = medida;
@@ -75,9 +76,9 @@ export default class SGrid extends Component<SGridProps> {
                 ...(!this.props.style.height ? {} : { height: this.props.style.height, }),
                 ...(!this.props.style.maxHeight ? {} : { height: this.props.style.maxHeight, }),
                 ...(!this.props.style.maxWidth ? {} : { height: this.props.style.maxWidth, }),
-                ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
                 ...(!this.props.style.width ? {} : { width: this.props.style.width, }),
-                ...(!this.props.colSquare ? {} : { height: this.animSize.y, }),
+                ...(!this.props.colSquare ? {} : (!this.props.col ? { width: this.animSize.x } : { height: this.animSize.y })),
+                ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
                 ...(!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex, }),
                 ...(this.props.style.margin == null ? {} : { margin: this.props.style.margin }),
                 ...(this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom }),
@@ -100,16 +101,21 @@ export default class SGrid extends Component<SGridProps> {
             }}
                 onLayout={(evt) => {
                     this.layout = evt.nativeEvent.layout;
-                    if (this.layout.width != this.animSize.y._value) {
-                        if (this.layout.width != 0) {
+
+                    if (this.props.colSquare) {
+                        if ( this.props.col) {
                             this.animSize.setValue({ x: this.animSize.x._value, y: this.layout.width });
+                        } else if (this.layout.height != this.animSize.x._value) {
+                            this.animSize.setValue({ x: this.layout.height, y: this.layout.height });
                         }
                     }
+
+
                     if (this.props.onLayout) this.props.onLayout(evt);
 
                 }}>
                 {this.props.children}
-            </Animated.View>
+            </Animated.View >
         );
 
     }

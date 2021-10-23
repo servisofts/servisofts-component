@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SIcon from '../../Component/SIcon';
 import LocalImg, { IconsVariant } from "../../img/index";
 import { SView, SText, STheme, SPage, SNavigation, SInput, SButtom, } from '../../index';
-
+import { SvgXml } from 'react-native-svg';
 const test = ``
 
 export default class SvgToReact extends Component {
@@ -71,7 +71,7 @@ const Native = Web;
 export default { Native, Web }`;
         finalPage += `\n`;
 
-        this.setState({ result: finalPage });
+        this.setState({ result: finalPage});
     }
     render() {
         return (
@@ -116,7 +116,6 @@ export default { Native, Web }`;
                             multiline={true}
                         />
                     </SView>
-
                 </SView>
             </SPage>
         );

@@ -61,8 +61,10 @@ var SStorage = /** @class */ (function (_super) {
         return (React.createElement(View, null,
             React.createElement(Text, null, " SStorage AsyncStorage Native ")));
     };
+    var _a;
+    _a = SStorage;
     SStorage.getItem = function (key, callback) { return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_a) {
+        return __generator(_a, function (_b) {
             AsyncStorage.getItem(key).then(function (resp) {
                 console.log(resp);
                 callback(resp);

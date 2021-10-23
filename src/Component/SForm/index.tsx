@@ -5,7 +5,7 @@ import { SInput, TypeInputProps } from '../SInput/index';
 import SView, { SViewProps } from '../SView/index';
 // import { Col, TypeCol } from '../SView/cols';
 import { SButtom, onSubmitProps } from '../SButtom/index';
-
+import Submit from './submit'
 
 
 interface InputsTp {
@@ -28,9 +28,11 @@ export default class SForm extends Component<SFromProps> {
         },
     }
     _ref;
+    state;
     constructor(props) {
         super(props);
         this.state = {
+            files: {},
         };
         this._ref = {};
     }
@@ -49,6 +51,11 @@ export default class SForm extends Component<SFromProps> {
             this._ref[key].focus();
         }
     }
+    submitFiles(data, key, url) {
+        Submit.http(data, url, this.state.files[key], (res) => {
+            
+        });
+    }
     submit() {
         var data = {};
         var isValid = true;
@@ -56,6 +63,10 @@ export default class SForm extends Component<SFromProps> {
             var input: SInput = this._ref[key];
             if (!input.verify()) {
                 isValid = false;
+            }
+            if (input.getType() == "file") {
+                this.state.files[key] = input.getValue();
+                return;
             }
             data[key] = input.getValue();
         })

@@ -51,6 +51,7 @@ export default class STable extends Component<SType> {
     initDelete(lista: any): any;
     getData: (obj: any, key: any) => any;
     filterData(): any[];
+    getAdd(): JSX.Element;
     render(): JSX.Element;
 }
 export {};

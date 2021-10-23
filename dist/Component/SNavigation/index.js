@@ -131,6 +131,7 @@ var SNavigation = /** @class */ (function (_super) {
                     return React.createElement(Page, __assign({}, props));
                 }
                 catch (e) {
+                    console.log(e);
                     return React.createElement(View, null);
                 }
             };

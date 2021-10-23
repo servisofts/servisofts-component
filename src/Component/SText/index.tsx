@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextStyle, TextProps } from 'react-native';
 import STheme from '../STheme/index';
 import SView, { SViewProps } from '../SView/index';
-
-
+import { FontsType } from '../../font/index';
 export type STextProps = {
     style?: TextStyle | [TextStyle] | any,
     primary?: boolean,
@@ -13,6 +12,7 @@ export type STextProps = {
     underLine?: boolean,
     justify?: boolean,
     capitalize?: boolean,
+    font?: FontsType,
 } & SViewProps & TextProps
 
 export default class SText extends Component<STextProps> {
@@ -26,6 +26,7 @@ export default class SText extends Component<STextProps> {
         return (
             <SView {...this.props}>
                 <Text style={{
+                    ...(this.props.font ? { fontFamily: this.props.font } : null),
                     color: STheme.color.secondary,
                     ...(!this.props.center ? {} : {
                         textAlign: "center",

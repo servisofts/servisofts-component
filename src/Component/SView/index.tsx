@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps } from 'react-native';
+import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps, Platform } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 import SGrid from '../SGrid/index';
 import STheme from '../STheme';
@@ -18,7 +18,7 @@ export type SViewProps = {
   animated?: boolean,
   backgroundColor?: string,
   flex?: Number | boolean,
-  height?: Number | boolean | string,
+  height?: any,
   width?: Number | boolean | string,
   withoutFeedback?: Boolean,
   card?: boolean,
@@ -52,8 +52,10 @@ export default class SView extends Component<SViewProps> {
   }
   render() {
 
-
-    var otherProps: any = {};
+    var otherProps: any = {
+      ...this.props
+    };
+    delete otherProps.height;
     var Element: any = View;
     if (this.props.onPress) {
       Element = TouchableOpacity;
@@ -82,7 +84,10 @@ export default class SView extends Component<SViewProps> {
       delete style["marginStart"];
       delete style["marginRight"];
       delete style["marginEnd"];
+      delete style["maxHeight"];
+      // delete style["maxWidth"];
     }
+
     return (
       <SGrid
         colSquare={this.props.colSquare}
@@ -96,11 +101,8 @@ export default class SView extends Component<SViewProps> {
         }}>
         <Element
           {...otherProps}
-          {...this.props}
-
           style={{
             width: "100%",
-            
             ...(this.state.params.dir != "row" ? {} : {
               flexDirection: "row",
               flexWrap: 'wrap',
@@ -114,8 +116,7 @@ export default class SView extends Component<SViewProps> {
               flexWrap: 'wrap',
             }),
             ...(!this.props.colSquare ? {} : { height: "100%" }),
-            ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
-            // height: "100%",
+            ...(Platform.OS != "web" ? (this.props.height ? { flex: 1, } : {}) : { height: "100%" }),
             ...(!this.props.center ? {
 
             } : {

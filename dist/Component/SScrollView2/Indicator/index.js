@@ -79,7 +79,8 @@ var Indicator = /** @class */ (function (_super) {
             var width = _a.width, height = _a.height;
             Animated.timing(_this.state.animSize, {
                 toValue: { x: width, y: height },
-                duration: 10
+                duration: 10,
+                useNativeDriver: false
             }).start();
             return;
         };

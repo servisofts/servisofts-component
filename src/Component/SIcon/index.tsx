@@ -3,6 +3,7 @@ import { Platform, Text, View } from 'react-native'
 import { SAssets } from '../../Types';
 import STheme from '../STheme';
 import LocalImg, { IconNames, IconsVariant } from '../../img/index'
+import SView from '../SView';
 
 type SIconType = {
     name?: IconNames,
@@ -11,6 +12,8 @@ type SIconType = {
     fill?: string,
     stroke?: string,
     opacity?: number | string,
+    style?: any,
+    bgr?: string
 }
 
 export default class SIcon extends Component<SIconType> {
@@ -46,6 +49,20 @@ export default class SIcon extends Component<SIconType> {
         if (!Icon) {
             return <View />
         }
-        return (<Icon width={"100%"} height={"100%"} fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} />)
+        var ICON = (<Icon width={"100%"} height={"100%"} fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} />)
+        if (this.props.bgr) {
+            ICON = (<SView center>
+                <SIcon name={"Box"} fill={this.props.bgr} />
+                <SView style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    padding: "10%",
+                }} center>
+                    {ICON}
+                </SView>
+            </SView>)
+        }
+        return ICON;
     }
 }

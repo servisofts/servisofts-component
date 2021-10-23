@@ -31,11 +31,14 @@ import { SInput } from '../SInput/index';
 import SView from '../SView/index';
 // import { Col, TypeCol } from '../SView/cols';
 import { SButtom } from '../SButtom/index';
+import Submit from './submit';
 var SForm = /** @class */ (function (_super) {
     __extends(SForm, _super);
     function SForm(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {};
+        _this.state = {
+            files: {}
+        };
         _this._ref = {};
         return _this;
     }
@@ -55,6 +58,10 @@ var SForm = /** @class */ (function (_super) {
             this._ref[key].focus();
         }
     };
+    SForm.prototype.submitFiles = function (data, key, url) {
+        Submit.http(data, url, this.state.files[key], function (res) {
+        });
+    };
     SForm.prototype.submit = function () {
         var _this = this;
         var data = {};
@@ -63,6 +70,10 @@ var SForm = /** @class */ (function (_super) {
             var input = _this._ref[key];
             if (!input.verify()) {
                 isValid = false;
+            }
+            if (input.getType() == "file") {
+                _this.state.files[key] = input.getValue();
+                return;
             }
             data[key] = input.getValue();
         });
