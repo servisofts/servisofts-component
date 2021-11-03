@@ -88,20 +88,19 @@ var DropFileSingle = /** @class */ (function (_super) {
                                 var _loop_1 = function (i) {
                                     var file = inputElement.files[i];
                                     ext = file.name.split('.').pop();
-                                    if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
-                                        fr = new FileReader();
-                                        fr.onload = function (e) {
-                                            _this.state.images[0] = {
-                                                file: file,
-                                                uri: e.target.result
-                                            };
-                                            if (_this.props.onChange) {
-                                                _this.props.onChange(_this.state.images);
-                                            }
-                                            _this.setState(__assign({}, _this.state));
+                                    // if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
+                                    fr = new FileReader();
+                                    fr.onload = function (e) {
+                                        _this.state.images[0] = {
+                                            file: file,
+                                            uri: e.target.result
                                         };
-                                        fr.readAsDataURL(file);
-                                    }
+                                        if (_this.props.onChange) {
+                                            _this.props.onChange(_this.state.images);
+                                        }
+                                        _this.setState(__assign({}, _this.state));
+                                    };
+                                    fr.readAsDataURL(file);
                                 };
                                 var ext, fr;
                                 for (var i = 0; i < inputElement.files.length; i++) {
@@ -133,6 +132,9 @@ var DropFileSingle = /** @class */ (function (_super) {
                                             file: file,
                                             uri: e.target.result
                                         };
+                                        if (_this.props.onChange) {
+                                            _this.props.onChange(_this.state.images);
+                                        }
                                         _this.setState(__assign({}, _this.state));
                                     };
                                     fr.readAsDataURL(file);

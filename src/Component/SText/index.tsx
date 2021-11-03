@@ -26,7 +26,7 @@ export default class SText extends Component<STextProps> {
         return (
             <SView {...this.props}>
                 <Text style={{
-                    ...(this.props.font ? { fontFamily: this.props.font } : null),
+                    ...(this.props.font ? { fontFamily: this.props.font } : (STheme.color.font ? { fontFamily: STheme.color.font } : null)),
                     color: STheme.color.secondary,
                     ...(!this.props.center ? {} : {
                         textAlign: "center",

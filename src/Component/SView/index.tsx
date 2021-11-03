@@ -85,7 +85,7 @@ export default class SView extends Component<SViewProps> {
       delete style["marginRight"];
       delete style["marginEnd"];
       delete style["maxHeight"];
-      // delete style["maxWidth"];
+      delete style["maxWidth"];
     }
 
     return (
