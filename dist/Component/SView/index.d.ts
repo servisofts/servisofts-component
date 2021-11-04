@@ -17,6 +17,7 @@ export declare type SViewProps = {
     width?: Number | boolean | string;
     withoutFeedback?: Boolean;
     card?: boolean;
+    border?: Number | boolean;
 } & ViewProps & TouchableOpacityProps;
 export default class SView extends Component<SViewProps> {
     state: any;
@@ -25,5 +26,6 @@ export default class SView extends Component<SViewProps> {
     getLayout(): any;
     getProp(prop: string): any;
     getData(): any;
+    _ELEM: any;
     render(): JSX.Element;
 }

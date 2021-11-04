@@ -70,7 +70,10 @@ var SView = /** @class */ (function (_super) {
             // }
         }
         if (this.props.animated) {
-            Element = Animated.createAnimatedComponent(Element);
+            if (!this._ELEM) {
+                this._ELEM = Animated.createAnimatedComponent(Element);
+            }
+            Element = this._ELEM;
         }
         var style = __assign({}, this.props.style);
         if (style) {
@@ -94,7 +97,7 @@ var SView = /** @class */ (function (_super) {
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
             } },
-            React.createElement(Element, __assign({}, otherProps, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, otherProps, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -109,6 +112,9 @@ var SView = /** @class */ (function (_super) {
                     flex: this.props.flex == true ? 1 : this.props.flex
                 })), (!this.props.width ? {} : {
                     width: this.props.width == true ? "100%" : this.props.width
+                })), (!this.props.border ? {} : {
+                    borderWidth: 1,
+                    borderColor: this.props.border
                 })), (this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {})), style) }), this.props.children)));
     };
     return SView;

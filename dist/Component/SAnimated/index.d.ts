@@ -45,7 +45,7 @@ export declare class SAnimated extends Component<typeProps> {
                 elevation?: number;
                 alignContent?: "center" | "space-around" | "flex-start" | "flex-end" | "space-between" | "stretch";
                 alignItems: import("react-native").FlexAlignType;
-                alignSelf?: import("react-native").FlexAlignType | "auto";
+                alignSelf?: "auto" | import("react-native").FlexAlignType;
                 aspectRatio?: number;
                 borderEndWidth?: string | number;
                 borderStartWidth?: string | number;

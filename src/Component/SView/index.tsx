@@ -22,6 +22,7 @@ export type SViewProps = {
   width?: Number | boolean | string,
   withoutFeedback?: Boolean,
   card?: boolean,
+  border?: Number | boolean,
 } & ViewProps & TouchableOpacityProps
 
 export default class SView extends Component<SViewProps> {
@@ -50,6 +51,8 @@ export default class SView extends Component<SViewProps> {
   getData() {
     return this.props.data;
   }
+
+  _ELEM;
   render() {
 
     var otherProps: any = {
@@ -68,7 +71,10 @@ export default class SView extends Component<SViewProps> {
       // }
     }
     if (this.props.animated) {
-      Element = Animated.createAnimatedComponent(Element);
+      if (!this._ELEM) {
+        this._ELEM = Animated.createAnimatedComponent(Element);
+      }
+      Element = this._ELEM;
     }
     var style = { ...this.props.style };
     if (style) {
@@ -129,6 +135,10 @@ export default class SView extends Component<SViewProps> {
 
             ...(!this.props.width ? {} : {
               width: this.props.width == true ? "100%" : this.props.width
+            }),
+            ...(!this.props.border ? {} : {
+              borderWidth: 1,
+              borderColor: this.props.border,
             }),
             ...(this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {}),
             ...style

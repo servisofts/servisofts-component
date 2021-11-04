@@ -25,10 +25,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, Platform, } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import SNavBar from '../SNavBar/index';
 import SView from '../SView/index';
-import SScrollView2 from '../SScrollView2/index';
 import SNavigation from '../SNavigation';
 var SPage = /** @class */ (function (_super) {
     __extends(SPage, _super);
@@ -50,14 +49,14 @@ var SPage = /** @class */ (function (_super) {
     SPage.prototype.getScroll = function () {
         if (this.props.disableScroll)
             return this.props.children;
-        return React.createElement(SScrollView2, { disableHorizontal: true, style: {
-            // minHeight: '100%',
+        return React.createElement(ScrollView, { style: {
+                flex: 1,
+                width: "100%"
             }, contentContainerStyle: {
-                minHeight: "100%"
+                width: "100%"
             } },
             React.createElement(SView, { style: {
                     width: '100%',
-                    height: '100%',
                     flex: 1
                 } }, this.props.children));
     };

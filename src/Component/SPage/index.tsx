@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, Platform, } from 'react-native';
+import { View, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import SNavBar from '../SNavBar/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
@@ -43,26 +43,19 @@ export default class SPage extends Component<SPageProps> {
     }
     getScroll() {
         if (this.props.disableScroll) return this.props.children
-        return <SScrollView2 disableHorizontal
-            style={{
-                // minHeight: '100%',
-            }}
-            contentContainerStyle={{
-                minHeight: "100%",
-
-            }}>
-
+        return <ScrollView style={{
+            flex: 1,
+            width: "100%",
+        }} contentContainerStyle={{
+            width: "100%",
+        }}>
             <SView style={{
                 width: '100%',
-                height: '100%',
                 flex: 1,
-
-
             }}>
                 {this.props.children}
             </SView>
-
-        </SScrollView2>
+        </ScrollView>
     }
     render() {
         return (

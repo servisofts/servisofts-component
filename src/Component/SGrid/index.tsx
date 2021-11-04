@@ -101,9 +101,8 @@ export default class SGrid extends Component<SGridProps> {
             }}
                 onLayout={(evt) => {
                     this.layout = evt.nativeEvent.layout;
-
                     if (this.props.colSquare) {
-                        if ( this.props.col) {
+                        if (this.props.col) {
                             this.animSize.setValue({ x: this.animSize.x._value, y: this.layout.width });
                         } else if (this.layout.height != this.animSize.x._value) {
                             this.animSize.setValue({ x: this.layout.height, y: this.layout.height });
