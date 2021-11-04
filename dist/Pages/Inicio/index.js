@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { SView, SText, SPage, SNavigation, SIcon, SHr, } from '../../index';
+import { SView, SText, SPage, SNavigation, SIcon, } from '../../index';
 var Inicio = /** @class */ (function (_super) {
     __extends(Inicio, _super);
     function Inicio(props) {
@@ -43,12 +43,7 @@ var Inicio = /** @class */ (function (_super) {
     };
     Inicio.prototype.render = function () {
         return (React.createElement(SPage, { title: "Servisofts Component" },
-            React.createElement(SView, { col: "xs-12", style: { padding: 8 } },
-                React.createElement(SText, { center: true, col: "xs-12", fontSize: 24, bold: true, justify: true }, "Servisofts - Component"),
-                React.createElement(SText, { col: "xs-12", bold: true, fontSize: 16, justify: true }, "Sobre SComponent!"),
-                React.createElement(SText, { col: "xs-12", justify: true }, "Servisofts Component es una libreria en Android, IOS & Web para facilitar el desarrollo en React-Native-Web. "),
-                React.createElement(SHr, null),
-                this.getLista())));
+            React.createElement(SView, { col: "xs-12", style: { padding: 8 } }, this.getLista())));
     };
     return Inicio;
 }(Component));

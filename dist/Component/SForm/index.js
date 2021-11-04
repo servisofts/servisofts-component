@@ -59,6 +59,9 @@ var SForm = /** @class */ (function (_super) {
         }
     };
     SForm.prototype.submitFiles = function (data, key, url) {
+        if (!this.state.files[key]) {
+            return;
+        }
         Submit.http(data, url, this.state.files[key], function (res) {
         });
     };
@@ -72,6 +75,10 @@ var SForm = /** @class */ (function (_super) {
                 isValid = false;
             }
             if (input.getType() == "file") {
+                _this.state.files[key] = input.getValue();
+                return;
+            }
+            if (input.getType() == "image") {
                 _this.state.files[key] = input.getValue();
                 return;
             }

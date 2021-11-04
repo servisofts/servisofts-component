@@ -5,7 +5,7 @@ import SStorage from '../SStorage';
 import SLoad from '../SLoad';
 import MapStyle from './MapStyle';
 import SIcon from '../SIcon';
-
+import { FontsType } from '../../font/index';
 export type SThemeColors = {
     barStyle: "dark-content" | "light-content",
     barColor: string,
@@ -25,7 +25,8 @@ export type SThemeColors = {
     lightGray?: string,
     darkGray?: string,
     lightBlack?: string,
-    mapStyle?: any[]
+    mapStyle?: any[],
+    font?: FontsType,
 
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -58,7 +59,7 @@ export default class STheme extends Component<SThemeProps> {
         lightGray: "#aaaaaa",
         darkGray: "#444444",
         lightBlack: "#666666",
-        mapStyle: MapStyle.default
+        mapStyle: MapStyle.default,
     };
     public static instance: STheme;
     public static select(theme: SThemeOptions) {
@@ -126,7 +127,7 @@ export default class STheme extends Component<SThemeProps> {
         Animated.timing(this.animFadeOut, {
             toValue: 1,
             duration: 1500,
-            useNativeDriver:false,
+            useNativeDriver: false,
         }).start((end) => {
             this.onAnim = false;
             this.state.isFadeOut = false;

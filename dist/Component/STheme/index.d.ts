@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { FontsType } from '../../font/index';
 export declare type SThemeColors = {
     barStyle: "dark-content" | "light-content";
     barColor: string;
@@ -19,6 +20,7 @@ export declare type SThemeColors = {
     darkGray?: string;
     lightBlack?: string;
     mapStyle?: any[];
+    font?: FontsType;
 };
 export declare type SThemeOptions = 'default' | 'dark';
 export declare type SThemeThemes = {

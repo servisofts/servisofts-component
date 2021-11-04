@@ -57,8 +57,8 @@ export default class SImage extends Component<SImageType> {
             }} onPress={() => {
                 SPopup.open({
                     key: "imgPreview",
-                    content: <SView col={"xs-10 md-6 xl-4"} center style={{
-                        height: 1000,
+                    content: <SView col={"xs-11 md-8 lg-6 xl-4"} colSquare center style={{
+                        overflow: 'hidden',
                         maxHeight: "100%",
                         backgroundColor: STheme.color.background,
                         borderRadius: 8,

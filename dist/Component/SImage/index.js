@@ -69,8 +69,8 @@ var SImage = /** @class */ (function (_super) {
             return React.createElement(SView, { style: __assign({ width: "100%", height: "100%" }, this.props.style), onPress: function () {
                     SPopup.open({
                         key: "imgPreview",
-                        content: React.createElement(SView, { col: "xs-10 md-6 xl-4", center: true, style: {
-                                height: 1000,
+                        content: React.createElement(SView, { col: "xs-11 md-8 lg-6 xl-4", colSquare: true, center: true, style: {
+                                overflow: 'hidden',
                                 maxHeight: "100%",
                                 backgroundColor: STheme.color.background,
                                 borderRadius: 8

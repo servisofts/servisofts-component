@@ -87,7 +87,7 @@ var SView = /** @class */ (function (_super) {
             delete style["marginRight"];
             delete style["marginEnd"];
             delete style["maxHeight"];
-            // delete style["maxWidth"];
+            delete style["maxWidth"];
         }
         return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: (!this.props.style ? {} : this.props.style), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;

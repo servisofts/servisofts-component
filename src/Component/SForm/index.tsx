@@ -52,6 +52,9 @@ export default class SForm extends Component<SFromProps> {
         }
     }
     submitFiles(data, key, url) {
+        if(!this.state.files[key]){
+            return;
+        }
         Submit.http(data, url, this.state.files[key], (res) => {
             
         });
@@ -65,6 +68,10 @@ export default class SForm extends Component<SFromProps> {
                 isValid = false;
             }
             if (input.getType() == "file") {
+                this.state.files[key] = input.getValue();
+                return;
+            }
+            if (input.getType() == "image") {
                 this.state.files[key] = input.getValue();
                 return;
             }

@@ -61,20 +61,20 @@ export default class DropFileSingle extends Component<Props> {
                 for (let i = 0; i < inputElement.files.length; i++) {
                     const file = inputElement.files[i];
                     var ext = file.name.split('.').pop();
-                    if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
-                        var fr = new FileReader();
-                        fr.onload = (e) => {
-                            this.state.images[0] = {
-                                file: file,
-                                uri: e.target.result
-                            };
-                            if (this.props.onChange) {
-                                this.props.onChange(this.state.images);
-                            }
-                            this.setState({ ...this.state });
+                    // if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
+                    var fr = new FileReader();
+                    fr.onload = (e) => {
+                        this.state.images[0] = {
+                            file: file,
+                            uri: e.target.result
+                        };
+                        if (this.props.onChange) {
+                            this.props.onChange(this.state.images);
                         }
-                        fr.readAsDataURL(file);
+                        this.setState({ ...this.state });
                     }
+                    fr.readAsDataURL(file);
+                    // }
                 }
             });
 
@@ -105,6 +105,9 @@ export default class DropFileSingle extends Component<Props> {
                             file: file,
                             uri: e.target.result
                         };
+                        if (this.props.onChange) {
+                            this.props.onChange(this.state.images);
+                        }
                         this.setState({ ...this.state });
                     }
                     fr.readAsDataURL(file);

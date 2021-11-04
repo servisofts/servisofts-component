@@ -25,6 +25,15 @@ var submit = /** @class */ (function (_super) {
         form.setAttribute("enctype", "multipart/form-data");
         var body = new FormData(form);
         var dataInner = [];
+        if (!files) {
+            console.log("NO HAY FILES");
+            return;
+        }
+        console.log("HAY FILES");
+        if (files.length <= 0) {
+            return;
+        }
+        console.log(files.length);
         files.map(function (file) {
             body.append('file', file.file);
             dataInner.push({
