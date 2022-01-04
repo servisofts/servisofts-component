@@ -68,7 +68,8 @@ var SNavigation = /** @class */ (function (_super) {
                     if (locstr == "/") {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
-                    SNavigation.lastRoute.navigation.replace(locstr);
+                    // SNavigation.lastRoute.navigation.replace(locstr);
+                    window.location.pathname = locstr;
                 }
                 else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
@@ -117,8 +118,10 @@ var SNavigation = /** @class */ (function (_super) {
         return linking;
     };
     SNavigation.prototype.getPages = function (Stack) {
+        var _this = this;
         var pages = __assign(__assign({}, this.props.props.pages), Pages);
         return Object.keys(pages).map(function (key) {
+            var _a, _b;
             var Page = function (props) {
                 try {
                     if (props) {
@@ -135,7 +138,7 @@ var SNavigation = /** @class */ (function (_super) {
                     return React.createElement(View, null);
                 }
             };
-            return React.createElement(Stack.Screen, { key: key, name: key, component: Page, options: __assign({ title: "Servisofts", headerShown: false }, pages[key].options) });
+            return React.createElement(Stack.Screen, { key: key, name: key, component: Page, options: __assign({ title: ((_a = _this.props.props) === null || _a === void 0 ? void 0 : _a.title) ? (_b = _this.props.props) === null || _b === void 0 ? void 0 : _b.title : "Servisofts", headerShown: false }, pages[key].options) });
         });
     };
     SNavigation.prototype.render = function () {

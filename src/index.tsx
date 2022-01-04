@@ -29,6 +29,7 @@ import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
 import SMapView from "./Component/SMapView";
 import SMarker from "./Component/SMapView/SMarker";
+import SList from "./Component/SList";
 import Font from "./font";
 export * from './Types'
 export {
@@ -51,6 +52,7 @@ export {
     SThread,
     SUuid,
     SImage,
+    SList,
     SView,
     SLoad,
     SStorage,

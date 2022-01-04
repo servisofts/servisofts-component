@@ -64,8 +64,13 @@ export default class SDate {
         }
         var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(mm)|(ss)', 'g');
         // var res = [...format.matchAll(myRe)];
-        var res = Array.from(format.matchAll(myRe));
+        // var res = Array.from(format.matchAll(myRe));
         // res = [...res];
+        let match;
+        let res = [];
+        while ((match = myRe.exec(format)) !== null) {
+            res.push(match);
+        }
         var date = {}
         res.map((obj) => {
             var temp = fecha.substring(obj.index, obj.index + obj[0].length);
@@ -94,6 +99,7 @@ export default class SDate {
                 this.date = new Date(date);
             } else {
                 this.date = SDate.parse(date, format);
+                // console.log(this.date);
             }
         } else {
             this.date = date;

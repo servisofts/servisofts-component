@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, NativeScrollEvent, ViewStyle } from 'react-native';
 import { SText, SView, STheme, SThread, SSCrollView } from '../../../../index';
 import SDate from '../../../SDate';
+import SPage from '../../../SPage';
 // import SBackground from '../../../SBackground';
 type typeResp = {
     year: number,
@@ -159,7 +160,7 @@ export default class SISelect extends Component<typeProps> {
                 position: "absolute",
                 width: "100%",
                 height: 40,
-                backgroundColor: STheme.color.primary + "44"
+                backgroundColor: STheme.color.card
             }}>
 
             </SView>
@@ -208,6 +209,7 @@ export default class SISelect extends Component<typeProps> {
             }
             }>
             {/* <SBackground /> */}
+            {SPage.backgroundComponent}
             < SView row style={{
                 width: "100%",
                 height: 200,

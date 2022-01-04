@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 import React from "react";
 import { View } from "react-native";
 import SDate from "../SDate";
-import { SText, SView, SPopupOpen } from "../../index";
+import { SText, STheme, SView, SPopupOpen } from "../../index";
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert";
 import SIFechaAlert from "./SInputTypes/SIFechaAlert";
 import SISelect from "./SInputTypes/SISelect";
@@ -367,7 +367,7 @@ var image = function (type, Parent) {
         style: {
             View: {
                 backgroundColor: "transparent",
-                height: Parent.getOption("height") || 100
+                height: Parent.getOption("height") == "default" ? 100 : Parent.getOption("height")
             },
             InputText: {
                 display: 'none'
@@ -381,14 +381,13 @@ var image = function (type, Parent) {
                     bgColor = customStyle.View.backgroundColor;
                 }
             }
-            return React.createElement(SView, { col: "xs-12", center: true, height: true },
+            return React.createElement(SView, { center: true, height: true },
                 React.createElement(SView, { style: {
                         overflow: 'hidden',
                         borderRadius: 4,
-                        backgroundColor: bgColor
+                        backgroundColor: STheme.color.card
                     }, height: true, colSquare: true },
                     React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
-                            // console.log(val);
                             Parent.setValue(val);
                         } }))));
         }

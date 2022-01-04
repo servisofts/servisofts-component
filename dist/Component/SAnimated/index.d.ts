@@ -43,7 +43,7 @@ export declare class SAnimated extends Component<typeProps> {
                 opacity?: number;
                 testID?: string;
                 elevation?: number;
-                alignContent?: "center" | "flex-start" | "flex-end" | "stretch" | "space-between" | "space-around";
+                alignContent?: "center" | "space-around" | "flex-start" | "flex-end" | "space-between" | "stretch";
                 alignItems: import("react-native").FlexAlignType;
                 alignSelf?: "auto" | import("react-native").FlexAlignType;
                 aspectRatio?: number;
@@ -59,7 +59,7 @@ export declare class SAnimated extends Component<typeProps> {
                 flexShrink?: number;
                 flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
                 height?: string | number;
-                justifyContent: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly";
+                justifyContent: "center" | "space-around" | "flex-start" | "flex-end" | "space-between" | "space-evenly";
                 left?: string | number;
                 margin?: string | number;
                 marginBottom?: string | number;
@@ -90,7 +90,7 @@ export declare class SAnimated extends Component<typeProps> {
                 top?: string | number;
                 width?: string | number;
                 zIndex?: number;
-                direction?: "inherit" | "ltr" | "rtl";
+                direction?: "ltr" | "rtl" | "inherit";
                 shadowColor?: string;
                 shadowOffset?: {
                     width: number;

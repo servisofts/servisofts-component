@@ -24,6 +24,8 @@ export default class SForm extends Component<SFromProps> {
     constructor(props: any);
     verify(): boolean;
     focus(key: any): void;
+    getFiles(): any;
+    uploadFiles(url: any): void;
     submitFiles(data: any, key: any, url: any): void;
     submit(): {};
     getButtom(): JSX.Element;

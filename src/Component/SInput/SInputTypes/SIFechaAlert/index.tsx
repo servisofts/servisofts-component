@@ -199,7 +199,7 @@ export default class SIFechaAlert extends Component<typeProps> {
                 position: "absolute",
                 width: "100%",
                 height: 40,
-                backgroundColor: STheme.color.secondary + "44"
+                backgroundColor: STheme.color.card
             }}>
 
             </SView>

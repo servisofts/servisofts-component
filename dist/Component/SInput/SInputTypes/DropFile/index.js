@@ -88,20 +88,19 @@ var DropFile = /** @class */ (function (_super) {
                                 var _loop_1 = function (i) {
                                     var file = inputElement.files[i];
                                     ext = file.name.split('.').pop();
-                                    if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
-                                        fr = new FileReader();
-                                        fr.onload = function (e) {
-                                            _this.state.images.push({
-                                                file: file,
-                                                uri: e.target.result
-                                            });
-                                            if (_this.props.onChange) {
-                                                _this.props.onChange(_this.state.images);
-                                            }
-                                            _this.setState(__assign({}, _this.state));
-                                        };
-                                        fr.readAsDataURL(file);
-                                    }
+                                    // if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
+                                    fr = new FileReader();
+                                    fr.onload = function (e) {
+                                        _this.state.images.push({
+                                            file: file,
+                                            uri: e.target.result
+                                        });
+                                        if (_this.props.onChange) {
+                                            _this.props.onChange(_this.state.images);
+                                        }
+                                        _this.setState(__assign({}, _this.state));
+                                    };
+                                    fr.readAsDataURL(file);
                                 };
                                 var ext, fr;
                                 for (var i = 0; i < inputElement.files.length; i++) {
@@ -229,7 +228,7 @@ var DropFile = /** @class */ (function (_super) {
                         if (_this.props.onPress)
                             _this.props.onPress();
                     } },
-                    React.createElement("input", { id: "dropFileainp" + ("_key_" + this.idInstance), type: 'file', name: 'file', className: 'drop-zone__inputa' + ("_key_" + this.idInstance), multiple: true, accept: "image/*", style: {
+                    React.createElement("input", { id: "dropFileainp" + ("_key_" + this.idInstance), type: 'file', name: 'file', className: 'drop-zone__inputa' + ("_key_" + this.idInstance), multiple: true, accept: "*/*", style: {
                             display: "none"
                         } }),
                     this.getImages()))));

@@ -21,6 +21,7 @@ export type SNavigationProps = {
     props: {
         prefixes: [string],
         pages: { [name in string]: SPageProps },
+        title?: string,
         navBar?: any,
     }
 }
@@ -67,7 +68,6 @@ export default class SNavigation extends Component<SNavigationProps> {
         SNavigation.lastRoute.navigation.replace(route, params);
     }
     static goBack() {
-
         if (SNavigation.lastRoute) {
             if (!SNavigation.lastRoute.navigation.canGoBack()) {
                 if (SNavigation.lastRoute.route.name == SNavigation.root) {
@@ -81,7 +81,8 @@ export default class SNavigation extends Component<SNavigationProps> {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
 
-                    SNavigation.lastRoute.navigation.replace(locstr);
+                    // SNavigation.lastRoute.navigation.replace(locstr);
+                    window.location.pathname = locstr;
                 } else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
                 }
@@ -170,7 +171,7 @@ export default class SNavigation extends Component<SNavigationProps> {
             return <Stack.Screen key={key} name={key}
                 component={Page}
                 options={{
-                    title: "Servisofts",
+                    title: this.props.props?.title ? this.props.props?.title : "Servisofts",
                     headerShown: false,
                     ...pages[key].options
                 }} />

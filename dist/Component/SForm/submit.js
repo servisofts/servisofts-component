@@ -29,10 +29,11 @@ var submit = /** @class */ (function (_super) {
             console.log("NO HAY FILES");
             return;
         }
-        console.log("HAY FILES");
         if (files.length <= 0) {
             return;
         }
+        alert(files);
+        console.log(files);
         console.log(files.length);
         files.map(function (file) {
             body.append('file', file.file);
@@ -49,7 +50,7 @@ var submit = /** @class */ (function (_super) {
         var data = JSON.stringify(props);
         body.append('data', data);
         // console.log(props);
-        var myRequest = new Request(url + "multipart", myInit);
+        var myRequest = new Request(url, myInit);
         fetch(myRequest)
             .then(function (response) {
             if (callback) {

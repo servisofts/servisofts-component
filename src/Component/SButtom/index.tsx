@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { STheme } from '../../index';
+import { SLoad, STheme } from '../../index';
 import DeleteBtn from './DeleteBtn';
 
 
 export type onSubmitProps = {
-    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR",
+    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR" | "float",
     variant?: "default" | "confirm",
 }
 
@@ -16,8 +16,9 @@ export type typeProps = {
     props?: onSubmitProps,
     onPress?: Function,
     onPressValidation?: Function,
+    loading?: boolean,
     //callBack:Function,
-}
+} & onSubmitProps
 
 
 export class SButtom extends Component<typeProps> {
@@ -38,8 +39,11 @@ export class SButtom extends Component<typeProps> {
     }
     getOption(option) {
         var opt = {
+            type: this.props.type,
+            variant: this.props.variant,
             ...this.props.options,
-            ...this.props.props
+            ...this.props.props,
+
         }
         return !opt[option] ? "default" : opt[option]
     }
@@ -114,13 +118,26 @@ export class SButtom extends Component<typeProps> {
             bateonR: {
                 touchable: {
                     backgroundColor: STheme.color.bateon + "",
-                    borderRadius:30,
+                    borderRadius: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
                 },
                 text: {
                     color: STheme.color.secondary,
                     ...this.props.styleText
+                }
+            },
+            float: {
+                touchable: {
+                    position: 'absolute',
+                    width: 50,
+                    height: 50,
+                    bottom: 38,
+                    right: 16,
+                    ...this.props.style,
+                },
+                text: {
+                    ...this.props.styleText,
                 }
             },
         }
@@ -163,14 +180,22 @@ export class SButtom extends Component<typeProps> {
                 Component = DeleteBtn
             }
         }
+        var CONTEN = this.props.children;
+        if (typeof this.props.children == "string") {
+            CONTEN = <Text style={[variant.text, style.text]}> {this.props.children}</Text>
+        }
+        if (this.props.loading) {
+            CONTEN = <SLoad />
+        }
         return (
             <Component style={{ ...variant.touchable, ...style.touchable, ...this.props.style }}
                 styleText={{ ...variant.text, ...style.text }}
                 onPress={() => {
+                    if (this.props.loading) return;
                     // if (!this.props.onPressValidation()) return;
                     if (this.props.onPress) this.props.onPress();
                 }}>
-                <Text style={[variant.text, style.text]}> {this.props.children}</Text>
+                {CONTEN}
             </Component >
         );
     }

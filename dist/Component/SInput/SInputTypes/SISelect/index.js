@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React, { Component } from 'react';
 import { SText, SView, STheme, SThread, SSCrollView } from '../../../../index';
+import SPage from '../../../SPage';
 var SISelect = /** @class */ (function (_super) {
     __extends(SISelect, _super);
     function SISelect(props) {
@@ -76,7 +77,7 @@ var SISelect = /** @class */ (function (_super) {
                         position: "absolute",
                         width: "100%",
                         height: 40,
-                        backgroundColor: STheme.color.primary + "44"
+                        backgroundColor: STheme.color.card
                     } }),
                 React.createElement(SSCrollView, { disableHorizontal: true, ref: function (ref) { _this.scroll[key] = ref; }, 
                     // reverse
@@ -161,6 +162,7 @@ var SISelect = /** @class */ (function (_super) {
                 backgroundColor: STheme.color.background,
                 overflow: "hidden"
             } },
+            SPage.backgroundComponent,
             React.createElement(SView, { row: true, style: {
                     width: "100%",
                     height: 200

@@ -53,20 +53,20 @@ export default class DropFile extends Component<Props> {
                 for (let i = 0; i < inputElement.files.length; i++) {
                     const file = inputElement.files[i];
                     var ext = file.name.split('.').pop();
-                    if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
-                        var fr = new FileReader();
-                        fr.onload = (e) => {
-                            this.state.images.push({
-                                file: file,
-                                uri: e.target.result
-                            });
-                            if (this.props.onChange) {
-                                this.props.onChange(this.state.images);
-                            }
-                            this.setState({ ...this.state });
+                    // if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "gif") {
+                    var fr = new FileReader();
+                    fr.onload = (e) => {
+                        this.state.images.push({
+                            file: file,
+                            uri: e.target.result
+                        });
+                        if (this.props.onChange) {
+                            this.props.onChange(this.state.images);
                         }
-                        fr.readAsDataURL(file);
+                        this.setState({ ...this.state });
                     }
+                    fr.readAsDataURL(file);
+                    // }
                 }
             });
 
@@ -182,7 +182,7 @@ export default class DropFile extends Component<Props> {
                     }} className={"dropZonea"} onClick={() => {
                         if (this.props.onPress) this.props.onPress();
                     }}>
-                        <input id={"dropFileainp" + `_key_${this.idInstance}`} type='file' name='file' className={'drop-zone__inputa' + `_key_${this.idInstance}`} multiple accept="image/*"
+                        <input id={"dropFileainp" + `_key_${this.idInstance}`} type='file' name='file' className={'drop-zone__inputa' + `_key_${this.idInstance}`} multiple accept="*/*"
                             style={{
                                 display: "none"
                             }} />

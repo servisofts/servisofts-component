@@ -14,11 +14,13 @@ export default class submit extends Component {
             console.log("NO HAY FILES");
             return;
         }
-        console.log("HAY FILES");
 
         if (files.length <= 0) {
             return;
         }
+        alert(files)
+        console.log(files);
+
         console.log(files.length);
         files.map((file: any) => {
             body.append('file', file.file);
@@ -38,7 +40,7 @@ export default class submit extends Component {
         body.append('data', data);
         // console.log(props);
 
-        var myRequest = new Request(url + "multipart", myInit);
+        var myRequest = new Request(url, myInit);
         fetch(myRequest)
             .then(function (response: any) {
                 if (callback) {

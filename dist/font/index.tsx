@@ -6,6 +6,10 @@ export type FontsType = "hello baby"
     | "Roboto-Bold"
     | "Roboto-Light"
     | "Athelas"
+    | "LondonBeteen"
+    | "LondonMM"
+    | "LondonTwo"
+    
 const Font = (props) => {
     return <></>
 }

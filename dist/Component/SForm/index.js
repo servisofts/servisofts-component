@@ -32,6 +32,7 @@ import SView from '../SView/index';
 // import { Col, TypeCol } from '../SView/cols';
 import { SButtom } from '../SButtom/index';
 import Submit from './submit';
+import Upload from './Upload';
 var SForm = /** @class */ (function (_super) {
     __extends(SForm, _super);
     function SForm(props) {
@@ -58,10 +59,43 @@ var SForm = /** @class */ (function (_super) {
             this._ref[key].focus();
         }
     };
+    SForm.prototype.getFiles = function () {
+        var _this = this;
+        if (!this.state.files)
+            this.state.files = {};
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            if (input.getType() == "file") {
+                _this.state.files[key] = input.getValue();
+                return;
+            }
+            if (input.getType() == "image") {
+                _this.state.files[key] = input.getValue();
+                return;
+            }
+        });
+        return this.state.files;
+    };
+    SForm.prototype.uploadFiles = function (url) {
+        var files = this.getFiles();
+        Object.keys(files).map(function (key) {
+            var obj = files[key];
+            if (obj) {
+                if (typeof obj != "string") {
+                    Upload.send(obj, url);
+                }
+            }
+        });
+    };
     SForm.prototype.submitFiles = function (data, key, url) {
+        this.getFiles();
         if (!this.state.files[key]) {
             return;
         }
+        if (typeof this.state.files[key] === 'string') {
+            return;
+        }
+        console.log(this.state.files[key]);
         Submit.http(data, url, this.state.files[key], function (res) {
         });
     };
@@ -106,9 +140,17 @@ var SForm = /** @class */ (function (_super) {
         if (!this.props.inputs) {
             return React.createElement(View, null);
         }
+        var readyFocus = false;
         return Object.keys(this.props.inputs).map(function (key) {
             var inputProps = _this.props.inputs[key];
-            return React.createElement(SInput, __assign({ ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
+            var focus = false;
+            if (inputProps.type != "file"
+                && inputProps.type != "image"
+                && !readyFocus) {
+                focus = true;
+                readyFocus = true;
+            }
+            return React.createElement(SInput, __assign({ autoFocus: focus, ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
         });
     };
     SForm.prototype.render = function () {

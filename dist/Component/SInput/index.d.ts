@@ -15,8 +15,8 @@ export declare type TypeInputProps = {
     col?: SColType;
     defaultValue?: any;
     placeholder?: any;
-    icon?: Component;
-    iconR?: Component;
+    icon?: any;
+    iconR?: any;
     label?: String;
     props?: any;
     separation?: number;
@@ -37,12 +37,14 @@ export declare class SInput extends Component<TypeInputProps> {
     customStyle: any;
     variant: any;
     _ref: any;
+    inpref: any;
     static defaultProps: {
         props: {};
         style: {};
         onStateChange: () => void;
     };
     constructor(props: any);
+    componentDidMount(): void;
     getComponent(): JSX.Element;
     getProps(): Readonly<TypeInputProps> & Readonly<{
         children?: React.ReactNode;

@@ -48,7 +48,7 @@ var SPage = /** @class */ (function (_super) {
     };
     SPage.prototype.getScroll = function () {
         if (this.props.disableScroll)
-            return this.props.children;
+            return React.createElement(SView, { center: this.props.center, col: "xs-12", flex: true }, this.props.children);
         return React.createElement(ScrollView, { style: {
                 flex: 1,
                 width: "100%"
@@ -58,7 +58,7 @@ var SPage = /** @class */ (function (_super) {
             React.createElement(SView, { style: {
                     width: '100%',
                     flex: 1
-                } }, this.props.children));
+                }, center: this.props.center }, this.props.children));
     };
     SPage.prototype.render = function () {
         return (React.createElement(SView, { col: "xs-12", style: {

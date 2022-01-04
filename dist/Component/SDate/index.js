@@ -22,6 +22,7 @@ var SDate = /** @class */ (function () {
             }
             else {
                 this.date = SDate.parse(date, format);
+                // console.log(this.date);
             }
         }
         else {
@@ -41,8 +42,13 @@ var SDate = /** @class */ (function () {
         }
         var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(mm)|(ss)', 'g');
         // var res = [...format.matchAll(myRe)];
-        var res = Array.from(format.matchAll(myRe));
+        // var res = Array.from(format.matchAll(myRe));
         // res = [...res];
+        var match;
+        var res = [];
+        while ((match = myRe.exec(format)) !== null) {
+            res.push(match);
+        }
         var date = {};
         res.map(function (obj) {
             var temp = fecha.substring(obj.index, obj.index + obj[0].length);

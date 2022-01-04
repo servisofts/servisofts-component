@@ -11,7 +11,8 @@ export type SPageProps = {
     title?: String | Component,
     hidden?: boolean,
     preventBack?: boolean,
-    disableScroll?: boolean
+    disableScroll?: boolean,
+    center?: boolean,
 
 }
 
@@ -42,7 +43,9 @@ export default class SPage extends Component<SPageProps> {
         return <SNavBar {...this.props} />
     }
     getScroll() {
-        if (this.props.disableScroll) return this.props.children
+        if (this.props.disableScroll) return <SView center={this.props.center} col={"xs-12"} flex>
+            {this.props.children}
+        </SView>
         return <ScrollView style={{
             flex: 1,
             width: "100%",
@@ -52,7 +55,7 @@ export default class SPage extends Component<SPageProps> {
             <SView style={{
                 width: '100%',
                 flex: 1,
-            }}>
+            }} center={this.props.center}>
                 {this.props.children}
             </SView>
         </ScrollView>

@@ -6,6 +6,7 @@ import SView, { SViewProps } from '../SView/index';
 // import { Col, TypeCol } from '../SView/cols';
 import { SButtom, onSubmitProps } from '../SButtom/index';
 import Submit from './submit'
+import Upload from './Upload';
 
 
 interface InputsTp {
@@ -51,12 +52,45 @@ export default class SForm extends Component<SFromProps> {
             this._ref[key].focus();
         }
     }
+    getFiles() {
+        if (!this.state.files) this.state.files = {};
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            if (input.getType() == "file") {
+                this.state.files[key] = input.getValue();
+                return;
+            }
+            if (input.getType() == "image") {
+                this.state.files[key] = input.getValue();
+                return;
+            }
+        })
+        return this.state.files;
+    }
+    uploadFiles(url) {
+        var files = this.getFiles();
+        Object.keys(files).map((key) => {
+            var obj = files[key];
+            if (obj) {
+                if (typeof obj != "string") {
+                    Upload.send(obj, url);
+                }
+            }
+
+        })
+    }
     submitFiles(data, key, url) {
-        if(!this.state.files[key]){
+        this.getFiles();
+        if (!this.state.files[key]) {
             return;
         }
+        if (typeof this.state.files[key] === 'string') {
+            return;
+        }
+        console.log(this.state.files[key]);
+
         Submit.http(data, url, this.state.files[key], (res) => {
-            
+
         });
     }
     submit() {
@@ -105,9 +139,20 @@ export default class SForm extends Component<SFromProps> {
             return <View />
         }
 
+        var readyFocus = false;
         return Object.keys(this.props.inputs).map((key) => {
             var inputProps = this.props.inputs[key];
+            var focus = false;
+            if (
+                inputProps.type != "file"
+                && inputProps.type != "image"
+                && !readyFocus
+            ) {
+                focus = true;
+                readyFocus = true;
+            }
             return <SInput
+                autoFocus={focus}
                 ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
                 {...this.props.inputProps}
@@ -121,7 +166,9 @@ export default class SForm extends Component<SFromProps> {
         return (
             <SView
                 col="xs-12"
-                {...this.props} {...this.props.props}>
+                {...this.props}
+                {...this.props.props}
+            >
                 {this.getInputs()}
                 <SView col={"xs-12"} style={{
                     height: 14,

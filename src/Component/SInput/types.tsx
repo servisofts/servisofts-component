@@ -407,7 +407,8 @@ const image = (type: TypeType, Parent: SInput) => {
         style: {
             View: {
                 backgroundColor: "transparent",
-                height: Parent.getOption("height") || 100,
+                height: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
+                // width: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
             },
             InputText: {
                 display: 'none',
@@ -421,14 +422,13 @@ const image = (type: TypeType, Parent: SInput) => {
                     bgColor = customStyle.View.backgroundColor;
                 }
             }
-            return <SView col={"xs-12"} center height>
+            return <SView center height >
                 <SView style={{
                     overflow: 'hidden',
                     borderRadius: 4,
-                    backgroundColor: bgColor
+                    backgroundColor: STheme.color.card,
                 }} height colSquare>
                     <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
-                        // console.log(val);
                         Parent.setValue(val);
                     }} />
                 </SView>

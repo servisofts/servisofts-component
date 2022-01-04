@@ -70,14 +70,12 @@ var SIcon = /** @class */ (function (_super) {
         }
         var ICON = (React.createElement(Icon, __assign({ width: "100%", height: "100%", fill: "#000" }, this.getIconProps(this.props.name), this.props)));
         if (this.props.bgr) {
-            ICON = (React.createElement(SView, { center: true },
-                React.createElement(SIcon, { name: "Box", fill: this.props.bgr }),
-                React.createElement(SView, { style: {
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        padding: "10%"
-                    }, center: true }, ICON)));
+            ICON = (React.createElement(SView, __assign({ col: "xs-12", center: true }, this.props),
+                React.createElement(SIcon, { name: "Box", fill: this.props.bgr, width: "100%", height: "100%" }),
+                React.createElement(SView, { col: "xs-11", height: "90%", style: {
+                        position: "absolute"
+                    }, center: true },
+                    React.createElement(Icon, __assign({ fill: "#000" }, this.getIconProps(this.props.name), this.props, { width: "100%", height: "100%" })))));
         }
         return ICON;
     };

@@ -69,6 +69,8 @@ var SInput = /** @class */ (function (_super) {
     }
     SInput.TYPE = function (type) { return type; };
     ;
+    SInput.prototype.componentDidMount = function () {
+    };
     SInput.prototype.getComponent = function () {
         var _this = this;
         return React.createElement(SInput, __assign({}, this.props, { onChangeText: function (vak) {
@@ -194,6 +196,7 @@ var SInput = /** @class */ (function (_super) {
     };
     SInput.prototype.render = function () {
         var _this = this;
+        var _a;
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;
@@ -211,6 +214,9 @@ var SInput = /** @class */ (function (_super) {
                 this.verify();
             }
         }
+        if (this.props.autoFocus) {
+            (_a = this.inpref) === null || _a === void 0 ? void 0 : _a.focus();
+        }
         return (React.createElement(SView, __assign({ col: "xs-12" }, (isOnPress ? {
             onPress: function () {
                 if (_this.props.onPress)
@@ -224,10 +230,10 @@ var SInput = /** @class */ (function (_super) {
             }
         } : {}), this.props, { style: __assign(__assign(__assign(__assign(__assign({}, customStyle["View"]), type.style.View), (this.state.error ? customStyle.error : {})), this.style), (!this.props.label ? { marginTop: this.props.separation } : {})) }),
             this.getLabel(),
-            React.createElement(SView, { col: "xs-12", row: true, style: { flex: 1, height: "100%" } },
+            React.createElement(SView, { col: "xs-12", row: true, center: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
                 React.createElement(SView, { flex: true },
-                    React.createElement(TextInput, __assign({ value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+                    React.createElement(TextInput, __assign({ ref: function (ref) { _this.inpref = ref; }, value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
                 this.getIcon_r()),
             this.isRender(type)));
     };

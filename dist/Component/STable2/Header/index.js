@@ -29,6 +29,7 @@ import { SView, SText, STheme } from '../../../index';
 import SAPanResponder from '../../SAnimated/SAPanResponder';
 import SIcon from '../../SIcon';
 import SPopup from '../../SPopup';
+import HAjustes from '../HAjustes';
 var Header = /** @class */ (function (_super) {
     __extends(Header, _super);
     function Header(props) {
@@ -54,43 +55,49 @@ var Header = /** @class */ (function (_super) {
             }
         });
     };
-    Header.prototype.render = function () {
-        return (React.createElement(SView, { animated: true, height: true, center: true, style: {
-                width: this.props.animWidth,
-                backgroundColor: STheme.color.primary,
-                borderRadius: 4,
-                overflow: 'hidden'
+    Header.prototype.getAjustes = function () {
+        var _this = this;
+        return React.createElement(SView, { style: {
+                position: "absolute",
+                width: 16,
+                height: 16,
+                top: -2,
+                left: 2
+            }, onPress: function () {
+                SPopup.open({ key: "hp", content: React.createElement(HAjustes, __assign({ key_header: _this.props.key_header }, _this.props)) });
             } },
-            React.createElement(SView, { row: true, center: true },
-                React.createElement(SText, { fontSize: 11, bold: true }, this.props.label),
-                this.props.order ? React.createElement(SView, { width: 14, center: true, style: {
-                        transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }]
-                    } },
-                    React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary, width: 10 })) : null),
-            React.createElement(SView, __assign({}, this.pan.getPanHandlers(), { animated: true, style: {
-                    position: "absolute",
-                    right: 0,
-                    width: 16,
-                    zIndex: 99,
-                    height: "100%",
-                    cursor: "col-resize",
-                    alignItems: "flex-end"
-                } }),
-                React.createElement(SView, { style: {
-                        width: 2,
-                        height: "100%",
-                        backgroundColor: STheme.color.secondary + "66"
-                    } })),
-            React.createElement(SView, { style: {
-                    position: "absolute",
-                    width: 16,
-                    height: 16,
-                    top: 0,
-                    left: 0
-                }, center: true, onPress: function () {
-                    SPopup.alert("ALFO");
+            React.createElement(SIcon, { name: this.props.filter_h ? "Ajustes" : "Engranaje", fill: STheme.color.secondary + "66", width: 10 }));
+    };
+    Header.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement(SView, { width: this.props.space ? this.props.space : 0, height: true }),
+            React.createElement(SView, { animated: true, height: true, center: true, style: {
+                    width: this.props.animWidth,
+                    backgroundColor: STheme.color.primary,
+                    borderRadius: 2,
+                    overflow: 'hidden'
                 } },
-                React.createElement(SIcon, { name: "Menu", fill: STheme.color.secondary + "66", width: 14 }))));
+                React.createElement(SView, { row: true, center: true },
+                    React.createElement(SText, { fontSize: 11, font: "Roboto-Bold" }, this.props.label),
+                    this.props.order ? React.createElement(SView, { width: 14, center: true, style: {
+                            transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }]
+                        } },
+                        React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary, width: 10 })) : null),
+                React.createElement(SView, __assign({}, this.pan.getPanHandlers(), { animated: true, style: {
+                        position: "absolute",
+                        right: 0,
+                        width: 16,
+                        zIndex: 99,
+                        height: "100%",
+                        cursor: "col-resize",
+                        alignItems: "flex-end"
+                    } }),
+                    React.createElement(SView, { style: {
+                            width: 2,
+                            height: "100%",
+                            backgroundColor: STheme.color.secondary + "66"
+                        } })),
+                this.getAjustes())));
     };
     return Header;
 }(Component));

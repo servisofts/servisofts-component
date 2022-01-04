@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 import { SText, SHr, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView } from '../../index';
 import SGradient from '../SGradient';
+import SIcon from '../SIcon';
 import { SInput } from '../SInput';
 import SPagination from '../SPagination';
 import ExportExcel from './ExportExcel';
@@ -23,6 +24,7 @@ export default class STable2 extends Component<SType> {
     _animSize;
     size;
     scroll;
+    sizeW;
     static defaultProps = {
     }
 
@@ -30,12 +32,13 @@ export default class STable2 extends Component<SType> {
         super(props);
         this.state = {
             limit: this.props.limit || 20,
-            space: 1,
+            space: 4,
             height: 40,
             page: 1,
             isLoad: false,
             data: {},
-            buscador: ""
+            buscador: "",
+            HFilter: {},
         };
 
     }
@@ -96,11 +99,17 @@ export default class STable2 extends Component<SType> {
         })
         return objFinal;
     }
+    filtro_de_cabeceras(data) {
+        return true;
+    }
+
     _buscador;
+    _HFilter;
     procesarData = () => {
         var dtStr = JSON.stringify(this.props.data);
-        if (this.state.lastData == dtStr && this.state.buscador == this._buscador) return;
+        if (this.state.lastData == dtStr && this.state.buscador == this._buscador && this.state.HFilter == this._HFilter) return;
         this._buscador = this.state.buscador;
+        this._HFilter = this.state.HFilter;
         this.state.lastData = dtStr;
         this.state.data = {};
         // this.setState({ isLoad: false });
@@ -111,10 +120,24 @@ export default class STable2 extends Component<SType> {
                 }
             }
             this.state.data[key] = {};
+            var isValid = true;
             this.props.header.map((item) => {
+                if (!isValid) return;
                 this.state.data[key][item.key] = Row.getDatoRecursive(this.props.data[key], item.key, index);
                 if (item.render) {
                     this.state.data[key][item.key] = item.render(this.state.data[key][item.key]);
+                }
+                if (this.state.HFilter[item.key]) {
+                    var filtro = this.state.HFilter[item.key];
+                    var expreg = new RegExp(filtro, "i");
+                    var data = this.state.data[key][item.key];
+                    if (typeof data != "string") {
+                        data = JSON.stringify(data);
+                    }
+                    if (!expreg.test(data)) {
+                        isValid = false;
+                        delete this.state.data[key];
+                    }
                 }
             })
         })
@@ -127,9 +150,14 @@ export default class STable2 extends Component<SType> {
     _animHeader = {};
     getHeader = () => {
         return this.props.header.map((item, index) => {
-            this._animHeader[item.key] = new Animated.Value(item.width || 0);
+
+            this._animHeader[item.key] = new Animated.Value(item.width);
             this._animSize = Animated.add(this._animSize, this._animHeader[item.key]);
-            return <Header {...item} animWidth={this._animHeader[item.key]} />
+            this._animSize = Animated.add(this._animSize, new Animated.Value(this.state.space));
+            return <Header {...item} filter_h={this.state.HFilter[item.key]} key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space} changeHF={(filter) => {
+                this.state.HFilter[item.key] = filter;
+                this.setState({ HFilter: { ...this.state.HFilter } });
+            }} />
         })
     }
 
@@ -149,6 +177,7 @@ export default class STable2 extends Component<SType> {
             return <Row
                 index={((this.state.page - 1) * this.state.limit) + i}
                 height={50}
+                space={this.state.space}
                 data={data}
                 header={this.props.header}
                 animHeader={this._animHeader}
@@ -161,7 +190,7 @@ export default class STable2 extends Component<SType> {
         //     return <SLoad />
         // }
         var cantidad = this.props.data ? Object.keys(this.state.data).length : 0;
-        return <SView col={"xs-12"} height={30} center backgroundColor={"#000"} style={{
+        return <SView col={"xs-12"} height={30} center backgroundColor={STheme.color.primary} style={{
             borderTopLeftRadius: 16,
             borderTopRightRadius: 16,
         }} row>
@@ -188,7 +217,10 @@ export default class STable2 extends Component<SType> {
         this._animSize.addListener(({ value }) => {
             this.size = value;
         });
-
+        // if (this.sizeW) {
+        //     this._animSize.setValue(this.sizeW);
+        // }
+        var anims = this._animSize;
         this.procesarData();
         return (
             <View style={{
@@ -196,22 +228,30 @@ export default class STable2 extends Component<SType> {
                 height: "100%",
             }}>
                 <SView col={"xs-12"} height={30} center>
-                    <SInput placeholder={"Buscar"} col={"xs-11.5"} height={24} style={{
-                        backgroundColor: STheme.color.card,
-                        borderRadius: 16,
+                    <SInput placeholder={"Buscar"} col={"xs-11.9"} height={24} style={{
+                        backgroundColor: STheme.color.primary + "BB",
+                        borderRadius: 4,
                         paddingLeft: 8,
-                    }} onChangeText={(txt) => {
+                    }} 
+                    icon={<SIcon name={"Search"} width={16} fill={STheme.color.secondary} />}
+                    onChangeText={(txt) => {
                         new SThread(400, "tbl_buscar", true).start(() => {
                             this.setState({ buscador: txt });
                         })
                     }} />
                 </SView>
-                <SView width flex center>
+                <SView col={"xs-12"} flex center
+                    onLayout={(e) => {
+                        this.sizeW = e.nativeEvent.layout.width;
+                        anims.setValue(this.sizeW);
+
+                    }}
+                >
                     <SScrollView2
                         ref={(ref) => this.scroll = ref}
                         header={{
-                            style: { height: 30, },
-                            content: <SView row height>
+                            style: { height: 30 },
+                            content: <SView col={"xs-12"} row height>
                                 {this.getHeader()}
                             </SView>
                         }}
@@ -219,7 +259,8 @@ export default class STable2 extends Component<SType> {
                         <SView animated
                             style={{
                                 width: this._animSize,
-                            }}>
+                            }}
+                        >
                             {this.getData()}
                             <SView height={200} />
                         </SView>

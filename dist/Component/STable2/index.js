@@ -27,6 +27,7 @@ var __assign = (this && this.__assign) || function () {
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 import { SText, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView } from '../../index';
+import SIcon from '../SIcon';
 import { SInput } from '../SInput';
 import SPagination from '../SPagination';
 import ExportExcel from './ExportExcel';
@@ -38,9 +39,10 @@ var STable2 = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.procesarData = function () {
             var dtStr = JSON.stringify(_this.props.data);
-            if (_this.state.lastData == dtStr && _this.state.buscador == _this._buscador)
+            if (_this.state.lastData == dtStr && _this.state.buscador == _this._buscador && _this.state.HFilter == _this._HFilter)
                 return;
             _this._buscador = _this.state.buscador;
+            _this._HFilter = _this.state.HFilter;
             _this.state.lastData = dtStr;
             _this.state.data = {};
             // this.setState({ isLoad: false });
@@ -51,10 +53,25 @@ var STable2 = /** @class */ (function (_super) {
                     }
                 }
                 _this.state.data[key] = {};
+                var isValid = true;
                 _this.props.header.map(function (item) {
+                    if (!isValid)
+                        return;
                     _this.state.data[key][item.key] = Row.getDatoRecursive(_this.props.data[key], item.key, index);
                     if (item.render) {
                         _this.state.data[key][item.key] = item.render(_this.state.data[key][item.key]);
+                    }
+                    if (_this.state.HFilter[item.key]) {
+                        var filtro = _this.state.HFilter[item.key];
+                        var expreg = new RegExp(filtro, "i");
+                        var data = _this.state.data[key][item.key];
+                        if (typeof data != "string") {
+                            data = JSON.stringify(data);
+                        }
+                        if (!expreg.test(data)) {
+                            isValid = false;
+                            delete _this.state.data[key];
+                        }
                     }
                 });
             });
@@ -66,9 +83,13 @@ var STable2 = /** @class */ (function (_super) {
         _this._animHeader = {};
         _this.getHeader = function () {
             return _this.props.header.map(function (item, index) {
-                _this._animHeader[item.key] = new Animated.Value(item.width || 0);
+                _this._animHeader[item.key] = new Animated.Value(item.width);
                 _this._animSize = Animated.add(_this._animSize, _this._animHeader[item.key]);
-                return React.createElement(Header, __assign({}, item, { animWidth: _this._animHeader[item.key] }));
+                _this._animSize = Animated.add(_this._animSize, new Animated.Value(_this.state.space));
+                return React.createElement(Header, __assign({}, item, { filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
+                        _this.state.HFilter[item.key] = filter;
+                        _this.setState({ HFilter: __assign({}, _this.state.HFilter) });
+                    } }));
             });
         };
         _this.getData = function () {
@@ -84,7 +105,7 @@ var STable2 = /** @class */ (function (_super) {
             });
             return new SOrdenador(orderArr).ordernarObject(_this.state.data).slice(((_this.state.page - 1) * _this.state.limit), (_this.state.page * _this.state.limit)).map(function (itemData, i) {
                 var data = _this.state.data[itemData];
-                return React.createElement(Row, { index: ((_this.state.page - 1) * _this.state.limit) + i, height: 50, data: data, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
+                return React.createElement(Row, { index: ((_this.state.page - 1) * _this.state.limit) + i, height: 50, space: _this.state.space, data: data, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
             });
         };
         _this.Footer = function () {
@@ -92,7 +113,7 @@ var STable2 = /** @class */ (function (_super) {
             //     return <SLoad />
             // }
             var cantidad = _this.props.data ? Object.keys(_this.state.data).length : 0;
-            return React.createElement(SView, { col: "xs-12", height: 30, center: true, backgroundColor: "#000", style: {
+            return React.createElement(SView, { col: "xs-12", height: 30, center: true, backgroundColor: STheme.color.primary, style: {
                     borderTopLeftRadius: 16,
                     borderTopRightRadius: 16
                 }, row: true },
@@ -114,12 +135,13 @@ var STable2 = /** @class */ (function (_super) {
         };
         _this.state = {
             limit: _this.props.limit || 20,
-            space: 1,
+            space: 4,
             height: 40,
             page: 1,
             isLoad: false,
             data: {},
-            buscador: ""
+            buscador: "",
+            HFilter: {}
         };
         return _this;
     }
@@ -177,6 +199,9 @@ var STable2 = /** @class */ (function (_super) {
         });
         return objFinal;
     };
+    STable2.prototype.filtro_de_cabeceras = function (data) {
+        return true;
+    };
     STable2.prototype.render = function () {
         var _this = this;
         this._animSize = new Animated.Value(0);
@@ -184,25 +209,32 @@ var STable2 = /** @class */ (function (_super) {
             var value = _a.value;
             _this.size = value;
         });
+        // if (this.sizeW) {
+        //     this._animSize.setValue(this.sizeW);
+        // }
+        var anims = this._animSize;
         this.procesarData();
         return (React.createElement(View, { style: {
                 width: "100%",
                 height: "100%"
             } },
             React.createElement(SView, { col: "xs-12", height: 30, center: true },
-                React.createElement(SInput, { placeholder: "Buscar", col: "xs-11.5", height: 24, style: {
-                        backgroundColor: STheme.color.card,
-                        borderRadius: 16,
+                React.createElement(SInput, { placeholder: "Buscar", col: "xs-11.9", height: 24, style: {
+                        backgroundColor: STheme.color.primary + "BB",
+                        borderRadius: 4,
                         paddingLeft: 8
-                    }, onChangeText: function (txt) {
+                    }, icon: React.createElement(SIcon, { name: "Search", width: 16, fill: STheme.color.secondary }), onChangeText: function (txt) {
                         new SThread(400, "tbl_buscar", true).start(function () {
                             _this.setState({ buscador: txt });
                         });
                     } })),
-            React.createElement(SView, { width: true, flex: true, center: true },
+            React.createElement(SView, { col: "xs-12", flex: true, center: true, onLayout: function (e) {
+                    _this.sizeW = e.nativeEvent.layout.width;
+                    anims.setValue(_this.sizeW);
+                } },
                 React.createElement(SScrollView2, { ref: function (ref) { return _this.scroll = ref; }, header: {
                         style: { height: 30 },
-                        content: React.createElement(SView, { row: true, height: true }, this.getHeader())
+                        content: React.createElement(SView, { col: "xs-12", row: true, height: true }, this.getHeader())
                     } },
                     React.createElement(SView, { animated: true, style: {
                             width: this._animSize

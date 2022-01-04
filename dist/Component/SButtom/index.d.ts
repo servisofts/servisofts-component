@@ -1,6 +1,6 @@
 import { Component } from 'react';
 export declare type onSubmitProps = {
-    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR";
+    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR" | "float";
     variant?: "default" | "confirm";
 };
 export declare type typeProps = {
@@ -10,7 +10,8 @@ export declare type typeProps = {
     props?: onSubmitProps;
     onPress?: Function;
     onPressValidation?: Function;
-};
+    loading?: boolean;
+} & onSubmitProps;
 export declare class SButtom extends Component<typeProps> {
     static defaultProps: {
         options: {};
@@ -64,6 +65,10 @@ export declare class SButtom extends Component<typeProps> {
                 justifyContent: string;
                 alignItems: string;
             };
+            text: any;
+        };
+        float: {
+            touchable: any;
             text: any;
         };
     };

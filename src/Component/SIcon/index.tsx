@@ -51,15 +51,12 @@ export default class SIcon extends Component<SIconType> {
         }
         var ICON = (<Icon width={"100%"} height={"100%"} fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} />)
         if (this.props.bgr) {
-            ICON = (<SView center>
-                <SIcon name={"Box"} fill={this.props.bgr} />
-                <SView style={{
+            ICON = (<SView col={"xs-12"} center {...this.props} >
+                <SIcon name={"Box"} fill={this.props.bgr} width={"100%"} height={"100%"} />
+                <SView col={"xs-11"} height={"90%"} style={{
                     position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    padding: "10%",
-                }} center>
-                    {ICON}
+                }} center >
+                    <Icon fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} width={"100%"} height={"100%"} />
                 </SView>
             </SView>)
         }

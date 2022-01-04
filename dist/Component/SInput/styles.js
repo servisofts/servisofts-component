@@ -40,6 +40,33 @@ var getType = function (type) {
                     borderColor: STheme.color.danger
                 }
             };
+        case "kolping":
+            return {
+                "View": {
+                    // backgroundColor: STheme.color.secondary + "22",
+                    borderWidth: 3,
+                    borderColor: STheme.color.lightGray,
+                    borderRadius: 10,
+                    marginTop: 32,
+                    paddingStart: 8,
+                    height: 50
+                },
+                "LabelStyle": {
+                    fontSize: 14,
+                    width: "100%",
+                    height: 0,
+                    color: STheme.color.text,
+                    fontFamily: "LondonBetween",
+                    display: 'none'
+                },
+                "InputText": __assign({ fontSize: 14, color: STheme.color.text, fontFamily: "LondonBetween", paddingStart: 4 }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" })),
+                "placeholder": {
+                    color: STheme.color.text + "66"
+                },
+                "error": {
+                    borderColor: STheme.color.danger
+                }
+            };
         case "bateon":
             return {
                 "View": {

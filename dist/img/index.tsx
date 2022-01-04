@@ -3,6 +3,7 @@ import Add from "./Add"
 import Ajustes from "./Ajustes"
 import AlertOutline from "./AlertOutline"
 import Alert from "./Alert"
+import Ambiente from "./Ambiente"
 import Arrow from "./Arrow"
 import Back from "./Back"
 import Background from "./Background"
@@ -20,6 +21,7 @@ import Edit from "./Edit"
 import Egreso from "./Egreso"
 import Engranaje from "./Engranaje"
 import Entrenamiento from "./Entrenamiento"
+import Evento from "./Evento"
 import Excel from "./Excel"
 import Eyes from "./Eyes"
 import Favorito from "./Favorito"
@@ -54,6 +56,7 @@ const Icons = {
     Ajustes,
     AlertOutline,
     Alert,
+    Ambiente,
     Arrow,
     Back,
     Background,
@@ -71,6 +74,7 @@ const Icons = {
     Egreso,
     Engranaje,
     Entrenamiento,
+    Evento,
     Excel,
     Eyes,
     Favorito,

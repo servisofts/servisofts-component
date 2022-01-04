@@ -4,6 +4,7 @@ export declare type SThemeColors = {
     barStyle: "dark-content" | "light-content";
     barColor: string;
     primary: string;
+    text?: string;
     card?: string;
     secondary: string;
     success?: string;

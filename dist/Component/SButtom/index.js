@@ -26,7 +26,7 @@ var __assign = (this && this.__assign) || function () {
 };
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { STheme } from '../../index';
+import { SLoad, STheme } from '../../index';
 import DeleteBtn from './DeleteBtn';
 var SButtom = /** @class */ (function (_super) {
     __extends(SButtom, _super);
@@ -36,7 +36,7 @@ var SButtom = /** @class */ (function (_super) {
         return _this;
     }
     SButtom.prototype.getOption = function (option) {
-        var opt = __assign(__assign({}, this.props.options), this.props.props);
+        var opt = __assign(__assign({ type: this.props.type, variant: this.props.variant }, this.props.options), this.props.props);
         return !opt[option] ? "default" : opt[option];
     };
     //---RENDER
@@ -87,6 +87,10 @@ var SButtom = /** @class */ (function (_super) {
                     alignItems: 'center'
                 },
                 text: __assign({ color: STheme.color.secondary }, this.props.styleText)
+            },
+            float: {
+                touchable: __assign({ position: 'absolute', width: 50, height: 50, bottom: 38, right: 16 }, this.props.style),
+                text: __assign({}, this.props.styleText)
             }
         };
     };
@@ -126,14 +130,22 @@ var SButtom = /** @class */ (function (_super) {
                 Component = DeleteBtn;
             }
         }
+        var CONTEN = this.props.children;
+        if (typeof this.props.children == "string") {
+            CONTEN = React.createElement(Text, { style: [variant.text, style.text] },
+                " ",
+                this.props.children);
+        }
+        if (this.props.loading) {
+            CONTEN = React.createElement(SLoad, null);
+        }
         return (React.createElement(Component, { style: __assign(__assign(__assign({}, variant.touchable), style.touchable), this.props.style), styleText: __assign(__assign({}, variant.text), style.text), onPress: function () {
+                if (_this.props.loading)
+                    return;
                 // if (!this.props.onPressValidation()) return;
                 if (_this.props.onPress)
                     _this.props.onPress();
-            } },
-            React.createElement(Text, { style: [variant.text, style.text] },
-                " ",
-                this.props.children)));
+            } }, CONTEN));
     };
     SButtom.defaultProps = {
         options: {},

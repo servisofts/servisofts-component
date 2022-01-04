@@ -44,6 +44,14 @@ var SOrdenador = /** @class */ (function () {
                 var ordInt = (prop.order == "asc" ? 1 : -1);
                 var valA = _this.recursiveData(instance.data[a], prop.key) || 1;
                 var valB = _this.recursiveData(instance.data[b], prop.key) || 1;
+                // if(!valA) valA = 0;
+                // if(!valB) valB = 0;
+                // if (/^[0-9]+([\,\.][0-9]+)?/gm.test(valA)) {
+                //     valA = parseFloat(valA);
+                // }
+                // if (/^[0-9]+([\,\.][0-9]+)?/gm.test(valB)) {
+                //     valB = parseFloat(valB);
+                // }
                 if (typeof valA == "string")
                     valA = valA.toLowerCase();
                 if (typeof valB == "string")

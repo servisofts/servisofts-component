@@ -160,10 +160,10 @@ var DropFileSingle = /** @class */ (function (_super) {
                 } },
                 React.createElement(SImage, { src: image.uri }));
         };
-        var value = props.defaultValue || "";
         _this.state = {
             images: []
         };
+        var value = props.defaultValue || "";
         if (value) {
             _this.state.images.push({
                 uri: value,

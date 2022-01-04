@@ -18,10 +18,11 @@ export default class DropFileSingle extends Component<Props> {
     idInstance;
     constructor(props) {
         super(props);
-        var value = props.defaultValue || "";
+      
         this.state = {
             images: [],
         };
+        var value = props.defaultValue || "";
         if (value) {
             this.state.images.push({
                 uri: value,
@@ -135,6 +136,7 @@ export default class DropFileSingle extends Component<Props> {
             overflow: 'hidden',
             borderRadius: 4,
         }}>
+            {/* <SIcon name={"Ajustes"} width={100} /> */}
             <SImage src={image.uri} />
         </SView>
     }

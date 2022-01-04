@@ -22,3 +22,16 @@
   font-family: 'Athelas';
   src: url(./Athelas.ttf);
 }
+ 
+@font-face {
+  font-family: 'LondonBetween';
+  src: url(./LondonBetween.ttf);
+}
+@font-face {
+  font-family: 'LondonMM';
+  src: url(./LondonMM.ttf);
+}
+@font-face {
+  font-family: 'LondonTwo';
+  src: url(./LondonTwo.ttf);
+}

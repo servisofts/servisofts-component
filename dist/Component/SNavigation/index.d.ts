@@ -17,6 +17,7 @@ export declare type SNavigationProps = {
         pages: {
             [name in string]: SPageProps;
         };
+        title?: string;
         navBar?: any;
     };
 };

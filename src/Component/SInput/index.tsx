@@ -17,8 +17,8 @@ export type TypeInputProps = {
     col?: SColType,
     defaultValue?: any,
     placeholder?: any,
-    icon?: Component,
-    iconR?: Component,
+    icon?: any,
+    iconR?: any,
     label?: String,
     props?: any,
     separation?: number,
@@ -38,7 +38,7 @@ export class SInput extends Component<TypeInputProps> {
     customStyle
     variant
     _ref
-
+    inpref
     static defaultProps = {
         props: {},
         style: {},
@@ -62,6 +62,9 @@ export class SInput extends Component<TypeInputProps> {
             error: false,
             data: {}
         };
+    }
+    componentDidMount(): void {
+   
     }
     getComponent() {
         return <SInput {...this.props} onChangeText={(vak) => {
@@ -232,6 +235,9 @@ export class SInput extends Component<TypeInputProps> {
                 this.verify();
             }
         }
+        if (this.props.autoFocus) {
+            this.inpref?.focus();
+        }
         return (
             <SView
                 col={"xs-12"}
@@ -251,17 +257,20 @@ export class SInput extends Component<TypeInputProps> {
                     ...type.style.View,
                     ...(this.state.error ? customStyle.error : {}),
                     ...this.style,
-                    ...(!this.props.label ? { marginTop: this.props.separation } : {})
+                    ...(!this.props.label ? { marginTop: this.props.separation } : {}),
                 }}
             >
+
                 {this.getLabel()}
                 <SView
                     col={"xs-12"}
                     row
+                    center
                     style={{ flex: 1, height: "100%", }}>
                     {this.getIcon()}
                     <SView flex>
                         <TextInput
+                            ref={(ref) => { this.inpref = ref }}
                             value={valueFilter}
                             {...this.props}
                             {...type.props}

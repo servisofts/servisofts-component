@@ -20,6 +20,10 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    Ambiente: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Arrow: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
@@ -85,6 +89,10 @@ declare const Icons: {
         Web: (props: any) => JSX.Element;
     };
     Entrenamiento: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Evento: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };

@@ -10,6 +10,7 @@ type typeProps = {
     data: Object,
     animHeader: any,
     animSize: any,
+    space?: number,
     height: number,
     index: number,
 }
@@ -48,8 +49,8 @@ class Row extends Component<typeProps> {
             var data = this.props.data;
             data = data[item.key];
             var ITEM;
-            if(item.key == "index"){
-                data = this.props.index+1;
+            if (item.key == "index") {
+                data = this.props.index + 1;
             }
             if (item.component) {
                 ITEM = item.component(data);
@@ -59,28 +60,32 @@ class Row extends Component<typeProps> {
                 }
                 ITEM = <SText fontSize={12}>{data}</SText>
             }
-            return <SView
-                animated
-                height
-                style={{
-                    width: this.props.animHeader[item.key],
-                    overflow: 'hidden',
-                    padding: 1,
-                }}
-            >
+            return <>
+                <SView width={this.props.space} height
+                    backgroundColor={this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22"}
+                />
                 <SView
+                    animated
                     height
-                    {...item}
                     style={{
-                        backgroundColor: this.props.index % 2 == 0 ? STheme.color.primary + "11" : STheme.color.secondary + "11",
+                        width: this.props.animHeader[item.key],
                         overflow: 'hidden',
-                        padding: 2,
-                        justifyContent: 'center',
-                        width: "100%",
-                    }}>
-                    {ITEM}
+                    }}
+                >
+                    <SView
+                        height
+                        {...item}
+                        style={{
+                            backgroundColor: this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22",
+                            overflow: 'hidden',
+                            padding: 2,
+                            justifyContent: 'center',
+                            width: "100%",
+                        }}>
+                        {ITEM}
+                    </SView>
                 </SView>
-            </SView>
+            </>
         })
     }
     render() {
@@ -90,7 +95,6 @@ class Row extends Component<typeProps> {
                 height={this.props.height}
                 animated
                 style={{
-
                     width: this.props.animSize,
                 }}
             >

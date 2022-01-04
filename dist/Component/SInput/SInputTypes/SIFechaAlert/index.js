@@ -107,7 +107,7 @@ var SIFechaAlert = /** @class */ (function (_super) {
                         position: "absolute",
                         width: "100%",
                         height: 40,
-                        backgroundColor: STheme.color.secondary + "44"
+                        backgroundColor: STheme.color.card
                     } }),
                 React.createElement(SSCrollView, { disableHorizontal: true, ref: function (ref) { _this.scroll[key] = ref; }, 
                     // reverse

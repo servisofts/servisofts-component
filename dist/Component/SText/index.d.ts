@@ -5,6 +5,7 @@ import { FontsType } from '../../font/index';
 export declare type STextProps = {
     style?: TextStyle | [TextStyle] | any;
     primary?: boolean;
+    secondary?: boolean;
     fontSize?: number;
     bold?: boolean;
     color?: string;

@@ -49,18 +49,19 @@ var Row = /** @class */ (function (_super) {
                     }
                     ITEM = React.createElement(SText, { fontSize: 12 }, data);
                 }
-                return React.createElement(SView, { animated: true, height: true, style: {
-                        width: _this.props.animHeader[item.key],
-                        overflow: 'hidden',
-                        padding: 1
-                    } },
-                    React.createElement(SView, __assign({ height: true }, item, { style: {
-                            backgroundColor: _this.props.index % 2 == 0 ? STheme.color.primary + "11" : STheme.color.secondary + "11",
-                            overflow: 'hidden',
-                            padding: 2,
-                            justifyContent: 'center',
-                            width: "100%"
-                        } }), ITEM));
+                return React.createElement(React.Fragment, null,
+                    React.createElement(SView, { width: _this.props.space, height: true, backgroundColor: _this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22" }),
+                    React.createElement(SView, { animated: true, height: true, style: {
+                            width: _this.props.animHeader[item.key],
+                            overflow: 'hidden'
+                        } },
+                        React.createElement(SView, __assign({ height: true }, item, { style: {
+                                backgroundColor: _this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22",
+                                overflow: 'hidden',
+                                padding: 2,
+                                justifyContent: 'center',
+                                width: "100%"
+                            } }), ITEM)));
             });
         };
         _this.state = {

@@ -5,6 +5,7 @@ declare type typeProps = {
     data: Object;
     animHeader: any;
     animSize: any;
+    space?: number;
     height: number;
     index: number;
 };
