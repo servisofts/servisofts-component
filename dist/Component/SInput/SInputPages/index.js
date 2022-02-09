@@ -1,5 +1,5 @@
-import Fecha from "./Fecha";
+import Direccion from "./Direccion";
 var SInputPages = {
-    "sc_direccion": Fecha
+    "sc_direccion": Direccion
 };
 export default SInputPages;

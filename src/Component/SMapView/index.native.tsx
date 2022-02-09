@@ -4,8 +4,14 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import MapStyle from './mapStyle'
 import SIcon from '../SIcon';
-
-export default class SMapView extends Component {
+import STheme from '../STheme';
+type PropsType = {
+    initialRegion: { latitude: number, longitude: number, latitudeDelta: number, longitudeDelta: number },
+    onRegionChangeComplete?: (region: any) => void,
+    onPress?: (event: any) => void,
+    preventCenter?: boolean,
+}
+export default class SMapView extends Component<PropsType> {
     mapa;
     state;
     constructor(props) {
@@ -32,7 +38,9 @@ export default class SMapView extends Component {
                     longitudeDelta: 0.002
                 }
                 // this.props.state.myUbicacionReducer.position = region;
-                this.mapa.animateToRegion(region, 1000)
+                if(!this.props.preventCenter){
+                    this.mapa.animateToRegion(region, 1000)
+                }
                 this.setState({ position: region })
 
             },
@@ -65,7 +73,7 @@ export default class SMapView extends Component {
                         flex: 1,
                     }}
                     initialRegion={this.state.region}
-                    // customMapStyle={MapStyle}
+                    // customMapStyle={STheme.color.mapStyle}
                     showsUserLocation={true}
                     showsMyLocationButton={false}
                     provider={PROVIDER_GOOGLE}

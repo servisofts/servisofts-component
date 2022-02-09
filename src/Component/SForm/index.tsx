@@ -22,7 +22,6 @@ export type SFromProps = {
     onSubmitProps?: onSubmitProps,
 } & SViewProps
 export default class SForm extends Component<SFromProps> {
-
     static defaultProps = {
         props: {
 
@@ -152,7 +151,7 @@ export default class SForm extends Component<SFromProps> {
                 readyFocus = true;
             }
             return <SInput
-                autoFocus={focus}
+                // autoFocus={focus}
                 ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
                 {...this.props.inputProps}

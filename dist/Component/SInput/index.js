@@ -232,8 +232,8 @@ var SInput = /** @class */ (function (_super) {
             this.getLabel(),
             React.createElement(SView, { col: "xs-12", row: true, center: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
-                React.createElement(SView, { flex: true },
-                    React.createElement(TextInput, __assign({ ref: function (ref) { _this.inpref = ref; }, value: valueFilter }, this.props, type.props, { style: __assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), onChangeText: this.onChangeText }))),
+                React.createElement(SView, { flex: true, height: true },
+                    React.createElement(TextInput, __assign({ ref: function (ref) { _this.inpref = ref; }, value: valueFilter }, this.props, type.props, { style: __assign(__assign(__assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), (this.props.color ? { color: this.props.color } : {})), this.props.style), onChangeText: this.onChangeText }))),
                 this.getIcon_r()),
             this.isRender(type)));
     };

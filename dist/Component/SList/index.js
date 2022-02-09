@@ -13,8 +13,21 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React, { Component } from 'react';
-import { SText, SView } from '../../index';
+import { SView } from '../../index';
+import SHr from '../SHr';
+import SOrdenador from '../SOrdenador';
 var SList = /** @class */ (function (_super) {
     __extends(SList, _super);
     function SList(props) {
@@ -22,9 +35,21 @@ var SList = /** @class */ (function (_super) {
         _this.state = {};
         return _this;
     }
+    SList.prototype.getData = function () {
+        var _this = this;
+        var _a;
+        return new SOrdenador((_a = this.props.order) !== null && _a !== void 0 ? _a : [{ key: "fecha_on", order: "desc", peso: 1 }]).ordernarObject(this.props.data).map(function (key, index) {
+            var _a;
+            var Item = _this.props.render(_this.props.data[key]);
+            if (!Item)
+                return null;
+            return React.createElement(React.Fragment, null,
+                Item,
+                React.createElement(SHr, { height: (_a = _this.props.space) !== null && _a !== void 0 ? _a : 8 }));
+        });
+    };
     SList.prototype.render = function () {
-        return (React.createElement(SView, { col: "xs-12", height: true },
-            React.createElement(SText, null, "List")));
+        return (React.createElement(SView, __assign({ col: "xs-12" }, this.props), this.getData()));
     };
     return SList;
 }(Component));

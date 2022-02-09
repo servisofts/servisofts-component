@@ -20,6 +20,7 @@ import DropFile from "./SInputTypes/DropFile";
 import SScrollView2 from "../SScrollView2";
 import SNavigation from "../SNavigation";
 import DropFileSingle from "./SInputTypes/DropFileSingle";
+import SIFecha_MY_Alert from "./SInputTypes/SIFecha_MY_Alert";
 var buildResp = function (data) {
     return data;
 };
@@ -31,6 +32,8 @@ export var Type = function (type, Parent) {
             return fecha(type, Parent);
         case "date":
             return fecha(type, Parent);
+        case "date_my":
+            return date_my(type, Parent);
         case "password":
             return password(type, Parent);
         case "phone":
@@ -88,11 +91,11 @@ var phone = function (type, Parent) {
             if (_value) {
                 var arr = _value.split(" ");
                 if (arr.length > 1) {
-                    console.log(arr[1]);
                     dialcode = SIDialCodeAlert.getDialCode(arr[0]);
+                    return dialcode.dialCode + " " + arr[1];
                 }
             }
-            return dialcode.dialCode + " " + text;
+            return text;
         },
         verify: function (value) {
             if (!value)
@@ -137,7 +140,13 @@ var phone = function (type, Parent) {
             var value = Parent.getValue();
             var arr = [];
             if (value) {
-                arr = value.split(" ");
+                if (value.indexOf("+") > -1) {
+                    arr = value.split(" ");
+                    console.log(arr);
+                }
+                else {
+                    arr = [dial.dialCode, value];
+                }
             }
             if (arr.length > 0) {
                 Parent.setValue(dial.dialCode + " " + arr[1]);
@@ -221,6 +230,39 @@ var fecha = function (type, Parent) {
             View: {},
             InputText: {},
             LabelStyle: {}
+        }
+    });
+};
+var date_my = function (type, Parent) {
+    var format = "yyyy-MM";
+    return buildResp({
+        props: {
+            editable: false,
+            // focusable: false,
+            pointerEvents: "none"
+        },
+        onPress: function () {
+            var value = new SDate(Parent.getValue() + "", "yyyy-MM");
+            SPopupOpen({
+                key: "fechaPicker",
+                content: React.createElement(SIFecha_MY_Alert, { props: {
+                        defaultValue: value
+                    }, onClose: function () {
+                        Parent.notifyBlur();
+                    }, onChange: function (val) {
+                        // console.log(val);
+                        Parent.setValue(val.toString(format));
+                    } })
+            });
+        },
+        style: {
+            View: {},
+            InputText: {},
+            LabelStyle: {}
+        },
+        filter: function (_value) {
+            var value = new SDate(_value + "", "yyyy-MM");
+            return value.toString("yyyy-MM");
         }
     });
 };
@@ -381,10 +423,9 @@ var image = function (type, Parent) {
                     bgColor = customStyle.View.backgroundColor;
                 }
             }
-            return React.createElement(SView, { center: true, height: true },
+            return React.createElement(SView, { col: "xs-12", center: true, height: true },
                 React.createElement(SView, { style: {
                         overflow: 'hidden',
-                        borderRadius: 4,
                         backgroundColor: STheme.color.card
                     }, height: true, colSquare: true },
                     React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {

@@ -8,6 +8,7 @@ declare type PropsType = {
     };
     onRegionChangeComplete?: (region: any) => void;
     onPress?: (event: any) => void;
+    preventCenter?: boolean;
 };
 declare class SMapView extends Component<PropsType> {
     mapa: any;

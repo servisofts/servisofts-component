@@ -43,7 +43,7 @@ export default class SPopupComponent extends Component<SPopupComponentProps> {
                 width: "100%",
                 height: "100%",
                 position: "absolute",
-                backgroundColor: STheme.color.secondary+"22",
+                backgroundColor: STheme.color.card,
                 justifyContent: "center",
                 alignItems: "center",
                 // ...this.props.style

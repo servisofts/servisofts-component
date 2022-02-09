@@ -1,5 +1,16 @@
 import { Component } from 'react';
-export default class SMapView extends Component {
+declare type PropsType = {
+    initialRegion: {
+        latitude: number;
+        longitude: number;
+        latitudeDelta: number;
+        longitudeDelta: number;
+    };
+    onRegionChangeComplete?: (region: any) => void;
+    onPress?: (event: any) => void;
+    preventCenter?: boolean;
+};
+export default class SMapView extends Component<PropsType> {
     mapa: any;
     state: any;
     constructor(props: any);
@@ -9,3 +20,4 @@ export default class SMapView extends Component {
     fitToCoordinates(arr: any, props: any): void;
     render(): JSX.Element;
 }
+export {};

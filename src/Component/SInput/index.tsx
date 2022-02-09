@@ -15,6 +15,7 @@ export type TypeInputProps = {
     isRequired?: Boolean,
     variant?: TypeVariant,
     col?: SColType,
+    color?: any,
     defaultValue?: any,
     placeholder?: any,
     icon?: any,
@@ -64,7 +65,7 @@ export class SInput extends Component<TypeInputProps> {
         };
     }
     componentDidMount(): void {
-   
+
     }
     getComponent() {
         return <SInput {...this.props} onChangeText={(vak) => {
@@ -216,7 +217,6 @@ export class SInput extends Component<TypeInputProps> {
         </SView>
     }
     render() {
-
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;
@@ -260,7 +260,6 @@ export class SInput extends Component<TypeInputProps> {
                     ...(!this.props.label ? { marginTop: this.props.separation } : {}),
                 }}
             >
-
                 {this.getLabel()}
                 <SView
                     col={"xs-12"}
@@ -268,7 +267,7 @@ export class SInput extends Component<TypeInputProps> {
                     center
                     style={{ flex: 1, height: "100%", }}>
                     {this.getIcon()}
-                    <SView flex>
+                    <SView flex height>
                         <TextInput
                             ref={(ref) => { this.inpref = ref }}
                             value={valueFilter}
@@ -280,7 +279,8 @@ export class SInput extends Component<TypeInputProps> {
                                 outline: "none",
                                 ...customStyle["InputText"],
                                 ...type.style.InputText,
-                                // ...this.props.style,
+                                ...(this.props.color ? { color: this.props.color } : {}),
+                                ...this.props.style,
                             }}
                             onChangeText={this.onChangeText}
                         />

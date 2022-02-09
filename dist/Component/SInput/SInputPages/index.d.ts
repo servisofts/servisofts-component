@@ -1,5 +1,5 @@
-import Fecha from "./Fecha";
+import Direccion from "./Direccion";
 declare const SInputPages: {
-    sc_direccion: typeof Fecha;
+    sc_direccion: typeof Direccion;
 };
 export default SInputPages;

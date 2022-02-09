@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 import React, { Component } from 'react';
 import { Animated, } from 'react-native';
 import { SInput } from '../..';
-import { SView } from '../../../../';
+import { SView } from '../../../..';
 import SIcon from '../../../SIcon';
 import SText from '../../../SText';
 import STheme from '../../../STheme';

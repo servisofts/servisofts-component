@@ -222,8 +222,7 @@ export default class STable extends Component<SType> {
                         }}
                         header={{
                             style: {
-
-                                height: 25,
+                                height: 30,
                             },
                             content: (
                                 <SHeader

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ViewStyle, Animated } from 'react-native';
 import SAPanResponder from '../../SAnimated/SAPanResponder';
+import STheme from '../../STheme';
 import Scroll from '../Scroll';
 
 type typeScroll = {
@@ -142,7 +143,7 @@ class Indicator extends Component<typeScroll> {
                     width: "100%",
                     height: "100%",
                     borderRadius: 100,
-                    backgroundColor: "#66666699",
+                    backgroundColor: STheme.color.card,
                 }}>
 
                 </View>

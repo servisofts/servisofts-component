@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { HeaderProps } from './Header';
 declare type SType = {
-    header: [HeaderProps];
+    header: Array<HeaderProps>;
     data: [Object] | Object;
     debug?: Boolean;
     filter?: (data: String, id?: any) => boolean;

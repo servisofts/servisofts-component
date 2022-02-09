@@ -43,14 +43,14 @@ export declare class SAnimated extends Component<typeProps> {
                 opacity?: number;
                 testID?: string;
                 elevation?: number;
-                alignContent?: "center" | "space-around" | "flex-start" | "flex-end" | "space-between" | "stretch";
+                alignContent?: "center" | "flex-start" | "flex-end" | "stretch" | "space-between" | "space-around";
                 alignItems: import("react-native").FlexAlignType;
-                alignSelf?: "auto" | import("react-native").FlexAlignType;
+                alignSelf?: import("react-native").FlexAlignType | "auto";
                 aspectRatio?: number;
                 borderEndWidth?: string | number;
                 borderStartWidth?: string | number;
                 bottom?: string | number;
-                display?: "flex" | "none";
+                display?: "none" | "flex";
                 end?: string | number;
                 flex?: number;
                 flexBasis?: string | number;
@@ -59,7 +59,7 @@ export declare class SAnimated extends Component<typeProps> {
                 flexShrink?: number;
                 flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
                 height?: string | number;
-                justifyContent: "center" | "space-around" | "flex-start" | "flex-end" | "space-between" | "space-evenly";
+                justifyContent: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly";
                 left?: string | number;
                 margin?: string | number;
                 marginBottom?: string | number;
@@ -74,7 +74,7 @@ export declare class SAnimated extends Component<typeProps> {
                 maxWidth?: string | number;
                 minHeight?: string | number;
                 minWidth?: string | number;
-                overflow?: "hidden" | "visible" | "scroll";
+                overflow?: "hidden" | "scroll" | "visible";
                 padding?: string | number;
                 paddingBottom?: string | number;
                 paddingEnd?: string | number;
@@ -90,7 +90,7 @@ export declare class SAnimated extends Component<typeProps> {
                 top?: string | number;
                 width?: string | number;
                 zIndex?: number;
-                direction?: "ltr" | "rtl" | "inherit";
+                direction?: "inherit" | "ltr" | "rtl";
                 shadowColor?: string;
                 shadowOffset?: {
                     width: number;

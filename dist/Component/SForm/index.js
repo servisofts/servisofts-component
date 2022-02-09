@@ -150,7 +150,11 @@ var SForm = /** @class */ (function (_super) {
                 focus = true;
                 readyFocus = true;
             }
-            return React.createElement(SInput, __assign({ autoFocus: focus, ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
+            return React.createElement(SInput
+            // autoFocus={focus}
+            , __assign({ 
+                // autoFocus={focus}
+                ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
         });
     };
     SForm.prototype.render = function () {

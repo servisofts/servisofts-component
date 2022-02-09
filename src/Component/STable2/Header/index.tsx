@@ -7,23 +7,24 @@ import SPopup from '../../SPopup';
 import HAjustes from '../HAjustes';
 
 export type HeaderProps = {
-    label: String,
+    label: string,
     key: string,
     width?: number,
     index?: number,
     space?: number,
-    hidden?: Boolean,
-    editable?: Boolean,
+    hidden?: boolean,
+    editable?: boolean,
     order?: "asc" | "desc",
     orderPriority?: number,
-    // type?: SInputType,
     component?: any,
     options?: Array<any>,
     render?: (data: any, id?: any) => {},
+    sumar?: boolean,
     animWidth?: Animated.Value,
-    changeHF: any,
-    key_header: any,
+    changeHF?: any,
+    key_header?: any,
     filter_h?: any,
+    total?: number,
 }
 class Header extends Component<HeaderProps> {
     pan;
@@ -63,7 +64,7 @@ class Header extends Component<HeaderProps> {
         }} onPress={() => {
             SPopup.open({ key: "hp", content: <HAjustes key_header={this.props.key_header} {...this.props} /> })
         }}>
-            <SIcon name={this.props.filter_h?"Ajustes":"Engranaje"} fill={STheme.color.secondary + "66"} width={10} />
+            <SIcon name={this.props.filter_h ? "Ajustes" : "Engranaje"} fill={STheme.color.secondary + "66"} width={10} />
         </SView>
     }
     render() {
@@ -81,14 +82,17 @@ class Header extends Component<HeaderProps> {
                         overflow: 'hidden',
                     }}>
                     <SView row center>
-                        <SText fontSize={11} font={"Roboto-Bold"}>{this.props.label}</SText>
+                        <SText fontSize={12} font={"Roboto-Bold"}>{this.props.label}</SText>
+
                         {this.props.order ? <SView width={14} center style={{
                             transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }],
                         }}>
                             <SIcon name={"Arrow"} fill={STheme.color.secondary} width={10} />
                         </SView> : null}
                     </SView>
-
+                    <SView row center>
+                        <SText fontSize={12} font={"Roboto"}>{this.props.total}</SText>
+                    </SView>
                     <SView
                         {...this.pan.getPanHandlers()}
                         animated

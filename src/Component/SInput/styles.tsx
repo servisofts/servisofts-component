@@ -6,7 +6,7 @@ import { STheme } from "../../index"
 //Tamanhos y fomas
 
 
-type Typesp = "default" | "primary" | "secondary" | "calistenia" | "bateon" | "kolping"
+type Typesp = "default" | "primary" | "secondary" | "calistenia" | "bateon" | "kolping" | "yoalquilo"
 
 
 export type TypeStyles = Typesp | [Typesp]
@@ -58,17 +58,18 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.lightGray,
                     borderRadius: 10,
                     marginTop: 32,
-                    paddingStart: 8,
+                    // paddingStart: 8,
                     height: 50,
 
                 },
                 "LabelStyle": {
+                    position: "absolute",
+                    top: -10,
+                    left: 0,
                     fontSize: 14,
                     width: "100%",
-                    height: 0,
                     color: STheme.color.text,
                     fontFamily: "LondonBetween",
-                    display: 'none',
                     // backgroundColor:STheme.color.primary+"22",
                     // borderRadius:4,
                     // padding:4,
@@ -76,13 +77,61 @@ const getType = (type: TypeStyles) => {
                 },
                 "InputText": {
                     fontSize: 14,
+                    paddingTop:4,
                     color: STheme.color.text,
                     fontFamily: "LondonBetween",
                     paddingStart: 4,
-                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text+"66" }),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: "100%",
+                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" }),
                 },
                 "placeholder": {
-                    color: STheme.color.text+"66"
+                    color: STheme.color.text + "66"
+                },
+                "error": {
+                    borderColor: STheme.color.danger,
+                    // color: STheme.color.primary + "66"
+                },
+            }
+        case "yoalquilo":
+            return {
+                "View": {
+                    backgroundColor: STheme.color.card,
+                    borderRadius: 10,
+                    marginTop: 42,
+                    borderWidth: 1,
+                    borderColor: STheme.color.card,
+                    // paddingStart: 8,
+                    height: 45,
+
+                },
+                "LabelStyle": {
+                    position: "absolute",
+                    top: -10,
+                    left: 2,
+                    fontSize: 14,
+                    width: "100%",
+                    color: STheme.color.text,
+                    fontFamily: "Roboto",
+                    // backgroundColor:STheme.color.primary+"22",
+                    // borderRadius:4,
+                    // padding:4,
+
+                },
+                "InputText": {
+                    fontSize: 14,
+                    paddingTop:4,
+                    color: STheme.color.text,
+                    fontFamily: "Roboto",
+                    paddingStart: 8,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: "100%",
+                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" }),
+                },
+                "placeholder": {
+                    color: STheme.color.text + "66"
                 },
                 "error": {
                     borderColor: STheme.color.danger,

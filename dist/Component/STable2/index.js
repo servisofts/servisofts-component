@@ -45,6 +45,7 @@ var STable2 = /** @class */ (function (_super) {
             _this._HFilter = _this.state.HFilter;
             _this.state.lastData = dtStr;
             _this.state.data = {};
+            _this.state.totales = {};
             // this.setState({ isLoad: false });
             Object.keys(_this.props.data).map(function (key, index) {
                 if (_this.props.filter) {
@@ -73,6 +74,12 @@ var STable2 = /** @class */ (function (_super) {
                             delete _this.state.data[key];
                         }
                     }
+                    if (item.sumar) {
+                        if (!_this.state.totales[item.key]) {
+                            _this.state.totales[item.key] = 0;
+                        }
+                        _this.state.totales[item.key] += parseFloat(_this.state.data[key][item.key]);
+                    }
                 });
             });
             _this.state.data = _this.buscar(_this.state.data);
@@ -86,7 +93,7 @@ var STable2 = /** @class */ (function (_super) {
                 _this._animHeader[item.key] = new Animated.Value(item.width);
                 _this._animSize = Animated.add(_this._animSize, _this._animHeader[item.key]);
                 _this._animSize = Animated.add(_this._animSize, new Animated.Value(_this.state.space));
-                return React.createElement(Header, __assign({}, item, { filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
+                return React.createElement(Header, __assign({}, item, { total: _this.state.totales[item.key], filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
                         _this.state.HFilter[item.key] = filter;
                         _this.setState({ HFilter: __assign({}, _this.state.HFilter) });
                     } }));
@@ -141,7 +148,8 @@ var STable2 = /** @class */ (function (_super) {
             isLoad: false,
             data: {},
             buscador: "",
-            HFilter: {}
+            HFilter: {},
+            totales: {}
         };
         return _this;
     }
@@ -233,7 +241,7 @@ var STable2 = /** @class */ (function (_super) {
                     anims.setValue(_this.sizeW);
                 } },
                 React.createElement(SScrollView2, { ref: function (ref) { return _this.scroll = ref; }, header: {
-                        style: { height: 30 },
+                        style: { height: 40 },
                         content: React.createElement(SView, { col: "xs-12", row: true, height: true }, this.getHeader())
                     } },
                     React.createElement(SView, { animated: true, style: {

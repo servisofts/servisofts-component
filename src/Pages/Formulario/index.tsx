@@ -37,7 +37,6 @@ export default class Formulario extends Component {
             inputProps={{
                 customStyle: this.state.customStyle,
                 col: "xs-11 md-3.5",
-
             }}
             inputs={{
                 "default": { type: "default", label: "default", isRequired: true },

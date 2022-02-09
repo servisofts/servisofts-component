@@ -13,6 +13,7 @@ export declare type TypeInputProps = {
     isRequired?: Boolean;
     variant?: TypeVariant;
     col?: SColType;
+    color?: any;
     defaultValue?: any;
     placeholder?: any;
     icon?: any;

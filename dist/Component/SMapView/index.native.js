@@ -42,7 +42,9 @@ var SMapView = /** @class */ (function (_super) {
                     longitudeDelta: 0.002
                 };
                 // this.props.state.myUbicacionReducer.position = region;
-                _this.mapa.animateToRegion(region, 1000);
+                if (!_this.props.preventCenter) {
+                    _this.mapa.animateToRegion(region, 1000);
+                }
                 _this.setState({ position: region });
             }, function (error) {
                 console.log(error.code, error.message);
@@ -78,7 +80,7 @@ var SMapView = /** @class */ (function (_super) {
                     height: "100%",
                     flex: 1
                 }, initialRegion: this.state.region, 
-                // customMapStyle={MapStyle}
+                // customMapStyle={STheme.color.mapStyle}
                 showsUserLocation: true, showsMyLocationButton: false, provider: PROVIDER_GOOGLE }, this.props), this.props.children),
             React.createElement(TouchableOpacity, { style: {
                     position: "absolute",

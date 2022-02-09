@@ -10,12 +10,14 @@ import DropFile from "./SInputTypes/DropFile"
 import SScrollView2 from "../SScrollView2"
 import SNavigation from "../SNavigation"
 import DropFileSingle from "./SInputTypes/DropFileSingle"
+import SIFecha_MY_Alert from "./SInputTypes/SIFecha_MY_Alert"
 
 export type TypeType =
     "default"
     | "select"
     | "fecha"
     | "date"
+    | "date_my"
     | "password"
     | "email"
     | "phone"
@@ -54,6 +56,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return fecha(type, Parent);
         case "date":
             return fecha(type, Parent);
+        case "date_my":
+            return date_my(type, Parent);
         case "password":
             return password(type, Parent);
         case "phone":
@@ -112,11 +116,11 @@ const phone = (type: TypeType, Parent: SInput) => {
             if (_value) {
                 var arr = _value.split(" ");
                 if (arr.length > 1) {
-                    console.log(arr[1])
                     dialcode = SIDialCodeAlert.getDialCode(arr[0])
+                    return dialcode.dialCode + " " + arr[1];
                 }
             }
-            return dialcode.dialCode + " " + text;
+            return text;
         },
         verify: (value) => {
             if (!value) return false;
@@ -161,7 +165,12 @@ const phone = (type: TypeType, Parent: SInput) => {
                 var value = Parent.getValue();
                 var arr = []
                 if (value) {
-                    arr = value.split(" ");
+                    if (value.indexOf("+") > -1) {
+                        arr = value.split(" ");
+                        console.log(arr)
+                    } else {
+                        arr = [dial.dialCode, value];
+                    }
                 }
                 if (arr.length > 0) {
                     Parent.setValue(dial.dialCode + " " + arr[1])
@@ -257,6 +266,46 @@ const fecha = (type: TypeType, Parent: SInput) => {
             },
             LabelStyle: {}
         }
+    })
+}
+const date_my = (type: TypeType, Parent: SInput) => {
+    var format = "yyyy-MM";
+    return buildResp({
+        props: {
+            editable: false,
+            // focusable: false,
+            pointerEvents: "none",
+        },
+        onPress: () => {
+            var value = new SDate(Parent.getValue() + "", "yyyy-MM");
+            SPopupOpen({
+                key: "fechaPicker",
+                content: <SIFecha_MY_Alert
+                    props={{
+                        defaultValue: value,
+                    }}
+                    onClose={() => {
+                        Parent.notifyBlur();
+                    }}
+                    onChange={(val) => {
+                        // console.log(val);
+                        Parent.setValue(val.toString(format));
+                    }} />
+            })
+        },
+        style: {
+            View: {
+
+            },
+            InputText: {
+
+            },
+            LabelStyle: {}
+        },
+        filter: (_value: String) => {
+            var value = new SDate(_value + "", "yyyy-MM");
+            return value.toString("yyyy-MM");
+        },
     })
 }
 const select = (type: TypeType, Parent: SInput) => {
@@ -407,7 +456,7 @@ const image = (type: TypeType, Parent: SInput) => {
         style: {
             View: {
                 backgroundColor: "transparent",
-                height: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
+                height: Parent.getOption("height") == "default" ? 100 : Parent.getOption("height"),
                 // width: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
             },
             InputText: {
@@ -422,10 +471,9 @@ const image = (type: TypeType, Parent: SInput) => {
                     bgColor = customStyle.View.backgroundColor;
                 }
             }
-            return <SView center height >
+            return <SView col={"xs-12"} center height >
                 <SView style={{
                     overflow: 'hidden',
-                    borderRadius: 4,
                     backgroundColor: STheme.color.card,
                 }} height colSquare>
                     <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {

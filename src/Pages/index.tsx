@@ -7,6 +7,8 @@ import STablePage from "./STablePage";
 import SGradientPage from "./SGradientPage";
 import SInputPages from "../Component/SInput/SInputPages";
 import SViewPage from "./SViewPage";
+import Docs from "./Docs";
+import NewTable from "./NewTable";
 const Pages: SPageListProps = {
     "scomponent": { component: Inicio },
     "scomponent/SIcon": { component: SIconPage },
@@ -15,6 +17,8 @@ const Pages: SPageListProps = {
     "scomponent/STable": { component: STablePage },
     "scomponent/SGradient": { component: SGradientPage },
     "scomponent/SView": SViewPage,
+    "scomponent/docs": Docs,
+    "scomponent/NewTable": NewTable,
     ...SInputPages
 }
 export default Pages;

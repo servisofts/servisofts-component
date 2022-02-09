@@ -48,18 +48,47 @@ var getType = function (type) {
                     borderColor: STheme.color.lightGray,
                     borderRadius: 10,
                     marginTop: 32,
-                    paddingStart: 8,
+                    // paddingStart: 8,
                     height: 50
                 },
                 "LabelStyle": {
+                    position: "absolute",
+                    top: -10,
+                    left: 0,
                     fontSize: 14,
                     width: "100%",
-                    height: 0,
                     color: STheme.color.text,
-                    fontFamily: "LondonBetween",
-                    display: 'none'
+                    fontFamily: "LondonBetween"
                 },
-                "InputText": __assign({ fontSize: 14, color: STheme.color.text, fontFamily: "LondonBetween", paddingStart: 4 }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" })),
+                "InputText": __assign({ fontSize: 14, paddingTop: 4, color: STheme.color.text, fontFamily: "LondonBetween", paddingStart: 4, justifyContent: 'center', alignItems: 'center', height: "100%" }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" })),
+                "placeholder": {
+                    color: STheme.color.text + "66"
+                },
+                "error": {
+                    borderColor: STheme.color.danger
+                }
+            };
+        case "yoalquilo":
+            return {
+                "View": {
+                    backgroundColor: STheme.color.card,
+                    borderRadius: 10,
+                    marginTop: 42,
+                    borderWidth: 1,
+                    borderColor: STheme.color.card,
+                    // paddingStart: 8,
+                    height: 45
+                },
+                "LabelStyle": {
+                    position: "absolute",
+                    top: -10,
+                    left: 2,
+                    fontSize: 14,
+                    width: "100%",
+                    color: STheme.color.text,
+                    fontFamily: "Roboto"
+                },
+                "InputText": __assign({ fontSize: 14, paddingTop: 4, color: STheme.color.text, fontFamily: "Roboto", paddingStart: 8, justifyContent: 'center', alignItems: 'center', height: "100%" }, (Platform.OS != "web" ? {} : { placeholderTextColor: STheme.color.text + "66" })),
                 "placeholder": {
                     color: STheme.color.text + "66"
                 },

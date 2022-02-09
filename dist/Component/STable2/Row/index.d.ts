@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { HeaderProps } from '../Header';
 declare type typeProps = {
-    header: [HeaderProps];
+    header: Array<HeaderProps>;
     data: Object;
     animHeader: any;
     animSize: any;

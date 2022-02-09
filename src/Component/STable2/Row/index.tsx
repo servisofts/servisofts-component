@@ -6,7 +6,7 @@ import SView from '../../SView';
 import { HeaderProps } from '../Header';
 
 type typeProps = {
-    header: [HeaderProps],
+    header: Array<HeaderProps>,
     data: Object,
     animHeader: any,
     animSize: any,
@@ -82,7 +82,7 @@ class Row extends Component<typeProps> {
                             justifyContent: 'center',
                             width: "100%",
                         }}>
-                        {ITEM}
+                            {ITEM}
                     </SView>
                 </SView>
             </>

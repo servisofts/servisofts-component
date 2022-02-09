@@ -1,5 +1,5 @@
 import { Component } from 'react';
-declare class Fecha extends Component {
+declare class Direccion extends Component {
     direccion: any;
     latitude: any;
     longitude: any;
@@ -7,4 +7,4 @@ declare class Fecha extends Component {
     getIcon(): JSX.Element;
     render(): JSX.Element;
 }
-export default Fecha;
+export default Direccion;

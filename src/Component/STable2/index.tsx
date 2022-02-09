@@ -11,7 +11,7 @@ import Row from './Row';
 
 
 type SType = {
-    header: [HeaderProps],
+    header: Array<HeaderProps>,
     data: [Object] | Object,
     debug?: Boolean,
     filter?: (data: String, id?: any) => boolean,
@@ -39,6 +39,7 @@ export default class STable2 extends Component<SType> {
             data: {},
             buscador: "",
             HFilter: {},
+            totales: {},
         };
 
     }
@@ -112,6 +113,7 @@ export default class STable2 extends Component<SType> {
         this._HFilter = this.state.HFilter;
         this.state.lastData = dtStr;
         this.state.data = {};
+        this.state.totales={};
         // this.setState({ isLoad: false });
         Object.keys(this.props.data).map((key, index) => {
             if (this.props.filter) {
@@ -127,6 +129,7 @@ export default class STable2 extends Component<SType> {
                 if (item.render) {
                     this.state.data[key][item.key] = item.render(this.state.data[key][item.key]);
                 }
+
                 if (this.state.HFilter[item.key]) {
                     var filtro = this.state.HFilter[item.key];
                     var expreg = new RegExp(filtro, "i");
@@ -138,6 +141,12 @@ export default class STable2 extends Component<SType> {
                         isValid = false;
                         delete this.state.data[key];
                     }
+                }
+                if (item.sumar) {
+                    if (!this.state.totales[item.key]) {
+                        this.state.totales[item.key] = 0;
+                    }
+                    this.state.totales[item.key] += parseFloat(this.state.data[key][item.key]);
                 }
             })
         })
@@ -154,7 +163,7 @@ export default class STable2 extends Component<SType> {
             this._animHeader[item.key] = new Animated.Value(item.width);
             this._animSize = Animated.add(this._animSize, this._animHeader[item.key]);
             this._animSize = Animated.add(this._animSize, new Animated.Value(this.state.space));
-            return <Header {...item} filter_h={this.state.HFilter[item.key]} key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space} changeHF={(filter) => {
+            return <Header {...item} total={this.state.totales[item.key]} filter_h={this.state.HFilter[item.key]} key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space} changeHF={(filter) => {
                 this.state.HFilter[item.key] = filter;
                 this.setState({ HFilter: { ...this.state.HFilter } });
             }} />
@@ -232,13 +241,13 @@ export default class STable2 extends Component<SType> {
                         backgroundColor: STheme.color.primary + "BB",
                         borderRadius: 4,
                         paddingLeft: 8,
-                    }} 
-                    icon={<SIcon name={"Search"} width={16} fill={STheme.color.secondary} />}
-                    onChangeText={(txt) => {
-                        new SThread(400, "tbl_buscar", true).start(() => {
-                            this.setState({ buscador: txt });
-                        })
-                    }} />
+                    }}
+                        icon={<SIcon name={"Search"} width={16} fill={STheme.color.secondary} />}
+                        onChangeText={(txt) => {
+                            new SThread(400, "tbl_buscar", true).start(() => {
+                                this.setState({ buscador: txt });
+                            })
+                        }} />
                 </SView>
                 <SView col={"xs-12"} flex center
                     onLayout={(e) => {
@@ -250,7 +259,7 @@ export default class STable2 extends Component<SType> {
                     <SScrollView2
                         ref={(ref) => this.scroll = ref}
                         header={{
-                            style: { height: 30 },
+                            style: { height: 40 },
                             content: <SView col={"xs-12"} row height>
                                 {this.getHeader()}
                             </SView>

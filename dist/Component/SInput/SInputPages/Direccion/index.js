@@ -14,13 +14,13 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { SMapView, SPage, SView } from '../../../../';
+import { SMapView, SPage, SView } from '../../../..';
 import SIcon from '../../../SIcon';
 import SNavigation from '../../../SNavigation';
 import ListaDireccion from './ListaDireccion';
-var Fecha = /** @class */ (function (_super) {
-    __extends(Fecha, _super);
-    function Fecha(props) {
+var Direccion = /** @class */ (function (_super) {
+    __extends(Direccion, _super);
+    function Direccion(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {};
         _this.direccion = SNavigation.getParam('direccion', "");
@@ -28,7 +28,7 @@ var Fecha = /** @class */ (function (_super) {
         _this.longitude = SNavigation.getParam('lng', -63.1775);
         return _this;
     }
-    Fecha.prototype.getIcon = function () {
+    Direccion.prototype.getIcon = function () {
         return React.createElement(SView, { style: {
                 position: 'absolute',
                 width: 30,
@@ -37,7 +37,7 @@ var Fecha = /** @class */ (function (_super) {
             } },
             React.createElement(SIcon, { name: "Marker" }));
     };
-    Fecha.prototype.render = function () {
+    Direccion.prototype.render = function () {
         return (React.createElement(SPage, { title: "Direccion", disableScroll: true },
             React.createElement(SView, { col: "xs-12", center: true, flex: true },
                 React.createElement(SView, { col: "xs-12", height: true, center: true },
@@ -46,10 +46,12 @@ var Fecha = /** @class */ (function (_super) {
                             longitude: this.longitude,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421
+                        }, onRegionChangeComplete: function (region) {
+                            console.log(region);
                         } }),
                     this.getIcon()),
                 React.createElement(ListaDireccion, { direccion: this.direccion }))));
     };
-    return Fecha;
+    return Direccion;
 }(Component));
-export default Fecha;
+export default Direccion;

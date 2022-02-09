@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { SMapView, SPage, SView } from '../../../../';
+import { SMapView, SPage, SView } from '../../../..';
 import SIcon from '../../../SIcon';
 import SNavigation from '../../../SNavigation';
 import ListaDireccion from './ListaDireccion';
 
-class Fecha extends Component {
+class Direccion extends Component {
     direccion;
     latitude;
     longitude;
@@ -36,7 +36,11 @@ class Fecha extends Component {
                             longitude: this.longitude,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421
-                        }} />
+                        }}
+                        
+                        onRegionChangeComplete={(region)=>{
+                            console.log(region)
+                        }}/>
                         {this.getIcon()}
                     </SView>
                     <ListaDireccion direccion={this.direccion} />
@@ -46,4 +50,4 @@ class Fecha extends Component {
         );
     }
 }
-export default Fecha;
+export default Direccion;

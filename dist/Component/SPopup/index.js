@@ -101,7 +101,7 @@ var SPopup = /** @class */ (function (_super) {
         return Object.keys(this.state.data).map(function (key) {
             var obj = _this.state.data[key];
             var style = _this.state.style[key];
-            return React.createElement(SPopupComponent, { style: style, close: function () { _this.close(key); } },
+            return React.createElement(SPopupComponent, { style: __assign({}, style), close: function () { _this.close(key); } },
                 React.createElement(TouchableWithoutFeedback, null, obj));
         });
     };

@@ -78,11 +78,13 @@ var Header = /** @class */ (function (_super) {
                     overflow: 'hidden'
                 } },
                 React.createElement(SView, { row: true, center: true },
-                    React.createElement(SText, { fontSize: 11, font: "Roboto-Bold" }, this.props.label),
+                    React.createElement(SText, { fontSize: 12, font: "Roboto-Bold" }, this.props.label),
                     this.props.order ? React.createElement(SView, { width: 14, center: true, style: {
                             transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }]
                         } },
                         React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary, width: 10 })) : null),
+                React.createElement(SView, { row: true, center: true },
+                    React.createElement(SText, { fontSize: 12, font: "Roboto" }, this.props.total)),
                 React.createElement(SView, __assign({}, this.pan.getPanHandlers(), { animated: true, style: {
                         position: "absolute",
                         right: 0,

@@ -8,6 +8,7 @@ type PropsType = {
     initialRegion: { latitude: number, longitude: number, latitudeDelta: number, longitudeDelta: number },
     onRegionChangeComplete?: (region: any) => void,
     onPress?: (event: any) => void,
+    preventCenter?: boolean,
 }
 class SMapView extends Component<PropsType> {
     mapa;

@@ -83,7 +83,9 @@ export default class SPopup extends Component {
             var obj = this.state.data[key];
             var style = this.state.style[key];
             return <SPopupComponent
-                style={style}
+                style={{
+                    ...style
+                }}
                 close={() => { this.close(key) }}
             >
                 <TouchableWithoutFeedback>

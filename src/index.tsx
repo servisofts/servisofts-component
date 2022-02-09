@@ -31,6 +31,7 @@ import SMapView from "./Component/SMapView";
 import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
 import Font from "./font";
+import SBuscador from "./Component/SBuscador";
 export * from './Types'
 export {
     SHr,
@@ -53,6 +54,7 @@ export {
     SUuid,
     SImage,
     SList,
+    SBuscador,
     SView,
     SLoad,
     SStorage,

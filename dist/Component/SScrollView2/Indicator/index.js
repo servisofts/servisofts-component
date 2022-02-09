@@ -63,6 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 import SAPanResponder from '../../SAnimated/SAPanResponder';
+import STheme from '../../STheme';
 var Indicator = /** @class */ (function (_super) {
     __extends(Indicator, _super);
     function Indicator(props) {
@@ -214,7 +215,7 @@ var Indicator = /** @class */ (function (_super) {
                         width: "100%",
                         height: "100%",
                         borderRadius: 100,
-                        backgroundColor: "#66666699"
+                        backgroundColor: STheme.color.card
                     } })));
     };
     Indicator.prototype.createPanMove = function () {

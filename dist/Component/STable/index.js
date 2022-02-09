@@ -189,7 +189,7 @@ var STable = /** @class */ (function (_super) {
                         minWidth: "100%"
                     }, header: {
                         style: {
-                            height: 25
+                            height: 30
                         },
                         content: (React.createElement(SHeader, __assign({ style: {
                                 backgroundColor: STheme.color.barColor,
