@@ -18,7 +18,7 @@ export declare type HeaderProps = {
     changeHF?: any;
     key_header?: any;
     filter_h?: any;
-    total?: number;
+    total?: any;
 };
 declare class Header extends Component<HeaderProps> {
     pan: any;

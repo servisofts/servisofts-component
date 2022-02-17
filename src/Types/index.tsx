@@ -44,6 +44,15 @@ type SAssets = {
         }
     }
 }
+type SInputsCofig = {
+    [name: string]: {
+        View?: any,
+        LabelStyle?: any,
+        InputText?: any,
+        placeholder?: any,
+        error?: any,
+    }
+}
 
 
 export type {
@@ -53,5 +62,6 @@ export type {
     SComponentContainerProps,
     SNavigationProps, SPageProps, SPageListProps,
     SThemeColors, SThemeOptions, SThemeProps, SThemeThemes,
-    SAssets
+    SAssets,
+    SInputsCofig
 }

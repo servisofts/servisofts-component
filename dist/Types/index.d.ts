@@ -20,4 +20,13 @@ declare type SAssets = {
         };
     };
 };
-export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes, SAssets };
+declare type SInputsCofig = {
+    [name: string]: {
+        View?: any;
+        LabelStyle?: any;
+        InputText?: any;
+        placeholder?: any;
+        error?: any;
+    };
+};
+export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes, SAssets, SInputsCofig };

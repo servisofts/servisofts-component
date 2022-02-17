@@ -8,6 +8,7 @@ import { SAssets } from '../../Types';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
 import SPage from '../SPage';
+import { SInputsCofig } from "../../Types/index"
 
 export type SComponentContainerProps = {
     theme?: SThemeProps,
@@ -15,6 +16,7 @@ export type SComponentContainerProps = {
     debug?: boolean,
     socket?: any,
     assets?: SAssets,
+    inputs?: SInputsCofig,
 }
 
 
@@ -30,6 +32,12 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     public static removeGrid(key: string) {
         if (!this.Instance) return;
         delete this.GridListen[key];
+    }
+    public static getInputsConfig() {
+        if (!this.Instance) {
+            return null;
+        }
+        return this.Instance.props.inputs;
     }
     layout;
     state;
@@ -49,6 +57,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
 
         }
     }
+
     onChangeSize(layout) {
         this.layout = layout;
         var curMedida = "";
@@ -107,6 +116,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         )
     }
     render() {
+        SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} onLoad={(color: SThemeColors) => {
                 if (this.state.theme != color) {

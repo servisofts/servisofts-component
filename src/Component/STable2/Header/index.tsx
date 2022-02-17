@@ -24,7 +24,7 @@ export type HeaderProps = {
     changeHF?: any,
     key_header?: any,
     filter_h?: any,
-    total?: number,
+    total?: any,
 }
 class Header extends Component<HeaderProps> {
     pan;
@@ -91,7 +91,7 @@ class Header extends Component<HeaderProps> {
                         </SView> : null}
                     </SView>
                     <SView row center>
-                        <SText fontSize={12} font={"Roboto"}>{this.props.total}</SText>
+                        <SText fontSize={12} font={"Roboto"}>{this.props.total?parseFloat(this.props.total ?? 0).toFixed(2):""}</SText>
                     </SView>
                     <SView
                         {...this.pan.getPanHandlers()}

@@ -8,7 +8,7 @@ export default class submit extends Component {
         form.setAttribute("enctype", "multipart/form-data");
 
         var body = new FormData(form);
-
+        
         var dataInner = [];
         if (!files) {
             console.log("NO HAY FILES");

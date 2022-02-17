@@ -20,7 +20,7 @@ var Formulario = /** @class */ (function (_super) {
     function Formulario(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            customStyle: "calistenia"
+            customStyle: "default"
         };
         return _this;
     }

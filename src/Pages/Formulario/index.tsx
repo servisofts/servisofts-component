@@ -7,7 +7,7 @@ export default class Formulario extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customStyle: "calistenia"
+            customStyle: "default"
         };
     }
 

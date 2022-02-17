@@ -5,13 +5,15 @@ import { STheme } from "../../index"
 // En los estilos NO SE DEVE colocar
 //Tamanhos y fomas
 
-
+import SComponentContainer from "../SComponentContainer"
 type Typesp = "default" | "primary" | "secondary" | "calistenia" | "bateon" | "kolping" | "yoalquilo"
 
 
 export type TypeStyles = Typesp | [Typesp]
 
-const getType = (type: TypeStyles) => {
+const getType = (type) => {
+    let typesConfig: any = SComponentContainer.getInputsConfig() ?? {};
+
     switch (type) {
         case "calistenia":
             return {
@@ -77,7 +79,7 @@ const getType = (type: TypeStyles) => {
                 },
                 "InputText": {
                     fontSize: 14,
-                    paddingTop:4,
+                    paddingTop: 4,
                     color: STheme.color.text,
                     fontFamily: "LondonBetween",
                     paddingStart: 4,
@@ -121,7 +123,7 @@ const getType = (type: TypeStyles) => {
                 },
                 "InputText": {
                     fontSize: 14,
-                    paddingTop:4,
+                    paddingTop: 4,
                     color: STheme.color.text,
                     fontFamily: "Roboto",
                     paddingStart: 8,
@@ -202,6 +204,7 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.danger,
                     // color: STheme.color.primary + "66"
                 },
+                ...typesConfig.secondary ?? {}
             }
         case "primary":
             return {
@@ -236,8 +239,12 @@ const getType = (type: TypeStyles) => {
                     borderColor: STheme.color.danger
                     // color: STheme.color.primary + "66"
                 },
+                ...typesConfig.primary ?? {}
             }
         default:
+            if (type != "default" && typesConfig[type]) {
+                return typesConfig[type];
+            }
             return {
                 "View": {
                 },
@@ -248,10 +255,12 @@ const getType = (type: TypeStyles) => {
                     color: STheme.color.secondary,
                 },
                 "placeholder": {
+
                 },
                 "error": {
                     borderColor: STheme.color.danger,
                 },
+                ...typesConfig.default ?? {}
             }
     }
 }

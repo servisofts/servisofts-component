@@ -60,6 +60,12 @@ var SComponentContainer = /** @class */ (function (_super) {
             return;
         delete this.GridListen[key];
     };
+    SComponentContainer.getInputsConfig = function () {
+        if (!this.Instance) {
+            return null;
+        }
+        return this.Instance.props.inputs;
+    };
     SComponentContainer.prototype.onChangeSize = function (layout) {
         var _this = this;
         this.layout = layout;
@@ -118,6 +124,7 @@ var SComponentContainer = /** @class */ (function (_super) {
     };
     SComponentContainer.prototype.render = function () {
         var _this = this;
+        SComponentContainer.Instance = this;
         return (React.createElement(STheme, __assign({}, this.props.theme, { onLoad: function (color) {
                 if (_this.state.theme != color) {
                     _this.setState({ theme: color });
