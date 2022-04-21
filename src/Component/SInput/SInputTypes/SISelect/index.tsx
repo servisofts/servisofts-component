@@ -120,10 +120,19 @@ export default class SISelect extends Component<typeProps> {
                 </SText>
             } else {
                 keyObj = obj.key;
-                Content = obj.content
-                if (typeof obj.content != "object") {
-                    Content = <SText>{obj.content}</SText>
+                if (obj.content) {
+                    Content = obj.content
+                    if (typeof obj.content != "object") {
+                        Content = <SText>{obj.content}</SText>
+                    }
                 }
+                if (obj.component) {
+                    Content = obj.component
+                    if (typeof obj.component != "object") {
+                        Content = <SText>{obj.component}</SText>
+                    }
+                }
+
             }
             return (<SView
                 center

@@ -23,6 +23,9 @@ export default class SForm extends Component<SFromProps> {
     state: any;
     constructor(props: any);
     verify(): boolean;
+    clear(): this;
+    setValues(obj: any): void;
+    getValues(): {};
     focus(key: any): void;
     getFiles(): any;
     uploadFiles(url: any): void;

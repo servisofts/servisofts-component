@@ -55,8 +55,8 @@ declare module 'react-native-image-picker' {
 
 
 declare module 'react-native-maps' {
-    import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-    export { Marker, PROVIDER_GOOGLE };
+    import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
+    export { Marker, PROVIDER_GOOGLE, Polyline };
     export default MapView;
 }
 

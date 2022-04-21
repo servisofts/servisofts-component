@@ -28,8 +28,9 @@ export default class Inicio extends Component {
             {this.getIcon({ name: "STable", page: "scomponent/STable", icon: "Excel" })}
             {this.getIcon({ name: "NewTable", page: "scomponent/NewTable", icon: "Excel" })}
             {this.getIcon({ name: "SGradient", page: "scomponent/SGradient", icon: "Box" })}
-            {this.getIcon({ name: "SGradient", page: "scomponent/SGradient", icon: "Entrenamiento" })}
             {this.getIcon({ name: "SView", page: "scomponent/SView", icon: "Box" })}
+            {this.getIcon({ name: "SDate", page: "scomponent/SDate", icon: "Calendar" })}
+            {this.getIcon({ name: "SLocation", page: "scomponent/SLocation", icon: "Marker" })}
         </SView>
     }
     render() {

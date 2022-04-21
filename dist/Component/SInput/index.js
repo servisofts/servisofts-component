@@ -32,6 +32,7 @@ import { CustomStyles } from './styles';
 var SInput = /** @class */ (function (_super) {
     __extends(SInput, _super);
     function SInput(props) {
+        var _a;
         var _this = _super.call(this, props) || this;
         _this.onChangeText = function (_text) {
             var text = _text;
@@ -61,8 +62,8 @@ var SInput = /** @class */ (function (_super) {
         //         ..._props.props
         //     };
         _this.state = {
-            value: _this.props.defaultValue,
-            error: false,
+            value: (_a = _this.props.value) !== null && _a !== void 0 ? _a : _this.props.defaultValue,
+            error: _this.props.error,
             data: {}
         };
         return _this;
@@ -197,6 +198,9 @@ var SInput = /** @class */ (function (_super) {
     SInput.prototype.render = function () {
         var _this = this;
         var _a;
+        if (this.props.value) {
+            this.state.value = this.props.value;
+        }
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;

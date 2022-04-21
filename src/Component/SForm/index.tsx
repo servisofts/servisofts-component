@@ -46,6 +46,28 @@ export default class SForm extends Component<SFromProps> {
         })
         return isValid;
     }
+    clear() {
+        var isValid = true;
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            input.setValue("");
+        })
+        return this;
+    }
+    setValues(obj) {
+        Object.keys(obj).map((key) => {
+            var input: SInput = this._ref[key];
+            input.setValue(obj[key]);
+        })
+    }
+    getValues() {
+        var obj = {};
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            obj[key] = input.getValue();
+        })
+        return obj;
+    }
     focus(key) {
         if (this._ref[key]) {
             this._ref[key].focus();

@@ -33,7 +33,12 @@ var SMapView = /** @class */ (function (_super) {
     __extends(SMapView, _super);
     function SMapView(props) {
         var _this = _super.call(this, props) || this;
-        _this.getposition = function () {
+        _this.center = function () {
+            _this.getposition(function (position) {
+                _this.mapa.animateToRegion(_this.state.position, 1000);
+            });
+        };
+        _this.getposition = function (callback) {
             Geolocation.getCurrentPosition(function (position) {
                 var region = {
                     latitude: position.coords.latitude,
@@ -41,10 +46,13 @@ var SMapView = /** @class */ (function (_super) {
                     latitudeDelta: 0.002,
                     longitudeDelta: 0.002
                 };
-                // this.props.state.myUbicacionReducer.position = region;
-                if (!_this.props.preventCenter) {
-                    _this.mapa.animateToRegion(region, 1000);
+                if (callback) {
+                    callback(region);
                 }
+                // this.props.state.myUbicacionReducer.position = region;
+                // if (!this.props.preventCenter) {
+                //     this.mapa.animateToRegion(region, 1000)
+                // }
                 _this.setState({ position: region });
             }, function (error) {
                 console.log(error.code, error.message);
@@ -74,14 +82,13 @@ var SMapView = /** @class */ (function (_super) {
     };
     SMapView.prototype.render = function () {
         var _this = this;
+        var _a, _b;
         return (React.createElement(React.Fragment, null,
             React.createElement(MapView, __assign({ ref: function (ref) { return _this.mapa = ref; }, style: {
                     width: "100%",
                     height: "100%",
                     flex: 1
-                }, initialRegion: this.state.region, 
-                // customMapStyle={STheme.color.mapStyle}
-                showsUserLocation: true, showsMyLocationButton: false, provider: PROVIDER_GOOGLE }, this.props), this.props.children),
+                }, initialRegion: this.state.region, showsUserLocation: (_a = this.props.showsUserLocation) !== null && _a !== void 0 ? _a : false, showsMyLocationButton: (_b = this.props.showsMyLocationButton) !== null && _b !== void 0 ? _b : false, provider: PROVIDER_GOOGLE }, this.props), this.props.children),
             React.createElement(TouchableOpacity, { style: {
                     position: "absolute",
                     bottom: 100,

@@ -13,6 +13,7 @@ import SView from "./Component/SView";
 import SStorage from './Component/SStorage';
 import SScrollView2 from "./Component/SScrollView2";
 import SScrollView3 from "./Component/SScrollView3";
+import SScroll from "./Component/SScroll";
 import { SInput } from "./Component/SInput";
 import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
@@ -31,5 +32,12 @@ import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
 import Font from "./font";
 import SBuscador from "./Component/SBuscador";
+import SMath from "./Component/SMath";
+import SPolyline from "./Component/SMapView/SPolyline";
+import SLocation from "./Component/SMapView/SLocation";
 export * from './Types';
-export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SUuid, SImage, SList, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, SButtom, SMapView, SMarker, Font };
+export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SUuid, SImage, SList, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, SButtom, SMath, 
+// MAPA
+SMapView, SMarker, SPolyline, SLocation, 
+// FUENTES
+Font };

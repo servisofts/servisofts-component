@@ -34,20 +34,20 @@ class SMapView extends Component<PropsType> {
 
     getposition = () => {
         var _map = this.mapa;
-        navigator.geolocation.getCurrentPosition(function (position) {
-            console.log("Latitude is :", position.coords.latitude);
-            // _map.setCenter({
-            //     lat: position.coords.latitude,
-            //     lng: position.coords.longitude
-            // })
-            // _map.setZoom(18)
-        }, (error) => {
-            console.log("error al optener ubicacion")
-        }, {
-            enableHighAccuracy: false,
-            timeout: 5000,
-            maximumAge: 1500
-        });
+        // navigator.geolocation.getCurrentPosition(function (position) {
+        //     console.log("Latitude is :", position.coords.latitude);
+        //     // _map.setCenter({
+        //     //     lat: position.coords.latitude,
+        //     //     lng: position.coords.longitude
+        //     // })
+        //     // _map.setZoom(18)
+        // }, (error) => {
+        //     console.log("error al optener ubicacion")
+        // }, {
+        //     enableHighAccuracy: false,
+        //     timeout: 5000,
+        //     maximumAge: 1500
+        // });
     }
 
 
@@ -56,11 +56,38 @@ class SMapView extends Component<PropsType> {
         this.getposition();
     }
 
-
+    center() {
+        var _map = this.mapa;
+        var props = this.props;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log("Latitude is :", position.coords.latitude);
+            _map.setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            })
+            _map.setZoom(18)
+            var center = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }
+            if (props.onRegionChangeComplete) props.onRegionChangeComplete(center);
+        }, (error) => {
+            console.log(error)
+        }, {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 1500
+        });
+    }
     setMarker() {
 
     }
+    animateToRegion(region, time) {
+        // this.mapa.animateToRegion(region, !time ? 1000 : time);
+        this.state.region = { ...this.state.region, ...region };
+        this.setState({ ...this.state });
 
+    }
     render() {
 
         console.log("holaaaa")
@@ -70,6 +97,10 @@ class SMapView extends Component<PropsType> {
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyDYLp8tqYQvGbQLdL0BbsAGYaXWr8dxTUg" }}
                     defaultCenter={{
+                        lat: this.state.region.latitude,
+                        lng: this.state.region.longitude
+                    }}
+                    center={{
                         lat: this.state.region.latitude,
                         lng: this.state.region.longitude
                     }}
@@ -87,6 +118,13 @@ class SMapView extends Component<PropsType> {
                             var latLng = { latitude: latitude, longitude: longitude };
                             this.props.onPress(latLng);
                         }
+                    }}
+                    onZoomAnimationEnd={(evt) => {
+                        var center = {
+                            latitude: this.mapa.center.lat(),
+                            longitude: this.mapa.center.lng(),
+                        }
+                        if (this.props.onRegionChangeComplete) this.props.onRegionChangeComplete(center);
                     }}
                     onDragEnd={(evt) => {
                         var center = {

@@ -17,6 +17,7 @@ export type TypeInputProps = {
     col?: SColType,
     color?: any,
     defaultValue?: any,
+    error?: boolean,
     placeholder?: any,
     icon?: any,
     iconR?: any,
@@ -59,8 +60,8 @@ export class SInput extends Component<TypeInputProps> {
 
 
         this.state = {
-            value: this.props.defaultValue,
-            error: false,
+            value: this.props.value ?? this.props.defaultValue,
+            error: this.props.error,
             data: {}
         };
     }
@@ -217,6 +218,10 @@ export class SInput extends Component<TypeInputProps> {
         </SView>
     }
     render() {
+
+        if(this.props.value){
+            this.state.value = this.props.value;
+        }
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;

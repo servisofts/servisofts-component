@@ -54,6 +54,31 @@ var SForm = /** @class */ (function (_super) {
         });
         return isValid;
     };
+    SForm.prototype.clear = function () {
+        var _this = this;
+        var isValid = true;
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            input.setValue("");
+        });
+        return this;
+    };
+    SForm.prototype.setValues = function (obj) {
+        var _this = this;
+        Object.keys(obj).map(function (key) {
+            var input = _this._ref[key];
+            input.setValue(obj[key]);
+        });
+    };
+    SForm.prototype.getValues = function () {
+        var _this = this;
+        var obj = {};
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            obj[key] = input.getValue();
+        });
+        return obj;
+    };
     SForm.prototype.focus = function (key) {
         if (this._ref[key]) {
             this._ref[key].focus();

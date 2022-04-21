@@ -96,9 +96,13 @@ export default class SDate {
     addDay(val: any): this;
     addMonth(val: any): this;
     getMonth(): any;
+    getYear(): any;
+    setYear(val: any): this;
     getMonthJson(): any;
     getDayOfWeek(): any;
     getDayOfWeekJson(): any;
+    getFirstDayOfWeek(): SDate;
+    getWeek(): number;
     equalDay(sdate: any): boolean;
     isAfter(sdate: any): boolean;
     isBefore(sdate: any): boolean;

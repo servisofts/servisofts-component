@@ -10,6 +10,9 @@ type PropsType = {
     onRegionChangeComplete?: (region: any) => void,
     onPress?: (event: any) => void,
     preventCenter?: boolean,
+    showsMyLocationButton?: boolean,
+    showsUserLocation?: boolean,
+
 }
 export default class SMapView extends Component<PropsType> {
     mapa;
@@ -28,7 +31,12 @@ export default class SMapView extends Component<PropsType> {
         };
         this.mapa = false;
     }
-    getposition = () => {
+    center = () => {
+        this.getposition((position) => {
+            this.mapa.animateToRegion(this.state.position, 1000)
+        });
+    }
+    getposition = (callback?) => {
         Geolocation.getCurrentPosition(
             (position) => {
                 var region = {
@@ -37,10 +45,13 @@ export default class SMapView extends Component<PropsType> {
                     latitudeDelta: 0.002,
                     longitudeDelta: 0.002
                 }
-                // this.props.state.myUbicacionReducer.position = region;
-                if(!this.props.preventCenter){
-                    this.mapa.animateToRegion(region, 1000)
+                if (callback) {
+                    callback(region)
                 }
+                // this.props.state.myUbicacionReducer.position = region;
+                // if (!this.props.preventCenter) {
+                //     this.mapa.animateToRegion(region, 1000)
+                // }
                 this.setState({ position: region })
 
             },
@@ -73,9 +84,8 @@ export default class SMapView extends Component<PropsType> {
                         flex: 1,
                     }}
                     initialRegion={this.state.region}
-                    // customMapStyle={STheme.color.mapStyle}
-                    showsUserLocation={true}
-                    showsMyLocationButton={false}
+                    showsUserLocation={this.props.showsUserLocation ?? false}
+                    showsMyLocationButton={this.props.showsMyLocationButton ?? false}
                     provider={PROVIDER_GOOGLE}
                     {...this.props}
                 >

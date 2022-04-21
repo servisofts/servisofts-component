@@ -230,7 +230,8 @@ var STable2 = /** @class */ (function (_super) {
                 React.createElement(SInput, { placeholder: "Buscar", col: "xs-11.9", height: 24, style: {
                         backgroundColor: STheme.color.primary + "BB",
                         borderRadius: 4,
-                        paddingLeft: 8
+                        paddingLeft: 8,
+                        height: 24
                     }, icon: React.createElement(SIcon, { name: "Search", width: 16, fill: STheme.color.secondary }), onChangeText: function (txt) {
                         new SThread(400, "tbl_buscar", true).start(function () {
                             _this.setState({ buscador: txt });
@@ -238,7 +239,7 @@ var STable2 = /** @class */ (function (_super) {
                     } })),
             React.createElement(SView, { col: "xs-12", flex: true, center: true, onLayout: function (e) {
                     _this.sizeW = e.nativeEvent.layout.width;
-                    anims.setValue(_this.sizeW);
+                    // anims.setValue(this.sizeW);
                 } },
                 React.createElement(SScrollView2, { ref: function (ref) { return _this.scroll = ref; }, header: {
                         style: { height: 40 },

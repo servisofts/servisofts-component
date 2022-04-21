@@ -15,6 +15,7 @@ export declare type TypeInputProps = {
     col?: SColType;
     color?: any;
     defaultValue?: any;
+    error?: boolean;
     placeholder?: any;
     icon?: any;
     iconR?: any;

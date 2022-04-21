@@ -94,14 +94,37 @@ var SDate = /** @class */ (function () {
     SDate.prototype.getMonth = function () {
         return this.date.getMonth() + 1;
     };
+    SDate.prototype.getYear = function () {
+        return this.date.getFullYear();
+    };
+    SDate.prototype.setYear = function (val) {
+        this.date.setFullYear(val);
+        return this;
+    };
     SDate.prototype.getMonthJson = function () {
         return SDate.getMonth(this.getMonth());
     };
     SDate.prototype.getDayOfWeek = function () {
-        return this.date.getDay();
+        var day = this.date.getDay();
+        if (day - 1 < 0) {
+            day = 7;
+        }
+        day = day - 1;
+        return day;
     };
     SDate.prototype.getDayOfWeekJson = function () {
-        return SDate.getDayOfWeek(this.date.getDay());
+        return SDate.getDayOfWeek(this.getDayOfWeek());
+    };
+    SDate.prototype.getFirstDayOfWeek = function () {
+        var day = this.getDayOfWeek();
+        var date = this.clone();
+        date.setDay(date.getDay() - day);
+        return date;
+    };
+    SDate.prototype.getWeek = function () {
+        var date = new SDate(this.getYear() + "-01-01", "yyyy-MM-dd");
+        var day = date.getFirstDayOfWeek();
+        return Math.floor(this.diff(day) / 7) + 1;
     };
     SDate.prototype.equalDay = function (sdate) {
         if (this.toString("yyyy-MM-dd") == sdate.toString("yyyy-MM-dd")) {

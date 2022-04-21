@@ -17,7 +17,9 @@ declare class SMapView extends Component<PropsType> {
     getZoom: (region: any) => number;
     getposition: () => void;
     componentDidMount(): void;
+    center(): void;
     setMarker(): void;
+    animateToRegion(region: any, time: any): void;
     render(): JSX.Element;
 }
 export default SMapView;

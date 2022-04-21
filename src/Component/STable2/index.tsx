@@ -241,6 +241,7 @@ export default class STable2 extends Component<SType> {
                         backgroundColor: STheme.color.primary + "BB",
                         borderRadius: 4,
                         paddingLeft: 8,
+                        height:24,
                     }}
                         icon={<SIcon name={"Search"} width={16} fill={STheme.color.secondary} />}
                         onChangeText={(txt) => {
@@ -252,7 +253,7 @@ export default class STable2 extends Component<SType> {
                 <SView col={"xs-12"} flex center
                     onLayout={(e) => {
                         this.sizeW = e.nativeEvent.layout.width;
-                        anims.setValue(this.sizeW);
+                        // anims.setValue(this.sizeW);
 
                     }}
                 >

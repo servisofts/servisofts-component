@@ -9,6 +9,8 @@ import SInputPages from "../Component/SInput/SInputPages";
 import SViewPage from "./SViewPage";
 import Docs from "./Docs";
 import NewTable from "./NewTable";
+import SDate from "./Doc_SDate";
+import SLocationPage from "./SLocationPage";
 const Pages: SPageListProps = {
     "scomponent": { component: Inicio },
     "scomponent/SIcon": { component: SIconPage },
@@ -19,6 +21,8 @@ const Pages: SPageListProps = {
     "scomponent/SView": SViewPage,
     "scomponent/docs": Docs,
     "scomponent/NewTable": NewTable,
+    "scomponent/SDate": SDate,
+    "scomponent/SLocation": SLocationPage,
     ...SInputPages
 }
 export default Pages;

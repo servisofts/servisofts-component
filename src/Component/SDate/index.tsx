@@ -135,14 +135,38 @@ export default class SDate {
     getMonth() {
         return this.date.getMonth() + 1;
     }
+    getYear() {
+        return this.date.getFullYear();
+    }
+    setYear(val) {
+        this.date.setFullYear(val);
+        return this;
+    }
     getMonthJson() {
         return SDate.getMonth(this.getMonth());
     }
     getDayOfWeek() {
-        return this.date.getDay();
+        var day = this.date.getDay();
+        if (day - 1 < 0) {
+            day = 7;
+        }
+        day = day - 1;
+        return day;
     }
     getDayOfWeekJson() {
-        return SDate.getDayOfWeek(this.date.getDay());
+        return SDate.getDayOfWeek(this.getDayOfWeek());
+    }
+
+    getFirstDayOfWeek() {
+        var day = this.getDayOfWeek();
+        var date = this.clone();
+        date.setDay(date.getDay() - day);
+        return date;
+    }
+    getWeek() {
+        var date = new SDate(this.getYear() + "-01-01", "yyyy-MM-dd");
+        var day = date.getFirstDayOfWeek();
+        return Math.floor(this.diff(day)/7)+1;
     }
     equalDay(sdate) {
         if (this.toString("yyyy-MM-dd") == sdate.toString("yyyy-MM-dd")) {

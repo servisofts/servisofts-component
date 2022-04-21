@@ -50,9 +50,17 @@ var SISelect = /** @class */ (function (_super) {
                 }
                 else {
                     keyObj = obj.key;
-                    Content = obj.content;
-                    if (typeof obj.content != "object") {
-                        Content = React.createElement(SText, null, obj.content);
+                    if (obj.content) {
+                        Content = obj.content;
+                        if (typeof obj.content != "object") {
+                            Content = React.createElement(SText, null, obj.content);
+                        }
+                    }
+                    if (obj.component) {
+                        Content = obj.component;
+                        if (typeof obj.component != "object") {
+                            Content = React.createElement(SText, null, obj.component);
+                        }
                     }
                 }
                 return (React.createElement(SView, { center: true, col: "xs-12", style: {
