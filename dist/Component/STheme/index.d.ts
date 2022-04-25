@@ -30,6 +30,7 @@ export declare type SThemeThemes = {
 export declare type SThemeProps = {
     initialTheme: SThemeOptions;
     themes: SThemeThemes;
+    noAnimated?: boolean;
     onLoad: (color: SThemeColors) => any;
 };
 export default class STheme extends Component<SThemeProps> {

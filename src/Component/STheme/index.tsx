@@ -35,6 +35,7 @@ export type SThemeThemes = { [index in SThemeOptions]: SThemeColors };
 export type SThemeProps = {
     initialTheme: SThemeOptions,
     themes: SThemeThemes,
+    noAnimated?: boolean,
     onLoad: (color: SThemeColors) => any
 }
 
@@ -136,6 +137,7 @@ export default class STheme extends Component<SThemeProps> {
         });
     }
     fadeOut() {
+        if(this.props.noAnimated) return;
         if (!this.state.isFadeOut) return;
         return <Animated.View style={{
             position: "absolute",
@@ -174,8 +176,7 @@ export default class STheme extends Component<SThemeProps> {
                 this.animar();
                 this.state.isFadeOut = true;
 
-                return (<>
-                    {this.fadeOut()}</>)
+                return (<>{this.fadeOut()}</>)
             } else {
                 this.state.lastLoad = new Date().getTime();
             }

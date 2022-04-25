@@ -108,6 +108,8 @@ var STheme = /** @class */ (function (_super) {
         });
     };
     STheme.prototype.fadeOut = function () {
+        if (this.props.noAnimated)
+            return;
         if (!this.state.isFadeOut)
             return;
         return React.createElement(Animated.View, { style: {
