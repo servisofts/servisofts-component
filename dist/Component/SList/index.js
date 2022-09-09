@@ -25,31 +25,82 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { SView } from '../../index';
-import SHr from '../SHr';
+import { SHr, SSection, SText, SView, SInput, SBuscador, SIcon, STheme } from '../../index';
 import SOrdenador from '../SOrdenador';
 var SList = /** @class */ (function (_super) {
     __extends(SList, _super);
     function SList(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {};
+        _this.state = {
+            buscar: ""
+        };
         return _this;
     }
     SList.prototype.getData = function () {
         var _this = this;
-        var _a;
-        return new SOrdenador((_a = this.props.order) !== null && _a !== void 0 ? _a : [{ key: "fecha_on", order: "desc", peso: 1 }]).ordernarObject(this.props.data).map(function (key, index) {
-            var _a;
-            var Item = _this.props.render(_this.props.data[key]);
+        var _a, _b, _c;
+        var space = (_a = this.props.space) !== null && _a !== void 0 ? _a : 8;
+        var data = this.props.data;
+        if (!data)
+            return null;
+        if (!data[0]) {
+            data = Object.values(data);
+        }
+        if (this.state.buscar) {
+            data = data.filter(function (itm) {
+                return SBuscador.validate(itm, _this.state.buscar);
+            });
+        }
+        if (this.props.filter) {
+            data = data.filter(this.props.filter);
+        }
+        var separation_style = __assign({}, this.props.horizontal ? { width: space / 2 } : { height: space / 2 });
+        var init_separation_style = __assign({}, this.props.horizontal ? { width: (_b = this.props.initSpace) !== null && _b !== void 0 ? _b : 0 } : { height: (_c = this.props.initSpace) !== null && _c !== void 0 ? _c : 0 });
+        var cant = Object.keys(data).length;
+        if (this.state.cant != cant) {
+            this.setState({
+                cant: cant
+            });
+        }
+        var arr;
+        if (this.props.order) {
+            arr = new SOrdenador(this.props.order).ordernarObject(data);
+        }
+        else {
+            arr = Object.keys(data);
+        }
+        if (this.props.limit) {
+            arr = arr.slice(0, this.props.limit);
+        }
+        return arr.map(function (key, index) {
+            var Item = _this.props.render(data[key], key);
             if (!Item)
                 return null;
-            return React.createElement(React.Fragment, null,
+            return React.createElement(SSection, { key: key + 'item_list' },
+                index == 0 ? React.createElement(SView, __assign({}, init_separation_style)) : React.createElement(SView, __assign({}, separation_style)),
                 Item,
-                React.createElement(SHr, { height: (_a = _this.props.space) !== null && _a !== void 0 ? _a : 8 }));
+                React.createElement(SView, __assign({}, separation_style)));
         });
     };
+    SList.prototype.getBuscardo = function () {
+        var _this = this;
+        var _a;
+        if (!this.props.buscador)
+            return null;
+        return React.createElement(SView, { col: "xs-12" },
+            React.createElement(SInput, { icon: React.createElement(SView, { center: true, col: "xs-12", height: true },
+                    React.createElement(SIcon, { name: "Search", fill: STheme.color.gray, width: 22 })), iconR: React.createElement(SView, { center: true, style: {
+                        padding: 4
+                    }, height: true },
+                    React.createElement(SText, { fontSize: 12, color: STheme.color.gray }, "(" + ((_a = this.state.cant) !== null && _a !== void 0 ? _a : 0) + ")")), placeholder: "Buscar...", ref: function (r) { return _this._buscador = r; }, onChangeText: function (val) {
+                    _this.setState({ buscar: val });
+                } }),
+            React.createElement(SHr, null));
+    };
     SList.prototype.render = function () {
-        return (React.createElement(SView, __assign({ col: "xs-12" }, this.props), this.getData()));
+        return (React.createElement(SView, __assign({ col: "xs-12" }, this.props, { row: this.props.horizontal }),
+            this.getBuscardo(),
+            this.getData()));
     };
     return SList;
 }(Component));

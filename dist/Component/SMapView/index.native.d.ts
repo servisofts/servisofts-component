@@ -11,6 +11,15 @@ declare type PropsType = {
     preventCenter?: boolean;
     showsMyLocationButton?: boolean;
     showsUserLocation?: boolean;
+    options?: {
+        styles?: any;
+        zoomControl?: boolean;
+        mapTypeControl?: boolean;
+        scaleControl?: boolean;
+        streetViewControl?: boolean;
+        rotateControl?: boolean;
+        fullscreenControl?: boolean;
+    };
 };
 export default class SMapView extends Component<PropsType> {
     mapa: any;

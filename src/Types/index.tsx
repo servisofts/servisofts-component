@@ -6,7 +6,7 @@ import { SNavigationProps, SPageProps, SPageListProps } from '../Component/SNavi
 import { SThemeColors, SThemeOptions, SThemeProps, SThemeThemes } from '../Component/STheme/index';
 
 // SCOL
-type TColKey = "xs" | "sm" | "md" | "lg" | "xl";
+type TColKey = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 type TColVal = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 type TColStr = `${TColKey}-${TColVal}`;
@@ -19,7 +19,7 @@ type TColSujestPage =
     | `xs-${number} sm-${number} `
     | `xs-${number} sm-${number} md-${number}`
     | `xs-${number} sm-${number} md-${number} lg-${number}`
-    | `xs-${number} sm-${number} md-${number} lg-${number} xl-${number}`
+    | `xs-${number} sm-${number} md-${number} lg-${number} xl-${number} xxl-${number}`
 
 type SColType =
     { [index in TColKey]?: TColVal }

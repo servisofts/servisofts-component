@@ -31,13 +31,15 @@ class SPagination extends Component<typeProps> {
         var ITEMS = [];
         if (this.props.page > 1) {
             ITEMS.push(
-                <SView style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: 100,
-                }} center onPress={() => {
-                    this.props.onChange(this.props.page - 1);
-                }}>
+                <SView
+                    key={"itm_sp_1"}
+                    style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 100,
+                    }} center onPress={() => {
+                        this.props.onChange(this.props.page - 1);
+                    }}>
                     <SText>{`<`}</SText>
                 </SView>
             );
@@ -80,28 +82,32 @@ class SPagination extends Component<typeProps> {
 
             vals[index] = val;
             ITEMS.push(
-                <SView style={{
-                    width: 22,
-                    height: 22,
-                    borderRadius: 40,
-                    backgroundColor: (val == this.props.page ? STheme.color.secondary + "66" : "transparent")
-                }} center onPress={() => {
-                    if (vals[index] == "...") return null;
-                    this.props.onChange(vals[index]);
-                }}>
+                <SView
+                    key={"itm_sp_2_" + index}
+                    style={{
+                        width: 22,
+                        height: 22,
+                        borderRadius: 40,
+                        backgroundColor: (val == this.props.page ? STheme.color.secondary + "66" : "transparent")
+                    }} center onPress={() => {
+                        if (vals[index] == "...") return null;
+                        this.props.onChange(vals[index]);
+                    }}>
                     <SText fontSize={12} center flex>{val}</SText>
                 </SView>
             );
         }
         if (this.props.page < cantPages) {
             ITEMS.push(
-                <SView style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: 100,
-                }} center onPress={() => {
-                    this.props.onChange(this.props.page + 1);
-                }}>
+                <SView
+                    key={"itm_sp_3"}
+                    style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 100,
+                    }} center onPress={() => {
+                        this.props.onChange(this.props.page + 1);
+                    }}>
                     <SText>{`>`}</SText>
                 </SView>
             );

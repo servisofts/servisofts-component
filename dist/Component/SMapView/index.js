@@ -65,7 +65,6 @@ var SMapView = /** @class */ (function (_super) {
         return _this;
     }
     SMapView.prototype.componentDidMount = function () {
-        console.log("hoola mundo");
         this.getposition();
     };
     SMapView.prototype.center = function () {
@@ -99,9 +98,11 @@ var SMapView = /** @class */ (function (_super) {
         this.state.region = __assign(__assign({}, this.state.region), region);
         this.setState(__assign({}, this.state));
     };
+    SMapView.prototype.renderChildrens = function () {
+    };
     SMapView.prototype.render = function () {
         var _this = this;
-        console.log("holaaaa");
+        var _a;
         return (React.createElement(React.Fragment, null,
             React.createElement(GoogleMapReact, { bootstrapURLKeys: { key: "AIzaSyDYLp8tqYQvGbQLdL0BbsAGYaXWr8dxTUg" }, defaultCenter: {
                     lat: this.state.region.latitude,
@@ -109,9 +110,7 @@ var SMapView = /** @class */ (function (_super) {
                 }, center: {
                     lat: this.state.region.latitude,
                     lng: this.state.region.longitude
-                }, options: {
-                    styles: STheme.color.mapStyle
-                }, defaultZoom: this.getZoom(this.state.region), onGoogleApiLoaded: function (_a) {
+                }, options: __assign({ styles: STheme.color.mapStyle }, ((_a = this.props.options) !== null && _a !== void 0 ? _a : {})), defaultZoom: this.getZoom(this.state.region), onGoogleApiLoaded: function (_a) {
                     var map = _a.map, maps = _a.maps;
                     _this.mapa = map;
                 }, onClick: function (evt) {

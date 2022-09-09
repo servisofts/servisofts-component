@@ -49,7 +49,7 @@ var Row = /** @class */ (function (_super) {
                     }
                     ITEM = React.createElement(SText, { fontSize: 12 }, data);
                 }
-                return React.createElement(React.Fragment, null,
+                return React.createElement(SView, { row: true, key: "itm_row_" + item.key, height: _this.props.height },
                     React.createElement(SView, { width: _this.props.space, height: true, backgroundColor: _this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22" }),
                     React.createElement(SView, { animated: true, height: true, style: {
                             width: _this.props.animHeader[item.key],

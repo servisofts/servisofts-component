@@ -31,6 +31,7 @@ import DebugBar from './DebugBar/index';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
 import SPage from '../SPage';
+import SThread from '../SThread';
 var SComponentContainer = /** @class */ (function (_super) {
     __extends(SComponentContainer, _super);
     function SComponentContainer(props) {
@@ -64,13 +65,22 @@ var SComponentContainer = /** @class */ (function (_super) {
         if (!this.Instance) {
             return null;
         }
-        return this.Instance.props.inputs;
+        if (!this.Instance.props) {
+            return null;
+        }
+        if (!this.Instance.props.inputs) {
+            return null;
+        }
+        return this.Instance.props.inputs();
     };
     SComponentContainer.prototype.onChangeSize = function (layout) {
         var _this = this;
         this.layout = layout;
         var curMedida = "";
-        if (layout.width >= 1200) {
+        if (layout.width >= 1400) {
+            curMedida = "xxl";
+        }
+        else if (layout.width >= 1200) {
             curMedida = "xl";
         }
         else if (layout.width >= 992) {
@@ -95,13 +105,14 @@ var SComponentContainer = /** @class */ (function (_super) {
     };
     SComponentContainer.prototype.getContenido = function () {
         var _this = this;
+        var _a, _b, _c;
         if (!this.state.theme)
-            return React.createElement(View, null);
+            return null;
         return (React.createElement(View, { style: {
                 width: "100%",
                 flex: 1,
                 height: "100%",
-                backgroundColor: this.state.theme.barColor
+                backgroundColor: ((_a = this.state.theme) === null || _a === void 0 ? void 0 : _a.barColor) || "#222222"
             } },
             React.createElement(SafeAreaView, { style: {
                     width: '100%',
@@ -111,7 +122,7 @@ var SComponentContainer = /** @class */ (function (_super) {
                         width: "100%",
                         flex: 1
                     } },
-                    React.createElement(StatusBar, { barStyle: this.state.theme.barStyle, animated: true, backgroundColor: this.state.theme.barColor }),
+                    React.createElement(StatusBar, { barStyle: (_b = this.state.theme) === null || _b === void 0 ? void 0 : _b.barStyle, animated: true, backgroundColor: ((_c = this.state.theme) === null || _c === void 0 ? void 0 : _c.barColor) || "#222222" }),
                     React.createElement(View, { style: {
                             width: "100%",
                             flex: 1
@@ -125,9 +136,12 @@ var SComponentContainer = /** @class */ (function (_super) {
     SComponentContainer.prototype.render = function () {
         var _this = this;
         SComponentContainer.Instance = this;
-        return (React.createElement(STheme, __assign({}, this.props.theme, { onLoad: function (color) {
+        return (React.createElement(STheme, __assign({}, this.props.theme, { data: this.state.theme, onLoad: function (color) {
                 if (_this.state.theme != color) {
-                    _this.setState({ theme: color });
+                    _this.setState({ theme: null });
+                    new SThread(10, "render_theme", false).start(function () {
+                        _this.setState({ theme: color });
+                    });
                 }
             } }), this.getContenido()));
     };

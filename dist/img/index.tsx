@@ -36,6 +36,7 @@ import Menu2 from "./Menu2"
 import Money from "./Money"
 import NoDelete from "./NoDelete"
 import Off from "./Off"
+import Pencil from "./Pencil"
 import Paquete from "./Paquete"
 import Parameter from "./Parameter"
 import Profanity from "./Profanity"
@@ -91,6 +92,7 @@ const Icons = {
     Off,
     Paquete,
     Parameter,
+    Pencil,
     Profanity,
     Reload,
     Reserve,

@@ -1,18 +1,17 @@
 var Upload = /** @class */ (function () {
     function Upload() {
     }
-    Upload.send = function (files, url) {
-        if (!files)
+    Upload.send = function (file, url) {
+        if (!file)
             return;
-        if (files.length <= 0)
-            return;
+        // if (files.length <= 0) return;
         // var form: any = document.createElement("FORM");
         // form.setAttribute("method", "POST");
         // form.setAttribute("enctype", "multipart/form-data");
         var body = new FormData();
-        files.map(function (file) {
-            body.append('file', file.file);
-        });
+        // files.map((file) => {
+        body.append('file', file.file);
+        // })
         var request = new XMLHttpRequest();
         // request.upload.addEventListener("progress", function (e) {
         //     console.log(e);

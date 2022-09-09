@@ -21,6 +21,7 @@ import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
 import STable2 from "./Component/STable2";
 import SForm from './Component/SForm';
+import Submit from "./Component/SForm/submit";
 import { SButtom } from './Component/SButtom';
 import SLoad from "./Component/SLoad";
 import SOrdenador from "./Component/SOrdenador";
@@ -36,6 +37,11 @@ import SBuscador from "./Component/SBuscador";
 import SMath from "./Component/SMath";
 import SPolyline from "./Component/SMapView/SPolyline";
 import SLocation from "./Component/SMapView/SLocation";
+import SSection from "./Component/SSection";
+import ExportExcel from "./Component/STable2/ExportExcel";
+import SRangeSlider from "./Component/SRangeSlider";
+import SAlvaro from "./Component/SAlvaro";
+import Upload from "./Component/SForm/Upload";
 export * from './Types'
 export {
     SHr,
@@ -56,6 +62,7 @@ export {
     SText,
     STheme,
     SThread,
+    SRangeSlider,
     SUuid,
     SImage,
     SList,
@@ -70,13 +77,19 @@ export {
     STable2,
     SInput,
     SForm,
+    Submit,
     SButtom,
     SMath,
+    SSection,
+    Upload,
+    ExportExcel,
     // MAPA
     SMapView,
     SMarker,
     SPolyline,
     SLocation,
     // FUENTES
-    Font
+    Font,
+    //alvaro
+    SAlvaro
 }

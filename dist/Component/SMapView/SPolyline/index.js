@@ -13,14 +13,26 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
 var SPolyline = /** @class */ (function (_super) {
     __extends(SPolyline, _super);
     function SPolyline() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SPolyline.prototype.render = function () {
-        return React.createElement(React.Fragment, null);
+        return React.createElement(GoogleMapReact, __assign({}, this.props));
     };
     return SPolyline;
 }(Component));

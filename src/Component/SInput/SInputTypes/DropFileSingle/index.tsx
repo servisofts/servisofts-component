@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { SIcon, SImage, SText, STheme, SView } from '../../../../index';
+import { SIcon, SImage, SText, STheme, SView, SNavigation } from '../../../../index';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 type Props = {
     onUpload?: Function,
@@ -9,6 +9,7 @@ type Props = {
     cstyle?: any,
     onChange?: Function,
     defaultValue?: string,
+    accept?: string,
 }
 
 export default class DropFileSingle extends Component<Props> {
@@ -18,16 +19,26 @@ export default class DropFileSingle extends Component<Props> {
     idInstance;
     constructor(props) {
         super(props);
-      
+
         this.state = {
             images: [],
         };
         var value = props.defaultValue || "";
         if (value) {
-            this.state.images.push({
-                uri: value,
-                name: value,
-            });
+            if (props.filePath) {
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+                this.state.images.push({
+                    uri: props.filePath + "/" + props.name + "/" + value,
+                    name: value,
+                });
+
+            } else {
+                this.state.images.push({
+                    uri: value,
+                    name: value,
+                });
+            }
+
         }
         this.onUpload = this.props.onUpload;
         this.idInstance = new Date().getTime();
@@ -127,6 +138,14 @@ export default class DropFileSingle extends Component<Props> {
         }
         return name;
     }
+    getExtension(name) {
+        if (!name) return;
+        var arr = name.split('.');
+        if (arr.length > 1) {
+            return arr.pop();
+        }
+        return "File";
+    }
     getImages = () => {
         if (this.state.images.length <= 0) {
             return <SText center>{""}</SText>
@@ -136,8 +155,26 @@ export default class DropFileSingle extends Component<Props> {
             overflow: 'hidden',
             borderRadius: 4,
         }}>
+            <SView col={"xs-12"} height style={{
+                position: "absolute",
+            }} center>
+                <SText color={STheme.color.gray} fontSize={18} bold>{this.getExtension(image?.file?.name ?? image.name)}</SText>
+            </SView>
             {/* <SIcon name={"Ajustes"} width={100} /> */}
-            <SImage src={image.uri} />
+            <SView flex col={"xs-12"}>
+                <SImage src={image.uri} />
+            </SView>
+            {/* <SView style={{
+                position: "absolute",
+                backgroundColor: "#00000099",
+                bottom: 0,
+                height: 20,
+            }} col={"xs-12"} row onPress={() => {
+                SNavigation.openURL(image.uri);
+            }}>
+                <SText fontSize={10} >{image?.file?.name ?? (image.name ?? "VER")}</SText>
+            </SView> */}
+
         </SView>
     }
     render() {
@@ -158,10 +195,12 @@ export default class DropFileSingle extends Component<Props> {
                     }} className={"dropZonea"} onClick={() => {
                         if (this.props.onPress) this.props.onPress();
                     }}>
-                        <input id={"dropFileainp" + `_key_${this.idInstance}`} type='file' name='file' className={'drop-zone__inputa' + `_key_${this.idInstance}`} accept="image/*"
+                        <input id={"dropFileainp" + `_key_${this.idInstance}`} type='file' name='file' className={'drop-zone__inputa' + `_key_${this.idInstance}`}
                             style={{
                                 display: "none"
-                            }} />
+                            }}
+                            accept={this.props.accept}
+                        />
 
                         {this.getImages()}
                         {/* {this.props.children} */}

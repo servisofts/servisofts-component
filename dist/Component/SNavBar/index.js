@@ -36,6 +36,7 @@ var SNavBar = /** @class */ (function (_super) {
         // }
     };
     SNavBar.prototype.getBack = function () {
+        var _this = this;
         if (this.props.preventBack) {
             return React.createElement(View, null);
         }
@@ -70,6 +71,12 @@ var SNavBar = /** @class */ (function (_super) {
             React.createElement(SView, { onPress: function () {
                     // if (SNavigation.lastRoute) {
                     // if (SNavigation.lastRoute.navigation.canGoBack()) {
+                    if (_this.props.onBack) {
+                        var prevent_default = _this.props.onBack();
+                        if (prevent_default) {
+                            return;
+                        }
+                    }
                     SNavigation.goBack();
                     // return;
                     // }

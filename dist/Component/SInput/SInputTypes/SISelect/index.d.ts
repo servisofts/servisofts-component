@@ -9,6 +9,7 @@ declare type typeConfig = {
 declare type typeProps = {
     style: ViewStyle;
     props: typeConfig;
+    height?: number;
     onChange: (value: SDate) => any;
     onClose?: () => any;
     options?: Array<string> | Array<{

@@ -35,7 +35,7 @@ var SGrid = /** @class */ (function (_super) {
         _this.getMax = function (col) {
             if (!col)
                 return 0;
-            var options = ["xs", "sm", "md", "lg", "xl"];
+            var options = ["xs", "sm", "md", "lg", "xl", "xxl"];
             var index = options.indexOf(_this.medida);
             for (var i = index; i >= 0; i--) {
                 var mtmp = options[i];
@@ -57,7 +57,7 @@ var SGrid = /** @class */ (function (_super) {
             var text = this.props.col;
             text = text.trim();
             text.split(" ").map(function (row) {
-                var cols = /((xs|sm|md|lg|xl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
+                var cols = /((xs|sm|md|lg|xl|xxl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
                 if (cols[2] && cols[3]) {
                     col[cols[2]] = cols[3];
                 }

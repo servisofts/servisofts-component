@@ -50,10 +50,14 @@ export var Type = function (type, Parent) {
             return image(type, Parent);
         case "file":
             return file(type, Parent);
+        case "files":
+            return files(type, Parent);
         case "direccion":
             return direccion(type, Parent);
         case "textArea":
             return textArea(type, Parent);
+        case "checkBox":
+            return checkBox(type, Parent);
         default:
             return buildResp({
                 props: {},
@@ -66,45 +70,40 @@ export var Type = function (type, Parent) {
     }
 };
 var phone = function (type, Parent) {
-    var value = Parent.getValue();
-    var arr = [];
-    if (value) {
-        arr = value.split(" ");
-    }
+    var _a;
+    var value = Parent.getValueClean();
     var dialcodeTxt = "+591";
-    if (arr.length > 1) {
-        dialcodeTxt = arr[0];
-        value = arr[1];
-    }
-    else {
-        if (Parent.getData().dialCode) {
-            dialcodeTxt = Parent.getData().dialCode.dialCode;
+    if (value && value.length > 0) {
+        if (value.indexOf("+") >= 0) {
+            var arr = value.split(" ");
+            if (arr.length > 1) {
+                dialcodeTxt = arr[0];
+                value = value.replace(dialcodeTxt + " ", "");
+                Parent.setValue(value);
+            }
         }
     }
     var dialcode = SIDialCodeAlert.getDialCode(dialcodeTxt);
+    if (!((_a = Parent.getData()) === null || _a === void 0 ? void 0 : _a.dialCode)) {
+        Parent.setData({
+            dialCode: dialcode
+        });
+    }
+    else {
+        dialcode = Parent.getData().dialCode;
+    }
     return buildResp({
         props: {
             keyboardType: "phone-pad"
         },
         onChangeText: function (text) {
-            var _value = Parent.getValue();
-            if (_value) {
-                var arr = _value.split(" ");
-                if (arr.length > 1) {
-                    dialcode = SIDialCodeAlert.getDialCode(arr[0]);
-                    return dialcode.dialCode + " " + arr[1];
-                }
-            }
+            // var _value = Parent.getValue();
             return text;
         },
         verify: function (value) {
             if (!value)
                 return false;
-            var arr = value.split(" ");
-            if (arr.length > 1) {
-                value = arr[1];
-            }
-            var countOfNumber = dialcode.mask.match(/9/g).length;
+            var countOfNumber = dialcode.mask.match(/./g).length;
             var isVerified = countOfNumber === (value === null || value === void 0 ? void 0 : value.length);
             return isVerified;
         },
@@ -112,11 +111,6 @@ var phone = function (type, Parent) {
             if (!value)
                 return value;
             var _value = value;
-            var arr = _value.split(" ");
-            if (arr.length > 1) {
-                dialcode = SIDialCodeAlert.getDialCode(arr[0]);
-                _value = arr[1];
-            }
             var unmaskedPhoneNumber = (_value.match(/\d+/g) || []).join('');
             if (unmaskedPhoneNumber.length === 0) {
                 return "";
@@ -136,25 +130,13 @@ var phone = function (type, Parent) {
             unmaskedPhoneNumber = (phoneNumber.match(/\d+/g) || []).join('');
             return phoneNumber;
         },
-        icon: (SIDialCodeAlert.getOpenButtom(dialcodeTxt, Parent.getStyle().InputText, function (dial) {
-            var value = Parent.getValue();
-            var arr = [];
-            if (value) {
-                if (value.indexOf("+") > -1) {
-                    arr = value.split(" ");
-                    console.log(arr);
-                }
-                else {
-                    arr = [dial.dialCode, value];
-                }
-            }
-            if (arr.length > 0) {
-                Parent.setValue(dial.dialCode + " " + arr[1]);
-            }
-            else {
-                Parent.setValue(dial.dialCode + " " + "");
-            }
-            Parent.notifyBlur();
+        icon: (SIDialCodeAlert.getOpenButtom(dialcode.dialCode, Parent.getStyle().InputText, function (dial) {
+            Parent.setValue(Parent.getValueClean());
+            dialcode = dial;
+            Parent.setData({
+                dialCode: dialcode
+            });
+            // Parent.notifyBlur();
         })),
         style: {
             View: {
@@ -299,7 +281,7 @@ var select = function (type, Parent) {
             var options = Parent.getOption("options");
             SPopupOpen({
                 key: "fechaPicker",
-                content: React.createElement(SISelect, { props: {
+                content: React.createElement(SISelect, { height: 300, props: {
                         defaultValue: Parent.getValue()
                     }, options: options, onClose: function () {
                         Parent.notifyBlur();
@@ -408,6 +390,7 @@ var image = function (type, Parent) {
         },
         style: {
             View: {
+                paddingStart: 0,
                 backgroundColor: "transparent",
                 height: Parent.getOption("height") == "default" ? 100 : Parent.getOption("height")
             },
@@ -428,7 +411,7 @@ var image = function (type, Parent) {
                         overflow: 'hidden',
                         backgroundColor: STheme.color.card
                     }, height: true, colSquare: true },
-                    React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
+                    React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { accept: "image/*", cstyle: Parent.getStyle(), onChange: function (val) {
                             Parent.setValue(val);
                         } }))));
         }
@@ -445,7 +428,36 @@ var file = function (type, Parent) {
         },
         style: {
             View: {
-                height: 100
+                paddingStart: 0,
+                height: 180
+            }
+        },
+        render: function (data) {
+            return React.createElement(SView, { style: {
+                    width: "100%",
+                    height: "100%",
+                    overflow: 'hidden'
+                } },
+                React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
+                        // console.log(val);
+                        Parent.setValue(val);
+                    } })));
+        }
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    });
+};
+var files = function (type, Parent) {
+    return buildResp({
+        props: {
+            editable: false
+        },
+        style: {
+            View: {
+                paddingStart: 0,
+                height: 180
             }
         },
         render: function (data) {
@@ -495,6 +507,41 @@ var textArea = function (type, Parent) {
             View: {
                 height: 100
             }
+        }
+    });
+};
+var checkBox = function (type, Parent) {
+    return buildResp({
+        props: {
+            editable: false
+        },
+        style: {
+            View: {
+                paddingStart: 0,
+                width: 20,
+                height: 20
+            },
+            LabelStyle: {
+                width: null,
+                position: "absolute"
+            }
+        },
+        render: function (data) {
+            var active = Parent.getValue();
+            Parent.state.value = !!active;
+            return React.createElement(SView, { style: {
+                    width: 20,
+                    height: 20,
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    borderColor: STheme.color.card,
+                    backgroundColor: !active ? "" : "#1975FF"
+                }, onPress: function () {
+                    if (Parent.getProps().disabled) {
+                        return;
+                    }
+                    Parent.setValue(!active);
+                }, center: true }, !active ? null : React.createElement(SText, { fontSize: 18, font: "Roboto", bold: true, color: "#fff" }, "✓"));
         }
     });
 };

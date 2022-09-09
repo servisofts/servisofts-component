@@ -37,7 +37,7 @@ var SPagination = /** @class */ (function (_super) {
         var cantPages = this.getPageItens();
         var ITEMS = [];
         if (this.props.page > 1) {
-            ITEMS.push(React.createElement(SView, { style: {
+            ITEMS.push(React.createElement(SView, { key: "itm_sp_1", style: {
                     width: 20,
                     height: 20,
                     borderRadius: 100
@@ -82,7 +82,7 @@ var SPagination = /** @class */ (function (_super) {
                 }
             }
             vals[index] = val;
-            ITEMS.push(React.createElement(SView, { style: {
+            ITEMS.push(React.createElement(SView, { key: "itm_sp_2_" + index, style: {
                     width: 22,
                     height: 22,
                     borderRadius: 40,
@@ -99,7 +99,7 @@ var SPagination = /** @class */ (function (_super) {
             _loop_1(index);
         }
         if (this.props.page < cantPages) {
-            ITEMS.push(React.createElement(SView, { style: {
+            ITEMS.push(React.createElement(SView, { key: "itm_sp_3", style: {
                     width: 20,
                     height: 20,
                     borderRadius: 100

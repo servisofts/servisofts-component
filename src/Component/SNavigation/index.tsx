@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, Linking } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
 import { NavigationContainer } from '@react-navigation/native';
@@ -51,6 +51,22 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navBar: any = null;
     static root: any;
     static routes = [];
+    static reset(route: string) {
+        if (!SNavigation.lastRoute) {
+            alert("no hay navegacion");
+            return;
+        }
+        // if (Platform.OS === "web") {
+        //     window.history.pushState([], "", route);
+        // }
+        SNavigation.lastRoute.navigation.reset({
+            index: 0,
+            routes: [{ name: route }]
+        });
+    }
+    static openURL(route: string) {
+        Linking.openURL(route);
+    }
     static navigate(route: string, params?: object) {
         if (!SNavigation.lastRoute) {
             alert("no hay navegacion");
@@ -83,6 +99,7 @@ export default class SNavigation extends Component<SNavigationProps> {
 
                     // SNavigation.lastRoute.navigation.replace(locstr);
                     window.location.pathname = locstr;
+
                 } else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
                 }
@@ -93,6 +110,14 @@ export default class SNavigation extends Component<SNavigationProps> {
             SNavigation.lastRoute.navigation.goBack();
         }
 
+    }
+    static getAllParams() {
+        var route = SNavigation.lastRoute.route;
+        var params = route.params;
+        if (!params) {
+            return {};
+        }
+        return params;
     }
     static getParam(key: string, valDef?: any) {
         var route = SNavigation.lastRoute.route;
@@ -106,7 +131,31 @@ export default class SNavigation extends Component<SNavigationProps> {
         }
         return param;
     }
+    static isBack() {
+        if (Platform.OS == "web") {
+            var prevent = false;
+            if (SNavigation.lastRoute) {
+                if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                    if (SNavigation.lastRoute.route.name == SNavigation.root) {
+                        return false;
+                    }
+                    var locstr = window.location.pathname;
+                    if (locstr == "/") {
+                        return false;
+                    }
 
+                }
+            }
+        } else {
+            if (!SNavigation.lastRoute) {
+                return false;
+            }
+            if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                return false;
+            }
+        }
+        return true;
+    }
     constructor(props: any) {
         super(props);
         this.state = {
@@ -164,7 +213,7 @@ export default class SNavigation extends Component<SNavigationProps> {
                     return <Page {...props} />
                 } catch (e) {
                     console.log(e);
-                    return <View />
+                    return null;
                 }
 
             }
@@ -177,6 +226,8 @@ export default class SNavigation extends Component<SNavigationProps> {
                 }} />
         })
     }
+
+
     render() {
         // var NavigationContainer = this.props.props.NavigationContainer;
         // var Stack = this.props.props.Stack;

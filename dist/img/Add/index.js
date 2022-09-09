@@ -16,6 +16,6 @@ var Web = function (props) { return (React.createElement("svg", __assign({}, pro
     React.createElement("g", { id: "Capa_2", "data-name": "Capa 2" },
         React.createElement("g", { id: "Capa_1-2", "data-name": "Capa 1" },
             React.createElement("rect", { width: "141.73", height: "141.73", rx: "34.98", fill: "#c31d38" }),
-            React.createElement("line", { x1: "72.47", y1: "27.67", x2: "72.47", y2: "114.07", fill: "none", stroke: "#fff", "stroke-linecap": "round", "stroke-miterlimit": "10", "stroke-width": "15.1" }),
-            React.createElement("line", { x1: "29.27", y1: "70.87", x2: "115.67", y2: "70.87", fill: "none", stroke: "#fff", "stroke-linecap": "round", "stroke-miterlimit": "10", "stroke-width": "15.1" }))))); };
+            React.createElement("line", { x1: "72.47", y1: "27.67", x2: "72.47", y2: "114.07", fill: "none", stroke: "#fff", strokeLinecap: "round", strokeMiterlimit: "10", strokeWidth: "15.1" }),
+            React.createElement("line", { x1: "29.27", y1: "70.87", x2: "115.67", y2: "70.87", fill: "none", stroke: "#fff", strokeLinecap: "round", strokeMiterlimit: "10", strokeWidth: "15.1" }))))); };
 export default { Native: Native, Web: Web };

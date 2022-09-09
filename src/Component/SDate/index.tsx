@@ -224,6 +224,8 @@ export default class SDate {
         format = format.replace("yyyy", json.year);
         format = format.replace("MM", this.formatCero(json.month));
         format = format.replace("MONTH", this.getMonthJson().text);
+        format = format.replace("DAY", this.getDayOfWeekJson().text);
+        format = format.replace("day", this.getDayOfWeekJson().textSmall);
         format = format.replace("MON", this.getMonthJson().textSmall);
         format = format.replace("dd", this.formatCero(json.day));
         format = format.replace("hh", this.formatCero(json.hour));

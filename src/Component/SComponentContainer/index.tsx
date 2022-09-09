@@ -9,6 +9,7 @@ import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
 import SPage from '../SPage';
 import { SInputsCofig } from "../../Types/index"
+import SThread from '../SThread';
 
 export type SComponentContainerProps = {
     theme?: SThemeProps,
@@ -16,7 +17,7 @@ export type SComponentContainerProps = {
     debug?: boolean,
     socket?: any,
     assets?: SAssets,
-    inputs?: SInputsCofig,
+    inputs?: () => SInputsCofig,
 }
 
 
@@ -37,7 +38,13 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         if (!this.Instance) {
             return null;
         }
-        return this.Instance.props.inputs;
+        if (!this.Instance.props) {
+            return null;
+        }
+        if (!this.Instance.props.inputs) {
+            return null;
+        }
+        return this.Instance.props.inputs();
     }
     layout;
     state;
@@ -61,7 +68,9 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     onChangeSize(layout) {
         this.layout = layout;
         var curMedida = "";
-        if (layout.width >= 1200) {
+        if (layout.width >= 1400) {
+            curMedida = "xxl";
+        } else if (layout.width >= 1200) {
             curMedida = "xl";
         } else if (layout.width >= 992) {
             curMedida = "lg"
@@ -82,13 +91,13 @@ export default class SComponentContainer extends Component<SComponentContainerPr
 
     }
     getContenido() {
-        if (!this.state.theme) return <View />
+        if (!this.state.theme) return null;
         return (
             <View style={{
                 width: "100%",
                 flex: 1,
                 height: "100%",
-                backgroundColor: this.state.theme.barColor
+                backgroundColor: this.state.theme?.barColor || "#222222"
             }} >
                 <SafeAreaView style={{
                     width: '100%',
@@ -98,7 +107,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         width: "100%",
                         flex: 1,
                     }} >
-                        <StatusBar barStyle={this.state.theme.barStyle} animated backgroundColor={this.state.theme.barColor} />
+                        <StatusBar barStyle={this.state.theme?.barStyle} animated backgroundColor={this.state.theme?.barColor || "#222222"} />
                         <View style={{
                             width: "100%",
                             flex: 1,
@@ -118,9 +127,12 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     render() {
         SComponentContainer.Instance = this;
         return (
-            <STheme {...this.props.theme} onLoad={(color: SThemeColors) => {
+            <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
                 if (this.state.theme != color) {
-                    this.setState({ theme: color });
+                    this.setState({ theme: null });
+                    new SThread(10, "render_theme", false).start(() => {
+                        this.setState({ theme: color });
+                    })
                 }
             }}>
                 {this.getContenido()}

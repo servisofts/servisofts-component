@@ -32,7 +32,6 @@ var submit = /** @class */ (function (_super) {
         if (files.length <= 0) {
             return;
         }
-        alert(files);
         console.log(files);
         console.log(files.length);
         files.map(function (file) {

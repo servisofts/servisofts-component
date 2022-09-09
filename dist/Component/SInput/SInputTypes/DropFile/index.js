@@ -61,7 +61,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { Component } from 'react';
-import { SIcon, SImage, SText, SView } from '../../../../index';
+import { SIcon, SImage, SText, STheme, SView } from '../../../../index';
 var delay = function (ms) { return new Promise(function (res) { return setTimeout(res, ms); }); };
 var DropFile = /** @class */ (function (_super) {
     __extends(DropFile, _super);
@@ -154,6 +154,7 @@ var DropFile = /** @class */ (function (_super) {
                 return React.createElement(SText, { center: true }, "");
             }
             return React.createElement(SView, { row: true, center: true }, _this.state.images.map(function (image, index) {
+                var _a, _b, _c, _d;
                 return React.createElement(SView, { key: index, width: 100, height: 100, style: {
                         padding: 4,
                         overflow: 'hidden'
@@ -164,9 +165,14 @@ var DropFile = /** @class */ (function (_super) {
                             // backgroundColor: STheme.color.card,
                             borderRadius: 4
                         } },
-                        React.createElement(SView, { col: "xs-8", colSquare: true },
-                            React.createElement(SImage, { src: image.uri })),
-                        React.createElement(SText, { fontSize: 8, center: true }, _this.getName(image.file.name)),
+                        React.createElement(SView, { col: "xs-8", colSquare: true, card: true },
+                            React.createElement(SView, { col: "xs-12", height: true, style: {
+                                    position: "absolute"
+                                }, center: true },
+                                React.createElement(SText, { color: STheme.color.gray, fontSize: 18, bold: true }, _this.getExtension((_b = (_a = image === null || image === void 0 ? void 0 : image.file) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : image.name))),
+                            React.createElement(SView, { col: "xs-12", flex: true },
+                                React.createElement(SImage, { src: image.uri }))),
+                        React.createElement(SText, { fontSize: 8, center: true }, _this.getName((_d = (_c = image === null || image === void 0 ? void 0 : image.file) === null || _c === void 0 ? void 0 : _c.name) !== null && _d !== void 0 ? _d : image.name)),
                         React.createElement(SView, { style: {
                                 position: "absolute",
                                 top: 0,
@@ -186,6 +192,22 @@ var DropFile = /** @class */ (function (_super) {
         _this.state = {
             images: []
         };
+        var value = props.defaultValue || "";
+        if (value) {
+            if (typeof value == "string") {
+                value = JSON.parse(value);
+            }
+            if (props.filePath) {
+                value.map(function (itm) {
+                    _this.state.images.push({
+                        uri: props.filePath + "/" + props.name + "/" + itm,
+                        name: itm
+                    });
+                });
+                console.log(_this.state.images);
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+            }
+        }
         _this.onUpload = _this.props.onUpload;
         _this.idInstance = new Date().getTime();
         return _this;
@@ -202,16 +224,30 @@ var DropFile = /** @class */ (function (_super) {
         });
     };
     DropFile.prototype.getName = function (name) {
+        if (!name)
+            return;
         var arr = name.split('.');
-        var ext = arr.pop();
+        if (arr.length > 1) {
+            var ext = arr.pop();
+        }
         var name = arr.join('.');
         if (name.length > 15) {
             name = name.substr(0, 15) + '...';
         }
         return name;
     };
+    DropFile.prototype.getExtension = function (name) {
+        if (!name)
+            return;
+        var arr = name.split('.');
+        if (arr.length > 1) {
+            return arr.pop();
+        }
+        return "File";
+    };
     DropFile.prototype.render = function () {
         var _this = this;
+        // console.log(this.props.defaultValue);
         return (React.createElement(SView, { col: "xs-12", height: true, style: {
                 padding: 4
             } },

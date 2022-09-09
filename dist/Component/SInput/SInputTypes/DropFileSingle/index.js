@@ -61,7 +61,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { Component } from 'react';
-import { SImage, SText, SView } from '../../../../index';
+import { SImage, SText, STheme, SView } from '../../../../index';
 var delay = function (ms) { return new Promise(function (res) { return setTimeout(res, ms); }); };
 var DropFileSingle = /** @class */ (function (_super) {
     __extends(DropFileSingle, _super);
@@ -150,6 +150,7 @@ var DropFileSingle = /** @class */ (function (_super) {
             });
         }); };
         _this.getImages = function () {
+            var _a, _b;
             if (_this.state.images.length <= 0) {
                 return React.createElement(SText, { center: true }, "");
             }
@@ -158,17 +159,31 @@ var DropFileSingle = /** @class */ (function (_super) {
                     overflow: 'hidden',
                     borderRadius: 4
                 } },
-                React.createElement(SImage, { src: image.uri }));
+                React.createElement(SView, { col: "xs-12", height: true, style: {
+                        position: "absolute"
+                    }, center: true },
+                    React.createElement(SText, { color: STheme.color.gray, fontSize: 18, bold: true }, _this.getExtension((_b = (_a = image === null || image === void 0 ? void 0 : image.file) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : image.name))),
+                React.createElement(SView, { flex: true, col: "xs-12" },
+                    React.createElement(SImage, { src: image.uri })));
         };
         _this.state = {
             images: []
         };
         var value = props.defaultValue || "";
         if (value) {
-            _this.state.images.push({
-                uri: value,
-                name: value
-            });
+            if (props.filePath) {
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+                _this.state.images.push({
+                    uri: props.filePath + "/" + props.name + "/" + value,
+                    name: value
+                });
+            }
+            else {
+                _this.state.images.push({
+                    uri: value,
+                    name: value
+                });
+            }
         }
         _this.onUpload = _this.props.onUpload;
         _this.idInstance = new Date().getTime();
@@ -194,6 +209,15 @@ var DropFileSingle = /** @class */ (function (_super) {
         }
         return name;
     };
+    DropFileSingle.prototype.getExtension = function (name) {
+        if (!name)
+            return;
+        var arr = name.split('.');
+        if (arr.length > 1) {
+            return arr.pop();
+        }
+        return "File";
+    };
     DropFileSingle.prototype.render = function () {
         var _this = this;
         return (React.createElement(SView, { col: "xs-12", height: true },
@@ -210,9 +234,9 @@ var DropFileSingle = /** @class */ (function (_super) {
                         if (_this.props.onPress)
                             _this.props.onPress();
                     } },
-                    React.createElement("input", { id: "dropFileainp" + ("_key_" + this.idInstance), type: 'file', name: 'file', className: 'drop-zone__inputa' + ("_key_" + this.idInstance), accept: "image/*", style: {
+                    React.createElement("input", { id: "dropFileainp" + ("_key_" + this.idInstance), type: 'file', name: 'file', className: 'drop-zone__inputa' + ("_key_" + this.idInstance), style: {
                             display: "none"
-                        } }),
+                        }, accept: this.props.accept }),
                     this.getImages()))));
     };
     return DropFileSingle;

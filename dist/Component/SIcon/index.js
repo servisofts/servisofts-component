@@ -34,6 +34,8 @@ var SIcon = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SIcon.loadAssets = function (assets) {
+        if (!assets)
+            return;
         if (assets.svg) {
             this.Assets = assets.svg;
         }

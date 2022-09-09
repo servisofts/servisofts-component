@@ -93,7 +93,7 @@ var STable2 = /** @class */ (function (_super) {
                 _this._animHeader[item.key] = new Animated.Value(item.width);
                 _this._animSize = Animated.add(_this._animSize, _this._animHeader[item.key]);
                 _this._animSize = Animated.add(_this._animSize, new Animated.Value(_this.state.space));
-                return React.createElement(Header, __assign({}, item, { total: _this.state.totales[item.key], filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
+                return React.createElement(Header, __assign({ headerColor: _this.props.headerColor }, item, { total: _this.state.totales[item.key], filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
                         _this.state.HFilter[item.key] = filter;
                         _this.setState({ HFilter: __assign({}, _this.state.HFilter) });
                     } }));
@@ -111,8 +111,9 @@ var STable2 = /** @class */ (function (_super) {
                 }
             });
             return new SOrdenador(orderArr).ordernarObject(_this.state.data).slice(((_this.state.page - 1) * _this.state.limit), (_this.state.page * _this.state.limit)).map(function (itemData, i) {
+                var _a, _b;
                 var data = _this.state.data[itemData];
-                return React.createElement(Row, { index: ((_this.state.page - 1) * _this.state.limit) + i, height: 50, space: _this.state.space, data: data, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
+                return React.createElement(Row, { key: "row_" + i, index: ((_this.state.page - 1) * _this.state.limit) + i, height: (_b = (_a = _this.props) === null || _a === void 0 ? void 0 : _a.rowHeight) !== null && _b !== void 0 ? _b : 50, space: _this.state.space, data: data, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
             });
         };
         _this.Footer = function () {

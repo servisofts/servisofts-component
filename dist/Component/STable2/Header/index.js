@@ -69,12 +69,12 @@ var Header = /** @class */ (function (_super) {
             React.createElement(SIcon, { name: this.props.filter_h ? "Ajustes" : "Engranaje", fill: STheme.color.secondary + "66", width: 10 }));
     };
     Header.prototype.render = function () {
-        var _a;
+        var _a, _b;
         return (React.createElement(React.Fragment, null,
             React.createElement(SView, { width: this.props.space ? this.props.space : 0, height: true }),
             React.createElement(SView, { animated: true, height: true, center: true, style: {
                     width: this.props.animWidth,
-                    backgroundColor: STheme.color.primary,
+                    backgroundColor: (_a = this.props.headerColor) !== null && _a !== void 0 ? _a : STheme.color.primary,
                     borderRadius: 2,
                     overflow: 'hidden'
                 } },
@@ -85,7 +85,7 @@ var Header = /** @class */ (function (_super) {
                         } },
                         React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary, width: 10 })) : null),
                 React.createElement(SView, { row: true, center: true },
-                    React.createElement(SText, { fontSize: 12, font: "Roboto" }, this.props.total ? parseFloat((_a = this.props.total) !== null && _a !== void 0 ? _a : 0).toFixed(2) : "")),
+                    React.createElement(SText, { fontSize: 12, font: "Roboto" }, this.props.total ? parseFloat((_b = this.props.total) !== null && _b !== void 0 ? _b : 0).toFixed(2) : "")),
                 React.createElement(SView, __assign({}, this.pan.getPanHandlers(), { animated: true, style: {
                         position: "absolute",
                         right: 0,

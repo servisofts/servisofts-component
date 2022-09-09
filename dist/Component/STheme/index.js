@@ -24,8 +24,44 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import SThread from '../SThread/index';
 import SStorage from '../SStorage';
 import MapStyle from './MapStyle';
@@ -33,21 +69,12 @@ var STheme = /** @class */ (function (_super) {
     __extends(STheme, _super);
     function STheme(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {};
         STheme.instance = _this;
         _this.state = {
             isFadeOut: true,
             select: !_this.props.initialTheme ? "default" : _this.props.initialTheme
         };
         // this.repaint();
-        SStorage.getItem("themeState", function (data) {
-            if (data) {
-                _this.select(data);
-            }
-            else {
-                SStorage.setItem("themeState", _this.state.select);
-            }
-        });
         _this.animFadeOut = new Animated.Value(0);
         return _this;
     }
@@ -72,93 +99,55 @@ var STheme = /** @class */ (function (_super) {
         return this.instance.state.select;
     };
     ;
+    STheme.prototype.componentDidMount = function () {
+        this.getItemTheme();
+    };
+    STheme.prototype.getItemTheme = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                SStorage.getItem("themeState", function (data) {
+                    if (data) {
+                        _this.select(data);
+                    }
+                    else {
+                        SStorage.setItem("themeState", _this.state.select);
+                        _this.select(_this.state.select);
+                    }
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     STheme.prototype.select = function (theme) {
+        var _this = this;
         if (!this.props.themes[theme]) {
             return "Theme not found ";
         }
         this.state.select = theme;
-        SStorage.setItem("themeState", theme);
-        this.setState({ select: theme });
+        if (STheme.colorSelect != this.props.themes[this.state.select]) {
+            // if (this.props.onLoad) {
+            //     this.props.onLoad(null);
+            // }
+            STheme.colorSelect = this.props.themes[this.state.select];
+            STheme.color = __assign(__assign(__assign({}, STheme.color), { mapStyle: MapStyle[this.state.select] }), this.props.themes[this.state.select]);
+        }
+        new SThread(100, "algo", false).start(function () {
+            SStorage.setItem("themeState", theme);
+            if (_this.props.onLoad) {
+                _this.props.onLoad(STheme.color);
+            }
+        });
     };
     STheme.prototype.change = function () {
         this.state.select = this.state.select != "default" ? "default" : "dark";
         SStorage.setItem("themeState", this.state.select);
-        this.setState({
-            lastLoad: new Date().getTime()
-        });
-    };
-    STheme.prototype.componentDidMount = function () {
-        this.animar();
-    };
-    STheme.prototype.animar = function () {
-        var _this = this;
-        if (this.onAnim)
-            return;
-        this.setState({ fadeOut: true });
-        this.animFadeOut.setValue(0);
-        this.onAnim = true;
-        Animated.timing(this.animFadeOut, {
-            toValue: 1,
-            duration: 1500,
-            useNativeDriver: false
-        }).start(function (end) {
-            _this.onAnim = false;
-            _this.state.isFadeOut = false;
-            _this.setState({ isFadeOut: false });
-        });
-    };
-    STheme.prototype.fadeOut = function () {
-        if (this.props.noAnimated)
-            return;
-        if (!this.state.isFadeOut)
-            return;
-        return React.createElement(Animated.View, { style: {
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                // backgroundColor: "#f0f",
-                backgroundColor: this.animFadeOut.interpolate({
-                    inputRange: [0, 0.8],
-                    outputRange: [STheme.color.primary, STheme.color.background]
-                }),
-                opacity: this.animFadeOut.interpolate({
-                    inputRange: [0, 0.8, 1],
-                    outputRange: [1, 0.9, 0]
-                })
-            } });
-    };
-    STheme.prototype.repaint = function () {
-        var _this = this;
-        if (STheme.colorSelect != this.props.themes[this.state.select]) {
-            STheme.colorSelect = this.props.themes[this.state.select];
-            STheme.color = __assign(__assign(__assign({}, STheme.color), { mapStyle: MapStyle[this.state.select] }), this.props.themes[this.state.select]);
-            if (this.state.lastLoad) {
-                new SThread(10, "stheme-change", true).start(function () {
-                    _this.setState({
-                        lastLoad: new Date().getTime()
-                    });
-                });
-                this.animar();
-                this.state.isFadeOut = true;
-                return (React.createElement(React.Fragment, null, this.fadeOut()));
-            }
-            else {
-                this.state.lastLoad = new Date().getTime();
-            }
-        }
-        if (this.props.onLoad) {
-            this.props.onLoad(STheme.color);
-        }
-        // new SThread(10, "report-onload-change", false).start(() => {
-        // })
-        return React.createElement(React.Fragment, null,
-            this.props.children,
-            this.fadeOut());
+        this.select(this.state.select);
     };
     STheme.prototype.render = function () {
-        return this.repaint();
+        if (!this.props.data)
+            return React.createElement(View, null);
+        return this.props.children;
     };
     STheme.color = {
         barStyle: "dark-content",

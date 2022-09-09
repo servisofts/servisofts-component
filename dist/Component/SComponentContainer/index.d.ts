@@ -9,7 +9,7 @@ export declare type SComponentContainerProps = {
     debug?: boolean;
     socket?: any;
     assets?: SAssets;
-    inputs?: SInputsCofig;
+    inputs?: () => SInputsCofig;
 };
 export default class SComponentContainer extends Component<SComponentContainerProps> {
     private static Instance;

@@ -12,6 +12,7 @@ type Props = {
     cstyle?: any,
     onChange?: Function,
     defaultValue?: string,
+    accept?: string,
 }
 
 export default class DropFileSingle extends Component<Props> {

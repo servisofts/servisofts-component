@@ -37,17 +37,22 @@ export default class SPopupComponent extends Component<SPopupComponentProps> {
     }
     render() {
         return (
-            <TouchableWithoutFeedback onPress={() => {
+            <TouchableOpacity activeOpacity={1} onPress={() => {
                 this.props.close();
-            }}><View style={{
+            }} style={{
                 width: "100%",
                 height: "100%",
                 position: "absolute",
-                backgroundColor: STheme.color.card,
-                justifyContent: "center",
-                alignItems: "center",
-                // ...this.props.style
             }}>
+                <View style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    backgroundColor: STheme.color.card,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // ...this.props.style
+                }}>
                     {/* <View style={{
                         position:"absolute",
                         width:"100%",
@@ -64,16 +69,11 @@ export default class SPopupComponent extends Component<SPopupComponentProps> {
                         justifyContent: "center",
                         overflow: "hidden",
                     }}>
-                        <TouchableWithoutFeedback
-                            accessibilityViewIsModal
-                            onPress={() => {
-                            }}>
-                            {this.props.children}
-                        </TouchableWithoutFeedback>
+                        {this.props.children}
                         {this.getButonClose()}
                     </View>
                 </View>
-            </TouchableWithoutFeedback >
+            </TouchableOpacity >
         );
     }
 }

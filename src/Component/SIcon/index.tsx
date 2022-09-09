@@ -19,6 +19,7 @@ type SIconType = {
 export default class SIcon extends Component<SIconType> {
     static Assets = {};
     static loadAssets(assets: SAssets) {
+        if(!assets) return;
         if (assets.svg) {
             this.Assets = assets.svg;
         }

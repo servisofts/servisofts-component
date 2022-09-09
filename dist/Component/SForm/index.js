@@ -107,10 +107,38 @@ var SForm = /** @class */ (function (_super) {
             var obj = files[key];
             if (obj) {
                 if (typeof obj != "string") {
-                    Upload.send(obj, url);
+                    Upload.send(obj[0], url);
                 }
             }
         });
+    };
+    SForm.prototype.uploadFiles2 = function (url) {
+        var _this = this;
+        var files = this.getFiles();
+        Object.keys(this._ref).map(function (key) {
+            var input = _this._ref[key];
+            if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
+                var files = input.getValue();
+                _this.state.files[key] = files;
+                Object.values(files).map(function (obj) {
+                    var _a;
+                    if (typeof obj != "string") {
+                        if (obj.file) {
+                            var name = (_a = obj === null || obj === void 0 ? void 0 : obj.file) === null || _a === void 0 ? void 0 : _a.name;
+                            Upload.send(obj, url + "/" + key + "/" + name);
+                        }
+                    }
+                });
+                return;
+            }
+        });
+    };
+    SForm.prototype.uploadFile = function (file, url) {
+        if (file) {
+            if (typeof file != "string") {
+                Upload.send(file[0], url);
+            }
+        }
     };
     SForm.prototype.submitFiles = function (data, key, url) {
         this.getFiles();
@@ -133,19 +161,84 @@ var SForm = /** @class */ (function (_super) {
             if (!input.verify()) {
                 isValid = false;
             }
+            if (input.getType() == "files") {
+                var files = input.getValue();
+                if (typeof files == "string") {
+                    files = JSON.parse(files);
+                }
+                if (!files)
+                    return;
+                if (files.length > 0) {
+                    _this.state.files[key] = files;
+                    data[key] = files.map(function (obj) {
+                        var _a;
+                        if (typeof obj == "string") {
+                            return obj;
+                        }
+                        if (obj.file) {
+                            return (_a = obj === null || obj === void 0 ? void 0 : obj.file) === null || _a === void 0 ? void 0 : _a.name;
+                        }
+                        else {
+                            return obj.name;
+                        }
+                    });
+                }
+                else {
+                    data[key] = [];
+                }
+                return;
+            }
             if (input.getType() == "file") {
-                _this.state.files[key] = input.getValue();
+                var files = input.getValue();
+                if (!files)
+                    return;
+                if (typeof files == "string") {
+                    data[key] = files;
+                }
+                else {
+                    if (!files)
+                        return;
+                    if (files.length > 0) {
+                        var file = files[0];
+                        if (file.file) {
+                            _this.state.files[key] = file;
+                            data[key] = file.file.name;
+                        }
+                        else {
+                            data[key] = file.name;
+                        }
+                    }
+                }
                 return;
             }
             if (input.getType() == "image") {
-                _this.state.files[key] = input.getValue();
+                var files = input.getValue();
+                if (!files)
+                    return;
+                if (typeof files == "string") {
+                    data[key] = files;
+                }
+                else {
+                    if (!files)
+                        return;
+                    if (files.length > 0) {
+                        var file = files[0];
+                        if (file.file) {
+                            _this.state.files[key] = file;
+                            data[key] = file.file.name;
+                        }
+                        else {
+                            data[key] = file.name;
+                        }
+                    }
+                }
                 return;
             }
             data[key] = input.getValue();
         });
         if (isValid) {
             if (this.props.onSubmit) {
-                this.props.onSubmit(data);
+                this.props.onSubmit(data, this);
             }
             return data;
         }
@@ -175,11 +268,9 @@ var SForm = /** @class */ (function (_super) {
                 focus = true;
                 readyFocus = true;
             }
-            return React.createElement(SInput
-            // autoFocus={focus}
-            , __assign({ 
+            return React.createElement(SInput, __assign({ key: "imput_" + key, 
                 // autoFocus={focus}
-                ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
+                name: key, ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
         });
     };
     SForm.prototype.render = function () {

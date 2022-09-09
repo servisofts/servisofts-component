@@ -13,6 +13,7 @@ export type TypeInputProps = {
     type?: TypeType,
     options?: Array<any>,
     isRequired?: Boolean,
+    required?: Boolean,
     variant?: TypeVariant,
     col?: SColType,
     color?: any,
@@ -24,6 +25,8 @@ export type TypeInputProps = {
     label?: String,
     props?: any,
     separation?: number,
+    filePath?:String,
+    name?:String,
     onChangeText?: (text: string) => any,
     onPress?: (val: any) => void,
     onStateChange?: (value: any) => void,
@@ -41,6 +44,7 @@ export class SInput extends Component<TypeInputProps> {
     variant
     _ref
     inpref
+    required;
     static defaultProps = {
         props: {},
         style: {},
@@ -57,13 +61,14 @@ export class SInput extends Component<TypeInputProps> {
         //         ..._props,
         //         ..._props.props
         //     };
-
-
         this.state = {
             value: this.props.value ?? this.props.defaultValue,
             error: this.props.error,
             data: {}
         };
+        this.inpref = null;
+
+        this.onChangeText = this.onChangeText.bind(this);
     }
     componentDidMount(): void {
 
@@ -85,9 +90,13 @@ export class SInput extends Component<TypeInputProps> {
     getData() {
         return this.state.data;
     }
+    setData(data) {
+        this.state.data = data;
+
+    }
     verify(noStateChange?: boolean) {
         if (this.props) {
-            if (!this.props.isRequired) return true;
+            if (!this.required) return true;
         }
         var isValid = true;
         if (!this.getValue()) {
@@ -95,7 +104,7 @@ export class SInput extends Component<TypeInputProps> {
         } else {
             if (this.type) {
                 if (this.type.verify) {
-                    if (!this.type.verify(this.getValue())) {
+                    if (!this.type.verify(this.getValueClean())) {
                         isValid = false;
                     }
                 }
@@ -124,9 +133,18 @@ export class SInput extends Component<TypeInputProps> {
         return this.props.type;
     }
     getValue() {
+        var value = this.state.value ?? "";
+        if (this.state.data?.dialCode) {
+            return this.state.data?.dialCode?.dialCode + " " + value;
+        }
         return this.state.value;
     }
-
+    getValueClean() {
+        return this.state.value;
+    }
+    focus() {
+        this.inpref.focus();
+    }
     getCustomStyle() {
         return this.customStyle;
     }
@@ -164,7 +182,7 @@ export class SInput extends Component<TypeInputProps> {
     }
     getLabel() {
         if (!this.props.label) return null;
-        return <SText style={{ ...this.customStyle["LabelStyle"] }}>{this.props.label}</SText>
+        return <SText style={{ position: "absolute", ...this.customStyle["LabelStyle"], ...this.type?.style?.LabelStyle ?? {} }}>{this.props.label}</SText>
     }
 
     getIcon_r() {
@@ -219,8 +237,11 @@ export class SInput extends Component<TypeInputProps> {
     }
     render() {
 
-        if(this.props.value){
+        if (this.props.value) {
             this.state.value = this.props.value;
+        }
+        if (this.props.required || this.props.isRequired) {
+            this.required = true;
         }
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
@@ -239,6 +260,8 @@ export class SInput extends Component<TypeInputProps> {
             if (valueFilter) {
                 this.verify();
             }
+        } else {
+            valueFilter = "";
         }
         if (this.props.autoFocus) {
             this.inpref?.focus();

@@ -36,6 +36,7 @@ export type SThemeProps = {
     initialTheme: SThemeOptions,
     themes: SThemeThemes,
     noAnimated?: boolean,
+    data?: any,
     onLoad: (color: SThemeColors) => any
 }
 
@@ -83,7 +84,7 @@ export default class STheme extends Component<SThemeProps> {
         return this.instance.state.select;
     };
 
-    state: any = {};
+    state: any;
     animFadeOut;
     constructor(props: any) {
         super(props);
@@ -93,106 +94,54 @@ export default class STheme extends Component<SThemeProps> {
             select: !this.props.initialTheme ? "default" : this.props.initialTheme,
         };
         // this.repaint();
+        this.animFadeOut = new Animated.Value(0);
+    }
+    componentDidMount() {
+        this.getItemTheme();
+
+    }
+    async getItemTheme() {
         SStorage.getItem("themeState", (data) => {
             if (data) {
                 this.select(data);
             } else {
                 SStorage.setItem("themeState", this.state.select);
+                this.select(this.state.select);
             }
         })
-        this.animFadeOut = new Animated.Value(0);
     }
     select(theme: SThemeOptions) {
         if (!this.props.themes[theme]) {
             return "Theme not found "
         }
         this.state.select = theme;
-        SStorage.setItem("themeState", theme);
-        this.setState({ select: theme })
-    }
-    change() {
-        this.state.select = this.state.select != "default" ? "default" : "dark";
-        SStorage.setItem("themeState", this.state.select);
-        this.setState({
-            lastLoad: new Date().getTime()
-        })
-    }
-    componentDidMount() {
-        this.animar();
-    }
-    onAnim
-    animar() {
-        if (this.onAnim) return;
-        this.setState({ fadeOut: true });
-        this.animFadeOut.setValue(0);
-        this.onAnim = true;
-        Animated.timing(this.animFadeOut, {
-            toValue: 1,
-            duration: 1500,
-            useNativeDriver: false,
-        }).start((end) => {
-            this.onAnim = false;
-            this.state.isFadeOut = false;
-            this.setState({ isFadeOut: false })
-        });
-    }
-    fadeOut() {
-        if(this.props.noAnimated) return;
-        if (!this.state.isFadeOut) return;
-        return <Animated.View style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            // backgroundColor: "#f0f",
-            backgroundColor: this.animFadeOut.interpolate({
-                inputRange: [0, 0.8],
-                outputRange: [STheme.color.primary, STheme.color.background]
-            }),
-            opacity: this.animFadeOut.interpolate({
-                inputRange: [0, 0.8, 1],
-                outputRange: [1, 0.9, 0]
-            }),
-        }}>
-
-        </Animated.View>
-    }
-    repaint() {
         if (STheme.colorSelect != this.props.themes[this.state.select]) {
+            // if (this.props.onLoad) {
+            //     this.props.onLoad(null);
+            // }
             STheme.colorSelect = this.props.themes[this.state.select];
             STheme.color = {
                 ...STheme.color,
                 mapStyle: MapStyle[this.state.select],
                 ...this.props.themes[this.state.select]
             };
-            if (this.state.lastLoad) {
-                new SThread(10, "stheme-change", true).start(() => {
-                    this.setState({
-                        lastLoad: new Date().getTime()
-                    })
-
-                })
-                this.animar();
-                this.state.isFadeOut = true;
-
-                return (<>{this.fadeOut()}</>)
-            } else {
-                this.state.lastLoad = new Date().getTime();
+        }
+        new SThread(100, "algo", false).start(() => {
+            SStorage.setItem("themeState", theme);
+            if (this.props.onLoad) {
+                this.props.onLoad(STheme.color);
             }
-        }
-        if (this.props.onLoad) {
-            this.props.onLoad(STheme.color);
-        }
-        // new SThread(10, "report-onload-change", false).start(() => {
+        })
 
-        // })
-        return <>
-            {this.props.children}
-            {this.fadeOut()}
-        </>
     }
+    change() {
+        this.state.select = this.state.select != "default" ? "default" : "dark";
+        SStorage.setItem("themeState", this.state.select);
+        this.select(this.state.select);
+    }
+
     render() {
-        return this.repaint()
+        if (!this.props.data) return <View />
+        return this.props.children
     }
 }

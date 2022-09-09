@@ -22,7 +22,6 @@ export default class SMarker extends Component {
                 {/* <Image
                     source={require('../../../img/marker.png')}
                     style={{ width: 25, height: 32, resizeMode: "cover" }}
-
                 /> */}
             </Marker>
         );

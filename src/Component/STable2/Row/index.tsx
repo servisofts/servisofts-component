@@ -60,8 +60,8 @@ class Row extends Component<typeProps> {
                 }
                 ITEM = <SText fontSize={12}>{data}</SText>
             }
-            return <>
-                <SView width={this.props.space} height
+            return <SView row key={"itm_row_" + item.key} height={this.props.height}>
+                <SView  width={this.props.space} height
                     backgroundColor={this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22"}
                 />
                 <SView
@@ -82,10 +82,10 @@ class Row extends Component<typeProps> {
                             justifyContent: 'center',
                             width: "100%",
                         }}>
-                            {ITEM}
+                        {ITEM}
                     </SView>
                 </SView>
-            </>
+            </SView>
         })
     }
     render() {

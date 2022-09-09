@@ -25,9 +25,11 @@ export type TypeType =
     | "money"
     | "telefono"
     | "image"
+    | "files"
     | "file"
     | "direccion"
     | "textArea"
+    | "checkBox"
 
 type returnType = {
     props?: TextInputProps,
@@ -74,10 +76,14 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return image(type, Parent);
         case "file":
             return file(type, Parent);
+        case "files":
+            return files(type, Parent);
         case "direccion":
             return direccion(type, Parent);
         case "textArea":
             return textArea(type, Parent);
+        case "checkBox":
+            return checkBox(type, Parent);
         default:
             return buildResp({
                 props: {
@@ -92,55 +98,46 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
     }
 }
 const phone = (type: TypeType, Parent: SInput) => {
-    var value = Parent.getValue();
-    var arr = []
-    if (value) {
-        arr = value.split(" ");
-    }
+    var value = Parent.getValueClean();
     var dialcodeTxt = "+591"
-    if (arr.length > 1) {
-        dialcodeTxt = arr[0];
-        value = arr[1];
-    } else {
-        if (Parent.getData().dialCode) {
-            dialcodeTxt = Parent.getData().dialCode.dialCode
+    if (value && value.length > 0) {
+        if (value.indexOf("+") >= 0) {
+            var arr = value.split(" ");
+            if (arr.length > 1) {
+                dialcodeTxt = arr[0];
+                value = value.replace(dialcodeTxt + " ", "");
+                Parent.setValue(value);
+            }
         }
     }
+
+
     var dialcode = SIDialCodeAlert.getDialCode(dialcodeTxt)
+
+    if (!Parent.getData()?.dialCode) {
+        Parent.setData({
+            dialCode: dialcode
+        })
+    } else {
+        dialcode = Parent.getData().dialCode
+    }
     return buildResp({
         props: {
             keyboardType: "phone-pad",
         },
         onChangeText: (text) => {
-            var _value = Parent.getValue();
-            if (_value) {
-                var arr = _value.split(" ");
-                if (arr.length > 1) {
-                    dialcode = SIDialCodeAlert.getDialCode(arr[0])
-                    return dialcode.dialCode + " " + arr[1];
-                }
-            }
+            // var _value = Parent.getValue();
             return text;
         },
         verify: (value) => {
             if (!value) return false;
-            var arr = value.split(" ");
-            if (arr.length > 1) {
-                value = arr[1];
-            }
-            const countOfNumber = dialcode.mask.match(/9/g).length
+            const countOfNumber = dialcode.mask.match(/./g).length
             const isVerified = countOfNumber === value?.length;
             return isVerified;
         },
         filter: (value: String) => {
             if (!value) return value;
             var _value = value;
-            var arr = _value.split(" ");
-            if (arr.length > 1) {
-                dialcode = SIDialCodeAlert.getDialCode(arr[0])
-                _value = arr[1];
-            }
-
             let unmaskedPhoneNumber = (_value.match(/\d+/g) || []).join('');
             if (unmaskedPhoneNumber.length === 0) {
                 return ""
@@ -161,23 +158,14 @@ const phone = (type: TypeType, Parent: SInput) => {
             return phoneNumber;
         },
         icon: (
-            SIDialCodeAlert.getOpenButtom(dialcodeTxt, Parent.getStyle().InputText, (dial) => {
-                var value = Parent.getValue();
-                var arr = []
-                if (value) {
-                    if (value.indexOf("+") > -1) {
-                        arr = value.split(" ");
-                        console.log(arr)
-                    } else {
-                        arr = [dial.dialCode, value];
-                    }
-                }
-                if (arr.length > 0) {
-                    Parent.setValue(dial.dialCode + " " + arr[1])
-                } else {
-                    Parent.setValue(dial.dialCode + " " + "")
-                }
-                Parent.notifyBlur();
+            SIDialCodeAlert.getOpenButtom(dialcode.dialCode, Parent.getStyle().InputText, (dial) => {
+
+                Parent.setValue(Parent.getValueClean())
+                dialcode = dial;
+                Parent.setData({
+                    dialCode: dialcode
+                })
+                // Parent.notifyBlur();
             })
         ),
         style: {
@@ -340,6 +328,7 @@ const select = (type: TypeType, Parent: SInput) => {
             SPopupOpen({
                 key: "fechaPicker",
                 content: <SISelect
+                    height={300}
                     props={{
                         defaultValue: Parent.getValue(),
                     }}
@@ -455,6 +444,7 @@ const image = (type: TypeType, Parent: SInput) => {
         },
         style: {
             View: {
+                paddingStart: 0,
                 backgroundColor: "transparent",
                 height: Parent.getOption("height") == "default" ? 100 : Parent.getOption("height"),
                 // width: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
@@ -476,7 +466,7 @@ const image = (type: TypeType, Parent: SInput) => {
                     overflow: 'hidden',
                     backgroundColor: STheme.color.card,
                 }} height colSquare>
-                    <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                    <DropFileSingle {...Parent.getProps()} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
                         Parent.setValue(val);
                     }} />
                 </SView>
@@ -496,7 +486,38 @@ const file = (type: TypeType, Parent: SInput) => {
         },
         style: {
             View: {
-                height: 100,
+                paddingStart: 0,
+                height: 180,
+            }
+        },
+        render: (data) => {
+            return <SView style={{
+                width: "100%",
+                height: "100%",
+                overflow: 'hidden',
+            }}>
+                <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                    // console.log(val);
+                    Parent.setValue(val);
+                }} />
+            </SView>
+        }
+
+        // verify: (value) => {
+        //     if (!value) return false;
+        //     return true;
+        // }
+    })
+}
+const files = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            editable: false,
+        },
+        style: {
+            View: {
+                paddingStart: 0,
+                height: 180,
             }
         },
         render: (data) => {
@@ -552,5 +573,46 @@ const textArea = (type: TypeType, Parent: SInput) => {
                 height: 100,
             }
         },
+    })
+}
+const checkBox = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            editable: false,
+
+        },
+        style: {
+            View: {
+                paddingStart: 0,
+                width: 20,
+                height: 20,
+            },
+            LabelStyle: {
+                width: null,
+                position: "absolute"
+            }
+
+        },
+        render: (data) => {
+            var active = Parent.getValue();
+            Parent.state.value = !!active;
+            return <SView style={{
+                width: 20,
+                height: 20,
+                borderWidth: 1,
+                borderRadius: 4,
+                borderColor: STheme.color.card,
+                backgroundColor: !active ? "" : "#1975FF",
+            }} onPress={() => {
+                if (Parent.getProps().disabled) {
+                    return;
+                }
+
+                Parent.setValue(!active);
+
+            }} center>
+                {!active ? null : <SText fontSize={18} font={"Roboto"} bold color={"#fff"}>{"✓"}</SText>}
+            </SView>
+        }
     })
 }

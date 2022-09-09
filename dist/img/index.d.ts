@@ -160,6 +160,10 @@ declare const Icons: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
+    Pencil: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Profanity: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;

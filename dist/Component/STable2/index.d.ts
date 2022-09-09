@@ -2,10 +2,12 @@ import { Component } from 'react';
 import { HeaderProps } from './Header';
 declare type SType = {
     header: Array<HeaderProps>;
+    headerColor?: string;
     data: [Object] | Object;
     debug?: Boolean;
     filter?: (data: String, id?: any) => boolean;
     limit?: number;
+    rowHeight?: number;
 };
 export default class STable2 extends Component<SType> {
     state: any;

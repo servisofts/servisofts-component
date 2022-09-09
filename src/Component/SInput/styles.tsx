@@ -6,7 +6,7 @@ import { STheme } from "../../index"
 //Tamanhos y fomas
 
 import SComponentContainer from "../SComponentContainer"
-type Typesp = "default" | "primary" | "secondary" | "calistenia" | "bateon" | "kolping" | "yoalquilo"
+type Typesp = "default" | "clean" | "primary" | "secondary" | "calistenia" | "bateon" | "kolping" | "yoalquilo"
 
 
 export type TypeStyles = Typesp | [Typesp]
@@ -240,6 +240,26 @@ const getType = (type) => {
                     // color: STheme.color.primary + "66"
                 },
                 ...typesConfig.primary ?? {}
+            }
+        case "clean":
+            return {
+                "View": {
+                  
+                },
+                "LabelStyle": {
+                    color: STheme.color.secondary,
+                },
+                "InputText": {
+                    color: STheme.color.secondary,
+                },
+                "placeholder": {
+
+                },
+                "error": {
+                    borderColor: STheme.color.danger,
+                    borderWidth:1,
+                },
+                // ...typesConfig.default ?? {}
             }
         default:
             if (type != "default" && typesConfig[type]) {

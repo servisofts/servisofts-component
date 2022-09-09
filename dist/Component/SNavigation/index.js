@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import { Platform, Linking } from 'react-native';
 import STheme from '../STheme/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -40,6 +40,22 @@ var SNavigation = /** @class */ (function (_super) {
         SNavigation.navBar = props.props.navBar;
         return _this;
     }
+    SNavigation.reset = function (route) {
+        if (!SNavigation.lastRoute) {
+            alert("no hay navegacion");
+            return;
+        }
+        // if (Platform.OS === "web") {
+        //     window.history.pushState([], "", route);
+        // }
+        SNavigation.lastRoute.navigation.reset({
+            index: 0,
+            routes: [{ name: route }]
+        });
+    };
+    SNavigation.openURL = function (route) {
+        Linking.openURL(route);
+    };
     SNavigation.navigate = function (route, params) {
         if (!SNavigation.lastRoute) {
             alert("no hay navegacion");
@@ -81,6 +97,14 @@ var SNavigation = /** @class */ (function (_super) {
             SNavigation.lastRoute.navigation.goBack();
         }
     };
+    SNavigation.getAllParams = function () {
+        var route = SNavigation.lastRoute.route;
+        var params = route.params;
+        if (!params) {
+            return {};
+        }
+        return params;
+    };
     SNavigation.getParam = function (key, valDef) {
         var route = SNavigation.lastRoute.route;
         var params = route.params;
@@ -92,6 +116,31 @@ var SNavigation = /** @class */ (function (_super) {
             return valDef;
         }
         return param;
+    };
+    SNavigation.isBack = function () {
+        if (Platform.OS == "web") {
+            var prevent = false;
+            if (SNavigation.lastRoute) {
+                if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                    if (SNavigation.lastRoute.route.name == SNavigation.root) {
+                        return false;
+                    }
+                    var locstr = window.location.pathname;
+                    if (locstr == "/") {
+                        return false;
+                    }
+                }
+            }
+        }
+        else {
+            if (!SNavigation.lastRoute) {
+                return false;
+            }
+            if (!SNavigation.lastRoute.navigation.canGoBack()) {
+                return false;
+            }
+        }
+        return true;
     };
     SNavigation.prototype.getLinking = function () {
         var linking = {
@@ -135,7 +184,7 @@ var SNavigation = /** @class */ (function (_super) {
                 }
                 catch (e) {
                     console.log(e);
-                    return React.createElement(View, null);
+                    return null;
                 }
             };
             return React.createElement(Stack.Screen, { key: key, name: key, component: Page, options: __assign({ title: ((_a = _this.props.props) === null || _a === void 0 ? void 0 : _a.title) ? (_b = _this.props.props) === null || _b === void 0 ? void 0 : _b.title : "Servisofts", headerShown: false }, pages[key].options) });

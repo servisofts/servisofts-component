@@ -28,7 +28,7 @@ export default class SGrid extends Component<SGridProps> {
     }
     getMax = (col) => {
         if (!col) return 0;
-        var options = ["xs", "sm", "md", "lg", "xl"];
+        var options = ["xs", "sm", "md", "lg", "xl", "xxl"];
         var index = options.indexOf(this.medida);
         for (let i = index; i >= 0; i--) {
             const mtmp = options[i];
@@ -45,7 +45,7 @@ export default class SGrid extends Component<SGridProps> {
             var text: string = this.props.col;
             text = text.trim();
             text.split(" ").map((row) => {
-                var cols = /((xs|sm|md|lg|xl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
+                var cols = /((xs|sm|md|lg|xl|xxl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
                 if (cols[2] && cols[3]) {
                     col[cols[2]] = cols[3];
                 }

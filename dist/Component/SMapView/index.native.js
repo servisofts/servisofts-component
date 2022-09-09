@@ -29,6 +29,7 @@ import { View, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import SIcon from '../SIcon';
+import STheme from '../STheme';
 var SMapView = /** @class */ (function (_super) {
     __extends(SMapView, _super);
     function SMapView(props) {
@@ -82,13 +83,13 @@ var SMapView = /** @class */ (function (_super) {
     };
     SMapView.prototype.render = function () {
         var _this = this;
-        var _a, _b;
+        var _a, _b, _c, _d;
         return (React.createElement(React.Fragment, null,
             React.createElement(MapView, __assign({ ref: function (ref) { return _this.mapa = ref; }, style: {
                     width: "100%",
                     height: "100%",
                     flex: 1
-                }, initialRegion: this.state.region, showsUserLocation: (_a = this.props.showsUserLocation) !== null && _a !== void 0 ? _a : false, showsMyLocationButton: (_b = this.props.showsMyLocationButton) !== null && _b !== void 0 ? _b : false, provider: PROVIDER_GOOGLE }, this.props), this.props.children),
+                }, initialRegion: this.state.region, showsUserLocation: (_a = this.props.showsUserLocation) !== null && _a !== void 0 ? _a : false, showsMyLocationButton: (_b = this.props.showsMyLocationButton) !== null && _b !== void 0 ? _b : false, provider: PROVIDER_GOOGLE, customMapStyle: (_d = (_c = this.props.options) === null || _c === void 0 ? void 0 : _c.styles) !== null && _d !== void 0 ? _d : STheme.color.mapStyle }, this.props), this.props.children),
             React.createElement(TouchableOpacity, { style: {
                     position: "absolute",
                     bottom: 100,

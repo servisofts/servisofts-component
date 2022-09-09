@@ -18,7 +18,6 @@ export default class submit extends Component {
         if (files.length <= 0) {
             return;
         }
-        alert(files)
         console.log(files);
 
         console.log(files.length);

@@ -9,6 +9,14 @@ type PropsType = {
     onRegionChangeComplete?: (region: any) => void,
     onPress?: (event: any) => void,
     preventCenter?: boolean,
+    options?: {
+        zoomControl?: boolean,
+        mapTypeControl?: boolean,
+        scaleControl?: boolean,
+        streetViewControl?: boolean,
+        rotateControl?: boolean,
+        fullscreenControl?: boolean
+    }
 }
 class SMapView extends Component<PropsType> {
     mapa;
@@ -52,7 +60,6 @@ class SMapView extends Component<PropsType> {
 
 
     componentDidMount() {
-        console.log("hoola mundo")
         this.getposition();
     }
 
@@ -82,16 +89,19 @@ class SMapView extends Component<PropsType> {
     setMarker() {
 
     }
+
+   
     animateToRegion(region, time) {
         // this.mapa.animateToRegion(region, !time ? 1000 : time);
         this.state.region = { ...this.state.region, ...region };
         this.setState({ ...this.state });
 
     }
+
+    renderChildrens(){
+        
+    }
     render() {
-
-        console.log("holaaaa")
-
         return (
             <>
                 <GoogleMapReact
@@ -105,7 +115,8 @@ class SMapView extends Component<PropsType> {
                         lng: this.state.region.longitude
                     }}
                     options={{
-                        styles: STheme.color.mapStyle
+                        styles: STheme.color.mapStyle,
+                        ...(this.props.options ?? {})
                     }}
                     defaultZoom={this.getZoom(this.state.region)}
                     onGoogleApiLoaded={({ map, maps }) => {

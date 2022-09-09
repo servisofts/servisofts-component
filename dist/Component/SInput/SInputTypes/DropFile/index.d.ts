@@ -5,6 +5,7 @@ declare type Props = {
     placeholder?: string;
     cstyle?: any;
     onChange?: Function;
+    defaultValue?: any;
 };
 export default class DropFile extends Component<Props> {
     state: any;
@@ -16,6 +17,7 @@ export default class DropFile extends Component<Props> {
     getFiles(): any;
     esperar: () => Promise<void>;
     getName(name: any): any;
+    getExtension(name: any): any;
     getImages: () => JSX.Element;
     render(): JSX.Element;
 }

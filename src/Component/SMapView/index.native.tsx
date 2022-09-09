@@ -12,6 +12,15 @@ type PropsType = {
     preventCenter?: boolean,
     showsMyLocationButton?: boolean,
     showsUserLocation?: boolean,
+    options?: {
+        styles?: any,
+        zoomControl?: boolean,
+        mapTypeControl?: boolean,
+        scaleControl?: boolean,
+        streetViewControl?: boolean,
+        rotateControl?: boolean,
+        fullscreenControl?: boolean
+    }
 
 }
 export default class SMapView extends Component<PropsType> {
@@ -87,6 +96,7 @@ export default class SMapView extends Component<PropsType> {
                     showsUserLocation={this.props.showsUserLocation ?? false}
                     showsMyLocationButton={this.props.showsMyLocationButton ?? false}
                     provider={PROVIDER_GOOGLE}
+                    customMapStyle={this.props.options?.styles ?? STheme.color.mapStyle}
                     {...this.props}
                 >
                     {this.props.children}

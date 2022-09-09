@@ -23,6 +23,7 @@ export type HeaderProps = {
     animWidth?: Animated.Value,
     changeHF?: any,
     key_header?: any,
+    headerColor?: string,
     filter_h?: any,
     total?: any,
 }
@@ -77,7 +78,7 @@ class Header extends Component<HeaderProps> {
                     center
                     style={{
                         width: this.props.animWidth,
-                        backgroundColor: STheme.color.primary,
+                        backgroundColor: this.props.headerColor ?? STheme.color.primary,
                         borderRadius: 2,
                         overflow: 'hidden',
                     }}>
@@ -91,7 +92,7 @@ class Header extends Component<HeaderProps> {
                         </SView> : null}
                     </SView>
                     <SView row center>
-                        <SText fontSize={12} font={"Roboto"}>{this.props.total?parseFloat(this.props.total ?? 0).toFixed(2):""}</SText>
+                        <SText fontSize={12} font={"Roboto"}>{this.props.total ? parseFloat(this.props.total ?? 0).toFixed(2) : ""}</SText>
                     </SView>
                     <SView
                         {...this.pan.getPanHandlers()}

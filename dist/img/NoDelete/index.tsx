@@ -5,7 +5,6 @@ import { Path, Rect, Line } from "react-native-svg";
 const Web = (props) => (
     <Svg {...props} viewBox="0 0 141.73 141.73">
         <Rect width="141.73" height="141.73" rx="34.98" fill="#C31C37" />
-        {/* stroke-linecap:round;stroke-miterlimit:10;stroke-width:21px; */}
         <Line x1="21.31" y1="121.21" x2="120.81" y2="21.14" stroke="#fff" strokeWidth="21px"  strokeLinecap="round"/>
         <Path
             d="M86.53,52.91a2.65,2.65,0,0,0-2.65,2.65v50.19a2.66,2.66,0,0,0,5.31,0V55.56A2.66,2.66,0,0,0,86.53,52.91Z" fill="#fff" />

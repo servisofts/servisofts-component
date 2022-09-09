@@ -11,6 +11,7 @@ export declare type TypeInputProps = {
     type?: TypeType;
     options?: Array<any>;
     isRequired?: Boolean;
+    required?: Boolean;
     variant?: TypeVariant;
     col?: SColType;
     color?: any;
@@ -22,6 +23,8 @@ export declare type TypeInputProps = {
     label?: String;
     props?: any;
     separation?: number;
+    filePath?: String;
+    name?: String;
     onChangeText?: (text: string) => any;
     onPress?: (val: any) => void;
     onStateChange?: (value: any) => void;
@@ -40,6 +43,7 @@ export declare class SInput extends Component<TypeInputProps> {
     variant: any;
     _ref: any;
     inpref: any;
+    required: any;
     static defaultProps: {
         props: {};
         style: {};
@@ -54,11 +58,14 @@ export declare class SInput extends Component<TypeInputProps> {
     getStyle(): any;
     getOption(option: any): any;
     getData(): any;
+    setData(data: any): void;
     verify(noStateChange?: boolean): boolean;
     notifyBlur(): void;
     setValue(value: any): void;
     getType(): TypeType;
     getValue(): any;
+    getValueClean(): any;
+    focus(): void;
     getCustomStyle(): any;
     isRender(type: any): JSX.Element;
     onChangeText: (_text: any) => void;

@@ -62,6 +62,12 @@ export default class SNavBar extends Component<SPageProps> {
             <SView onPress={() => {
                 // if (SNavigation.lastRoute) {
                 // if (SNavigation.lastRoute.navigation.canGoBack()) {
+                if (this.props.onBack) {
+                    var prevent_default = this.props.onBack();
+                    if (prevent_default) {
+                        return;
+                    }
+                }
                 SNavigation.goBack();
 
                 // return;

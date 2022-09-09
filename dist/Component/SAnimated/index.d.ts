@@ -50,7 +50,7 @@ export declare class SAnimated extends Component<typeProps> {
                 borderEndWidth?: string | number;
                 borderStartWidth?: string | number;
                 bottom?: string | number;
-                display?: "none" | "flex";
+                display?: "flex" | "none";
                 end?: string | number;
                 flex?: number;
                 flexBasis?: string | number;

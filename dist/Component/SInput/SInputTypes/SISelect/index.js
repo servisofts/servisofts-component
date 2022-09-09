@@ -19,6 +19,7 @@ import SPage from '../../../SPage';
 var SISelect = /** @class */ (function (_super) {
     __extends(SISelect, _super);
     function SISelect(props) {
+        var _a;
         var _this = _super.call(this, props) || this;
         _this.onScrollEnd = function (key, evt) {
             var center = (evt.vertical.contentOffset.y + (evt.vertical.layoutMeasurement.height / 2));
@@ -65,8 +66,8 @@ var SISelect = /** @class */ (function (_super) {
                 }
                 return (React.createElement(SView, { center: true, col: "xs-12", style: {
                         width: "100%",
-                        height: 40
-                    }, data: keyObj, ref: function (ref) { _this.refItens[keyObj] = ref; }, onPress: function () {
+                        height: _this.state.height_item
+                    }, key: keyObj, data: keyObj, ref: function (ref) { _this.refItens[keyObj] = ref; }, onPress: function () {
                         var layout = _this.refItens[keyObj].getLayout();
                         _this.scroll[key].scrollTo({ x: layout.x + 50, y: layout.y + 20 });
                     } }, Content));
@@ -98,11 +99,11 @@ var SISelect = /** @class */ (function (_super) {
                             width: "100%"
                         } },
                         React.createElement(SView, { style: {
-                                height: 80
+                                height: (_this.state.height / 2) - (_this.state.height_item / 2)
                             } }),
                         _this.getListaKey(key),
                         React.createElement(SView, { style: {
-                                height: 80
+                                height: (_this.state.height / 2) - (_this.state.height_item / 2)
                             } }))));
         };
         if (_this.props.props.defaultValue) {
@@ -110,7 +111,9 @@ var SISelect = /** @class */ (function (_super) {
         }
         _this.state = {
             initial: _this.value,
-            select: false
+            select: false,
+            height: (_a = _this.props.height) !== null && _a !== void 0 ? _a : 300,
+            height_item: 40
         };
         _this.scroll = {};
         _this.refItens = {};
@@ -165,7 +168,7 @@ var SISelect = /** @class */ (function (_super) {
     };
     SISelect.prototype.render = function () {
         return React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, withoutFeedback: true, style: {
-                height: 200,
+                height: this.state.height,
                 borderRadius: 8,
                 backgroundColor: STheme.color.background,
                 overflow: "hidden"
@@ -173,7 +176,7 @@ var SISelect = /** @class */ (function (_super) {
             SPage.backgroundComponent,
             React.createElement(SView, { row: true, style: {
                     width: "100%",
-                    height: 200
+                    height: "100%"
                 } }, this.getLista("select")));
     };
     SISelect.defaultProps = {

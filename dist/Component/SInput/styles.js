@@ -161,6 +161,21 @@ var getType = function (type) {
                     borderColor: STheme.color.danger
                     // color: STheme.color.primary + "66"
                 } }, (_c = typesConfig.primary) !== null && _c !== void 0 ? _c : {});
+        case "clean":
+            return {
+                "View": {},
+                "LabelStyle": {
+                    color: STheme.color.secondary
+                },
+                "InputText": {
+                    color: STheme.color.secondary
+                },
+                "placeholder": {},
+                "error": {
+                    borderColor: STheme.color.danger,
+                    borderWidth: 1
+                }
+            };
         default:
             if (type != "default" && typesConfig[type]) {
                 return typesConfig[type];

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { FontsType } from '../../font/index';
 export declare type SThemeColors = {
     barStyle: "dark-content" | "light-content";
@@ -31,6 +31,7 @@ export declare type SThemeProps = {
     initialTheme: SThemeOptions;
     themes: SThemeThemes;
     noAnimated?: boolean;
+    data?: any;
     onLoad: (color: SThemeColors) => any;
 };
 export default class STheme extends Component<SThemeProps> {
@@ -43,12 +44,9 @@ export default class STheme extends Component<SThemeProps> {
     state: any;
     animFadeOut: any;
     constructor(props: any);
+    componentDidMount(): void;
+    getItemTheme(): Promise<void>;
     select(theme: SThemeOptions): string;
     change(): void;
-    componentDidMount(): void;
-    onAnim: any;
-    animar(): void;
-    fadeOut(): JSX.Element;
-    repaint(): JSX.Element;
-    render(): JSX.Element;
+    render(): React.ReactNode;
 }

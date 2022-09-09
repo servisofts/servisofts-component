@@ -4,7 +4,7 @@ import { View, Text, ViewStyle } from 'react-native';
 import { SInput, TypeInputProps } from '../SInput/index';
 import SView, { SViewProps } from '../SView/index';
 // import { Col, TypeCol } from '../SView/cols';
-import { SButtom, onSubmitProps } from '../SButtom/index';
+import { SButtom, onSubmitProps, typeProps as ButtomType } from '../SButtom/index';
 import Submit from './submit'
 import Upload from './Upload';
 
@@ -19,7 +19,7 @@ export type SFromProps = {
     inputs: InputsTp,
     onSubmit?: Function,
     onSubmitName?: String,
-    onSubmitProps?: onSubmitProps,
+    onSubmitProps?: ButtomType,
 } & SViewProps
 export default class SForm extends Component<SFromProps> {
     static defaultProps = {
@@ -88,17 +88,47 @@ export default class SForm extends Component<SFromProps> {
         })
         return this.state.files;
     }
+
     uploadFiles(url) {
         var files = this.getFiles();
+
         Object.keys(files).map((key) => {
             var obj = files[key];
             if (obj) {
                 if (typeof obj != "string") {
-                    Upload.send(obj, url);
+                    Upload.send(obj[0], url);
                 }
             }
 
         })
+    }
+    uploadFiles2(url) {
+        var files = this.getFiles();
+        Object.keys(this._ref).map((key) => {
+            var input: SInput = this._ref[key];
+            if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
+                var files = input.getValue();
+                this.state.files[key] = files;
+                Object.values(files).map((obj: any) => {
+                    if (typeof obj != "string") {
+                        if (obj.file) {
+                            var name = obj?.file?.name;
+                            Upload.send(obj, url + "/" + key + "/" + name);
+                        }
+
+                    }
+                })
+                return;
+            }
+
+        })
+    }
+    uploadFile(file, url) {
+        if (file) {
+            if (typeof file != "string") {
+                Upload.send(file[0], url);
+            }
+        }
     }
     submitFiles(data, key, url) {
         this.getFiles();
@@ -122,19 +152,74 @@ export default class SForm extends Component<SFromProps> {
             if (!input.verify()) {
                 isValid = false;
             }
+            if (input.getType() == "files") {
+                var files = input.getValue();
+                if (typeof files == "string") {
+                    files = JSON.parse(files);
+                }
+                if (!files) return;
+                if (files.length > 0) {
+                    this.state.files[key] = files;
+                    data[key] = files.map((obj: any) => {
+                        if (typeof obj == "string") {
+                            return obj;
+                        }
+                        if (obj.file) {
+                            return obj?.file?.name;
+                        } else {
+                            return obj.name;
+                        }
+                    })
+                } else {
+                    data[key] = [];
+                }
+                return;
+            }
             if (input.getType() == "file") {
-                this.state.files[key] = input.getValue();
+                var files = input.getValue();
+                if (!files) return;
+                if (typeof files == "string") {
+                    data[key] = files;
+                } else {
+                    if (!files) return;
+                    if (files.length > 0) {
+                        var file = files[0];
+                        if (file.file) {
+                            this.state.files[key] = file
+                            data[key] = file.file.name
+                        } else {
+                            data[key] = file.name;
+                        }
+
+                    }
+                }
                 return;
             }
             if (input.getType() == "image") {
-                this.state.files[key] = input.getValue();
+                var files = input.getValue();
+                if (!files) return;
+                if (typeof files == "string") {
+                    data[key] = files;
+                } else {
+                    if (!files) return;
+                    if (files.length > 0) {
+                        var file = files[0];
+                        if (file.file) {
+                            this.state.files[key] = file
+                            data[key] = file.file.name
+                        } else {
+                            data[key] = file.name;
+                        }
+
+                    }
+                }
                 return;
             }
             data[key] = input.getValue();
         })
         if (isValid) {
             if (this.props.onSubmit) {
-                this.props.onSubmit(data);
+                this.props.onSubmit(data, this);
             }
             return data;
         }
@@ -173,7 +258,9 @@ export default class SForm extends Component<SFromProps> {
                 readyFocus = true;
             }
             return <SInput
+                key={"imput_" + key}
                 // autoFocus={focus}
+                name={key}
                 ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
                 {...this.props.inputProps}

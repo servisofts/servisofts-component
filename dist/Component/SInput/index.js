@@ -66,6 +66,8 @@ var SInput = /** @class */ (function (_super) {
             error: _this.props.error,
             data: {}
         };
+        _this.inpref = null;
+        _this.onChangeText = _this.onChangeText.bind(_this);
         return _this;
     }
     SInput.TYPE = function (type) { return type; };
@@ -90,9 +92,12 @@ var SInput = /** @class */ (function (_super) {
     SInput.prototype.getData = function () {
         return this.state.data;
     };
+    SInput.prototype.setData = function (data) {
+        this.state.data = data;
+    };
     SInput.prototype.verify = function (noStateChange) {
         if (this.props) {
-            if (!this.props.isRequired)
+            if (!this.required)
                 return true;
         }
         var isValid = true;
@@ -102,7 +107,7 @@ var SInput = /** @class */ (function (_super) {
         else {
             if (this.type) {
                 if (this.type.verify) {
-                    if (!this.type.verify(this.getValue())) {
+                    if (!this.type.verify(this.getValueClean())) {
                         isValid = false;
                     }
                 }
@@ -131,7 +136,18 @@ var SInput = /** @class */ (function (_super) {
         return this.props.type;
     };
     SInput.prototype.getValue = function () {
+        var _a, _b, _c, _d;
+        var value = (_a = this.state.value) !== null && _a !== void 0 ? _a : "";
+        if ((_b = this.state.data) === null || _b === void 0 ? void 0 : _b.dialCode) {
+            return ((_d = (_c = this.state.data) === null || _c === void 0 ? void 0 : _c.dialCode) === null || _d === void 0 ? void 0 : _d.dialCode) + " " + value;
+        }
         return this.state.value;
+    };
+    SInput.prototype.getValueClean = function () {
+        return this.state.value;
+    };
+    SInput.prototype.focus = function () {
+        this.inpref.focus();
     };
     SInput.prototype.getCustomStyle = function () {
         return this.customStyle;
@@ -147,9 +163,10 @@ var SInput = /** @class */ (function (_super) {
         }
     };
     SInput.prototype.getLabel = function () {
+        var _a, _b, _c;
         if (!this.props.label)
             return null;
-        return React.createElement(SText, { style: __assign({}, this.customStyle["LabelStyle"]) }, this.props.label);
+        return React.createElement(SText, { style: __assign(__assign({ position: "absolute" }, this.customStyle["LabelStyle"]), (_c = (_b = (_a = this.type) === null || _a === void 0 ? void 0 : _a.style) === null || _b === void 0 ? void 0 : _b.LabelStyle) !== null && _c !== void 0 ? _c : {}) }, this.props.label);
     };
     SInput.prototype.getIcon_r = function () {
         var ITEM = false;
@@ -201,6 +218,9 @@ var SInput = /** @class */ (function (_super) {
         if (this.props.value) {
             this.state.value = this.props.value;
         }
+        if (this.props.required || this.props.isRequired) {
+            this.required = true;
+        }
         var customStyle = CustomStyles(this.props.customStyle);
         this.customStyle = customStyle;
         this.style = this.props.style;
@@ -217,6 +237,9 @@ var SInput = /** @class */ (function (_super) {
             if (valueFilter) {
                 this.verify();
             }
+        }
+        else {
+            valueFilter = "";
         }
         if (this.props.autoFocus) {
             (_a = this.inpref) === null || _a === void 0 ? void 0 : _a.focus();

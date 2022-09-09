@@ -66,9 +66,7 @@ var SStorage = /** @class */ (function (_super) {
     SStorage.getItem = function (key, callback) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(_a, function (_b) {
             AsyncStorage.getItem(key).then(function (resp) {
-                console.log(resp);
                 callback(resp);
-                ////
             });
             return [2 /*return*/];
         });

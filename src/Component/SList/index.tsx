@@ -1,36 +1,98 @@
 import React, { Component } from 'react';
-import { SPage, SText, SView } from '../../index';
-import SHr from '../SHr';
+import { SHr, SPage, SSection, SText, SView, SInput, SBuscador, SIcon, STheme } from '../../index';
 import SOrdenador, { TypeOrdenar } from '../SOrdenador';
 
 
 type SListType = {
     data: any,
-    render: (item: any) => JSX.Element,
+    horizontal?: boolean,
+    center?: boolean,
+    render: (item: any, key?: any) => JSX.Element,
+    filter?: (item: any) => boolean,
     space?: number,
-    order?: [TypeOrdenar]
+    initSpace?: number,
+    limit?:number,
+    order?: [TypeOrdenar],
+    buscador?: boolean,
 }
 class SList extends Component<SListType> {
+    _buscador;
+    state;
     constructor(props) {
         super(props);
         this.state = {
+            buscar: ""
         };
     }
 
     getData() {
+        var space = this.props.space ?? 8;
+        var data = this.props.data;
+        if (!data) return null;
+        if (!data[0]) {
+            data = Object.values(data);
 
-        return new SOrdenador(this.props.order ?? [{ key: "fecha_on", order: "desc", peso: 1 }]).ordernarObject(this.props.data).map((key, index) => {
-            var Item = this.props.render(this.props.data[key]);
+        }
+        if (this.state.buscar) {
+            data = data.filter((itm) => {
+                return SBuscador.validate(itm, this.state.buscar);
+            })
+        }
+        if (this.props.filter) {
+            data = data.filter(this.props.filter)
+        }
+        var separation_style: any = {
+            ...this.props.horizontal ? { width: space / 2 } : { height: space / 2 }
+        }
+        var init_separation_style: any = {
+            ...this.props.horizontal ? { width: this.props.initSpace ?? 0 } : { height: this.props.initSpace ?? 0 }
+        }
+        var cant = Object.keys(data).length
+        if (this.state.cant != cant) {
+            this.setState({
+                cant: cant
+            })
+        }
+        var arr;
+        if (this.props.order) {
+            arr = new SOrdenador(this.props.order).ordernarObject(data);
+        } else {
+            arr = Object.keys(data);
+        }
+        if(this.props.limit){
+            arr = arr.slice(0,this.props.limit)
+        }
+        return arr.map((key, index) => {
+            var Item = this.props.render(data[key], key);
             if (!Item) return null;
-            return <>
+
+            return <SSection key={key + 'item_list'}>
+                {index == 0 ? <SView {...init_separation_style} /> : <SView {...separation_style} />}
                 {Item}
-                <SHr height={this.props.space ?? 8} />
-            </>
+                <SView {...separation_style} />
+            </SSection>
         })
+    }
+    getBuscardo() {
+        if (!this.props.buscador) return null;
+        return <SView col={"xs-12"}>
+            <SInput
+                icon={<SView center col={"xs-12"} height><SIcon name={"Search"} fill={STheme.color.gray} width={22} /></SView>}
+                iconR={<SView center style={{
+                    padding: 4
+                }} height><SText fontSize={12} color={STheme.color.gray}>{`(${this.state.cant ?? 0})`}</SText></SView>}
+                placeholder={"Buscar..."}
+                ref={r => this._buscador = r}
+                onChangeText={(val) => {
+                    this.setState({ buscar: val })
+                }} />
+            <SHr />
+        </SView>
     }
     render() {
         return (
-            <SView col={"xs-12"} {...this.props}>
+            <SView col={"xs-12"} {...this.props} row={this.props.horizontal}>
+                {this.getBuscardo()}
                 {this.getData()}
             </SView>
         );

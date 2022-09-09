@@ -17,6 +17,7 @@ type typeConfig = {
 type typeProps = {
     style: ViewStyle,
     props: typeConfig,
+    height?: number,
     onChange: (value: SDate) => any,
     onClose?: () => any,
     options?: Array<string> | Array<{ key: string, content: any }>,
@@ -42,6 +43,8 @@ export default class SISelect extends Component<typeProps> {
         this.state = {
             initial: this.value,
             select: false,
+            height: this.props.height ?? 300,
+            height_item: 40,
         };
         this.scroll = {};
         this.refItens = {
@@ -139,8 +142,9 @@ export default class SISelect extends Component<typeProps> {
                 col={"xs-12"}
                 style={{
                     width: "100%",
-                    height: 40,
+                    height: this.state.height_item,
                 }}
+                key={keyObj}
                 data={keyObj}
                 ref={(ref) => { this.refItens[keyObj] = ref }}
                 onPress={() => {
@@ -187,11 +191,11 @@ export default class SISelect extends Component<typeProps> {
                     width: "100%",
                 }}>
                     <SView style={{
-                        height: 80
+                        height: (this.state.height / 2) - (this.state.height_item / 2)
                     }}></SView>
                     {this.getListaKey(key)}
                     <SView style={{
-                        height: 80
+                        height: (this.state.height / 2) - (this.state.height_item / 2)
                     }}></SView>
                 </SView>
             </SSCrollView>
@@ -211,7 +215,7 @@ export default class SISelect extends Component<typeProps> {
             center
             withoutFeedback
             style={{
-                height: 200,
+                height: this.state.height,
                 borderRadius: 8,
                 backgroundColor: STheme.color.background,
                 overflow: "hidden"
@@ -221,7 +225,7 @@ export default class SISelect extends Component<typeProps> {
             {SPage.backgroundComponent}
             < SView row style={{
                 width: "100%",
-                height: 200,
+                height: "100%",
             }}>
                 {this.getLista("select")}
             </SView >

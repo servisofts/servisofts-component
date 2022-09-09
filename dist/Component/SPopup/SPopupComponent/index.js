@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import STheme from '../../STheme';
 var SPopupComponent = /** @class */ (function (_super) {
     __extends(SPopupComponent, _super);
@@ -39,8 +39,12 @@ var SPopupComponent = /** @class */ (function (_super) {
     };
     SPopupComponent.prototype.render = function () {
         var _this = this;
-        return (React.createElement(TouchableWithoutFeedback, { onPress: function () {
+        return (React.createElement(TouchableOpacity, { activeOpacity: 1, onPress: function () {
                 _this.props.close();
+            }, style: {
+                width: "100%",
+                height: "100%",
+                position: "absolute"
             } },
             React.createElement(View, { style: {
                     width: "100%",
@@ -59,8 +63,7 @@ var SPopupComponent = /** @class */ (function (_super) {
                         justifyContent: "center",
                         overflow: "hidden"
                     } },
-                    React.createElement(TouchableWithoutFeedback, { accessibilityViewIsModal: true, onPress: function () {
-                        } }, this.props.children),
+                    this.props.children,
                     this.getButonClose()))));
     };
     return SPopupComponent;

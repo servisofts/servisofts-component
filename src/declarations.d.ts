@@ -65,10 +65,10 @@ declare module '@react-native-community/geolocation' {
     export default Geolocation;
 }
 
-declare module 'google-map-react' {
-    import GoogleMapReact from 'google-map-react';
-    export default GoogleMapReact;
-}
+// declare module 'google-map-react' {
+//     import GoogleMapReact from 'google-map-react';
+//     export default GoogleMapReact;
+// }
 
 // declare module "*.svg" {
 //     // export const ReactComponent: (props: React.SVGProps<SVGElement>) => ReactElement

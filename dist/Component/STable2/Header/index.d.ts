@@ -17,6 +17,7 @@ export declare type HeaderProps = {
     animWidth?: Animated.Value;
     changeHF?: any;
     key_header?: any;
+    headerColor?: string;
     filter_h?: any;
     total?: any;
 };

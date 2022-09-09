@@ -8,6 +8,7 @@ type Props = {
     placeholder?: string,
     cstyle?: any,
     onChange?: Function,
+    defaultValue?: any,
 }
 
 export default class DropFile extends Component<Props> {
@@ -20,6 +21,25 @@ export default class DropFile extends Component<Props> {
         this.state = {
             images: [],
         };
+        var value = props.defaultValue || "";
+        if (value) {
+            if (typeof value == "string") {
+                value = JSON.parse(value);
+            }
+            if (props.filePath) {
+                value.map((itm) => {
+                    this.state.images.push({
+                        uri: props.filePath + "/" + props.name + "/" + itm,
+                        name: itm,
+                    });
+                    
+                })
+                console.log(this.state.images)
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+
+            }
+
+        }
         this.onUpload = this.props.onUpload;
         this.idInstance = new Date().getTime();
     }
@@ -110,13 +130,25 @@ export default class DropFile extends Component<Props> {
         });
     }
     getName(name) {
+        if(!name) return;
         var arr = name.split('.');
-        var ext = arr.pop();
+        if (arr.length > 1) {
+            var ext = arr.pop();
+
+        }
         var name = arr.join('.');
         if (name.length > 15) {
             name = name.substr(0, 15) + '...';
         }
         return name;
+    }
+    getExtension(name) {
+        if(!name) return;
+        var arr = name.split('.');
+        if (arr.length > 1) {
+            return arr.pop();
+        }
+        return "File";
     }
     getImages = () => {
         if (this.state.images.length <= 0) {
@@ -135,10 +167,17 @@ export default class DropFile extends Component<Props> {
                             // backgroundColor: STheme.color.card,
                             borderRadius: 4,
                         }}>
-                        <SView col={"xs-8"} colSquare>
-                            <SImage src={image.uri} />
+                        <SView col={"xs-8"} colSquare card>
+                            <SView col={"xs-12"} height style={{
+                                position: "absolute",
+                            }} center>
+                                <SText color={STheme.color.gray} fontSize={18} bold>{this.getExtension(image?.file?.name ?? image.name)}</SText>
+                            </SView>
+                            <SView col={"xs-12"} flex>
+                                <SImage src={image.uri} />
+                            </SView>
                         </SView>
-                        <SText fontSize={8} center>{this.getName(image.file.name)}</SText>
+                        <SText fontSize={8} center>{this.getName(image?.file?.name ?? image.name)}</SText>
                         <SView
                             style={{
                                 position: "absolute",
@@ -163,6 +202,7 @@ export default class DropFile extends Component<Props> {
         </SView>
     }
     render() {
+        // console.log(this.props.defaultValue);
         return (
             <SView col={"xs-12"}
                 height
@@ -190,6 +230,7 @@ export default class DropFile extends Component<Props> {
                         {this.getImages()}
 
                         {/* {this.props.children} */}
+
                     </div>
                 </SView>
             </SView>
