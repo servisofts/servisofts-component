@@ -32,6 +32,7 @@ export declare type TypeInputProps = {
         latitude: number;
         longitude: number;
     };
+    render?: (ref: any) => any;
 } & TextInputProps & SViewProps;
 export declare class SInput extends Component<TypeInputProps> {
     static TYPE(type: TypeType): TypeType;

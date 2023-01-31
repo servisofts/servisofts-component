@@ -32,13 +32,46 @@ var SList = /** @class */ (function (_super) {
     function SList(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
+            page: 1,
             buscar: ""
         };
+        _this._rend = props.render;
         return _this;
     }
+    SList.prototype.getMoreItems = function (inverse) {
+        var _this = this;
+        if (!this.props.inverse != !inverse)
+            return null;
+        if (!this.props.limit)
+            return null;
+        if (this.state.cant <= (this.state.page * this.props.limit)) {
+            return null;
+        }
+        var props = {};
+        if (this.props.horizontal) {
+            props = {
+                width: 100,
+                height: true
+            };
+        }
+        else {
+            props = {
+                col: "xs-12"
+            };
+        }
+        return React.createElement(SView, __assign({}, props, { center: true, style: {
+                padding: 8
+            }, onPress: function () {
+                _this.state.page += 1;
+                _this.setState(__assign({}, _this.state));
+            } }),
+            React.createElement(SText, { style: {
+                    textDecoration: "underline"
+                } }, "Ver mas"));
+    };
     SList.prototype.getData = function () {
         var _this = this;
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         var space = (_a = this.props.space) !== null && _a !== void 0 ? _a : 8;
         var data = this.props.data;
         if (!data)
@@ -63,6 +96,7 @@ var SList = /** @class */ (function (_super) {
             });
         }
         var arr;
+        // arr = new SOrdenador([]).ordernarObject(data);
         if (this.props.order) {
             arr = new SOrdenador(this.props.order).ordernarObject(data);
         }
@@ -70,10 +104,23 @@ var SList = /** @class */ (function (_super) {
             arr = Object.keys(data);
         }
         if (this.props.limit) {
-            arr = arr.slice(0, this.props.limit);
+            // if (this.props.inverse) {
+            //     var init = arr.length - 1 - ((this.props.limit ?? 1) * this.state.page);
+            //     if (init < 0) init = 0;
+            //     arr = arr.slice(init, arr.length - 1)
+            // } else {
+            arr = arr.slice(0, ((_d = this.props.limit) !== null && _d !== void 0 ? _d : 1) * this.state.page);
+            // }
         }
+        if (this.props.inverse) {
+            arr = arr.slice(0).reverse();
+        }
+        // arr = arr.slice(0, 10)
         return arr.map(function (key, index) {
-            var Item = _this.props.render(data[key], key);
+            if (!_this._rend) {
+                _this._rend = function (o) { return React.createElement(SText, null, JSON.stringify(o)); };
+            }
+            var Item = _this._rend(data[key], key, index);
             if (!Item)
                 return null;
             return React.createElement(SSection, { key: key + 'item_list' },
@@ -99,8 +146,10 @@ var SList = /** @class */ (function (_super) {
     };
     SList.prototype.render = function () {
         return (React.createElement(SView, __assign({ col: "xs-12" }, this.props, { row: this.props.horizontal }),
+            this.getMoreItems(true),
             this.getBuscardo(),
-            this.getData()));
+            this.getData(),
+            this.getMoreItems(false)));
     };
     return SList;
 }(Component));

@@ -16,6 +16,9 @@ export type SPageProps = {
     disableScroll?: boolean,
     center?: boolean,
     onRefresh?: Function,
+    navBar?: any,
+    header?: any,
+    footer?: any,
 
 }
 
@@ -40,9 +43,9 @@ export default class SPage extends Component<SPageProps> {
                 if (name == "/") {
                     nk = name + key;
                 } else {
-                    if(key){
+                    if (key) {
                         nk = name + delimiter + key;
-                    }else{
+                    } else {
                         nk = name;
                     }
                 }
@@ -65,6 +68,7 @@ export default class SPage extends Component<SPageProps> {
 
     }
     getNavBar() {
+        if (this.props.navBar) return this.props.navBar
         if (this.props.hidden) return <View />
         if (SNavigation.navBar) return <SNavigation.navBar {...this.props} />
         return <SNavBar {...this.props} />
@@ -106,6 +110,15 @@ export default class SPage extends Component<SPageProps> {
             </SView>
         </ScrollView>
     }
+
+    render_footer() {
+        if (!this.props.footer) return null
+        return this.props.footer;
+    }
+    render_header() {
+        if (!this.props.header) return null
+        return this.props.header;
+    }
     render() {
 
         return (
@@ -122,6 +135,7 @@ export default class SPage extends Component<SPageProps> {
                         flex: 1,
                     }}>
                     {this.getNavBar()}
+                    {this.render_header()}
                     <SView col={"xs-12"}
                         style={{
                             flex: 1,
@@ -130,8 +144,8 @@ export default class SPage extends Component<SPageProps> {
                         }}>
                         {SPage.backgroundComponent}
                         {this.getScroll()}
-
                     </SView>
+                    {this.render_footer()}
                 </KeyboardAvoidingView>
             </SView>
         );

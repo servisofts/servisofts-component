@@ -121,6 +121,10 @@ var SMapView = /** @class */ (function (_super) {
                         _this.props.onPress(latLng);
                     }
                 }, onZoomAnimationEnd: function (evt) {
+                    if (!_this.mapa)
+                        return;
+                    if (!_this.mapa.center)
+                        return;
                     var center = {
                         latitude: _this.mapa.center.lat(),
                         longitude: _this.mapa.center.lng()

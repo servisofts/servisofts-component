@@ -11,6 +11,7 @@ export declare type SThemeColors = {
     warning?: string;
     danger?: string;
     bateon?: string;
+    accent?: string;
     error?: string;
     info?: string;
     background?: string;

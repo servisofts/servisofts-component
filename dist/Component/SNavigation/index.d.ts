@@ -19,6 +19,7 @@ export declare type SNavigationProps = {
         };
         title?: string;
         navBar?: any;
+        validator?: any;
     };
 };
 export default class SNavigation extends Component<SNavigationProps> {

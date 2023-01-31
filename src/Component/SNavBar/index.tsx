@@ -96,7 +96,14 @@ export default class SNavBar extends Component<SPageProps> {
             </SView>
         </SView>
     }
+
+    renderTitle() {
+        if (!this.props.title) return null;
+        if (typeof this.props.title == "object") return this.props.title;
+        return <SText color={STheme.color.secondary}>{this.props.title}</SText>
+    }
     render() {
+
         return (
             <SView
                 col={"xs-12"}
@@ -112,7 +119,7 @@ export default class SNavBar extends Component<SPageProps> {
                     {this.getBack()}
                 </SView>
                 <SView col={"xs-8"} center flex>
-                    <SText color={STheme.color.secondary}>{this.props.title}</SText>
+                    {this.renderTitle()}
                 </SView>
                 <SView col={"xs-2"} center onPress={() => {
                     STheme.change();

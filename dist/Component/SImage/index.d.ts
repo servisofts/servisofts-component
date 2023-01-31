@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import { ImageStyle } from 'react-native';
 declare type SImageType = {
     source?: any;
     src?: any;
-    style?: any;
+    style?: ImageStyle;
     enablePreview?: boolean;
 };
 export default class SImage extends Component<SImageType> {

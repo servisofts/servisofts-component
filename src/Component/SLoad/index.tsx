@@ -4,6 +4,7 @@ import STheme from '../STheme';
 import SView from '../SView';
 
 type typeProps = {
+    color?: string,
 }
 
 export default class SLoad extends Component<typeProps> {
@@ -14,9 +15,13 @@ export default class SLoad extends Component<typeProps> {
 
     }
     render() {
+        var color = STheme.color.text ? STheme.color.text : STheme.color.secondary;
         return (
             <SView col={"xs-12"} center >
-                <ActivityIndicator color={STheme.color.text ? STheme.color.text : STheme.color.secondary} />
+                <ActivityIndicator
+                    color={this.props.color ?? color}
+                    {...this.props}
+                />
             </SView>
         );
     }

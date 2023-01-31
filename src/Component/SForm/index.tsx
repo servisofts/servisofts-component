@@ -77,6 +77,7 @@ export default class SForm extends Component<SFromProps> {
         if (!this.state.files) this.state.files = {};
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
+            if (!input) return null;
             if (input.getType() == "file") {
                 this.state.files[key] = input.getValue();
                 return;
@@ -89,11 +90,14 @@ export default class SForm extends Component<SFromProps> {
         return this.state.files;
     }
 
-    uploadFiles(url) {
+    uploadFiles(url, key) {
         var files = this.getFiles();
 
-        Object.keys(files).map((key) => {
-            var obj = files[key];
+        Object.keys(files).map((key2) => {
+            if (key) {
+                if (key != key2) return;
+            }
+            var obj = files[key2];
             if (obj) {
                 if (typeof obj != "string") {
                     Upload.send(obj[0], url);
@@ -104,10 +108,14 @@ export default class SForm extends Component<SFromProps> {
     }
     uploadFiles2(url) {
         var files = this.getFiles();
-        Object.keys(this._ref).map((key) => {
-            var input: SInput = this._ref[key];
+        var _refs = this._ref;
+        Object.keys(_refs).map((key) => {
+            var input: SInput = _refs[key];
+            if (!input) return;
             if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
                 var files = input.getValue();
+
+                if (!files) return;
                 this.state.files[key] = files;
                 Object.values(files).map((obj: any) => {
                     if (typeof obj != "string") {
@@ -261,11 +269,14 @@ export default class SForm extends Component<SFromProps> {
                 key={"imput_" + key}
                 // autoFocus={focus}
                 name={key}
-                ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
                 {...this.props.inputProps}
                 {...inputProps}
                 defaultValue={inputProps.defaultValue}
+                ref={(ref) => {
+                    this._ref[key] = ref
+                }}
+
             />
         })
     }

@@ -10,8 +10,10 @@ export type SViewProps = {
   dir?: SDirectionType,
   row?: boolean,
   // props?: SViewProps,
+  refs?:any,
+  ref?:any,
   data?: any,
-  style?: any,
+  style?: ViewStyle,
   onPress?: Function,
   colSquare?: boolean,
   center?: boolean,
@@ -53,7 +55,7 @@ export default class SView extends Component<SViewProps> {
   }
 
   _ELEM;
-  render() {
+  render(): any {
 
     var otherProps: any = {
       ...this.props
@@ -76,7 +78,8 @@ export default class SView extends Component<SViewProps> {
       }
       Element = this._ELEM;
     }
-    var style = { ...this.props.style };
+    var styles_p: any = this.props.style
+    var style = { ...styles_p };
     if (style) {
       delete style["top"];
       delete style["left"];

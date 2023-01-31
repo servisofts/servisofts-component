@@ -131,6 +131,8 @@ class SMapView extends Component<PropsType> {
                         }
                     }}
                     onZoomAnimationEnd={(evt) => {
+                        if(!this.mapa) return;
+                        if(!this.mapa.center) return;
                         var center = {
                             latitude: this.mapa.center.lat(),
                             longitude: this.mapa.center.lng(),

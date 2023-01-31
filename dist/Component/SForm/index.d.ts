@@ -28,7 +28,7 @@ export default class SForm extends Component<SFromProps> {
     getValues(): {};
     focus(key: any): void;
     getFiles(): any;
-    uploadFiles(url: any): void;
+    uploadFiles(url: any, key: any): void;
     uploadFiles2(url: any): void;
     uploadFile(file: any, url: any): void;
     submitFiles(data: any, key: any, url: any): void;

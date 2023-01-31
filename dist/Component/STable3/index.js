@@ -118,8 +118,9 @@ var STable2 = /** @class */ (function (_super) {
                 return React.createElement(SLoad, null);
             }
             var size = 0;
+            var anm = _this._anim.size;
             return React.createElement(SView, { height: true, row: true, animated: true, style: {
-                    width: _this._anim.size
+                    width: anm
                 } },
                 React.createElement(SView, { style: { position: "absolute" }, col: "xs-12", height: true },
                     React.createElement(SGradient, { colors: [

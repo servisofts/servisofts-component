@@ -61,7 +61,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { Component } from 'react';
-import { SImage, SText, STheme, SView } from '../../../../index';
+import { SImage, SText, SView } from '../../../../index';
 var delay = function (ms) { return new Promise(function (res) { return setTimeout(res, ms); }); };
 var DropFileSingle = /** @class */ (function (_super) {
     __extends(DropFileSingle, _super);
@@ -150,7 +150,6 @@ var DropFileSingle = /** @class */ (function (_super) {
             });
         }); };
         _this.getImages = function () {
-            var _a, _b;
             if (_this.state.images.length <= 0) {
                 return React.createElement(SText, { center: true }, "");
             }
@@ -161,8 +160,7 @@ var DropFileSingle = /** @class */ (function (_super) {
                 } },
                 React.createElement(SView, { col: "xs-12", height: true, style: {
                         position: "absolute"
-                    }, center: true },
-                    React.createElement(SText, { color: STheme.color.gray, fontSize: 18, bold: true }, _this.getExtension((_b = (_a = image === null || image === void 0 ? void 0 : image.file) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : image.name))),
+                    }, center: true }),
                 React.createElement(SView, { flex: true, col: "xs-12" },
                     React.createElement(SImage, { src: image.uri })));
         };

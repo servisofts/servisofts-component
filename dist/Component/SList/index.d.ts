@@ -3,8 +3,9 @@ import { TypeOrdenar } from '../SOrdenador';
 declare type SListType = {
     data: any;
     horizontal?: boolean;
+    inverse?: boolean;
     center?: boolean;
-    render: (item: any, key?: any) => JSX.Element;
+    render: (item: any, key?: any, index?: any) => JSX.Element;
     filter?: (item: any) => boolean;
     space?: number;
     initSpace?: number;
@@ -15,7 +16,9 @@ declare type SListType = {
 declare class SList extends Component<SListType> {
     _buscador: any;
     state: any;
+    _rend: any;
     constructor(props: any);
+    getMoreItems(inverse: any): JSX.Element;
     getData(): any;
     getBuscardo(): JSX.Element;
     render(): JSX.Element;

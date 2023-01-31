@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { HeaderProps } from './Header';
-declare type SType = {
+export declare type STable2Type = {
     header: Array<HeaderProps>;
     headerColor?: string;
     data: [Object] | Object;
@@ -9,7 +9,7 @@ declare type SType = {
     limit?: number;
     rowHeight?: number;
 };
-export default class STable2 extends Component<SType> {
+export default class STable2 extends Component<STable2Type> {
     state: any;
     dataProcesada: any;
     _animSize: any;
@@ -30,4 +30,3 @@ export default class STable2 extends Component<SType> {
     Footer: () => JSX.Element;
     render(): JSX.Element;
 }
-export {};

@@ -88,7 +88,7 @@ export default class SDate {
     }
 
     //CLASS
-    date
+    date: Date
     constructor(date?: any, format?: formatsTypes | string) {
         if (!date) {
             this.date = new Date();
@@ -106,13 +106,22 @@ export default class SDate {
         }
     }
     isValid() {
-        if (isNaN(this.date)) {
+        var d: any = this.date;
+        if (isNaN(d)) {
             return false;
         }
         return true;
     }
     clone() {
         return new SDate(new Date(this.date.getTime()));
+    }
+
+    // addTime() {
+    //     this.date.set
+    // }
+    setHours(hours: number, min?: number, sec?: number, ms?: number) {
+        this.date.setHours(hours, min, sec, ms);
+        return this;
     }
     getTime() {
         return this.date.getTime();
@@ -166,7 +175,7 @@ export default class SDate {
     getWeek() {
         var date = new SDate(this.getYear() + "-01-01", "yyyy-MM-dd");
         var day = date.getFirstDayOfWeek();
-        return Math.floor(this.diff(day)/7)+1;
+        return Math.floor(this.diff(day) / 7) + 1;
     }
     equalDay(sdate) {
         if (this.toString("yyyy-MM-dd") == sdate.toString("yyyy-MM-dd")) {
@@ -221,7 +230,7 @@ export default class SDate {
             format = "yyyy-MM-dd hh:mm:ss"
         }
         var json = this.toJson();
-        format = format.replace("yyyy", json.year);
+        format = format.replace("yyyy", json.year + "");
         format = format.replace("MM", this.formatCero(json.month));
         format = format.replace("MONTH", this.getMonthJson().text);
         format = format.replace("DAY", this.getDayOfWeekJson().text);

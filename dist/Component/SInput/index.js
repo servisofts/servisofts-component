@@ -153,6 +153,17 @@ var SInput = /** @class */ (function (_super) {
         return this.customStyle;
     };
     SInput.prototype.isRender = function (type) {
+        if (this.props.render) {
+            var RESPITEM = this.props.render(this);
+            if (RESPITEM) {
+                return React.createElement(View, { style: {
+                        width: "100%",
+                        height: "100%",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    } }, RESPITEM);
+            }
+        }
         if (type.render) {
             return React.createElement(View, { style: {
                     width: "100%",
@@ -214,7 +225,7 @@ var SInput = /** @class */ (function (_super) {
     };
     SInput.prototype.render = function () {
         var _this = this;
-        var _a;
+        var _a, _b, _c;
         if (this.props.value) {
             this.state.value = this.props.value;
         }
@@ -244,6 +255,11 @@ var SInput = /** @class */ (function (_super) {
         if (this.props.autoFocus) {
             (_a = this.inpref) === null || _a === void 0 ? void 0 : _a.focus();
         }
+        var styleFinal = __assign(__assign(__assign(__assign(__assign({}, customStyle["View"]), type.style.View), (this.state.error ? customStyle.error : {})), this.style), (!this.props.label ? { marginTop: this.props.separation } : {}));
+        if (this.props.height) {
+            delete styleFinal.height;
+        }
+        var sp = this.props.style;
         return (React.createElement(SView, __assign({ col: "xs-12" }, (isOnPress ? {
             onPress: function () {
                 if (_this.props.onPress)
@@ -255,12 +271,12 @@ var SInput = /** @class */ (function (_super) {
                         layout: _this.layout
                     });
             }
-        } : {}), this.props, { style: __assign(__assign(__assign(__assign(__assign({}, customStyle["View"]), type.style.View), (this.state.error ? customStyle.error : {})), this.style), (!this.props.label ? { marginTop: this.props.separation } : {})) }),
+        } : {}), this.props, { style: styleFinal }),
             this.getLabel(),
             React.createElement(SView, { col: "xs-12", row: true, center: true, style: { flex: 1, height: "100%" } },
                 this.getIcon(),
                 React.createElement(SView, { flex: true, height: true },
-                    React.createElement(TextInput, __assign({ ref: function (ref) { _this.inpref = ref; }, value: valueFilter }, this.props, type.props, { style: __assign(__assign(__assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), (this.props.color ? { color: this.props.color } : {})), this.props.style), onChangeText: this.onChangeText }))),
+                    React.createElement(TextInput, __assign({ ref: function (ref) { _this.inpref = ref; }, value: valueFilter, editable: !this.props.disabled, placeholderTextColor: (_c = (_b = customStyle["InputText"]) === null || _b === void 0 ? void 0 : _b.placeholderTextColor) !== null && _c !== void 0 ? _c : "" }, this.props, type.props, { style: __assign(__assign(__assign(__assign({ flex: 1, height: "100%", outline: "none" }, customStyle["InputText"]), type.style.InputText), (this.props.color ? { color: this.props.color } : {})), sp), onChangeText: this.onChangeText }))),
                 this.getIcon_r()),
             this.isRender(type)));
     };

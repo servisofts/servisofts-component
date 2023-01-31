@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Platform, Text, View } from 'react-native'
+import { Image, Platform, Text, View, ImageStyle } from 'react-native'
 import SPopup from '../SPopup';
 import STheme from '../STheme';
 import SView from '../SView';
@@ -7,7 +7,7 @@ import SView from '../SView';
 type SImageType = {
     source?: any,
     src?: any,
-    style?: any,
+    style?: ImageStyle,
     enablePreview?: boolean,
     // name?: "",
 }
@@ -25,7 +25,7 @@ export default class SImage extends Component<SImageType> {
     getImage(source, style?) {
         // var key = source.uri;
         if (!style) style = {};
-        return <Image source={source} style={{ resizeMode: "contain", width:"100%", height:"100%", ...this.props.style, ...style, }} />;
+        return <Image source={source} style={{ resizeMode: "contain", width: "100%", height: "100%", ...this.props.style, ...style, }} />;
         // if (!SImage.Instances[key]) {
         // SImage.Instances[key] = <Image source={source} style={{ ...this.props.style, ...style }} />;
         // }
@@ -41,7 +41,7 @@ export default class SImage extends Component<SImageType> {
         if (!source && this.props.src) {
             if (typeof this.props.src == "string") {
                 source = { uri: this.props.src };
-            }else{
+            } else {
                 source = this.props.src;
                 if (Platform.OS == "web") {
                     source = { uri: source.default };

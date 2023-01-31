@@ -54,11 +54,11 @@ declare module 'react-native-image-picker' {
 
 
 
-declare module 'react-native-maps' {
-    import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
-    export { Marker, PROVIDER_GOOGLE, Polyline };
-    export default MapView;
-}
+// declare module 'react-native-maps' {
+//     import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
+//     export { Marker, PROVIDER_GOOGLE, Polyline };
+//     export default MapView;
+// }
 
 declare module '@react-native-community/geolocation' {
     import Geolocation from '@react-native-community/geolocation';

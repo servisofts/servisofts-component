@@ -21,9 +21,10 @@ var SHr = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SHr.prototype.render = function () {
+        var _a;
         return (React.createElement(View, { style: {
                 width: "100%",
-                height: this.props.height,
+                height: (_a = this.props.h) !== null && _a !== void 0 ? _a : this.props.height,
                 backgroundColor: this.props.color
             } }));
     };

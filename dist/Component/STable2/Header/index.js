@@ -70,10 +70,11 @@ var Header = /** @class */ (function (_super) {
     };
     Header.prototype.render = function () {
         var _a, _b;
+        var anm = this.props.animWidth;
         return (React.createElement(React.Fragment, null,
             React.createElement(SView, { width: this.props.space ? this.props.space : 0, height: true }),
             React.createElement(SView, { animated: true, height: true, center: true, style: {
-                    width: this.props.animWidth,
+                    width: anm,
                     backgroundColor: (_a = this.props.headerColor) !== null && _a !== void 0 ? _a : STheme.color.primary,
                     borderRadius: 2,
                     overflow: 'hidden'

@@ -169,6 +169,7 @@ var SNavigation = /** @class */ (function (_super) {
     SNavigation.prototype.getPages = function (Stack) {
         var _this = this;
         var pages = __assign(__assign({}, this.props.props.pages), Pages);
+        var Validator = this.props.props.validator;
         return Object.keys(pages).map(function (key) {
             var _a, _b;
             var Page = function (props) {
@@ -180,7 +181,9 @@ var SNavigation = /** @class */ (function (_super) {
                     if (!Page) {
                         Page = pages[key];
                     }
-                    return React.createElement(Page, __assign({}, props));
+                    return React.createElement(React.Fragment, null,
+                        !Validator ? null : React.createElement(Validator, null),
+                        React.createElement(Page, __assign({}, props)));
                 }
                 catch (e) {
                     console.log(e);

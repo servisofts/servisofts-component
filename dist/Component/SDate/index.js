@@ -65,13 +65,21 @@ var SDate = /** @class */ (function () {
         return dateFina;
     };
     SDate.prototype.isValid = function () {
-        if (isNaN(this.date)) {
+        var d = this.date;
+        if (isNaN(d)) {
             return false;
         }
         return true;
     };
     SDate.prototype.clone = function () {
         return new SDate(new Date(this.date.getTime()));
+    };
+    // addTime() {
+    //     this.date.set
+    // }
+    SDate.prototype.setHours = function (hours, min, sec, ms) {
+        this.date.setHours(hours, min, sec, ms);
+        return this;
     };
     SDate.prototype.getTime = function () {
         return this.date.getTime();
@@ -177,7 +185,7 @@ var SDate = /** @class */ (function () {
             format = "yyyy-MM-dd hh:mm:ss";
         }
         var json = this.toJson();
-        format = format.replace("yyyy", json.year);
+        format = format.replace("yyyy", json.year + "");
         format = format.replace("MM", this.formatCero(json.month));
         format = format.replace("MONTH", this.getMonthJson().text);
         format = format.replace("DAY", this.getDayOfWeekJson().text);

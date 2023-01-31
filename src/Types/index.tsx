@@ -4,6 +4,8 @@ import { STextProps } from '../Component/SText/index';
 import { SComponentContainerProps } from '../Component/SComponentContainer/index';
 import { SNavigationProps, SPageProps, SPageListProps } from '../Component/SNavigation/index';
 import { SThemeColors, SThemeOptions, SThemeProps, SThemeThemes } from '../Component/STheme/index';
+import { STable2Type } from "../Component/STable2";
+import { HeaderProps } from "../Component/STable2/Header";
 
 // SCOL
 type TColKey = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
@@ -63,5 +65,7 @@ export type {
     SNavigationProps, SPageProps, SPageListProps,
     SThemeColors, SThemeOptions, SThemeProps, SThemeThemes,
     SAssets,
-    SInputsCofig
+    SInputsCofig,
+    STable2Type,
+    HeaderProps
 }

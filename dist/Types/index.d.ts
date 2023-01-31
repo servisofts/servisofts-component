@@ -3,6 +3,8 @@ import { STextProps } from '../Component/SText/index';
 import { SComponentContainerProps } from '../Component/SComponentContainer/index';
 import { SNavigationProps, SPageProps, SPageListProps } from '../Component/SNavigation/index';
 import { SThemeColors, SThemeOptions, SThemeProps, SThemeThemes } from '../Component/STheme/index';
+import { STable2Type } from "../Component/STable2";
+import { HeaderProps } from "../Component/STable2/Header";
 declare type TColKey = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 declare type TColVal = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 declare type TColStr = `${TColKey}-${TColVal}`;
@@ -29,4 +31,4 @@ declare type SInputsCofig = {
         error?: any;
     };
 };
-export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes, SAssets, SInputsCofig };
+export type { SDirectionType, SColType, TColStr, TColVal, TColKey, SViewProps, STextProps, SComponentContainerProps, SNavigationProps, SPageProps, SPageListProps, SThemeColors, SThemeOptions, SThemeProps, SThemeThemes, SAssets, SInputsCofig, STable2Type, HeaderProps };

@@ -161,6 +161,7 @@ var STheme = /** @class */ (function (_super) {
         danger: "#DF2732",
         bateon: "#95070C",
         error: "#ff0000",
+        accent: "#00CC00",
         info: "#405394",
         black: "#000000",
         white: "#ffffff",

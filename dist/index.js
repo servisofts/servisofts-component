@@ -28,7 +28,8 @@ import SDate from "./Component/SDate";
 import SImage from "./Component/SImage";
 import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
-import SMapView from "./Component/SMapView";
+import SMapView2 from "./Component/SMapView";
+import SMapView from "./Component/SMapView2";
 import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
 import Font from "./font";
@@ -44,7 +45,7 @@ import Upload from "./Component/SForm/Upload";
 export * from './Types';
 export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SRangeSlider, SUuid, SImage, SList, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, Submit, SButtom, SMath, SSection, Upload, ExportExcel, 
 // MAPA
-SMapView, SMarker, SPolyline, SLocation, 
+SMapView, SMapView2, SMarker, SPolyline, SLocation, 
 // FUENTES
 Font, 
 //alvaro

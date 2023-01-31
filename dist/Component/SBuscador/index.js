@@ -29,6 +29,27 @@ var SBuscador = /** @class */ (function (_super) {
         if (!buscador)
             return data;
         var val = buscador.toLowerCase();
+        val = val.trim();
+        var str = JSON.stringify(data).toLowerCase();
+        var arr_busqueda = val.split(" ");
+        var peso = 0;
+        arr_busqueda.map(function (palabra_a_buscar) {
+            var expreg = new RegExp(":.*?" + palabra_a_buscar + ".*?(,|})", "i");
+            if (expreg.test(str)) {
+                peso++;
+                // return data;
+            }
+        });
+        if (!peso)
+            return null;
+        data.peso = peso;
+        return data;
+    };
+    // No tocar la version antigua
+    SBuscador.validate_old = function (data, buscador) {
+        if (!buscador)
+            return data;
+        var val = buscador.toLowerCase();
         var str = JSON.stringify(data).toLowerCase();
         var expreg = new RegExp(":.*?" + val + ".*?(,|})", "i");
         if (expreg.test(str)) {

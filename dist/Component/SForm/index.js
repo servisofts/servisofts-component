@@ -90,6 +90,8 @@ var SForm = /** @class */ (function (_super) {
             this.state.files = {};
         Object.keys(this._ref).map(function (key) {
             var input = _this._ref[key];
+            if (!input)
+                return null;
             if (input.getType() == "file") {
                 _this.state.files[key] = input.getValue();
                 return;
@@ -101,10 +103,14 @@ var SForm = /** @class */ (function (_super) {
         });
         return this.state.files;
     };
-    SForm.prototype.uploadFiles = function (url) {
+    SForm.prototype.uploadFiles = function (url, key) {
         var files = this.getFiles();
-        Object.keys(files).map(function (key) {
-            var obj = files[key];
+        Object.keys(files).map(function (key2) {
+            if (key) {
+                if (key != key2)
+                    return;
+            }
+            var obj = files[key2];
             if (obj) {
                 if (typeof obj != "string") {
                     Upload.send(obj[0], url);
@@ -115,10 +121,15 @@ var SForm = /** @class */ (function (_super) {
     SForm.prototype.uploadFiles2 = function (url) {
         var _this = this;
         var files = this.getFiles();
-        Object.keys(this._ref).map(function (key) {
-            var input = _this._ref[key];
+        var _refs = this._ref;
+        Object.keys(_refs).map(function (key) {
+            var input = _refs[key];
+            if (!input)
+                return;
             if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
                 var files = input.getValue();
+                if (!files)
+                    return;
                 _this.state.files[key] = files;
                 Object.values(files).map(function (obj) {
                     var _a;
@@ -270,7 +281,9 @@ var SForm = /** @class */ (function (_super) {
             }
             return React.createElement(SInput, __assign({ key: "imput_" + key, 
                 // autoFocus={focus}
-                name: key, ref: function (ref) { _this._ref[key] = ref; }, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue }));
+                name: key, placeholder: inputProps.label }, _this.props.inputProps, inputProps, { defaultValue: inputProps.defaultValue, ref: function (ref) {
+                    _this._ref[key] = ref;
+                } }));
         });
     };
     SForm.prototype.render = function () {

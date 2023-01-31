@@ -13,6 +13,8 @@ export type HeaderProps = {
     index?: number,
     space?: number,
     hidden?: boolean,
+    center?: boolean,
+    onPress?: () => any,
     editable?: boolean,
     order?: "asc" | "desc",
     orderPriority?: number,
@@ -69,6 +71,7 @@ class Header extends Component<HeaderProps> {
         </SView>
     }
     render() {
+        var anm: any = this.props.animWidth
         return (
             <>
                 <SView width={this.props.space ? this.props.space : 0} height />
@@ -77,7 +80,7 @@ class Header extends Component<HeaderProps> {
                     height
                     center
                     style={{
-                        width: this.props.animWidth,
+                        width: anm,
                         backgroundColor: this.props.headerColor ?? STheme.color.primary,
                         borderRadius: 2,
                         overflow: 'hidden',

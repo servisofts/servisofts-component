@@ -7,6 +7,9 @@ export declare type SPageProps = {
     disableScroll?: boolean;
     center?: boolean;
     onRefresh?: Function;
+    navBar?: any;
+    header?: any;
+    footer?: any;
 };
 export default class SPage extends Component<SPageProps> {
     static backgroundComponent: JSX.Element;
@@ -14,9 +17,11 @@ export default class SPage extends Component<SPageProps> {
     static setBackground(background: any): void;
     state: any;
     constructor(props: any);
-    getNavBar(): JSX.Element;
+    getNavBar(): any;
     getRefresh(): JSX.Element;
     getChildren(): {};
     getScroll(): JSX.Element;
+    render_footer(): any;
+    render_header(): any;
     render(): JSX.Element;
 }

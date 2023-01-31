@@ -68,6 +68,8 @@ var SPage = /** @class */ (function (_super) {
         SPage.backgroundComponent = background;
     };
     SPage.prototype.getNavBar = function () {
+        if (this.props.navBar)
+            return this.props.navBar;
         if (this.props.hidden)
             return React.createElement(View, null);
         if (SNavigation.navBar)
@@ -108,6 +110,16 @@ var SPage = /** @class */ (function (_super) {
                     flex: 1
                 }, center: this.props.center }, this.getChildren()));
     };
+    SPage.prototype.render_footer = function () {
+        if (!this.props.footer)
+            return null;
+        return this.props.footer;
+    };
+    SPage.prototype.render_header = function () {
+        if (!this.props.header)
+            return null;
+        return this.props.header;
+    };
     SPage.prototype.render = function () {
         return (React.createElement(SView, { col: "xs-12", style: {
                 flex: 1,
@@ -117,13 +129,15 @@ var SPage = /** @class */ (function (_super) {
                     flex: 1
                 } },
                 this.getNavBar(),
+                this.render_header(),
                 React.createElement(SView, { col: "xs-12", style: {
                         flex: 1,
                         height: "100%",
                         overflow: "hidden"
                     } },
                     SPage.backgroundComponent,
-                    this.getScroll()))));
+                    this.getScroll()),
+                this.render_footer())));
     };
     SPage.backgroundComponent = (React.createElement(View, { style: {
             position: "absolute",

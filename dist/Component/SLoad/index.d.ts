@@ -1,5 +1,7 @@
 import { Component } from 'react';
-declare type typeProps = {};
+declare type typeProps = {
+    color?: string;
+};
 export default class SLoad extends Component<typeProps> {
     constructor(props: any);
     render(): JSX.Element;

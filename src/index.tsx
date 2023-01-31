@@ -29,7 +29,11 @@ import SDate from "./Component/SDate";
 import SImage from "./Component/SImage";
 import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
-import SMapView from "./Component/SMapView";
+
+import SMapView2 from "./Component/SMapView";
+import SMapView from "./Component/SMapView2";
+
+
 import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
 import Font from "./font";
@@ -85,6 +89,7 @@ export {
     ExportExcel,
     // MAPA
     SMapView,
+    SMapView2,
     SMarker,
     SPolyline,
     SLocation,

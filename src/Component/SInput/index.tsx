@@ -25,12 +25,13 @@ export type TypeInputProps = {
     label?: String,
     props?: any,
     separation?: number,
-    filePath?:String,
-    name?:String,
+    filePath?: String,
+    name?: String,
     onChangeText?: (text: string) => any,
     onPress?: (val: any) => void,
     onStateChange?: (value: any) => void,
     latLng?: { latitude: number, longitude: number },
+    render?: (ref) => any,
 } & TextInputProps & SViewProps
 
 
@@ -149,6 +150,20 @@ export class SInput extends Component<TypeInputProps> {
         return this.customStyle;
     }
     isRender(type) {
+        if (this.props.render) {
+            var RESPITEM = this.props.render(this);
+            if (RESPITEM) {
+                return <View style={{
+                    width: "100%",
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}>
+                    {RESPITEM}
+                </View>
+            }
+
+        }
         if (type.render) {
             return <View style={{
                 width: "100%",
@@ -266,6 +281,19 @@ export class SInput extends Component<TypeInputProps> {
         if (this.props.autoFocus) {
             this.inpref?.focus();
         }
+
+        var styleFinal = {
+            ...customStyle["View"],
+            ...type.style.View,
+            ...(this.state.error ? customStyle.error : {}),
+            ...this.style,
+            ...(!this.props.label ? { marginTop: this.props.separation } : {}),
+
+        }
+        if (this.props.height) {
+            delete styleFinal.height
+        }
+        var sp: any = this.props.style
         return (
             <SView
                 col={"xs-12"}
@@ -280,13 +308,7 @@ export class SInput extends Component<TypeInputProps> {
                     }
                 } : {})}
                 {...this.props}
-                style={{
-                    ...customStyle["View"],
-                    ...type.style.View,
-                    ...(this.state.error ? customStyle.error : {}),
-                    ...this.style,
-                    ...(!this.props.label ? { marginTop: this.props.separation } : {}),
-                }}
+                style={styleFinal}
             >
                 {this.getLabel()}
                 <SView
@@ -299,6 +321,8 @@ export class SInput extends Component<TypeInputProps> {
                         <TextInput
                             ref={(ref) => { this.inpref = ref }}
                             value={valueFilter}
+                            editable={!this.props.disabled}
+                            placeholderTextColor={customStyle["InputText"]?.placeholderTextColor ?? ""}
                             {...this.props}
                             {...type.props}
                             style={{
@@ -308,13 +332,12 @@ export class SInput extends Component<TypeInputProps> {
                                 ...customStyle["InputText"],
                                 ...type.style.InputText,
                                 ...(this.props.color ? { color: this.props.color } : {}),
-                                ...this.props.style,
+                                ...sp,
                             }}
                             onChangeText={this.onChangeText}
                         />
                     </SView>
                     {this.getIcon_r()}
-
                 </SView>
                 {this.isRender(type)}
             </SView>

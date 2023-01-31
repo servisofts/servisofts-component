@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SView } from "../../../index"
 const SMarker = (props) => {
+    var transform: any = [{ translateY: "-50%" }]
     return <div style={{
         cursor: "pointer",
         textAlign: "center",
@@ -11,7 +12,7 @@ const SMarker = (props) => {
         }}>
         <SView col={"xs-12"} height style={{
             alignItems: 'center',
-            transform: [{ translateY: "-50%" }],
+            transform: transform
         }}>
             {props.contenido}
             {props.children}

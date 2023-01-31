@@ -10,7 +10,7 @@ import Header, { HeaderProps } from './Header';
 import Row from './Row';
 
 
-type SType = {
+export type STable2Type = {
     header: Array<HeaderProps>,
     headerColor?: string,
     data: [Object] | Object,
@@ -20,7 +20,7 @@ type SType = {
     rowHeight?: number,
 }
 
-export default class STable2 extends Component<SType> {
+export default class STable2 extends Component<STable2Type> {
     state;
     dataProcesada;
     _animSize;

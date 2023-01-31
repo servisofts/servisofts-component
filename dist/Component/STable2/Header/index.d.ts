@@ -7,6 +7,8 @@ export declare type HeaderProps = {
     index?: number;
     space?: number;
     hidden?: boolean;
+    center?: boolean;
+    onPress?: () => any;
     editable?: boolean;
     order?: "asc" | "desc";
     orderPriority?: number;

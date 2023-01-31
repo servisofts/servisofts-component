@@ -75,7 +75,8 @@ var SView = /** @class */ (function (_super) {
             }
             Element = this._ELEM;
         }
-        var style = __assign({}, this.props.style);
+        var styles_p = this.props.style;
+        var style = __assign({}, styles_p);
         if (style) {
             delete style["top"];
             delete style["left"];

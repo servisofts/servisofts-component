@@ -17,6 +17,9 @@ var Upload = /** @class */ (function () {
         //     console.log(e);
         // });        
         request.open('POST', url, true);
+        // request.setRequestHeader("Access-Control-Allow-Origin","*")
+        // request.setRequestHeader('Content-type', 'multipart/form-data');
+        // request.setRequestHeader('Access-Control-Allow-Headers', '*');
         // request.withCredentials = true;
         request.send(body);
     };

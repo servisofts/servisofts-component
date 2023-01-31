@@ -23,6 +23,7 @@ export type SNavigationProps = {
         pages: { [name in string]: SPageProps },
         title?: string,
         navBar?: any,
+        validator?: any
     }
 }
 
@@ -96,7 +97,7 @@ export default class SNavigation extends Component<SNavigationProps> {
                     if (locstr == "/") {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
-
+                    
                     // SNavigation.lastRoute.navigation.replace(locstr);
                     window.location.pathname = locstr;
 
@@ -199,6 +200,7 @@ export default class SNavigation extends Component<SNavigationProps> {
             ...this.props.props.pages,
             ...Pages,
         };
+        const Validator = this.props.props.validator;
         return Object.keys(pages).map((key) => {
             var Page = (props) => {
                 try {
@@ -210,7 +212,10 @@ export default class SNavigation extends Component<SNavigationProps> {
                         Page = pages[key];
                     }
 
-                    return <Page {...props} />
+                    return <>
+                        {!Validator ? null : <Validator />}
+                        <Page {...props} />
+                    </>
                 } catch (e) {
                     console.log(e);
                     return null;

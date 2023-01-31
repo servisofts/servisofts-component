@@ -6,16 +6,19 @@ export default class Upload {
         // form.setAttribute("method", "POST");
         // form.setAttribute("enctype", "multipart/form-data");
         var body = new FormData();
+        
         // files.map((file) => {
         body.append('file', file.file);
         // })
         var request = new XMLHttpRequest();
-
         // request.upload.addEventListener("progress", function (e) {
         //     console.log(e);
         // });        
 
         request.open('POST', url, true);
+        // request.setRequestHeader("Access-Control-Allow-Origin","*")
+        // request.setRequestHeader('Content-type', 'multipart/form-data');
+        // request.setRequestHeader('Access-Control-Allow-Headers', '*');
         // request.withCredentials = true;
 
         request.send(body);

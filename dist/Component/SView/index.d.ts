@@ -1,12 +1,14 @@
 import { Component } from 'react';
-import { ViewProps, TouchableOpacityProps } from 'react-native';
+import { ViewStyle, ViewProps, TouchableOpacityProps } from 'react-native';
 import { SColType, SDirectionType } from '../../Types/index';
 export declare type SViewProps = {
     col?: SColType;
     dir?: SDirectionType;
     row?: boolean;
+    refs?: any;
+    ref?: any;
     data?: any;
-    style?: any;
+    style?: ViewStyle;
     onPress?: Function;
     colSquare?: boolean;
     center?: boolean;
@@ -27,5 +29,5 @@ export default class SView extends Component<SViewProps> {
     getProp(prop: string): any;
     getData(): any;
     _ELEM: any;
-    render(): JSX.Element;
+    render(): any;
 }

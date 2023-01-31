@@ -102,6 +102,13 @@ var SNavBar = /** @class */ (function (_super) {
                 }, center: true, height: true },
                 React.createElement(SIcon, { width: 25, height: 25, name: "Arrow", fill: STheme.color.secondary })));
     };
+    SNavBar.prototype.renderTitle = function () {
+        if (!this.props.title)
+            return null;
+        if (typeof this.props.title == "object")
+            return this.props.title;
+        return React.createElement(SText, { color: STheme.color.secondary }, this.props.title);
+    };
     SNavBar.prototype.render = function () {
         return (React.createElement(SView, { col: "xs-12", row: true, center: true, style: {
                 height: 40,
@@ -110,8 +117,7 @@ var SNavBar = /** @class */ (function (_super) {
                 alignItems: "center"
             } },
             React.createElement(SView, { col: "xs-2", center: true, height: true }, this.getBack()),
-            React.createElement(SView, { col: "xs-8", center: true, flex: true },
-                React.createElement(SText, { color: STheme.color.secondary }, this.props.title)),
+            React.createElement(SView, { col: "xs-8", center: true, flex: true }, this.renderTitle()),
             React.createElement(SView, { col: "xs-2", center: true, onPress: function () {
                     STheme.change();
                 } })));

@@ -186,8 +186,9 @@ export default class STable2 extends Component<SType> {
             return <SLoad />
         }
         var size = 0;
+        var anm: any = this._anim.size;
         return <SView height row animated style={{
-            width: this._anim.size
+            width: anm
         }}>
             <SView style={{ position: "absolute" }} col={"xs-12"} height>
                 <SGradient colors={[
