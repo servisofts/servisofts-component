@@ -13,8 +13,19 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React, { Component } from 'react';
-import SView from '../SView';
+import SBuscadorInput from './SBuscadorInput';
 var SBuscador = /** @class */ (function (_super) {
     __extends(SBuscador, _super);
     function SBuscador(props) {
@@ -36,10 +47,15 @@ var SBuscador = /** @class */ (function (_super) {
         arr_busqueda.map(function (palabra_a_buscar) {
             var expreg = new RegExp(":.*?" + palabra_a_buscar + ".*?(,|})", "i");
             if (expreg.test(str)) {
+                if (palabra_a_buscar + "".length < 2) {
+                    return;
+                }
                 peso++;
                 // return data;
             }
         });
+        if (peso < arr_busqueda.length)
+            return null;
         if (!peso)
             return null;
         data.peso = peso;
@@ -57,8 +73,27 @@ var SBuscador = /** @class */ (function (_super) {
         }
         return null;
     };
+    SBuscador.filter = function (_a) {
+        var _this = this;
+        var data = _a.data, txt = _a.txt;
+        if (typeof data === 'object' && !Array.isArray(data)) {
+            // Filtramos tipo objeto
+            var objFinal = {};
+            Object.keys(data).map(function (key) {
+                if (!_this.validate(data[key], txt))
+                    return;
+                objFinal[key] = data[key];
+            });
+            return objFinal;
+        }
+        else if (Array.isArray(data)) {
+            // Filtramos tipo array
+            return data.filter(function (a) { return _this.validate(a, txt); });
+        }
+        return data;
+    };
     SBuscador.prototype.render = function () {
-        return (React.createElement(SView, null));
+        return (React.createElement(SBuscadorInput, __assign({}, this.props)));
     };
     return SBuscador;
 }(Component));

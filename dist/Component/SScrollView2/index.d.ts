@@ -30,6 +30,10 @@ export default class SScrollView2 extends Component<SType> {
     setRef(key: any, ref: any): void;
     getRef(key: any): any;
     setEnabled(en: any): void;
+    scrollTo(props: {
+        x?: any;
+        y?: any;
+    }): void;
     render(): JSX.Element;
 }
 export {};

@@ -61,7 +61,17 @@ export default class SScrollView2 extends Component<SType> {
 
         }
     }
+    scrollTo(props: { x?, y?}) {
+        if (this.getRef("scrollh")) {
+            this.getRef("scrollh").scrollTo(props)
+        }
+        if (this.getRef("scrollv")) {
+            this.getRef("scrollh").scrollTo(props)
+        }
+        this.getRef("scrollv").scrollTo(props);
+    }
     render() {
+        let ccs: any = this.props.contentContainerStyle;
         return (
             <View style={{
                 width: "100%",
@@ -91,7 +101,8 @@ export default class SScrollView2 extends Component<SType> {
                             disableHorizontal={this.props.disableHorizontal}
                             ref={(ref) => { this.setRef("scrollh", ref) }}
                             horizontal={true}
-                            contentContainerStyle={this.props.contentContainerStyle}
+                            contentContainerStyle={{ width: "100%", ...(ccs ?? {}) }}
+                            {...this.props}
                         >
                             <View style={{
                                 width: "100%",
@@ -107,7 +118,9 @@ export default class SScrollView2 extends Component<SType> {
                                     contentContainerStyle={this.props.contentContainerStyle}
                                     onScroll={this.props.onScroll}
                                     onPageFinish={this.props.onPageFinish}
-                                    // onScrollEnd={this.props.onScrollEnd}
+                                    parent={this}
+                                    {...this.props}
+                                // onScrollEnd={this.props.onScrollEnd}
                                 >
                                     <View style={{
                                         width: "100%",

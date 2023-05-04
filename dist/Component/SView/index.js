@@ -93,12 +93,12 @@ var SView = /** @class */ (function (_super) {
             delete style["maxHeight"];
             delete style["maxWidth"];
         }
-        return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, flex: this.props.flex, col: this.state.params.col, style: (!this.props.style ? {} : this.props.style), onLayout: function (evt) {
+        return (React.createElement(SGrid, { colSquare: this.props.colSquare, height: this.props.height, margin: this.props.margin, flex: this.props.flex, col: this.state.params.col, style: (!this.props.style ? {} : this.props.style), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;
                 if (_this.props.onLayout)
                     _this.props.onLayout(evt);
             } },
-            React.createElement(Element, __assign({}, otherProps, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
+            React.createElement(Element, __assign({}, otherProps, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({ width: "100%" }, (this.state.params.dir != "row" ? {} : {
                     flexDirection: "row",
                     flexWrap: 'wrap'
                 })), (!this.props.backgroundColor ? {} : {
@@ -116,7 +116,7 @@ var SView = /** @class */ (function (_super) {
                 })), (!this.props.border ? {} : {
                     borderWidth: 1,
                     borderColor: this.props.border
-                })), (this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {})), style) }), this.props.children)));
+                })), (this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {})), (this.props.borderRadius ? { borderRadius: this.props.borderRadius } : {})), (this.props.br ? { borderRadius: this.props.br } : {})), (this.props.padding ? { padding: this.props.padding } : {})), style) }), this.props.children)));
     };
     return SView;
 }(Component));

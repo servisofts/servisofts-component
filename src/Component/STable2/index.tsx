@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
-import { SText, SHr, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView } from '../../index';
+import { SText, SHr, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView, SMath } from '../../index';
 import SGradient from '../SGradient';
 import SIcon from '../SIcon';
 import { SInput } from '../SInput';
 import SPagination from '../SPagination';
 import ExportExcel from './ExportExcel';
 import Header, { HeaderProps } from './Header';
-import Row from './Row';
+import Row, { STable2cellStyle } from './Row';
+
 
 
 export type STable2Type = {
@@ -18,6 +19,7 @@ export type STable2Type = {
     filter?: (data: String, id?: any) => boolean,
     limit?: number,
     rowHeight?: number,
+    cellStyle?: STable2cellStyle,
 }
 
 export default class STable2 extends Component<STable2Type> {
@@ -41,9 +43,17 @@ export default class STable2 extends Component<STable2Type> {
             data: {},
             buscador: "",
             HFilter: {},
+            HFNI: {},
             totales: {},
         };
-
+        this.props.header.map((item, index) => {
+            if (item.filter_h) {
+                this.state.HFilter[item.key] = item.filter_h
+            }
+            if (item.filter_notin) {
+                this.state.HFNI[item.key] = item.filter_notin
+            }
+        })
     }
     componentDidMount() {
 
@@ -108,9 +118,11 @@ export default class STable2 extends Component<STable2Type> {
 
     _buscador;
     _HFilter;
+    _HFNI;
     procesarData = () => {
         var dtStr = JSON.stringify(this.props.data);
-        if (this.state.lastData == dtStr && this.state.buscador == this._buscador && this.state.HFilter == this._HFilter) return;
+        if (this.state.lastData == dtStr && this.state.buscador == this._buscador && this.state.HFilter == this._HFilter && this.state.HFNI == this._HFNI) return;
+        this._HFNI = this.state.HFNI;
         this._buscador = this.state.buscador;
         this._HFilter = this.state.HFilter;
         this.state.lastData = dtStr;
@@ -132,29 +144,48 @@ export default class STable2 extends Component<STable2Type> {
                     this.state.data[key][item.key] = item.render(this.state.data[key][item.key]);
                 }
 
+                var data = this.state.data[key][item.key];
+                if (typeof data == "object") {
+                    data = JSON.stringify(data);
+                }
                 if (this.state.HFilter[item.key]) {
                     var filtro = this.state.HFilter[item.key];
-                    var expreg = new RegExp(filtro, "i");
-                    var data = this.state.data[key][item.key];
-                    if (typeof data != "string") {
-                        data = JSON.stringify(data);
-                    }
-                    if (!expreg.test(data)) {
-                        isValid = false;
-                        delete this.state.data[key];
-                    }
+                    filtro.split(" ").map((f) => {
+                        if (f.length < 1) return;
+                        var expreg = new RegExp(f, "i");
+                        if (!expreg.test(data)) {
+                            isValid = false;
+                            delete this.state.data[key];
+                        }
+                    })
                 }
-                if (item.sumar) {
-                    if (!this.state.totales[item.key]) {
-                        this.state.totales[item.key] = 0;
-                    }
-                    this.state.totales[item.key] += parseFloat(this.state.data[key][item.key]);
+                if (this.state.HFNI[item.key]) {
+                    var filtro = this.state.HFNI[item.key];
+                    filtro.split(" ").map((f) => {
+                        if (f.length < 1) return;
+                        var expreg = new RegExp(f, "i");
+                        if (expreg.test(data)) {
+                            isValid = false;
+                            delete this.state.data[key];
+                        }
+                    })
                 }
             })
+            this.props.header.filter(a => !!a.sumar).map((item) => {
+                if (!isValid) return;
+                if (!this.state.totales[item.key]) {
+                    this.state.totales[item.key] = 0;
+                }
+                let val = this.state.data[key][item.key];
+                this.state.totales[item.key] += SMath.parseFloat(val);
+            })
         })
+
+        console.log(this.state.totales)
         this.state.data = this.buscar(this.state.data);
         new SThread(100, "as", false).start(() => {
-            this.setState({ isLoad: true });
+            this.state.isLoad = true;
+            this.setState({ ...this.state });
         });
     }
 
@@ -162,13 +193,23 @@ export default class STable2 extends Component<STable2Type> {
     getHeader = () => {
         return this.props.header.map((item, index) => {
 
-            this._animHeader[item.key] = new Animated.Value(item.width);
+            this._animHeader[item.key] = new Animated.Value(item.width ?? 40);
             this._animSize = Animated.add(this._animSize, this._animHeader[item.key]);
             this._animSize = Animated.add(this._animSize, new Animated.Value(this.state.space));
-            return <Header headerColor={this.props.headerColor} {...item} total={this.state.totales[item.key]} filter_h={this.state.HFilter[item.key]} key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space} changeHF={(filter) => {
-                this.state.HFilter[item.key] = filter;
-                this.setState({ HFilter: { ...this.state.HFilter } });
-            }} />
+            return <Header headerColor={this.props.headerColor} {...item}
+                label={item.label ?? item.key}
+                total={this.state.totales[item.key]}
+                key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space}
+                filter_h={this.state.HFilter[item.key]}
+                filter_notin={this.state.HFNI[item.key]}
+                changeHFNI={(filter) => {
+                    this.state.HFNI[item.key] = filter;
+                    this.setState({ HFNI: { ...this.state.HFNI } });
+                }}
+                changeHF={(filter) => {
+                    this.state.HFilter[item.key] = filter;
+                    this.setState({ HFilter: { ...this.state.HFilter } });
+                }} />
         })
     }
 
@@ -177,10 +218,10 @@ export default class STable2 extends Component<STable2Type> {
             return <SLoad />
         }
         var orderArr = []
-        orderArr.push({ key: "Peso", order: "desc", peso: 4 });
+        // orderArr.push({ key: "Peso", order: "desc", peso: 4 });
         this.props.header.map((header, i) => {
             if (header.order) {
-                orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority || 2 });
+                orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority || 2, type: header.orderType });
             }
         })
         return new SOrdenador(orderArr).ordernarObject(this.state.data).slice(((this.state.page - 1) * this.state.limit), (this.state.page * this.state.limit)).map((itemData, i) => {
@@ -191,6 +232,7 @@ export default class STable2 extends Component<STable2Type> {
                 height={this.props?.rowHeight ?? 50}
                 space={this.state.space}
                 data={data}
+                cellStyle={this.props.cellStyle}
                 header={this.props.header}
                 animHeader={this._animHeader}
                 animSize={this._animSize}
@@ -262,6 +304,9 @@ export default class STable2 extends Component<STable2Type> {
                 >
                     <SScrollView2
                         ref={(ref) => this.scroll = ref}
+                        contentContainerStyle={{
+                            width: null
+                        }}
                         header={{
                             style: { height: 40 },
                             content: <SView col={"xs-12"} row height>

@@ -32,10 +32,11 @@ import SGradient from "./Component/SGradient";
 
 import SMapView2 from "./Component/SMapView";
 import SMapView from "./Component/SMapView2";
-
-
+import SExcel from "./Component/SExcel";
+import SExcelReader from "./Component/SExcelReader";
 import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
+import SList2 from "./Component/SList2";
 import Font from "./font";
 import SBuscador from "./Component/SBuscador";
 import SMath from "./Component/SMath";
@@ -46,6 +47,7 @@ import ExportExcel from "./Component/STable2/ExportExcel";
 import SRangeSlider from "./Component/SRangeSlider";
 import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
+import SPromise from "./Component/SPromise";
 export * from './Types'
 export {
     SHr,
@@ -70,6 +72,7 @@ export {
     SUuid,
     SImage,
     SList,
+    SList2,
     SBuscador,
     SView,
     SLoad,
@@ -86,7 +89,10 @@ export {
     SMath,
     SSection,
     Upload,
+    SExcel,
+    SExcelReader,
     ExportExcel,
+    SPromise,
     // MAPA
     SMapView,
     SMapView2,

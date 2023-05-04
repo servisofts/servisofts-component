@@ -1,27 +1,54 @@
+import SImageCompressor from "../SImageCompressor";
+
 export default class Upload {
     static send(file, url) {
         if (!file) return;
-        // if (files.length <= 0) return;
-        // var form: any = document.createElement("FORM");
-        // form.setAttribute("method", "POST");
-        // form.setAttribute("enctype", "multipart/form-data");
+        console.log(file.file);
+
         var body = new FormData();
-        
-        // files.map((file) => {
         body.append('file', file.file);
-        // })
         var request = new XMLHttpRequest();
-        // request.upload.addEventListener("progress", function (e) {
-        //     console.log(e);
-        // });        
-
         request.open('POST', url, true);
-        // request.setRequestHeader("Access-Control-Allow-Origin","*")
-        // request.setRequestHeader('Content-type', 'multipart/form-data');
-        // request.setRequestHeader('Access-Control-Allow-Headers', '*');
-        // request.withCredentials = true;
-
         request.send(body);
+        console.log("Se envio la data")
+    }
+    static sendPromise({ file }, url) {
+        return new Promise(async (resolve, reject) => {
+            if (!file) reject("file not found");
+            if (!file.type) reject("file.type not found");
+            if (file.type.startsWith("image")) {
+                file = await SImageCompressor.compress({ file: file, maxWidth: 1024, quality: 0.8 })
+            }
+            console.log("enviandoooooo")
+            var body = new FormData();
+            body.append('file', file);
+            var request = new XMLHttpRequest();
+            request.open('POST', url, true);
+            request.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(request.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: request.statusText,
+                        in: "onload"
+                    });
+                }
+            };
+            request.onerror = function () {
+                reject({
+                    status: this.status,
+                    statusText: request.statusText,
+                    in: "onerror"
+                });
+            };
+
+            request.send(body);
+
+            // resolve("exito")
+
+        })
+
     }
 
 }

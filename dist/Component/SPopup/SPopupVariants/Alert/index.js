@@ -14,7 +14,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import SIcon from '../../../SIcon';
 import SPage from '../../../SPage';
 import SText from '../../../SText';
 import STheme from '../../../STheme';
@@ -34,8 +33,6 @@ var Alert = /** @class */ (function (_super) {
             } },
             SPage.backgroundComponent,
             React.createElement(SView, { col: "xs-12", center: true },
-                React.createElement(SView, { col: "xs-12", height: 90 },
-                    React.createElement(SIcon, { name: "AlertOutline", fill: STheme.color.danger })),
                 React.createElement(SView, { col: "xs-10", center: true, height: 40 },
                     React.createElement(SText, { fontSize: 12, center: true },
                         " ",

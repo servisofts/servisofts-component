@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import SGrid from '../SGrid/index';
 import { SThemeProps } from '../STheme/index';
 import { SAssets } from '../../Types';
 import { SInputsCofig } from "../../Types/index";
@@ -15,7 +14,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     private static Instance;
     private static GridListen;
     static SSocket: any;
-    static registerGrid(key: string, grid: SGrid): void;
+    static registerGrid(key: string, grid: any): void;
     static removeGrid(key: string): void;
     static getInputsConfig(): SInputsCofig;
     layout: any;

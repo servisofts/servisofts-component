@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { SView } from '../../../index';
+import { SHr, SList, SText, SView } from '../../../index';
 import SForm from '../../SForm';
 import SIcon from '../../SIcon';
 import SPage from '../../SPage';
@@ -27,20 +27,41 @@ var HAjustes = /** @class */ (function (_super) {
         _this.state = {};
         return _this;
     }
+    HAjustes.prototype.getOptions = function () {
+        if (!this.props.options)
+            return null;
+        return React.createElement(SView, null,
+            React.createElement(SText, { bold: true, fontSize: 16 }, this.props.label),
+            React.createElement(SHr, null),
+            React.createElement(SText, null, "Opciones disponibles para buscar:"),
+            React.createElement(SHr, { h: 4 }),
+            React.createElement(SList, { data: this.props.options, horizontal: true, render: function (a) { return React.createElement(SText, { bold: true, color: STheme.color.lightGray }, a); } }));
+    };
     HAjustes.prototype.getForm = function () {
         var _this = this;
-        var _a;
-        return React.createElement(SView, { col: "xs-11" },
+        var _a, _b;
+        return React.createElement(SView, { col: "xs-11", flex: true },
+            React.createElement(SHr, null),
+            this.getOptions(),
+            React.createElement(SHr, null),
             React.createElement(SForm, { inputProps: {
                     customStyle: "calistenia"
                 }, inputs: {
                     // "order": { label: "Ordenar", type: "select", defaultValue: this.props?.order, options: ["no", "asc", "desc"], },
-                    "filtro": {
-                        label: "Filtro", placeholder: "Filtro", defaultValue: (_a = this.props) === null || _a === void 0 ? void 0 : _a.filter_h, icon: (React.createElement(SIcon, { name: 'Search', width: 20, fill: STheme.color.secondary })), onChangeText: function (text) {
-                            console.log(text);
+                    "filtro_in": {
+                        label: "Filtro IN", placeholder: "Filtro para encontrar", defaultValue: (_a = this.props) === null || _a === void 0 ? void 0 : _a.filter_h, icon: (React.createElement(SIcon, { name: 'Search', width: 20, fill: STheme.color.secondary })), onChangeText: function (text) {
                             if (_this.props.changeHF) {
                                 new SThread(400, "tbl_buscar_hf", true).start(function () {
                                     _this.props.changeHF(text);
+                                });
+                            }
+                        }
+                    },
+                    "filtro_notin": {
+                        label: "Filtro Not IN", placeholder: "Filtro para ignorar", defaultValue: (_b = this.props) === null || _b === void 0 ? void 0 : _b.filter_notin, icon: (React.createElement(SIcon, { name: 'Search', width: 20, fill: STheme.color.secondary })), onChangeText: function (text) {
+                            if (_this.props.changeHFNI) {
+                                new SThread(400, "tbl_buscar_hf", true).start(function () {
+                                    _this.props.changeHFNI(text);
                                 });
                             }
                         }

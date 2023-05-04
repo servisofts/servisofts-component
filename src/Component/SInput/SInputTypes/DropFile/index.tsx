@@ -24,20 +24,26 @@ export default class DropFile extends Component<Props> {
         var value = props.defaultValue || "";
         if (value) {
             if (typeof value == "string") {
-                value = JSON.parse(value);
+                try {
+                    value = JSON.parse(value);
+                } catch (e) {
+                    // console.error("Value error", e)
+                }
             }
-            if (props.filePath) {
-                value.map((itm) => {
-                    this.state.images.push({
-                        uri: props.filePath + "/" + props.name + "/" + itm,
-                        name: itm,
-                    });
-                    
-                })
-                console.log(this.state.images)
-                // console.log(props.filePath + "/" + props.name + "/" + value)
+            if (Array.isArray(value)) {
+                if (props.filePath) {
+                    value.map((itm) => {
+                        this.state.images.push({
+                            uri: props.filePath + "/" + props.name + "/" + itm,
+                            name: itm,
+                        });
 
+                    })
+                    console.log(this.state.images)
+                    // console.log(props.filePath + "/" + props.name + "/" + value)
+                }
             }
+
 
         }
         this.onUpload = this.props.onUpload;
@@ -130,7 +136,7 @@ export default class DropFile extends Component<Props> {
         });
     }
     getName(name) {
-        if(!name) return;
+        if (!name) return;
         var arr = name.split('.');
         if (arr.length > 1) {
             var ext = arr.pop();
@@ -143,7 +149,7 @@ export default class DropFile extends Component<Props> {
         return name;
     }
     getExtension(name) {
-        if(!name) return;
+        if (!name) return;
         var arr = name.split('.');
         if (arr.length > 1) {
             return arr.pop();
@@ -202,11 +208,11 @@ export default class DropFile extends Component<Props> {
         </SView>
     }
     render() {
-        // console.log(this.props.defaultValue);
         return (
             <SView col={"xs-12"}
                 height
                 style={{
+                    // backgroundColor:"#F0f",
                     padding: 4,
                 }}>
                 <SView height col={"xs-12"} style={{

@@ -36,6 +36,9 @@ export default class SDate {
             day: dia,
         };
     }
+    static getDaysInMonth = (year, month) => {
+        return new Date(year, month, 0).getDate();
+    }
     static isValid = (fecha) => {
         var fechaf = fecha.split("-");
         var ano = fechaf[0];
@@ -56,6 +59,17 @@ export default class SDate {
             return val;
         }
         return "0" + val
+    }
+
+    static toString(dateStr, props: { fromFormat?: formatsTypes, toFormat?: formatsTypes }) {
+        if (!dateStr) return "";
+        let date: SDate;
+        if (props.fromFormat) {
+            date = new SDate(dateStr, props.fromFormat)
+        } else {
+            date = new SDate(dateStr, props.fromFormat ?? "")
+        }
+        return date.toString(props.toFormat);
     }
 
     static parse(fecha: String, format: formatsTypes | string) {
@@ -133,14 +147,37 @@ export default class SDate {
         this.date.setDate(val);
         return this;
     }
+
     addDay(val) {
-        this.date.setDate(this.getDay() + val);
+        this.date.setDate(this.date.getDate() + val);
         return this;
     }
+
     addMonth(val) {
         this.date.setMonth(this.getMonth() - 1 + val);
         return this;
     }
+    addYear(val) {
+        this.date.setFullYear(this.date.getFullYear() + val);
+        return this;
+    }
+    addHour(val) {
+        this.date.setHours(this.date.getHours() + val);
+        return this;
+    }
+    addMinute(val) {
+        this.date.setMinutes(this.date.getMinutes() + val);
+        return this;
+    }
+    addSecond(val) {
+        this.date.setSeconds(this.date.getSeconds() + val);
+        return this;
+    }
+    addMillisecond(val) {
+        this.date.setMilliseconds(this.date.getMilliseconds() + val);
+        return this;
+    }
+
     getMonth() {
         return this.date.getMonth() + 1;
     }

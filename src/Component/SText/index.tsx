@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextStyle, TextProps } from 'react-native';
+import { View, Text, TextStyle, TextProps, Dimensions, PixelRatio } from 'react-native';
 import STheme from '../STheme/index';
 import SView, { SViewProps } from '../SView/index';
 import { FontsType } from '../../font/index';
@@ -25,10 +25,20 @@ export default class SText extends Component<STextProps> {
 
     }
     render() {
+        const fontSize = (this?.props?.fontSize ?? this.props?.style?.fontSize) ?? 14; // Tamaño de fuente base en píxeles
+
+        // const screenWidth = Dimensions.get('window').width;
+        // const baseWidth = 375; // El ancho base en el que se basa el diseño de la aplicación
+        // const normalize = (size) => {
+        //   const newSize = (size * screenWidth) / baseWidth;
+        //   return newSize;
+        // };
+        // const adjustedFontSize = normalize(fontSize);
         return (
             <SView {...this.props}>
                 <Text style={{
                     ...(this.props.font ? { fontFamily: this.props.font } : (STheme.color.font ? { fontFamily: STheme.color.font } : null)),
+                    fontSize: fontSize,
                     color: !STheme.color.text ? STheme.color.secondary : STheme.color.text,
                     ...(!this.props.center ? {} : {
                         textAlign: "center",
@@ -45,9 +55,8 @@ export default class SText extends Component<STextProps> {
                     ...(!this.props.bold ? {} : {
                         fontWeight: "bold",
                     }),
-                    ...(!this.props.fontSize ? {} : {
-                        fontSize: this.props.fontSize
-                    }),
+
+
                     ...(!this.props.underLine ? {} : {
                         textDecorationLine: "underline",
                     }),
@@ -58,7 +67,7 @@ export default class SText extends Component<STextProps> {
                         textAlign: "justify",
                     }),
                     ...this.props.style
-                }}>{this.props.children}</Text>
+                }} allowFontScaling={false}>{this.props.children}</Text>
             </SView>
         );
 

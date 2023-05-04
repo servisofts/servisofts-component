@@ -114,7 +114,8 @@ var SNavBar = /** @class */ (function (_super) {
                 height: 40,
                 backgroundColor: STheme.color.barColor,
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                overflow: "hidden"
             } },
             React.createElement(SView, { col: "xs-2", center: true, height: true }, this.getBack()),
             React.createElement(SView, { col: "xs-8", center: true, flex: true }, this.renderTitle()),

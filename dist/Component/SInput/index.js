@@ -141,6 +141,10 @@ var SInput = /** @class */ (function (_super) {
         if ((_b = this.state.data) === null || _b === void 0 ? void 0 : _b.dialCode) {
             return ((_d = (_c = this.state.data) === null || _c === void 0 ? void 0 : _c.dialCode) === null || _d === void 0 ? void 0 : _d.dialCode) + " " + value;
         }
+        if (this.props.type == "link") {
+            value = escape(unescape(this.state.value));
+            return value;
+        }
         return this.state.value;
     };
     SInput.prototype.getValueClean = function () {

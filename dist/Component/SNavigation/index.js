@@ -24,12 +24,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Platform, Linking } from 'react-native';
 import STheme from '../STheme/index';
+import SPage from '../SPage/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Pages from '../../Pages/index';
+import SThread from '../SThread';
+import SView from '../SView';
 var Stack = createStackNavigator();
 var stateNavigator;
 var SNavigation = /** @class */ (function (_super) {
@@ -40,7 +43,7 @@ var SNavigation = /** @class */ (function (_super) {
         SNavigation.navBar = props.props.navBar;
         return _this;
     }
-    SNavigation.reset = function (route) {
+    SNavigation.reset = function (route, params) {
         if (!SNavigation.lastRoute) {
             alert("no hay navegacion");
             return;
@@ -50,7 +53,7 @@ var SNavigation = /** @class */ (function (_super) {
         // }
         SNavigation.lastRoute.navigation.reset({
             index: 0,
-            routes: [{ name: route }]
+            routes: [{ name: route, params: params }]
         });
     };
     SNavigation.openURL = function (route) {
@@ -85,10 +88,17 @@ var SNavigation = /** @class */ (function (_super) {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
                     // SNavigation.lastRoute.navigation.replace(locstr);
-                    window.location.pathname = locstr;
+                    try {
+                        SNavigation.lastRoute.navigation.replace("/" + locstr, SNavigation.getAllParams());
+                    }
+                    catch (e) {
+                        window.location.pathname = locstr;
+                    }
+                    return;
                 }
                 else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                    return;
                 }
                 // if (locstr.split("/").length <= 2) {
                 //     return <View />
@@ -98,16 +108,18 @@ var SNavigation = /** @class */ (function (_super) {
         }
     };
     SNavigation.getAllParams = function () {
-        var route = SNavigation.lastRoute.route;
-        var params = route.params;
+        var _a;
+        var route = (_a = SNavigation.lastRoute) === null || _a === void 0 ? void 0 : _a.route;
+        var params = route === null || route === void 0 ? void 0 : route.params;
         if (!params) {
             return {};
         }
         return params;
     };
     SNavigation.getParam = function (key, valDef) {
-        var route = SNavigation.lastRoute.route;
-        var params = route.params;
+        var _a;
+        var route = (_a = SNavigation.lastRoute) === null || _a === void 0 ? void 0 : _a.route;
+        var params = route === null || route === void 0 ? void 0 : route.params;
         if (!params) {
             return valDef;
         }
@@ -173,6 +185,13 @@ var SNavigation = /** @class */ (function (_super) {
         return Object.keys(pages).map(function (key) {
             var _a, _b;
             var Page = function (props) {
+                var _a = useState({ loading: false }), state = _a[0], setState = _a[1];
+                useEffect(function () {
+                    // if (state.loading) return;
+                    new SThread(10, "load-page", false).start(function () {
+                        setState({ loading: true });
+                    });
+                }, []);
                 try {
                     if (props) {
                         SNavigation.lastRoute = props;
@@ -181,12 +200,17 @@ var SNavigation = /** @class */ (function (_super) {
                     if (!Page) {
                         Page = pages[key];
                     }
+                    if (!state.loading)
+                        return React.createElement(SView, { col: "xs-12", height: true },
+                            SPage.backgroundComponent,
+                            Page.TOPBAR);
                     return React.createElement(React.Fragment, null,
                         !Validator ? null : React.createElement(Validator, null),
+                        Page.TOPBAR,
                         React.createElement(Page, __assign({}, props)));
                 }
                 catch (e) {
-                    console.log(e);
+                    console.error(e);
                     return null;
                 }
             };
@@ -203,7 +227,9 @@ var SNavigation = /** @class */ (function (_super) {
                 colors: {
                     background: STheme.color.background
                 }
-            }, initialState: stateNavigator, onStateChange: function (state) {
+            }, 
+            // initialState={stateNavigator}
+            onStateChange: function (state) {
                 return stateNavigator = state;
             } },
             React.createElement(Stack.Navigator, null, this.getPages(Stack))));

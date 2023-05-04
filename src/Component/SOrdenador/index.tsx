@@ -1,3 +1,5 @@
+import SDate from "../SDate";
+
 export type TypeOrdenar = {
     key: string,
     order: "asc" | "desc",
@@ -68,6 +70,10 @@ export default class SOrdenador {
             if (prop.type == "number") {
                 valA = parseFloat(valA ?? 0);
                 valB = parseFloat(valB ?? 0);
+            }
+            if (prop.type == "date") {
+                valA = new SDate(valA).getTime()
+                valB = new SDate(valB).getTime()
             }
 
             // const expres = /^[0-9]+$/

@@ -32,6 +32,7 @@ import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
 import SPage from '../SPage';
 import SThread from '../SThread';
+import SLoadContainer from '../SLoad/SLoadContainer';
 var SComponentContainer = /** @class */ (function (_super) {
     __extends(SComponentContainer, _super);
     function SComponentContainer(props) {
@@ -92,8 +93,11 @@ var SComponentContainer = /** @class */ (function (_super) {
         else if (layout.width >= 576) {
             curMedida = "sm";
         }
-        else {
+        else if (layout.width >= 350) {
             curMedida = "xs";
+        }
+        else {
+            curMedida = "xxs";
         }
         if (this.state.medida != curMedida) {
             this.state.medida = curMedida;
@@ -131,7 +135,8 @@ var SComponentContainer = /** @class */ (function (_super) {
                             _this.onChangeSize(evt.nativeEvent.layout);
                         } }, this.props.children),
                     React.createElement(DebugBar, { debug: this.props.debug }),
-                    React.createElement(SPopup, null)))));
+                    React.createElement(SPopup, null),
+                    React.createElement(SLoadContainer, null)))));
     };
     SComponentContainer.prototype.render = function () {
         var _this = this;

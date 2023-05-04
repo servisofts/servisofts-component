@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { ViewStyle, StyleProp } from 'react-native';
+import SScrollView2 from '..';
 import Indicator from '../Indicator';
 declare type typeScroll = {
     horizontal?: boolean;
     disableHorizontal?: boolean;
     indicator?: Indicator;
-    contentContainerStyle?: StyleProp<ViewStyle>;
+    contentContainerStyle?: any;
     onScroll?: (e: any) => void;
     onPageFinish?: () => {};
+    parent?: SScrollView2;
 };
 declare class Scroll extends Component<typeScroll> {
     enabled: any;
@@ -29,6 +30,10 @@ declare class Scroll extends Component<typeScroll> {
     noscroll(): void;
     setEnabled(bool: any): void;
     moveScroll({ x, y }: {
+        x: any;
+        y: any;
+    }): void;
+    scrollTo({ x, y }: {
         x: any;
         y: any;
     }): void;

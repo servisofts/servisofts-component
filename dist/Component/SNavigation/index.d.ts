@@ -28,7 +28,7 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navBar: any;
     static root: any;
     static routes: any[];
-    static reset(route: string): void;
+    static reset(route: string, params?: object): void;
     static openURL(route: string): void;
     static navigate(route: string, params?: object): void;
     static replace(route: string, params?: object): void;

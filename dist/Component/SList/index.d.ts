@@ -12,11 +12,19 @@ declare type SListType = {
     limit?: number;
     order?: [TypeOrdenar];
     buscador?: boolean;
+    flexEnd?: boolean;
+    flex?: boolean;
+    scrollEnabled?: boolean;
+    style?: any;
+    contentContainerStyle?: any;
 };
 declare class SList extends Component<SListType> {
     _buscador: any;
     state: any;
     _rend: any;
+    static defaultProps: {
+        scrollEnabled: boolean;
+    };
     constructor(props: any);
     getMoreItems(inverse: any): JSX.Element;
     getData(): any;

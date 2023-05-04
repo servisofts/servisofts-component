@@ -22,6 +22,12 @@ export type FontsType = "hello baby"
     | "OpenSans-Regular"
     | "OpenSans-SemiBold"
     | "OpenSans-SemiBoldItalic"
+    | "Oswald-Bold"
+    | "Oswald-ExtraLight"
+    | "Oswald-Light"
+    | "Oswald-Medium"
+    | "Oswald-Regular"
+    | "Oswald-SemiBold"
 
 const Font = (props) => {
     return <></>

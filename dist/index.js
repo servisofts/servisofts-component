@@ -30,8 +30,11 @@ import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
 import SMapView2 from "./Component/SMapView";
 import SMapView from "./Component/SMapView2";
+import SExcel from "./Component/SExcel";
+import SExcelReader from "./Component/SExcelReader";
 import SMarker from "./Component/SMapView/SMarker";
 import SList from "./Component/SList";
+import SList2 from "./Component/SList2";
 import Font from "./font";
 import SBuscador from "./Component/SBuscador";
 import SMath from "./Component/SMath";
@@ -42,8 +45,9 @@ import ExportExcel from "./Component/STable2/ExportExcel";
 import SRangeSlider from "./Component/SRangeSlider";
 import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
+import SPromise from "./Component/SPromise";
 export * from './Types';
-export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SRangeSlider, SUuid, SImage, SList, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, Submit, SButtom, SMath, SSection, Upload, ExportExcel, 
+export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SRangeSlider, SUuid, SImage, SList, SList2, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, Submit, SButtom, SMath, SSection, Upload, SExcel, SExcelReader, ExportExcel, SPromise, 
 // MAPA
 SMapView, SMapView2, SMarker, SPolyline, SLocation, 
 // FUENTES

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import SView from '../SView';
+import { SScrollView3PropsType } from './types';
 
-type typeProps = {
-}
 
-class SScrollView3 extends Component<typeProps> {
+
+class SScrollView3 extends Component<SScrollView3PropsType> {
+    props: SScrollView3PropsType
     constructor(props) {
         super(props);
         this.state = {
@@ -15,12 +16,16 @@ class SScrollView3 extends Component<typeProps> {
     render() {
         return (
             <SView col={"xs-12"} height>
-                <ScrollView>
-                    <ScrollView horizontal>
-                        <SView col={"xs-12"}>
-                            {this.props.children}
-                        </SView>
-                    </ScrollView>
+                <ScrollView
+                    horizontal
+                    showsVerticalScrollIndicator={this.props.scroll}
+                    showsHorizontalScrollIndicator={this.props.scroll}
+                    {...this.props}
+                >
+                    <SView col={"xs-12"} >
+                        {this.props.children}
+                    </SView>
+                    
                 </ScrollView>
             </SView>
         );

@@ -80,9 +80,13 @@ var Scroll = /** @class */ (function (_super) {
         var x = _a.x, y = _a.y;
         this.scrollRef.scrollTo({ x: x, y: y, animated: false });
     };
+    Scroll.prototype.scrollTo = function (_a) {
+        var x = _a.x, y = _a.y;
+        this.scrollRef.scrollTo({ x: x, y: y, animated: false });
+    };
     Scroll.prototype.render = function () {
         var _this = this;
-        return (React.createElement(ScrollView, { horizontal: this.props.horizontal, ref: function (ref) { _this.scrollRef = ref; }, disableScrollViewPanResponder: true, showsHorizontalScrollIndicator: false, showsVerticalScrollIndicator: false, nestedScrollEnabled: true, bounces: false, scrollEventThrottle: 16, onContentSizeChange: function (w, h) {
+        return (React.createElement(ScrollView, __assign({ horizontal: this.props.horizontal, ref: function (ref) { _this.scrollRef = ref; }, disableScrollViewPanResponder: true, showsHorizontalScrollIndicator: false, showsVerticalScrollIndicator: false, nestedScrollEnabled: true, bounces: false, scrollEventThrottle: 16, onContentSizeChange: function (w, h) {
                 _this.contentSize = { width: w, height: h };
                 if (_this.indicator) {
                     _this.indicator.repaint(_this);
@@ -111,9 +115,6 @@ var Scroll = /** @class */ (function (_super) {
                 if (_this.indicator) {
                     _this.indicator.onScroll(evt.nativeEvent);
                 }
-                if (_this.indicator) {
-                    _this.indicator.onScroll(evt.nativeEvent);
-                }
             }, style: __assign({}, (this.props.disableHorizontal ? {
                 width: "100%",
                 height: "100%"
@@ -121,7 +122,7 @@ var Scroll = /** @class */ (function (_super) {
                     maxWidth: "100%",
                     minWidth: "100%",
                     minHeight: "100%"
-                } : {})), this.props.contentContainerStyle] }, this.props.children));
+                } : {})), this.props.contentContainerStyle] }, this.props), this.props.children));
     };
     return Scroll;
 }(Component));

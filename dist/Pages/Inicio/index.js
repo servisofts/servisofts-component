@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { SView, SText, SPage, SNavigation, SIcon, } from '../../index';
+import { SView, SText, SPage, SNavigation, SIcon, SMath, } from '../../index';
 var Inicio = /** @class */ (function (_super) {
     __extends(Inicio, _super);
     function Inicio(props) {
@@ -42,11 +42,14 @@ var Inicio = /** @class */ (function (_super) {
             this.getIcon({ name: "SGradient", page: "scomponent/SGradient", icon: "Box" }),
             this.getIcon({ name: "SView", page: "scomponent/SView", icon: "Box" }),
             this.getIcon({ name: "SDate", page: "scomponent/SDate", icon: "Calendar" }),
-            this.getIcon({ name: "SLocation", page: "scomponent/SLocation", icon: "Marker" }));
+            this.getIcon({ name: "SLocation", page: "scomponent/SLocation", icon: "Marker" }),
+            this.getIcon({ name: "SMath", page: "scomponent/SMath", icon: "Alert" }));
     };
     Inicio.prototype.render = function () {
         return (React.createElement(SPage, { title: "Servisofts Component" },
-            React.createElement(SView, { col: "xs-12", style: { padding: 8 } }, this.getLista())));
+            React.createElement(SView, { col: "xs-12", style: { padding: 8 } },
+                React.createElement(SText, null, SMath.formatMoney(232323.0323023)),
+                this.getLista())));
     };
     return Inicio;
 }(Component));

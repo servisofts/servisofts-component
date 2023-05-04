@@ -216,6 +216,10 @@ declare const Icons: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;
     };
+    World: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
 };
 export default Icons;
 export declare const IconsVariant: {

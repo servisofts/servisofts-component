@@ -97,7 +97,8 @@ var DropFileSingle = /** @class */ (function (_super) {
                 return React.createElement(SText, { center: true }, "");
             }
             var image = _this.state.files[0];
-            return React.createElement(SView, { col: "xs-12", height: true, style: {
+            console.log(image);
+            return React.createElement(SView, { col: "xs-12", flex: true, style: {
                     overflow: 'hidden',
                     borderRadius: 4
                 } },
@@ -108,10 +109,19 @@ var DropFileSingle = /** @class */ (function (_super) {
         };
         var value = props.defaultValue || "";
         if (value) {
-            _this.state.files.push({
-                uri: value,
-                name: value
-            });
+            if (props.filePath) {
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+                _this.state.files.push({
+                    uri: props.filePath + "/" + props.name + "/" + value,
+                    name: value
+                });
+            }
+            else {
+                _this.state.files.push({
+                    uri: value,
+                    name: value
+                });
+            }
         }
         return _this;
     }
@@ -126,7 +136,7 @@ var DropFileSingle = /** @class */ (function (_super) {
     };
     DropFileSingle.prototype.render = function () {
         var _this = this;
-        return (React.createElement(SView, { col: "xs-12", height: true, center: true, onPress: function () {
+        return (React.createElement(SView, { col: "xs-12", flex: true, center: true, onPress: function () {
                 _this.fileUpload();
                 // ImagePicker.showImagePicker({
                 //     title: 'Seleccionar una Foto',
@@ -143,7 +153,7 @@ var DropFileSingle = /** @class */ (function (_super) {
                 // }, (response) => {
                 // });
             } },
-            React.createElement(SView, { height: true, col: "xs-12", style: {
+            React.createElement(SView, { flex: true, col: "xs-12", style: {
                     borderRadius: 4
                 }, center: true }, this.getImages())));
     };

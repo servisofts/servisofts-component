@@ -25,21 +25,35 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
-import STheme from '../STheme';
-import SView from '../SView';
+import _type from "./type";
+import { SUuid } from '../SUuid';
+import SLoadContainer from './SLoadContainer';
 var SLoad = /** @class */ (function (_super) {
     __extends(SLoad, _super);
     function SLoad(props) {
+        var _a;
         var _this = _super.call(this, props) || this;
         _this.state = {};
+        _this.key = (_a = _this.props.key) !== null && _a !== void 0 ? _a : SUuid();
         return _this;
     }
+    SLoad.prototype.componentWillUnmount = function () {
+        SLoadContainer.remove(this.props.key);
+    };
     SLoad.prototype.render = function () {
-        var _a;
-        var color = STheme.color.text ? STheme.color.text : STheme.color.secondary;
-        return (React.createElement(SView, { col: "xs-12", center: true },
-            React.createElement(ActivityIndicator, __assign({ color: (_a = this.props.color) !== null && _a !== void 0 ? _a : color }, this.props))));
+        var type = this.props.type;
+        if (!type)
+            type = "circle";
+        var Comp = _type[type];
+        var ITEM = React.createElement(Comp, __assign({ key: this.key }, this.props));
+        if (Comp.renderGlobal) {
+            Comp.renderGlobal(ITEM);
+            return null;
+        }
+        return ITEM;
+    };
+    SLoad.defaultProps = {
+        type: "circle"
     };
     return SLoad;
 }(Component));

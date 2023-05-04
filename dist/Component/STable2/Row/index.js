@@ -34,6 +34,8 @@ var Row = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.getItems = function () {
             return _this.props.header.map(function (item, index) {
+                var _a, _b;
+                var cellStyle = __assign(__assign({ fontSize: 12, height: _this.props.height }, (_a = _this.props.cellStyle) !== null && _a !== void 0 ? _a : {}), (_b = item.cellStyle) !== null && _b !== void 0 ? _b : {});
                 var data = _this.props.data;
                 data = data[item.key];
                 var ITEM;
@@ -47,9 +49,11 @@ var Row = /** @class */ (function (_super) {
                     if (typeof data == "object") {
                         data = JSON.stringify(data);
                     }
-                    ITEM = React.createElement(SText, { fontSize: 12 }, data);
+                    ITEM = React.createElement(SText, { fontSize: cellStyle.fontSize, col: "xs-12", center: item.center, style: {
+                            textAlign: cellStyle.textAlign
+                        } }, data);
                 }
-                return React.createElement(SView, { row: true, key: "itm_row_" + item.key, height: _this.props.height },
+                return React.createElement(SView, { row: true, key: "itm_row_" + item.key, height: cellStyle.height },
                     React.createElement(SView, { width: _this.props.space, height: true, backgroundColor: _this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22" }),
                     React.createElement(SView, { animated: true, height: true, style: {
                             width: _this.props.animHeader[item.key],
@@ -96,7 +100,8 @@ var Row = /** @class */ (function (_super) {
         return data;
     };
     Row.prototype.render = function () {
-        return (React.createElement(SView, { row: true, height: this.props.height, animated: true, style: {
+        var _a, _b, _c;
+        return (React.createElement(SView, { row: true, height: (_c = (_b = (_a = this.props) === null || _a === void 0 ? void 0 : _a.cellStyle) === null || _b === void 0 ? void 0 : _b.height) !== null && _c !== void 0 ? _c : this.props.height, animated: true, style: {
                 width: this.props.animSize
             } }, this.getItems()));
     };

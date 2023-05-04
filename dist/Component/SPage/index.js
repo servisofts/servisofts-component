@@ -30,6 +30,7 @@ import SNavBar from '../SNavBar/index';
 import SView from '../SView/index';
 import SNavigation from '../SNavigation';
 import SThread from '../SThread';
+import SwipeToRefresh from '../SScrollView3/SwipeToRefresh';
 var SPage = /** @class */ (function (_super) {
     __extends(SPage, _super);
     function SPage(props) {
@@ -98,18 +99,46 @@ var SPage = /** @class */ (function (_super) {
     SPage.prototype.getScroll = function () {
         if (this.props.disableScroll)
             return React.createElement(SView, { center: this.props.center, col: "xs-12", flex: true }, this.getChildren());
-        return React.createElement(ScrollView, { style: {
-                flex: 1,
-                width: "100%"
-            }, contentContainerStyle: {
-                width: "100%",
-                minHeight: "100%"
-            }, refreshControl: this.getRefresh() },
+        if (Platform.OS != "web") {
+            return React.createElement(ScrollView, { style: {
+                    flex: 1,
+                    width: "100%"
+                }, contentContainerStyle: {
+                    width: "100%",
+                    minHeight: "100%"
+                }, refreshControl: this.getRefresh() },
+                React.createElement(SView, { style: {
+                        width: '100%',
+                        flex: 1
+                    }, center: this.props.center }, this.getChildren()));
+        }
+        return React.createElement(SwipeToRefresh, { onRefresh: this.props.onRefresh },
             React.createElement(SView, { style: {
                     width: '100%',
                     flex: 1
                 }, center: this.props.center }, this.getChildren()));
     };
+    // getScroll() {
+    //     if (this.props.disableScroll) return <SView center={this.props.center} col={"xs-12"} flex>
+    //         {this.getChildren()}
+    //     </SView>
+    //     return <ScrollView style={{
+    //         flex: 1,
+    //         width: "100%",
+    //     }} contentContainerStyle={{
+    //         width: "100%",
+    //         minHeight: "100%",
+    //     }}
+    //         refreshControl={this.getRefresh()}
+    //     >
+    //         <SView style={{
+    //             width: '100%',
+    //             flex: 1,
+    //         }} center={this.props.center}>
+    //             {this.getChildren()}
+    //         </SView>
+    //     </ScrollView>
+    // }
     SPage.prototype.render_footer = function () {
         if (!this.props.footer)
             return null;
@@ -125,7 +154,11 @@ var SPage = /** @class */ (function (_super) {
                 flex: 1,
                 height: '100%'
             } },
-            React.createElement(KeyboardAvoidingView, { behavior: Platform.OS === "ios" ? "padding" : "height", style: {
+            SPage.backgroundComponent,
+            React.createElement(KeyboardAvoidingView, { behavior: Platform.OS === "ios" ? "padding" : "height", 
+                // behavior={"padding"}
+                // enabled={Platform.OS === "ios"}
+                style: {
                     flex: 1
                 } },
                 this.getNavBar(),
@@ -134,9 +167,7 @@ var SPage = /** @class */ (function (_super) {
                         flex: 1,
                         height: "100%",
                         overflow: "hidden"
-                    } },
-                    SPage.backgroundComponent,
-                    this.getScroll()),
+                    } }, this.getScroll()),
                 this.render_footer())));
     };
     SPage.backgroundComponent = (React.createElement(View, { style: {

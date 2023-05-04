@@ -11,7 +11,7 @@ const BackgroundImage = (props) => {
         backgroundColor: "#999fff",
         // padding: 0,
     }}>
-        <Svg xmlns="http://www.w3.org/2000/svg" width={"100%"} height={"100%"}  >
+        <Svg width={"100%"} height={"100%"}  >
             <Defs>
                 <LinearGradient id="negro_amarillo2" x1="50%" x2="50%" y2="100%" gradientUnits="objectBoundingBox">
                     <Stop offset="0" stop-color="#1c1c1c" />

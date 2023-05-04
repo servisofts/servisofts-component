@@ -36,6 +36,19 @@ var SDate = /** @class */ (function () {
         }
         return "0" + val;
     };
+    SDate.toString = function (dateStr, props) {
+        var _a;
+        if (!dateStr)
+            return "";
+        var date;
+        if (props.fromFormat) {
+            date = new SDate(dateStr, props.fromFormat);
+        }
+        else {
+            date = new SDate(dateStr, (_a = props.fromFormat) !== null && _a !== void 0 ? _a : "");
+        }
+        return date.toString(props.toFormat);
+    };
     SDate.parse = function (fecha, format) {
         if (!format) {
             format = "yyyy-MM-dd hh:mm";
@@ -92,11 +105,31 @@ var SDate = /** @class */ (function () {
         return this;
     };
     SDate.prototype.addDay = function (val) {
-        this.date.setDate(this.getDay() + val);
+        this.date.setDate(this.date.getDate() + val);
         return this;
     };
     SDate.prototype.addMonth = function (val) {
         this.date.setMonth(this.getMonth() - 1 + val);
+        return this;
+    };
+    SDate.prototype.addYear = function (val) {
+        this.date.setFullYear(this.date.getFullYear() + val);
+        return this;
+    };
+    SDate.prototype.addHour = function (val) {
+        this.date.setHours(this.date.getHours() + val);
+        return this;
+    };
+    SDate.prototype.addMinute = function (val) {
+        this.date.setMinutes(this.date.getMinutes() + val);
+        return this;
+    };
+    SDate.prototype.addSecond = function (val) {
+        this.date.setSeconds(this.date.getSeconds() + val);
+        return this;
+    };
+    SDate.prototype.addMillisecond = function (val) {
+        this.date.setMilliseconds(this.date.getMilliseconds() + val);
         return this;
     };
     SDate.prototype.getMonth = function () {
@@ -224,6 +257,9 @@ var SDate = /** @class */ (function () {
     SDate.getDayOfWeek = function (dia) {
         var dateJson = CalendarParams.dayOfWeek[dia];
         return __assign(__assign({}, dateJson), { day: dia });
+    };
+    SDate.getDaysInMonth = function (year, month) {
+        return new Date(year, month, 0).getDate();
     };
     SDate.isValid = function (fecha) {
         var fechaf = fecha.split("-");

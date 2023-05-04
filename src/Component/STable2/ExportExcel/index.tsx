@@ -47,6 +47,7 @@ export default class ExportExcel extends Component<ExportExcelProps> {
         var header = this.props.header;
         header.map((item, index) => {
             var letter = this.toLetters(index + 1);
+            if (!ws[letter + '1']) return;
             ws[letter + '1'].s = {
                 fill: fill,
                 font: font,
@@ -68,7 +69,7 @@ export default class ExportExcel extends Component<ExportExcelProps> {
         var header = this.props.header;
         var headerArray = [];
         header.map((item, index) => {
-            headerArray.push(item.label);
+            headerArray.push(item.label ?? item.key);
         })
         return headerArray;
     }
@@ -78,7 +79,7 @@ export default class ExportExcel extends Component<ExportExcelProps> {
         var dataArr = [];
 
         var orderArr = []
-        orderArr.push({ key: "Peso", order: "desc", peso: 4 });
+        // orderArr.push({ key: "Peso", order: "desc", peso: 4 });
         this.props.header.map((header, i) => {
             if (header.order) {
                 orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority });
@@ -94,7 +95,10 @@ export default class ExportExcel extends Component<ExportExcelProps> {
                 } else {
                     dataFinal = item[head.key] || "";
                 }
-                if(typeof dataFinal == "object" ){
+                if (head.renderExcel) {
+                    dataFinal = head.renderExcel(dataFinal);
+                }
+                if (typeof dataFinal == "object") {
                     dataFinal = JSON.stringify(dataFinal)
                 }
                 arrT.push(dataFinal);

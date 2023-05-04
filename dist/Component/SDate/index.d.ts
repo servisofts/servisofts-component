@@ -83,8 +83,13 @@ export default class SDate {
         };
     };
     static getDayOfWeek: (dia: any) => any;
+    static getDaysInMonth: (year: any, month: any) => number;
     static isValid: (fecha: any) => boolean;
     static formatCero(val: any): any;
+    static toString(dateStr: any, props: {
+        fromFormat?: formatsTypes;
+        toFormat?: formatsTypes;
+    }): String | "";
     static parse(fecha: String, format: formatsTypes | string): Date;
     date: Date;
     constructor(date?: any, format?: formatsTypes | string);
@@ -96,6 +101,11 @@ export default class SDate {
     setDay(val: any): this;
     addDay(val: any): this;
     addMonth(val: any): this;
+    addYear(val: any): this;
+    addHour(val: any): this;
+    addMinute(val: any): this;
+    addSecond(val: any): this;
+    addMillisecond(val: any): this;
     getMonth(): number;
     getYear(): number;
     setYear(val: any): this;

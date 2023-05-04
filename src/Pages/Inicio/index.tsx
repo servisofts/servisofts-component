@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import SGradient from '../../Component/SGradient';
-import { SView, SText, STheme, SPage, SNavigation, SIcon, SHr, } from '../../index';
+import { SView, SText, STheme, SPage, SNavigation, SIcon, SHr, SMath, } from '../../index';
 import Aperture from './Aperture';
 export default class Inicio extends Component {
     constructor(props) {
@@ -31,6 +31,7 @@ export default class Inicio extends Component {
             {this.getIcon({ name: "SView", page: "scomponent/SView", icon: "Box" })}
             {this.getIcon({ name: "SDate", page: "scomponent/SDate", icon: "Calendar" })}
             {this.getIcon({ name: "SLocation", page: "scomponent/SLocation", icon: "Marker" })}
+            {this.getIcon({ name: "SMath", page: "scomponent/SMath", icon: "Alert" })}
         </SView>
     }
     render() {
@@ -42,6 +43,7 @@ export default class Inicio extends Component {
                 <SView col={"xs-12"} style={{ padding: 8 }}>
                     {/* <SText col={"xs-12"} justify>{"Servisofts Component is a library for Android, IOS & web for easing app development in react-native-web."}</SText> */}
                     {/* <SHr /> */}
+                    <SText>{SMath.formatMoney(232323.0323023)}</SText>
                     {this.getLista()}
 
                 </SView>

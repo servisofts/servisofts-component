@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ViewStyle, Platform, StyleProp } from 'react-native';
+import SScrollView2 from '..';
 import Indicator from '../Indicator';
 
 type typeScroll = {
     horizontal?: boolean,
     disableHorizontal?: boolean,
     indicator?: Indicator,
-    contentContainerStyle?: StyleProp<ViewStyle>,
+    contentContainerStyle?: any,
     onScroll?: (e: any) => void,
     onPageFinish?: () => {},
+    parent?: SScrollView2,
 
 }
 const preventDefault = e => e.preventDefault();
@@ -68,6 +70,9 @@ class Scroll extends Component<typeScroll> {
     moveScroll({ x, y }) {
         this.scrollRef.scrollTo({ x, y, animated: false })
     }
+    scrollTo({ x, y }) {
+        this.scrollRef.scrollTo({ x, y, animated: false })
+    }
     render() {
         return (
             <ScrollView
@@ -110,9 +115,6 @@ class Scroll extends Component<typeScroll> {
                     if (this.indicator) {
                         this.indicator.onScroll(evt.nativeEvent);
                     }
-                    if (this.indicator) {
-                        this.indicator.onScroll(evt.nativeEvent);
-                    }
 
                 }}
                 style={{
@@ -130,6 +132,7 @@ class Scroll extends Component<typeScroll> {
                     } : {}),
 
                 }, this.props.contentContainerStyle]}
+                {...this.props}
             >
                 {this.props.children}
             </ScrollView>

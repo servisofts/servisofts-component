@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import React, { Component } from 'react';
-import { SIcon, SPage, SView } from '../..';
+import { SIcon, SLoad, SPage, SView } from '../..';
 var SViewPage = /** @class */ (function (_super) {
     __extends(SViewPage, _super);
     function SViewPage(props) {
@@ -26,6 +26,7 @@ var SViewPage = /** @class */ (function (_super) {
         return (React.createElement(SPage, { title: "SView" },
             React.createElement(SView, { col: "xs-12", height: 50, row: true },
                 React.createElement(SView, { col: "xs-12 sm-10 md-8 lg-6 xl-4", height: true, backgroundColor: "#00f" }),
+                React.createElement(SLoad, { type: 'skeleton', col: "xs-12 sm-10 md-8 lg-6 xl-4", height: true }),
                 React.createElement(SView, { width: 50, height: true, backgroundColor: "#0ff" },
                     React.createElement(SIcon, { name: "Girl" })))));
     };

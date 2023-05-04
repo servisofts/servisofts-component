@@ -21,5 +21,6 @@ import Docs from "./Docs";
 import NewTable from "./NewTable";
 import SDate from "./Doc_SDate";
 import SLocationPage from "./SLocationPage";
-var Pages = __assign({ "scomponent": { component: Inicio }, "scomponent/SIcon": { component: SIconPage }, "scomponent/SvgToReact": { component: SvgToReact }, "scomponent/Formulario": { component: Formulario }, "scomponent/STable": { component: STablePage }, "scomponent/SGradient": { component: SGradientPage }, "scomponent/SView": SViewPage, "scomponent/docs": Docs, "scomponent/NewTable": NewTable, "scomponent/SDate": SDate, "scomponent/SLocation": SLocationPage }, SInputPages);
+import SMath from "./SMath";
+var Pages = __assign({ "servisofts": { component: Inicio }, "scomponent": { component: Inicio }, "scomponent/SMath": { component: SMath }, "scomponent/SIcon": { component: SIconPage }, "scomponent/SvgToReact": { component: SvgToReact }, "scomponent/Formulario": { component: Formulario }, "scomponent/STable": { component: STablePage }, "scomponent/SGradient": { component: SGradientPage }, "scomponent/SView": SViewPage, "scomponent/docs": Docs, "scomponent/NewTable": NewTable, "scomponent/SDate": SDate, "scomponent/SLocation": SLocationPage }, SInputPages);
 export default Pages;

@@ -25,27 +25,36 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import SComponentContainer from '../SComponentContainer/index';
 import { SUuid } from '../SUuid/index';
 var SGrid = /** @class */ (function (_super) {
     __extends(SGrid, _super);
     function SGrid(props) {
         var _this = _super.call(this, props) || this;
+        _this.medida = "xs";
         _this.getMax = function (col) {
             if (!col)
                 return 0;
-            var options = ["xs", "sm", "md", "lg", "xl", "xxl"];
+            var options = ["xxs", "xs", "sm", "md", "lg", "xl", "xxl"];
             var index = options.indexOf(_this.medida);
             for (var i = index; i >= 0; i--) {
                 var mtmp = options[i];
                 if (col[mtmp]) {
                     return col[mtmp];
                 }
+                else {
+                    if (_this.medida == "xxs") {
+                        return col["xs"];
+                    }
+                }
             }
             return 0;
         };
-        _this.state = {};
+        _this.state = {
+            x: 100,
+            y: 0
+        };
         _this.animSize = new Animated.ValueXY({ x: 100, y: 0 });
         _this.key = SUuid();
         return _this;
@@ -57,43 +66,74 @@ var SGrid = /** @class */ (function (_super) {
             var text = this.props.col;
             text = text.trim();
             text.split(" ").map(function (row) {
-                var cols = /((xs|sm|md|lg|xl|xxl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
+                var cols = /((xxs|xs|sm|md|lg|xl|xxl)-(([0-9]{1,2}.[0-9])|([0-9]{1,2})))/.exec(row);
                 if (cols[2] && cols[3]) {
                     col[cols[2]] = cols[3];
                 }
             });
             var max = this.getMax(col);
-            this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
+            // Animated.timing(this.animSize, {
+            //     toValue: { x: (max * 100) / 12, y: this.animSize.y._value },
+            //     useNativeDriver: true,
+            //     duration: 1,
+            // }).start();
+            this.setValue({ x: (max * 100) / 12, y: this.state.y });
+            // console.log("animado")
+            // this.setState()
+            // this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
         }
         else {
             col = this.props.col;
         }
     };
-    SGrid.prototype.changeMedida = function (medida) {
-        this.medida = medida;
-        this.setSize();
-    };
+    // shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any): any {
+    //     return nextState.x !== this.state.x
+    // }
     SGrid.prototype.componentDidMount = function () {
         SComponentContainer.registerGrid(this.key, this);
     };
     SGrid.prototype.componentWillUnmount = function () {
         SComponentContainer.removeGrid(this.key);
     };
+    SGrid.prototype.changeMedida = function (medida) {
+        this.medida = medida;
+        this.setSize();
+    };
+    SGrid.prototype.setValue = function (_a) {
+        var x = _a.x, y = _a.y;
+        if (x) {
+            if (this.state.x !== x) {
+                this.setState({ x: x });
+            }
+        }
+        if (y) {
+            if (this.state.y !== y) {
+                this.setState({ y: y });
+            }
+        }
+        // this.animSize.setValue({ x, y });
+    };
+    SGrid.prototype.getValue = function () {
+        return this.state;
+    };
     SGrid.prototype.render = function () {
         var _this = this;
-        return (React.createElement(Animated.View, { style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, (!this.props.style.position ? {} : { position: this.props.style.position })), (!this.props.style.flex ? {} : { flex: this.props.style.flex })), (!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : this.props.flex })), (!this.props.style.height ? {} : { height: this.props.style.height })), (!this.props.style.maxHeight ? {} : { maxHeight: this.props.style.maxHeight })), (!this.props.style.maxWidth ? {} : { maxWidth: this.props.style.maxWidth })), (!this.props.style.width ? {} : { width: this.props.style.width })), (!this.props.colSquare ? {} : (!this.props.col ? { width: this.animSize.x } : { height: this.animSize.y }))), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex })), (this.props.style.margin == null ? {} : { margin: this.props.style.margin })), (this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom })), (this.props.style.marginTop == null ? {} : { marginTop: this.props.style.marginTop })), (this.props.style.marginLeft == null ? {} : { marginLeft: this.props.style.marginLeft })), (this.props.style.marginRight == null ? {} : { marginRight: this.props.style.marginRight })), (this.props.style.marginStart == null ? {} : { marginStart: this.props.style.marginStart })), (this.props.style.marginEnd == null ? {} : { marginEnd: this.props.style.marginEnd })), (this.props.style.top == null ? {} : { top: this.props.style.top })), (this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom })), (this.props.style.left == null ? {} : { left: this.props.style.left })), (this.props.style.right == null ? {} : { right: this.props.style.right })), (!this.props.col ? {} : {
-                width: this.animSize.x.interpolate({
-                    inputRange: [0, 100],
-                    outputRange: ["0%", "100%"]
-                })
+        var size = this.getValue();
+        return (React.createElement(View
+        // key={SUuid()}
+        , { 
+            // key={SUuid()}
+            style: __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, (!this.props.style.position ? {} : { position: this.props.style.position })), (!this.props.style.flex ? {} : { flex: this.props.style.flex })), (!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : parseInt(this.props.flex + "") })), (!this.props.style.height ? {} : { height: this.props.style.height })), (!this.props.style.maxHeight ? {} : { maxHeight: this.props.style.maxHeight })), (!this.props.style.maxWidth ? {} : { maxWidth: this.props.style.maxWidth })), (!this.props.style.width ? {} : { width: this.props.style.width })), (!this.props.colSquare ? {} : (!this.props.col ? { width: size.x } : { height: size.y }))), (!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height })), (!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex })), (this.props.style.margin == null ? {} : { margin: this.props.style.margin })), (this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom })), (this.props.style.marginTop == null ? {} : { marginTop: this.props.style.marginTop })), (this.props.style.marginLeft == null ? {} : { marginLeft: this.props.style.marginLeft })), (this.props.style.marginRight == null ? {} : { marginRight: this.props.style.marginRight })), (this.props.style.marginStart == null ? {} : { marginStart: this.props.style.marginStart })), (this.props.style.marginEnd == null ? {} : { marginEnd: this.props.style.marginEnd })), (this.props.style.top == null ? {} : { top: this.props.style.top })), (this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom })), (this.props.style.left == null ? {} : { left: this.props.style.left })), (this.props.style.right == null ? {} : { right: this.props.style.right })), (this.props.margin == null ? {} : { padding: this.props.margin })), (!this.props.col ? {} : {
+                width: size.x + "%"
             })), onLayout: function (evt) {
                 _this.layout = evt.nativeEvent.layout;
                 if (_this.props.colSquare) {
+                    var size_1 = _this.getValue();
                     if (_this.props.col) {
-                        _this.animSize.setValue({ x: _this.animSize.x._value, y: _this.layout.width });
+                        _this.setValue({ x: size_1.x, y: _this.layout.width });
                     }
-                    else if (_this.layout.height != _this.animSize.x._value) {
-                        _this.animSize.setValue({ x: _this.layout.height, y: _this.layout.height });
+                    else if (_this.layout.height != size_1.x) {
+                        _this.setValue({ x: _this.layout.height, y: _this.layout.height });
                     }
                 }
                 if (_this.props.onLayout)

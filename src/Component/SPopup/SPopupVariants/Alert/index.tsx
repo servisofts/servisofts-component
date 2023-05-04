@@ -27,9 +27,9 @@ export default class Alert extends Component<PropsType> {
                 }}>
                 {SPage.backgroundComponent}
                 <SView col={"xs-12"} center>
-                    <SView col={"xs-12"} height={90}>
+                    {/* <SView col={"xs-12"} height={90}>
                         <SIcon name={"AlertOutline"} fill={STheme.color.danger} />
-                    </SView>
+                    </SView> */}
                     <SView col={"xs-10"} center height={40}>
                         <SText fontSize={12} center> {this.props.title} </SText>
                     </SView>

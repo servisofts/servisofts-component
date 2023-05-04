@@ -11,9 +11,11 @@ export declare type SFromProps = {
     props?: SViewProps;
     inputProps?: TypeInputProps;
     inputs: InputsTp;
+    loading?: boolean;
     onSubmit?: Function;
     onSubmitName?: String;
     onSubmitProps?: ButtomType;
+    error?: String;
 } & SViewProps;
 export default class SForm extends Component<SFromProps> {
     static defaultProps: {
@@ -29,12 +31,13 @@ export default class SForm extends Component<SFromProps> {
     focus(key: any): void;
     getFiles(): any;
     uploadFiles(url: any, key: any): void;
-    uploadFiles2(url: any): void;
+    uploadFiles2(url: any): Promise<unknown>;
     uploadFile(file: any, url: any): void;
     submitFiles(data: any, key: any, url: any): void;
     submit(): {};
     getButtom(): JSX.Element;
     getInputs(): JSX.Element | JSX.Element[];
+    render_error(): JSX.Element;
     render(): JSX.Element;
 }
 export {};

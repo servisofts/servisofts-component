@@ -8,7 +8,7 @@ import { STable2Type } from "../Component/STable2";
 import { HeaderProps } from "../Component/STable2/Header";
 
 // SCOL
-type TColKey = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+type TColKey = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 type TColVal = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 type TColStr = `${TColKey}-${TColVal}`;

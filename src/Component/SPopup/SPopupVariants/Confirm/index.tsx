@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SPopup from '../..'
 import { SButtom } from '../../../SButtom'
+import SHr from '../../../SHr'
 import SIcon from '../../../SIcon'
 import SPage from '../../../SPage'
 import SText from '../../../SText'
@@ -40,20 +41,27 @@ export default class Confirm extends Component<PropsType> {
                 withoutFeedback
                 style={{
                     height: 260,
-                    borderRadius: 8,
+                    padding: 8,
+                    // borderWidth:2,
+                    // borderColor:STheme.color.text+"33",
+                    borderRadius: 16,
                     overflow: 'hidden',
                 }}>
                 {SPage.backgroundComponent}
-                <SView col={"xs-12"} center>
-                    <SView col={"xs-12"} height={90}>
+                <SView col={"xs-12"} center flex>
+                    <SHr />
+                    {/* <SView col={"xs-12"} height={90}>
                         <SIcon name={"AlertOutline"} fill={STheme.color.danger} />
+                    </SView> */}
+                    <SView flex />
+                    <SView col={"xs-11"} center>
+                        <SText fontSize={18} center bold>{this.props.title}</SText>
                     </SView>
-                    <SView col={"xs-11"} center height={40}>
-                        <SText fontSize={16} center bold> {this.props.title} </SText>
+                    <SView flex />
+                    <SView col={"xs-10"} center>
+                        <SText fontSize={14} center color={STheme.color.lightGray}>{this.props.message}</SText>
                     </SView>
-                    <SView col={"xs-10"} center height={40}>
-                        <SText fontSize={12} center> {this.props.message} </SText>
-                    </SView>
+                    <SView flex />
                     <SView col={"xs-12"} row height={70} center>
                         <SView col={"xs-6"} center>
                             <SButtom props={{ type: "danger" }} onPress={() => {
@@ -64,7 +72,7 @@ export default class Confirm extends Component<PropsType> {
                             }}>Cancelar</SButtom>
                         </SView>
                         <SView col={"xs-6"} center >
-                            <SButtom props={{ type: "outline" }} onPress={() => {
+                            <SButtom props={{ type: "primary" }} onPress={() => {
                                 if (this.props.onPress) {
                                     this.state.acept = true;
                                     this.props.onPress()
@@ -74,6 +82,7 @@ export default class Confirm extends Component<PropsType> {
                             }}>Confirmar</SButtom>
                         </SView>
                     </SView>
+                    <SHr />
                 </SView>
             </SView>
         )

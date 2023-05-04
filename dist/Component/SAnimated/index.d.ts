@@ -74,7 +74,7 @@ export declare class SAnimated extends Component<typeProps> {
                 maxWidth?: string | number;
                 minHeight?: string | number;
                 minWidth?: string | number;
-                overflow?: "hidden" | "scroll" | "visible";
+                overflow?: "hidden" | "visible" | "scroll";
                 padding?: string | number;
                 paddingBottom?: string | number;
                 paddingEnd?: string | number;

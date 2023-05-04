@@ -1,5 +1,10 @@
 import { Component } from 'react';
 import { HeaderProps } from '../Header';
+export declare type STable2cellStyle = {
+    fontSize?: number;
+    height?: number;
+    textAlign?: "center" | "end" | "start";
+};
 declare type typeProps = {
     header: Array<HeaderProps>;
     data: Object;
@@ -8,6 +13,7 @@ declare type typeProps = {
     space?: number;
     height: number;
     index: number;
+    cellStyle: STable2cellStyle;
 };
 declare class Row extends Component<typeProps> {
     constructor(props: any);

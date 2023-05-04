@@ -66,10 +66,29 @@ var Header = /** @class */ (function (_super) {
             }, onPress: function () {
                 SPopup.open({ key: "hp", content: React.createElement(HAjustes, __assign({ key_header: _this.props.key_header }, _this.props)) });
             } },
-            React.createElement(SIcon, { name: this.props.filter_h ? "Ajustes" : "Engranaje", fill: STheme.color.secondary + "66", width: 10 }));
+            React.createElement(SIcon, { name: this.props.filter_h || this.props.filter_notin ? "Ajustes" : "Engranaje", fill: STheme.color.secondary + "66", width: 10 }));
+    };
+    Header.prototype.renderTotal = function () {
+        var total = this.props.total;
+        if (!total)
+            return null;
+        total = parseFloat(total);
+        if (this.props.renderTotal) {
+            var ITEM = this.props.renderTotal(total);
+            if (["string", "number"].includes(typeof ITEM)) {
+                total = ITEM;
+            }
+            else {
+                return ITEM;
+            }
+        }
+        else {
+            total = total.toFixed(2);
+        }
+        return React.createElement(SText, { fontSize: 12, font: "Roboto" }, total);
     };
     Header.prototype.render = function () {
-        var _a, _b;
+        var _a;
         var anm = this.props.animWidth;
         return (React.createElement(React.Fragment, null,
             React.createElement(SView, { width: this.props.space ? this.props.space : 0, height: true }),
@@ -85,8 +104,7 @@ var Header = /** @class */ (function (_super) {
                             transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }]
                         } },
                         React.createElement(SIcon, { name: "Arrow", fill: STheme.color.secondary, width: 10 })) : null),
-                React.createElement(SView, { row: true, center: true },
-                    React.createElement(SText, { fontSize: 12, font: "Roboto" }, this.props.total ? parseFloat((_b = this.props.total) !== null && _b !== void 0 ? _b : 0).toFixed(2) : "")),
+                React.createElement(SView, { row: true, center: true }, this.renderTotal()),
                 React.createElement(SView, __assign({}, this.pan.getPanHandlers(), { animated: true, style: {
                         position: "absolute",
                         right: 0,

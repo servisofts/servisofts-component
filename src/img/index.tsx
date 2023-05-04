@@ -51,6 +51,7 @@ import Traspaso from "./Traspaso"
 import Usuarios from "./Usuarios"
 import Wifi from "./Wifi"
 import WifiDisconnect from "./WifiDisconnect"
+import World from "./World"
 import Svg from "./Svg";
 const Icons = {
     Add,
@@ -106,6 +107,7 @@ const Icons = {
     "Icon2": Alert,
     Wifi,
     WifiDisconnect,
+    World,
     ...Svg
 
 }

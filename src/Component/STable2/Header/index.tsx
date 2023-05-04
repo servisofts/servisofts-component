@@ -5,6 +5,7 @@ import SAPanResponder from '../../SAnimated/SAPanResponder';
 import SIcon from '../../SIcon';
 import SPopup from '../../SPopup';
 import HAjustes from '../HAjustes';
+import { STable2cellStyle } from '../Row';
 
 export type HeaderProps = {
     label: string,
@@ -17,17 +18,23 @@ export type HeaderProps = {
     onPress?: () => any,
     editable?: boolean,
     order?: "asc" | "desc",
+    orderType?: any,
     orderPriority?: number,
     component?: any,
     options?: Array<any>,
     render?: (data: any, id?: any) => {},
+    renderExcel?: (data: any) => {},
     sumar?: boolean,
+    renderTotal?: (total: number) => any,
     animWidth?: Animated.Value,
     changeHF?: any,
+    changeHFNI?: any,
     key_header?: any,
     headerColor?: string,
     filter_h?: any,
+    filter_notin?: any,
     total?: any,
+    cellStyle?: STable2cellStyle
 }
 class Header extends Component<HeaderProps> {
     pan;
@@ -67,8 +74,25 @@ class Header extends Component<HeaderProps> {
         }} onPress={() => {
             SPopup.open({ key: "hp", content: <HAjustes key_header={this.props.key_header} {...this.props} /> })
         }}>
-            <SIcon name={this.props.filter_h ? "Ajustes" : "Engranaje"} fill={STheme.color.secondary + "66"} width={10} />
+            <SIcon name={this.props.filter_h || this.props.filter_notin ? "Ajustes" : "Engranaje"} fill={STheme.color.secondary + "66"} width={10} />
         </SView>
+    }
+
+    renderTotal() {
+        let total = this.props.total;
+        if (!total) return null;
+        total = parseFloat(total);
+        if (this.props.renderTotal) {
+            let ITEM = this.props.renderTotal(total);
+            if (["string", "number"].includes(typeof ITEM)) {
+                total = ITEM;
+            } else {
+                return ITEM;
+            }
+        } else {
+            total = total.toFixed(2);
+        }
+        return <SText fontSize={12} font={"Roboto"}>{total}</ SText>
     }
     render() {
         var anm: any = this.props.animWidth
@@ -95,7 +119,7 @@ class Header extends Component<HeaderProps> {
                         </SView> : null}
                     </SView>
                     <SView row center>
-                        <SText fontSize={12} font={"Roboto"}>{this.props.total ? parseFloat(this.props.total ?? 0).toFixed(2) : ""}</SText>
+                        {this.renderTotal()}
                     </SView>
                     <SView
                         {...this.pan.getPanHandlers()}

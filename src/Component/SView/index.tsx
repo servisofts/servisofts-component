@@ -9,9 +9,13 @@ export type SViewProps = {
   col?: SColType,
   dir?: SDirectionType,
   row?: boolean,
+  borderRadius?: number,
+  br?: number
+  padding?: any,
+  margin?: any,
   // props?: SViewProps,
-  refs?:any,
-  ref?:any,
+  refs?: any,
+  ref?: any,
   data?: any,
   style?: ViewStyle,
   onPress?: Function,
@@ -101,6 +105,7 @@ export default class SView extends Component<SViewProps> {
       <SGrid
         colSquare={this.props.colSquare}
         height={this.props.height}
+        margin={this.props.margin}
         flex={this.props.flex}
         col={this.state.params.col}
         style={(!this.props.style ? {} : this.props.style)}
@@ -144,6 +149,9 @@ export default class SView extends Component<SViewProps> {
               borderColor: this.props.border,
             }),
             ...(this.props.card ? { borderRadius: 4, backgroundColor: STheme.color.card } : {}),
+            ...(this.props.borderRadius ? { borderRadius: this.props.borderRadius } : {}),
+            ...(this.props.br ? { borderRadius: this.props.br } : {}),
+            ...(this.props.padding ? { padding: this.props.padding } : {}),
             ...style
           }}>
           {this.props.children}

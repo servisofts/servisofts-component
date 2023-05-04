@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Animated } from 'react-native';
+import { STable2cellStyle } from '../Row';
 export declare type HeaderProps = {
     label: string;
     key: string;
@@ -11,17 +12,23 @@ export declare type HeaderProps = {
     onPress?: () => any;
     editable?: boolean;
     order?: "asc" | "desc";
+    orderType?: any;
     orderPriority?: number;
     component?: any;
     options?: Array<any>;
     render?: (data: any, id?: any) => {};
+    renderExcel?: (data: any) => {};
     sumar?: boolean;
+    renderTotal?: (total: number) => any;
     animWidth?: Animated.Value;
     changeHF?: any;
+    changeHFNI?: any;
     key_header?: any;
     headerColor?: string;
     filter_h?: any;
+    filter_notin?: any;
     total?: any;
+    cellStyle?: STable2cellStyle;
 };
 declare class Header extends Component<HeaderProps> {
     pan: any;
@@ -30,6 +37,7 @@ declare class Header extends Component<HeaderProps> {
     initSize: any;
     createPan(): void;
     getAjustes(): JSX.Element;
+    renderTotal(): any;
     render(): JSX.Element;
 }
 export default Header;

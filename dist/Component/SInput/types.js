@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 import React from "react";
 import { View } from "react-native";
 import SDate from "../SDate";
-import { SText, STheme, SView, SPopupOpen } from "../../index";
+import { SText, STheme, SView, SPopupOpen, SIcon } from "../../index";
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert";
 import SIFechaAlert from "./SInputTypes/SIFechaAlert";
 import SISelect from "./SInputTypes/SISelect";
@@ -46,6 +46,8 @@ export var Type = function (type, Parent) {
             return number(type, Parent);
         case "money":
             return money(type, Parent);
+        case "hour":
+            return hour(type, Parent);
         case "image":
             return image(type, Parent);
         case "file":
@@ -58,6 +60,8 @@ export var Type = function (type, Parent) {
             return textArea(type, Parent);
         case "checkBox":
             return checkBox(type, Parent);
+        case "link":
+            return link(type, Parent);
         default:
             return buildResp({
                 props: {},
@@ -356,6 +360,7 @@ var money = function (type, Parent) {
                 return _value;
             var value = _value + "";
             value = value.trim();
+            // var value: any = value.replace(/./g, "");
             if (value.indexOf("\.") >= 0) {
                 var arr = value.split("\.");
                 var int = arr[0].replace(/\D/, "");
@@ -374,6 +379,85 @@ var money = function (type, Parent) {
                 value = "0.0" + value;
             }
             return value + "";
+        },
+        verify: function (value) {
+            if (!value)
+                return false;
+            return true;
+        }
+    });
+};
+var hour = function (type, Parent) {
+    return buildResp({
+        props: {
+            keyboardType: "number-pad",
+            placeholder: "00:00"
+        },
+        style: {},
+        icon: (React.createElement(SView, { style: {
+                width: 30,
+                height: "100%"
+            }, center: true },
+            React.createElement(SText, null, "H"))),
+        filter: function (_value) {
+            if (!_value)
+                return null;
+            var int = _value.replace(/\D/, "") + "";
+            var hora = int.substring(0, 2);
+            var minutos = int.substring(2, 4);
+            if (parseFloat(minutos) >= 60)
+                minutos = "59";
+            if (parseFloat(hora) >= 24) {
+                int = "2359";
+                hora = "23";
+                minutos = "59";
+            }
+            if (int.length > 2)
+                return hora + ":" + minutos;
+            //     if (parseFloat(int) > 24) int = "24"
+            //     return int.substring(0, 2) + ":" + int.substring(2, 4);
+            // }
+            // if (parseFloat(int) > 24) int = "24"
+            return hora;
+        },
+        verify: function (value) {
+            if (!value)
+                return false;
+            return true;
+        }
+    });
+};
+var link = function (type, Parent) {
+    return buildResp({
+        props: {
+            // keyboardType: "number-pad",
+            placeholder: "https://servisofts.com/"
+        },
+        style: {
+            View: {
+            // alignItems:"flex-start",
+            // justifyContent:"flex-start",
+            },
+            InputText: {
+                flex: 1,
+                width: "100%",
+                marginEnd: 4,
+                // textAlign: "right",
+                fontSize: 16
+            }
+        },
+        icon: (React.createElement(SView, { style: {
+                width: 30,
+                height: "100%",
+                padding: 6
+            }, center: true },
+            React.createElement(SIcon, { name: "World", fill: STheme.color.text }))),
+        filter: function (_value) {
+            var value = _value + "";
+            if (!value) {
+                return "";
+            }
+            return unescape(value);
         },
         verify: function (value) {
             if (!value)
@@ -436,6 +520,8 @@ var file = function (type, Parent) {
             return React.createElement(SView, { style: {
                     width: "100%",
                     height: "100%",
+                    flex: 1,
+                    // backgroundColor:"#f0f",
                     overflow: 'hidden'
                 } },
                 React.createElement(DropFileSingle, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
@@ -466,7 +552,9 @@ var files = function (type, Parent) {
                     height: "100%",
                     overflow: 'hidden'
                 } },
-                React.createElement(SScrollView2, { disableHorizontal: true },
+                React.createElement(SScrollView2, { disableHorizontal: true, contentContainerStyle: {
+                        flex: 1
+                    } },
                     React.createElement(DropFile, __assign({}, Parent.getProps(), { cstyle: Parent.getStyle(), onChange: function (val) {
                             // console.log(val);
                             Parent.setValue(val);

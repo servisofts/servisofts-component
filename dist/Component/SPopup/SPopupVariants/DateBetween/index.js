@@ -50,7 +50,7 @@ var DateBetween = /** @class */ (function (_super) {
                         " ")),
                 React.createElement(SView, { col: "xs-11", center: true, row: true },
                     React.createElement(SView, { col: "xs-12 md-5.5", center: true },
-                        React.createElement(SInput, { ref: function (ref) { return _this.fecha_ini = ref; }, type: 'date', label: "Fecha inicio", customStyle: "calistenia", defaultValue: new SDate().toString("yyyy-MM-dd") })),
+                        React.createElement(SInput, { ref: function (ref) { return _this.fecha_ini = ref; }, type: 'date', label: "Fecha inicio", customStyle: "calistenia", defaultValue: new SDate().setDay(1).toString("yyyy-MM-dd") })),
                     React.createElement(SView, { col: "xs-0 md-1" }),
                     React.createElement(SView, { col: "xs-12 md-5.5", center: true },
                         React.createElement(SInput, { ref: function (ref) { return _this.fecha_fin = ref; }, type: 'date', label: "Fecha fin", customStyle: "calistenia", defaultValue: new SDate().toString("yyyy-MM-dd") }))),

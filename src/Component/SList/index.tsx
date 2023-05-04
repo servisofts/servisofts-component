@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SHr, SPage, SSection, SText, SView, SInput, SBuscador, SIcon, STheme, SThread } from '../../index';
 import SOrdenador, { TypeOrdenar } from '../SOrdenador';
+import { FlatList } from 'react-native';
 
 
 type SListType = {
@@ -15,11 +16,19 @@ type SListType = {
     limit?: number,
     order?: [TypeOrdenar],
     buscador?: boolean,
+    flexEnd?: boolean,
+    flex?: boolean,
+    scrollEnabled?: boolean,
+    style?: any,
+    contentContainerStyle?: any
 }
 class SList extends Component<SListType> {
     _buscador;
     state;
     _rend;
+    static defaultProps = {
+        scrollEnabled: true
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -49,18 +58,20 @@ class SList extends Component<SListType> {
             }
         }
         return <SView {...props} center style={{
-            padding: 8
+            padding: 8,
         }} onPress={() => {
             this.state.page += 1;
             this.setState({ ...this.state })
         }}>
-            <SText style={{
-                textDecoration: "underline"
-            }}>Ver mas</SText>
+            <SText style={{// textDecoration: "underline"
+            }} underLine>Ver más</SText>
         </SView>
     }
     getData() {
         var space = this.props.space ?? 8;
+        if (this.props.space === 0) {
+            space = null;
+        }
         var data = this.props.data;
         if (!data) return null;
         if (!data[0]) {
@@ -77,7 +88,8 @@ class SList extends Component<SListType> {
             data = data.filter(this.props.filter)
         }
         var separation_style: any = {
-            ...this.props.horizontal ? { width: space / 2 } : { height: space / 2 }
+            width: space / 2,
+            height: space / 2
         }
         var init_separation_style: any = {
             ...this.props.horizontal ? { width: this.props.initSpace ?? 0 } : { height: this.props.initSpace ?? 0 }
@@ -88,28 +100,58 @@ class SList extends Component<SListType> {
                 cant: cant
             })
         }
-
         var arr;
-        // arr = new SOrdenador([]).ordernarObject(data);
         if (this.props.order) {
             arr = new SOrdenador(this.props.order).ordernarObject(data);
         } else {
             arr = Object.keys(data);
         }
         if (this.props.limit) {
-            // if (this.props.inverse) {
-            //     var init = arr.length - 1 - ((this.props.limit ?? 1) * this.state.page);
-            //     if (init < 0) init = 0;
-            //     arr = arr.slice(init, arr.length - 1)
-            // } else {
             arr = arr.slice(0, (this.props.limit ?? 1) * this.state.page)
-            // }
         }
 
         if (this.props.inverse) {
             arr = arr.slice(0).reverse()
         }
-        // arr = arr.slice(0, 10)
+
+        // let style: any = this.props.style;
+        let e_style = {};
+        let e_contentstyle = {};
+        if (this.props.flex) {
+            e_style["width"] = "100%"
+            e_style["flex"] = 1
+            e_contentstyle["width"] = "100%";
+            e_contentstyle["flex"] = 1;
+        }
+        if (this.props.center) {
+            e_contentstyle["alignItems"] = "center";
+            e_contentstyle["justifyContent"] = "center";
+        }
+        return <FlatList
+            data={arr}
+            horizontal={this.props.horizontal}
+            style={{
+                ...e_style
+            }}
+            contentContainerStyle={{
+                ...e_contentstyle,
+                ...(this.props.contentContainerStyle ?? {})
+            }}
+            scrollEnabled={this.props.scrollEnabled}
+            renderItem={({ item, index }) => {
+                if (!this._rend) {
+                    this._rend = (o) => <SText>{JSON.stringify(o)}</SText>
+                }
+                var Item = this._rend(data[item], item, index);
+                if (!Item) return null;
+                return <SSection key={item + 'item_list'}>
+                    {space ? (index == 0 ? <SView {...init_separation_style} /> : <SView {...separation_style} />) : null}
+                    {Item}
+                    {space ? <SView {...separation_style} /> : null}
+                </SSection>
+            }}
+
+        />
         return arr.map((key, index) => {
             if (!this._rend) {
                 this._rend = (o) => <SText>{JSON.stringify(o)}</SText>
@@ -117,9 +159,9 @@ class SList extends Component<SListType> {
             var Item = this._rend(data[key], key, index);
             if (!Item) return null;
             return <SSection key={key + 'item_list'}>
-                {index == 0 ? <SView {...init_separation_style} /> : <SView {...separation_style} />}
+                {space ? (index == 0 ? <SView {...init_separation_style} /> : <SView {...separation_style} />) : null}
                 {Item}
-                <SView {...separation_style} />
+                {space ? <SView {...separation_style} /> : null}
             </SSection>
         })
     }
@@ -134,18 +176,22 @@ class SList extends Component<SListType> {
                 placeholder={"Buscar..."}
                 ref={r => this._buscador = r}
                 onChangeText={(val) => {
-                    this.setState({ buscar: val })
+                    new SThread(500, "buscador_list", true).start(() => {
+                        this.setState({ buscar: val })
+                    })
+
                 }} />
             <SHr />
         </SView>
     }
     render() {
         return (
-            <SView col={"xs-12"} {...this.props} row={this.props.horizontal}>
+            <SView col={"xs-12"} {...this.props} row={this.props.horizontal} flex>
                 {this.getMoreItems(true)}
                 {this.getBuscardo()}
                 {this.getData()}
                 {this.getMoreItems(false)}
+                {this.props.flexEnd ? <SView flex /> : null}
             </SView>
         );
     }

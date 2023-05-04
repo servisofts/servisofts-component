@@ -122,6 +122,8 @@ var ExportExcel = /** @class */ (function (_super) {
         var header = this.props.header;
         header.map(function (item, index) {
             var letter = _this.toLetters(index + 1);
+            if (!ws[letter + '1'])
+                return;
             ws[letter + '1'].s = {
                 fill: fill,
                 font: font
@@ -142,7 +144,8 @@ var ExportExcel = /** @class */ (function (_super) {
         var header = this.props.header;
         var headerArray = [];
         header.map(function (item, index) {
-            headerArray.push(item.label);
+            var _a;
+            headerArray.push((_a = item.label) !== null && _a !== void 0 ? _a : item.key);
         });
         return headerArray;
     };
@@ -151,7 +154,7 @@ var ExportExcel = /** @class */ (function (_super) {
         var data = this.props.getDataProcesada();
         var dataArr = [];
         var orderArr = [];
-        orderArr.push({ key: "Peso", order: "desc", peso: 4 });
+        // orderArr.push({ key: "Peso", order: "desc", peso: 4 });
         this.props.header.map(function (header, i) {
             if (header.order) {
                 orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority });
@@ -167,6 +170,9 @@ var ExportExcel = /** @class */ (function (_super) {
                 }
                 else {
                     dataFinal = item[head.key] || "";
+                }
+                if (head.renderExcel) {
+                    dataFinal = head.renderExcel(dataFinal);
                 }
                 if (typeof dataFinal == "object") {
                     dataFinal = JSON.stringify(dataFinal);

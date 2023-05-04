@@ -138,6 +138,10 @@ export class SInput extends Component<TypeInputProps> {
         if (this.state.data?.dialCode) {
             return this.state.data?.dialCode?.dialCode + " " + value;
         }
+        if (this.props.type == "link") {
+            value = escape(unescape(this.state.value));
+            return value;
+        }
         return this.state.value;
     }
     getValueClean() {

@@ -58,8 +58,18 @@ var SScrollView2 = /** @class */ (function (_super) {
         else {
         }
     };
+    SScrollView2.prototype.scrollTo = function (props) {
+        if (this.getRef("scrollh")) {
+            this.getRef("scrollh").scrollTo(props);
+        }
+        if (this.getRef("scrollv")) {
+            this.getRef("scrollh").scrollTo(props);
+        }
+        this.getRef("scrollv").scrollTo(props);
+    };
     SScrollView2.prototype.render = function () {
         var _this = this;
+        var ccs = this.props.contentContainerStyle;
         return (React.createElement(View, { style: {
                 width: "100%",
                 flex: 1
@@ -76,13 +86,13 @@ var SScrollView2 = /** @class */ (function (_super) {
                         minWidth: "100%",
                         alignItems: "center"
                     } : {})) },
-                    React.createElement(Scroll, { disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollh", ref); }, horizontal: true, contentContainerStyle: this.props.contentContainerStyle },
+                    React.createElement(Scroll, __assign({ disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollh", ref); }, horizontal: true, contentContainerStyle: __assign({ width: "100%" }, (ccs !== null && ccs !== void 0 ? ccs : {})) }, this.props),
                         React.createElement(View, { style: __assign({ width: "100%" }, (this.props.disableHorizontal ? {
                                 // minWidth: "100%",
                                 minHeight: "100%",
                                 alignItems: "center"
                             } : {})) },
-                            React.createElement(Scroll, { disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollv", ref); }, contentContainerStyle: this.props.contentContainerStyle, onScroll: this.props.onScroll, onPageFinish: this.props.onPageFinish },
+                            React.createElement(Scroll, __assign({ disableHorizontal: this.props.disableHorizontal, ref: function (ref) { _this.setRef("scrollv", ref); }, contentContainerStyle: this.props.contentContainerStyle, onScroll: this.props.onScroll, onPageFinish: this.props.onPageFinish, parent: this }, this.props),
                                 React.createElement(View, { style: {
                                         width: "100%",
                                         height: "100%",

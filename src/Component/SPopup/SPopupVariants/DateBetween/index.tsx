@@ -57,7 +57,7 @@ export default class DateBetween extends Component<PropsType> {
                     </SView>
                     <SView col={"xs-11"} center row >
                         <SView col={"xs-12 md-5.5"} center >
-                            <SInput ref={(ref) => this.fecha_ini = ref} type={'date'} label={"Fecha inicio"} customStyle={"calistenia"} defaultValue={new SDate().toString("yyyy-MM-dd")} />
+                            <SInput ref={(ref) => this.fecha_ini = ref} type={'date'} label={"Fecha inicio"} customStyle={"calistenia"} defaultValue={new SDate().setDay(1).toString("yyyy-MM-dd")} />
                         </SView>
                         <SView col={"xs-0 md-1"} />
                         <SView col={"xs-12 md-5.5"} center >

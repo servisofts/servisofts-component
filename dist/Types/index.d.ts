@@ -5,7 +5,7 @@ import { SNavigationProps, SPageProps, SPageListProps } from '../Component/SNavi
 import { SThemeColors, SThemeOptions, SThemeProps, SThemeThemes } from '../Component/STheme/index';
 import { STable2Type } from "../Component/STable2";
 import { HeaderProps } from "../Component/STable2/Header";
-declare type TColKey = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+declare type TColKey = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 declare type TColVal = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 declare type TColStr = `${TColKey}-${TColVal}`;
 declare type TColCovination = `${TColStr} ${TColStr}`;

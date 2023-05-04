@@ -26,7 +26,7 @@ var __assign = (this && this.__assign) || function () {
 };
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
-import { SText, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView } from '../../index';
+import { SText, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView, SMath } from '../../index';
 import SIcon from '../SIcon';
 import { SInput } from '../SInput';
 import SPagination from '../SPagination';
@@ -39,8 +39,9 @@ var STable2 = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.procesarData = function () {
             var dtStr = JSON.stringify(_this.props.data);
-            if (_this.state.lastData == dtStr && _this.state.buscador == _this._buscador && _this.state.HFilter == _this._HFilter)
+            if (_this.state.lastData == dtStr && _this.state.buscador == _this._buscador && _this.state.HFilter == _this._HFilter && _this.state.HFNI == _this._HFNI)
                 return;
+            _this._HFNI = _this.state.HFNI;
             _this._buscador = _this.state.buscador;
             _this._HFilter = _this.state.HFilter;
             _this.state.lastData = dtStr;
@@ -62,38 +63,63 @@ var STable2 = /** @class */ (function (_super) {
                     if (item.render) {
                         _this.state.data[key][item.key] = item.render(_this.state.data[key][item.key]);
                     }
+                    var data = _this.state.data[key][item.key];
+                    if (typeof data == "object") {
+                        data = JSON.stringify(data);
+                    }
                     if (_this.state.HFilter[item.key]) {
                         var filtro = _this.state.HFilter[item.key];
-                        var expreg = new RegExp(filtro, "i");
-                        var data = _this.state.data[key][item.key];
-                        if (typeof data != "string") {
-                            data = JSON.stringify(data);
-                        }
-                        if (!expreg.test(data)) {
-                            isValid = false;
-                            delete _this.state.data[key];
-                        }
+                        filtro.split(" ").map(function (f) {
+                            if (f.length < 1)
+                                return;
+                            var expreg = new RegExp(f, "i");
+                            if (!expreg.test(data)) {
+                                isValid = false;
+                                delete _this.state.data[key];
+                            }
+                        });
                     }
-                    if (item.sumar) {
-                        if (!_this.state.totales[item.key]) {
-                            _this.state.totales[item.key] = 0;
-                        }
-                        _this.state.totales[item.key] += parseFloat(_this.state.data[key][item.key]);
+                    if (_this.state.HFNI[item.key]) {
+                        var filtro = _this.state.HFNI[item.key];
+                        filtro.split(" ").map(function (f) {
+                            if (f.length < 1)
+                                return;
+                            var expreg = new RegExp(f, "i");
+                            if (expreg.test(data)) {
+                                isValid = false;
+                                delete _this.state.data[key];
+                            }
+                        });
                     }
                 });
+                _this.props.header.filter(function (a) { return !!a.sumar; }).map(function (item) {
+                    if (!isValid)
+                        return;
+                    if (!_this.state.totales[item.key]) {
+                        _this.state.totales[item.key] = 0;
+                    }
+                    var val = _this.state.data[key][item.key];
+                    _this.state.totales[item.key] += SMath.parseFloat(val);
+                });
             });
+            console.log(_this.state.totales);
             _this.state.data = _this.buscar(_this.state.data);
             new SThread(100, "as", false).start(function () {
-                _this.setState({ isLoad: true });
+                _this.state.isLoad = true;
+                _this.setState(__assign({}, _this.state));
             });
         };
         _this._animHeader = {};
         _this.getHeader = function () {
             return _this.props.header.map(function (item, index) {
-                _this._animHeader[item.key] = new Animated.Value(item.width);
+                var _a, _b;
+                _this._animHeader[item.key] = new Animated.Value((_a = item.width) !== null && _a !== void 0 ? _a : 40);
                 _this._animSize = Animated.add(_this._animSize, _this._animHeader[item.key]);
                 _this._animSize = Animated.add(_this._animSize, new Animated.Value(_this.state.space));
-                return React.createElement(Header, __assign({ headerColor: _this.props.headerColor }, item, { total: _this.state.totales[item.key], filter_h: _this.state.HFilter[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, changeHF: function (filter) {
+                return React.createElement(Header, __assign({ headerColor: _this.props.headerColor }, item, { label: (_b = item.label) !== null && _b !== void 0 ? _b : item.key, total: _this.state.totales[item.key], key_header: item.key, animWidth: _this._animHeader[item.key], space: _this.state.space, filter_h: _this.state.HFilter[item.key], filter_notin: _this.state.HFNI[item.key], changeHFNI: function (filter) {
+                        _this.state.HFNI[item.key] = filter;
+                        _this.setState({ HFNI: __assign({}, _this.state.HFNI) });
+                    }, changeHF: function (filter) {
                         _this.state.HFilter[item.key] = filter;
                         _this.setState({ HFilter: __assign({}, _this.state.HFilter) });
                     } }));
@@ -104,16 +130,16 @@ var STable2 = /** @class */ (function (_super) {
                 return React.createElement(SLoad, null);
             }
             var orderArr = [];
-            orderArr.push({ key: "Peso", order: "desc", peso: 4 });
+            // orderArr.push({ key: "Peso", order: "desc", peso: 4 });
             _this.props.header.map(function (header, i) {
                 if (header.order) {
-                    orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority || 2 });
+                    orderArr.push({ key: header.key, order: header.order, peso: header.orderPriority || 2, type: header.orderType });
                 }
             });
             return new SOrdenador(orderArr).ordernarObject(_this.state.data).slice(((_this.state.page - 1) * _this.state.limit), (_this.state.page * _this.state.limit)).map(function (itemData, i) {
                 var _a, _b;
                 var data = _this.state.data[itemData];
-                return React.createElement(Row, { key: "row_" + i, index: ((_this.state.page - 1) * _this.state.limit) + i, height: (_b = (_a = _this.props) === null || _a === void 0 ? void 0 : _a.rowHeight) !== null && _b !== void 0 ? _b : 50, space: _this.state.space, data: data, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
+                return React.createElement(Row, { key: "row_" + i, index: ((_this.state.page - 1) * _this.state.limit) + i, height: (_b = (_a = _this.props) === null || _a === void 0 ? void 0 : _a.rowHeight) !== null && _b !== void 0 ? _b : 50, space: _this.state.space, data: data, cellStyle: _this.props.cellStyle, header: _this.props.header, animHeader: _this._animHeader, animSize: _this._animSize });
             });
         };
         _this.Footer = function () {
@@ -150,8 +176,17 @@ var STable2 = /** @class */ (function (_super) {
             data: {},
             buscador: "",
             HFilter: {},
+            HFNI: {},
             totales: {}
         };
+        _this.props.header.map(function (item, index) {
+            if (item.filter_h) {
+                _this.state.HFilter[item.key] = item.filter_h;
+            }
+            if (item.filter_notin) {
+                _this.state.HFNI[item.key] = item.filter_notin;
+            }
+        });
         return _this;
     }
     STable2.prototype.componentDidMount = function () {
@@ -242,7 +277,9 @@ var STable2 = /** @class */ (function (_super) {
                     _this.sizeW = e.nativeEvent.layout.width;
                     // anims.setValue(this.sizeW);
                 } },
-                React.createElement(SScrollView2, { ref: function (ref) { return _this.scroll = ref; }, header: {
+                React.createElement(SScrollView2, { ref: function (ref) { return _this.scroll = ref; }, contentContainerStyle: {
+                        width: null
+                    }, header: {
                         style: { height: 40 },
                         content: React.createElement(SView, { col: "xs-12", row: true, height: true }, this.getHeader())
                     } },

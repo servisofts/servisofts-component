@@ -23,11 +23,21 @@ export default class DropFileSingle extends Component<Props> {
             files: [],
         };
         var value = props.defaultValue || "";
-        if (value) {
-            this.state.files.push({
-                uri: value,
-                name: value,
-            });
+      if (value) {
+            if (props.filePath) {
+                // console.log(props.filePath + "/" + props.name + "/" + value)
+                this.state.files.push({
+                    uri: props.filePath + "/" + props.name + "/" + value,
+                    name: value,
+                });
+
+            } else {
+                this.state.files.push({
+                    uri: value,
+                    name: value,
+                });
+            }
+
         }
     }
 
@@ -70,7 +80,8 @@ export default class DropFileSingle extends Component<Props> {
             return <SText center>{""}</SText>
         }
         var image = this.state.files[0];
-        return <SView col={"xs-12"} height style={{
+        console.log(image)
+        return <SView col={"xs-12"} flex style={{
             overflow: 'hidden',
             borderRadius: 4,
         }}>
@@ -81,7 +92,7 @@ export default class DropFileSingle extends Component<Props> {
         return (
             <SView
                 col={"xs-12"}
-                height
+                flex
                 center
                 onPress={() => {
                     this.fileUpload();
@@ -101,7 +112,7 @@ export default class DropFileSingle extends Component<Props> {
 
                     // });
                 }}>
-                <SView height col={"xs-12"} style={{
+                <SView flex col={"xs-12"} style={{
                     borderRadius: 4,
                 }} center>
                     {this.getImages()}

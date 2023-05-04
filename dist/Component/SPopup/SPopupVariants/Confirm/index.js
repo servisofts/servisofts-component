@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 import React, { Component } from 'react';
 import SPopup from '../..';
 import { SButtom } from '../../../SButtom';
-import SIcon from '../../../SIcon';
+import SHr from '../../../SHr';
 import SPage from '../../../SPage';
 import SText from '../../../SText';
 import STheme from '../../../STheme';
@@ -37,23 +37,22 @@ var Confirm = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, backgroundColor: STheme.color.background, withoutFeedback: true, style: {
                 height: 260,
-                borderRadius: 8,
+                padding: 8,
+                // borderWidth:2,
+                // borderColor:STheme.color.text+"33",
+                borderRadius: 16,
                 overflow: 'hidden'
             } },
             SPage.backgroundComponent,
-            React.createElement(SView, { col: "xs-12", center: true },
-                React.createElement(SView, { col: "xs-12", height: 90 },
-                    React.createElement(SIcon, { name: "AlertOutline", fill: STheme.color.danger })),
-                React.createElement(SView, { col: "xs-11", center: true, height: 40 },
-                    React.createElement(SText, { fontSize: 16, center: true, bold: true },
-                        " ",
-                        this.props.title,
-                        " ")),
-                React.createElement(SView, { col: "xs-10", center: true, height: 40 },
-                    React.createElement(SText, { fontSize: 12, center: true },
-                        " ",
-                        this.props.message,
-                        " ")),
+            React.createElement(SView, { col: "xs-12", center: true, flex: true },
+                React.createElement(SHr, null),
+                React.createElement(SView, { flex: true }),
+                React.createElement(SView, { col: "xs-11", center: true },
+                    React.createElement(SText, { fontSize: 18, center: true, bold: true }, this.props.title)),
+                React.createElement(SView, { flex: true }),
+                React.createElement(SView, { col: "xs-10", center: true },
+                    React.createElement(SText, { fontSize: 14, center: true, color: STheme.color.lightGray }, this.props.message)),
+                React.createElement(SView, { flex: true }),
                 React.createElement(SView, { col: "xs-12", row: true, height: 70, center: true },
                     React.createElement(SView, { col: "xs-6", center: true },
                         React.createElement(SButtom, { props: { type: "danger" }, onPress: function () {
@@ -63,13 +62,14 @@ var Confirm = /** @class */ (function (_super) {
                                 SPopup.close("confirm");
                             } }, "Cancelar")),
                     React.createElement(SView, { col: "xs-6", center: true },
-                        React.createElement(SButtom, { props: { type: "outline" }, onPress: function () {
+                        React.createElement(SButtom, { props: { type: "primary" }, onPress: function () {
                                 if (_this.props.onPress) {
                                     _this.state.acept = true;
                                     _this.props.onPress();
                                 }
                                 SPopup.close("confirm");
-                            } }, "Confirmar"))))));
+                            } }, "Confirmar"))),
+                React.createElement(SHr, null))));
     };
     Confirm.defaultProps = {
         title: '',

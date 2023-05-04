@@ -10,7 +10,7 @@ var BackgroundImage = function (props) {
             position: "absolute",
             backgroundColor: "#999fff"
         } },
-        React.createElement(Svg, { xmlns: "http://www.w3.org/2000/svg", width: "100%", height: "100%" },
+        React.createElement(Svg, { width: "100%", height: "100%" },
             React.createElement(Defs, null,
                 React.createElement(LinearGradient, { id: "negro_amarillo2", x1: "50%", x2: "50%", y2: "100%", gradientUnits: "objectBoundingBox" },
                     React.createElement(Stop, { offset: "0", "stop-color": "#1c1c1c" }),

@@ -5,6 +5,10 @@ export declare type SViewProps = {
     col?: SColType;
     dir?: SDirectionType;
     row?: boolean;
+    borderRadius?: number;
+    br?: number;
+    padding?: any;
+    margin?: any;
     refs?: any;
     ref?: any;
     data?: any;

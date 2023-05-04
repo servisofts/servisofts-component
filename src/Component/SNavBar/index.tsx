@@ -113,7 +113,8 @@ export default class SNavBar extends Component<SPageProps> {
                     height: 40,
                     backgroundColor: STheme.color.barColor,
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
+                    overflow: "hidden",
                 }}>
                 <SView col={"xs-2"} center height>
                     {this.getBack()}

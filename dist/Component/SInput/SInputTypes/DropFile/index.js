@@ -195,17 +195,24 @@ var DropFile = /** @class */ (function (_super) {
         var value = props.defaultValue || "";
         if (value) {
             if (typeof value == "string") {
-                value = JSON.parse(value);
+                try {
+                    value = JSON.parse(value);
+                }
+                catch (e) {
+                    // console.error("Value error", e)
+                }
             }
-            if (props.filePath) {
-                value.map(function (itm) {
-                    _this.state.images.push({
-                        uri: props.filePath + "/" + props.name + "/" + itm,
-                        name: itm
+            if (Array.isArray(value)) {
+                if (props.filePath) {
+                    value.map(function (itm) {
+                        _this.state.images.push({
+                            uri: props.filePath + "/" + props.name + "/" + itm,
+                            name: itm
+                        });
                     });
-                });
-                console.log(_this.state.images);
-                // console.log(props.filePath + "/" + props.name + "/" + value)
+                    console.log(_this.state.images);
+                    // console.log(props.filePath + "/" + props.name + "/" + value)
+                }
             }
         }
         _this.onUpload = _this.props.onUpload;
@@ -247,8 +254,8 @@ var DropFile = /** @class */ (function (_super) {
     };
     DropFile.prototype.render = function () {
         var _this = this;
-        // console.log(this.props.defaultValue);
         return (React.createElement(SView, { col: "xs-12", height: true, style: {
+                // backgroundColor:"#F0f",
                 padding: 4
             } },
             React.createElement(SView, { height: true, col: "xs-12", style: {

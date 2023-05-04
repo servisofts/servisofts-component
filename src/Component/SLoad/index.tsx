@@ -2,27 +2,36 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import STheme from '../STheme';
 import SView from '../SView';
+import { SLoadPropsType } from './type';
+import _type from "./type"
+import { SUuid } from '../SUuid';
+import SLoadContainer from './SLoadContainer';
+export default class SLoad extends Component<SLoadPropsType> {
+    props: SLoadPropsType;
 
-type typeProps = {
-    color?: string,
-}
-
-export default class SLoad extends Component<typeProps> {
+    static defaultProps: SLoadPropsType = {
+        type: "circle"
+    }
+    key;
     constructor(props) {
         super(props);
         this.state = {
         };
+        this.key = this.props.key ?? SUuid()
+    }
 
+    componentWillUnmount(): void {
+        SLoadContainer.remove(this.props.key);
     }
     render() {
-        var color = STheme.color.text ? STheme.color.text : STheme.color.secondary;
-        return (
-            <SView col={"xs-12"} center >
-                <ActivityIndicator
-                    color={this.props.color ?? color}
-                    {...this.props}
-                />
-            </SView>
-        );
+        var type = this.props.type;
+        if (!type) type = "circle"
+        const Comp: any = _type[type]
+        const ITEM = <Comp key={this.key} {...this.props} />;
+        if (Comp.renderGlobal) {
+            Comp.renderGlobal(ITEM)
+            return null;
+        }
+        return ITEM;
     }
 }

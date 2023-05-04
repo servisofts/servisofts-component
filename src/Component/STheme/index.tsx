@@ -26,9 +26,12 @@ export type SThemeColors = {
     gray?: string,
     lightGray?: string,
     darkGray?: string,
+    blue?: string,
+    link?: string,
     lightBlack?: string,
     mapStyle?: any[],
     font?: FontsType,
+
 
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -64,6 +67,8 @@ export default class STheme extends Component<SThemeProps> {
         lightGray: "#aaaaaa",
         darkGray: "#444444",
         lightBlack: "#666666",
+        blue: "#0000FF",
+        link: "#6666ff",
         mapStyle: MapStyle.default,
     };
     public static instance: STheme;

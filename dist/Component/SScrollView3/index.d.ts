@@ -1,6 +1,7 @@
 import { Component } from 'react';
-declare type typeProps = {};
-declare class SScrollView3 extends Component<typeProps> {
+import { SScrollView3PropsType } from './types';
+declare class SScrollView3 extends Component<SScrollView3PropsType> {
+    props: SScrollView3PropsType;
     constructor(props: any);
     render(): JSX.Element;
 }

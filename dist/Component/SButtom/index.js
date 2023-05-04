@@ -50,6 +50,10 @@ var SButtom = /** @class */ (function (_super) {
                 touchable: __assign({ borderRadius: 4, backgroundColor: STheme.color.secondary, borderWidth: 1, borderColor: STheme.color.secondary, justifyContent: 'center', alignItems: 'center' }, this.props.style),
                 text: __assign({ color: STheme.color.primary }, this.props.styleText)
             },
+            primary: {
+                touchable: __assign({ borderRadius: 4, backgroundColor: STheme.color.primary, borderWidth: 1, borderColor: STheme.color.primary, justifyContent: 'center', alignItems: 'center' }, this.props.style),
+                text: __assign({ color: STheme.color.secondary }, this.props.styleText)
+            },
             outline: {
                 touchable: {
                     backgroundColor: STheme.color.primary + "88",

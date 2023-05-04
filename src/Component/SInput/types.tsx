@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { StyleSheet, TextInputProps, TextStyle, TouchableOpacity, View, ViewStyle, Text } from "react-native"
 import { SInput } from "."
 import SDate from "../SDate"
-import { SText, STheme, SView, SPopupOpen, SPopupClose } from "../../index"
+import { SText, STheme, SView, SPopupOpen, SPopupClose, SIcon } from "../../index"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
 import SISelect from "./SInputTypes/SISelect"
@@ -30,6 +30,8 @@ export type TypeType =
     | "direccion"
     | "textArea"
     | "checkBox"
+    | "link"
+    | "hour"
 
 type returnType = {
     props?: TextInputProps,
@@ -72,6 +74,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return number(type, Parent);
         case "money":
             return money(type, Parent);
+        case "hour":
+            return hour(type, Parent);
         case "image":
             return image(type, Parent);
         case "file":
@@ -84,6 +88,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return textArea(type, Parent);
         case "checkBox":
             return checkBox(type, Parent);
+        case "link":
+            return link(type, Parent);
         default:
             return buildResp({
                 props: {
@@ -409,6 +415,8 @@ const money = (type: TypeType, Parent: SInput) => {
             if (!_value) return _value;
             var value: any = _value + "";
             value = value.trim();
+            // var value: any = value.replace(/./g, "");
+
             if (value.indexOf("\.") >= 0) {
                 var arr = value.split("\.");
                 var int: any = arr[0].replace(/\D/, "");
@@ -435,6 +443,87 @@ const money = (type: TypeType, Parent: SInput) => {
         }
     })
 }
+const hour = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            keyboardType: "number-pad",
+            placeholder: "00:00",
+        },
+        style: {
+
+        },
+        icon: (<SView style={{
+            width: 30,
+            height: "100%",
+        }} center >
+            <SText >H</SText>
+        </SView>
+        ),
+        filter: (_value: String) => {
+            if (!_value) return null;
+            var int: string = _value.replace(/\D/, "") + "";
+            let hora = int.substring(0, 2);
+            let minutos = int.substring(2, 4);
+            if (parseFloat(minutos) >= 60) minutos = "59";
+            if (parseFloat(hora) >= 24) {
+                int = "2359";
+                hora = "23";
+                minutos = "59";
+            }
+            if (int.length > 2) return hora + ":" + minutos
+            //     if (parseFloat(int) > 24) int = "24"
+            //     return int.substring(0, 2) + ":" + int.substring(2, 4);
+            // }
+            // if (parseFloat(int) > 24) int = "24"
+            return hora;
+        },
+        verify: (value) => {
+            if (!value) return false;
+            return true;
+        }
+    })
+}
+const link = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            // keyboardType: "number-pad",
+            placeholder: "https://servisofts.com/",
+        },
+        style: {
+            View: {
+                // alignItems:"flex-start",
+                // justifyContent:"flex-start",
+            },
+            InputText: {
+                flex: 1,
+                width: "100%",
+                marginEnd: 4,
+                // textAlign: "right",
+                fontSize: 16,
+            }
+        },
+        icon: (<SView style={{
+            width: 30,
+            height: "100%",
+            padding: 6,
+        }} center >
+            <SIcon name="World" fill={STheme.color.text} />
+        </SView>
+        ),
+        filter: (_value: String) => {
+            let value = _value + "";
+            if (!value) {
+                return "";
+            }
+            return unescape(value);
+
+        },
+        verify: (value) => {
+            if (!value) return false;
+            return true;
+        }
+    })
+}
 
 const image = (type: TypeType, Parent: SInput) => {
     return buildResp({
@@ -447,6 +536,8 @@ const image = (type: TypeType, Parent: SInput) => {
                 paddingStart: 0,
                 backgroundColor: "transparent",
                 height: Parent.getOption("height") == "default" ? 100 : Parent.getOption("height"),
+
+
                 // width: Parent.getOption("height")=="default"?100:Parent.getOption("height"),
             },
             InputText: {
@@ -494,6 +585,8 @@ const file = (type: TypeType, Parent: SInput) => {
             return <SView style={{
                 width: "100%",
                 height: "100%",
+                flex: 1,
+                // backgroundColor:"#f0f",
                 overflow: 'hidden',
             }}>
                 <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
@@ -525,8 +618,11 @@ const files = (type: TypeType, Parent: SInput) => {
                 width: "100%",
                 height: "100%",
                 overflow: 'hidden',
+                // backgroundColor:"#00f",
             }}>
-                <SScrollView2 disableHorizontal>
+                <SScrollView2 disableHorizontal contentContainerStyle={{
+                    flex: 1
+                }}>
                     <DropFile {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
                         // console.log(val);
                         Parent.setValue(val);

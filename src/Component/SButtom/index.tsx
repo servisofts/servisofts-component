@@ -5,7 +5,7 @@ import DeleteBtn from './DeleteBtn';
 
 
 export type onSubmitProps = {
-    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR" | "float",
+    type?: "default" | "outline" | "secondary" | "danger" | "success" | "bateonR" | "float" | "primary",
     variant?: "default" | "confirm",
 }
 
@@ -73,6 +73,22 @@ export class SButtom extends Component<typeProps> {
                 },
                 text: {
                     color: STheme.color.primary,
+                    ...this.props.styleText,
+
+                }
+            },
+            primary: {
+                touchable: {
+                    borderRadius: 4,
+                    backgroundColor: STheme.color.primary,
+                    borderWidth: 1,
+                    borderColor: STheme.color.primary,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    ...this.props.style,
+                },
+                text: {
+                    color: STheme.color.secondary,
                     ...this.props.styleText,
 
                 }

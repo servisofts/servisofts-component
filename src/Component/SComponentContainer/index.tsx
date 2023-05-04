@@ -10,6 +10,7 @@ import SPopup from '../SPopup';
 import SPage from '../SPage';
 import { SInputsCofig } from "../../Types/index"
 import SThread from '../SThread';
+import SLoadContainer from '../SLoad/SLoadContainer';
 
 export type SComponentContainerProps = {
     theme?: SThemeProps,
@@ -25,7 +26,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
     static SSocket: any;
-    public static registerGrid(key: string, grid: SGrid) {
+    public static registerGrid(key: string, grid: any) {
         if (!this.Instance) return;
         this.GridListen[key] = grid;
         grid.changeMedida(this.Instance.state.medida);
@@ -78,8 +79,10 @@ export default class SComponentContainer extends Component<SComponentContainerPr
             curMedida = "md"
         } else if (layout.width >= 576) {
             curMedida = "sm"
-        } else {
+        } else if (layout.width >= 350) {
             curMedida = "xs"
+        } else {
+            curMedida = "xxs"
         }
         if (this.state.medida != curMedida) {
             this.state.medida = curMedida;
@@ -119,6 +122,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         </View>
                         <DebugBar debug={this.props.debug} />
                         <SPopup />
+                        <SLoadContainer />
                     </View>
                 </SafeAreaView>
             </View>

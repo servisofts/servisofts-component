@@ -169,6 +169,8 @@ var STheme = /** @class */ (function (_super) {
         lightGray: "#aaaaaa",
         darkGray: "#444444",
         lightBlack: "#666666",
+        blue: "#0000FF",
+        link: "#6666ff",
         mapStyle: MapStyle["default"]
     };
     return STheme;

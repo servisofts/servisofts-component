@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, Platform, Linking } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Pages from '../../Pages/index';
+import SLoad from '../SLoad';
+import SThread from '../SThread';
+import { SUuid } from '../SUuid';
+import SView from '../SView';
+import SHr from '../SHr';
 export type SPageProps = {
     params?: [string],
     component: any,
@@ -52,7 +57,7 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navBar: any = null;
     static root: any;
     static routes = [];
-    static reset(route: string) {
+    static reset(route: string, params?: object) {
         if (!SNavigation.lastRoute) {
             alert("no hay navegacion");
             return;
@@ -62,7 +67,7 @@ export default class SNavigation extends Component<SNavigationProps> {
         // }
         SNavigation.lastRoute.navigation.reset({
             index: 0,
-            routes: [{ name: route }]
+            routes: [{ name: route, params: params }]
         });
     }
     static openURL(route: string) {
@@ -97,12 +102,17 @@ export default class SNavigation extends Component<SNavigationProps> {
                     if (locstr == "/") {
                         SNavigation.lastRoute.navigation.replace(SNavigation.root);
                     }
-                    
-                    // SNavigation.lastRoute.navigation.replace(locstr);
-                    window.location.pathname = locstr;
 
+                    // SNavigation.lastRoute.navigation.replace(locstr);
+                    try {
+                        SNavigation.lastRoute.navigation.replace("/" + locstr, SNavigation.getAllParams())
+                    } catch (e) {
+                        window.location.pathname = locstr;
+                    }
+                    return;
                 } else {
                     SNavigation.lastRoute.navigation.replace(SNavigation.root);
+                    return;
                 }
                 // if (locstr.split("/").length <= 2) {
                 //     return <View />
@@ -113,16 +123,16 @@ export default class SNavigation extends Component<SNavigationProps> {
 
     }
     static getAllParams() {
-        var route = SNavigation.lastRoute.route;
-        var params = route.params;
+        var route = SNavigation.lastRoute?.route;
+        var params = route?.params;
         if (!params) {
             return {};
         }
         return params;
     }
     static getParam(key: string, valDef?: any) {
-        var route = SNavigation.lastRoute.route;
-        var params = route.params;
+        var route = SNavigation.lastRoute?.route;
+        var params = route?.params;
         if (!params) {
             return valDef;
         }
@@ -203,6 +213,13 @@ export default class SNavigation extends Component<SNavigationProps> {
         const Validator = this.props.props.validator;
         return Object.keys(pages).map((key) => {
             var Page = (props) => {
+                const [state, setState] = useState({ loading: false });
+                useEffect(() => {
+                    // if (state.loading) return;
+                    new SThread(10, "load-page", false).start(() => {
+                        setState({ loading: true })
+                    })
+                }, [])
                 try {
                     if (props) {
                         SNavigation.lastRoute = props;
@@ -211,13 +228,22 @@ export default class SNavigation extends Component<SNavigationProps> {
                     if (!Page) {
                         Page = pages[key];
                     }
-
+                    if (!state.loading) return <SView col={"xs-12"} height>
+                        {SPage.backgroundComponent}
+                        {Page.TOPBAR}
+                        {/* <SLoad type='skeleton' col={"xs-12"} height={55} />
+                        <SHr />
+                        <SLoad type='skeleton' col={"xs-12"} flex />
+                        <SHr />
+                        <SLoad type='skeleton' col={"xs-12"} height={55} /> */}
+                    </SView>
                     return <>
                         {!Validator ? null : <Validator />}
+                        {Page.TOPBAR}
                         <Page {...props} />
                     </>
                 } catch (e) {
-                    console.log(e);
+                    console.error(e);
                     return null;
                 }
 
@@ -244,13 +270,12 @@ export default class SNavigation extends Component<SNavigationProps> {
                 background: STheme.color.background
             }
         }}
-            initialState={stateNavigator}
+            // initialState={stateNavigator}
             onStateChange={(state) =>
                 stateNavigator = state
                 // AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
             }
-        >
-            <Stack.Navigator>
+        ><Stack.Navigator>
                 {this.getPages(Stack)}
             </Stack.Navigator>
         </NavigationContainer>

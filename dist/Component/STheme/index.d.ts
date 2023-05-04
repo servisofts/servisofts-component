@@ -20,6 +20,8 @@ export declare type SThemeColors = {
     gray?: string;
     lightGray?: string;
     darkGray?: string;
+    blue?: string;
+    link?: string;
     lightBlack?: string;
     mapStyle?: any[];
     font?: FontsType;

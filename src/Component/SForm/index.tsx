@@ -7,6 +7,9 @@ import SView, { SViewProps } from '../SView/index';
 import { SButtom, onSubmitProps, typeProps as ButtomType } from '../SButtom/index';
 import Submit from './submit'
 import Upload from './Upload';
+import SText from '../SText';
+import STheme from '../STheme';
+import SHr from '../SHr';
 
 
 interface InputsTp {
@@ -17,9 +20,11 @@ export type SFromProps = {
     props?: SViewProps,
     inputProps?: TypeInputProps,
     inputs: InputsTp,
+    loading?: boolean,
     onSubmit?: Function,
     onSubmitName?: String,
     onSubmitProps?: ButtomType,
+    error?: String,
 } & SViewProps
 export default class SForm extends Component<SFromProps> {
     static defaultProps = {
@@ -91,6 +96,7 @@ export default class SForm extends Component<SFromProps> {
     }
 
     uploadFiles(url, key) {
+        console.log("ENRTO uploadFiles")
         var files = this.getFiles();
 
         Object.keys(files).map((key2) => {
@@ -100,45 +106,55 @@ export default class SForm extends Component<SFromProps> {
             var obj = files[key2];
             if (obj) {
                 if (typeof obj != "string") {
-                    Upload.send(obj[0], url);
+                    Upload.sendPromise(obj[0], url);
                 }
             }
 
         })
     }
-    uploadFiles2(url) {
-        var files = this.getFiles();
-        var _refs = this._ref;
-        Object.keys(_refs).map((key) => {
-            var input: SInput = _refs[key];
-            if (!input) return;
-            if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
-                var files = input.getValue();
-
-                if (!files) return;
-                this.state.files[key] = files;
-                Object.values(files).map((obj: any) => {
-                    if (typeof obj != "string") {
-                        if (obj.file) {
-                            var name = obj?.file?.name;
-                            Upload.send(obj, url + "/" + key + "/" + name);
+    async uploadFiles2(url) {
+        return new Promise(async (resolve, reject) => {
+            var files = this.getFiles();
+            var arr_ref_keys = Object.keys(this._ref);
+            for (let i = 0; i < arr_ref_keys.length; i++) {
+                const key = arr_ref_keys[i];
+                const input: SInput = this._ref[key];
+                if (!input) continue;
+                if (input.getType() == "file" || input.getType() == "image" || input.getType() == "files") {
+                    var files = input.getValue();
+                    if (!files) continue;
+                    this.state.files[key] = files;
+                    var array = Object.values(files);
+                    for (let index = 0; index < array.length; index++) {
+                        const obj: any = array[index];
+                        if (obj) {
+                            if (typeof obj != "string") {
+                                console.log(obj);
+                                if (obj.file) {
+                                    var name = obj?.file?.name;
+                                    var resp = await Upload.sendPromise(obj, url + "/" + key + "/" + name);
+                                    console.log(resp);
+                                }
+                            }
                         }
 
                     }
-                })
-                return;
+                }
             }
-
+            resolve("exito")
         })
     }
+
     uploadFile(file, url) {
+        console.log("ENRTO uploadFile")
         if (file) {
             if (typeof file != "string") {
-                Upload.send(file[0], url);
+                Upload.sendPromise(file[0], url);
             }
         }
     }
     submitFiles(data, key, url) {
+        console.log("ENRTO submitFiles")
         this.getFiles();
         if (!this.state.files[key]) {
             return;
@@ -162,13 +178,21 @@ export default class SForm extends Component<SFromProps> {
             }
             if (input.getType() == "files") {
                 var files = input.getValue();
-                if (typeof files == "string") {
-                    files = JSON.parse(files);
+                if (!files) return;
+                try {
+                    if (typeof files == "string") {
+                        files = JSON.parse(files);
+                    }
+                }catch(e){
+                    return;
                 }
                 if (!files) return;
                 if (files.length > 0) {
                     this.state.files[key] = files;
                     data[key] = files.map((obj: any) => {
+                        if (!obj) {
+                            return null;
+                        }
                         if (typeof obj == "string") {
                             return obj;
                         }
@@ -218,7 +242,6 @@ export default class SForm extends Component<SFromProps> {
                         } else {
                             data[key] = file.name;
                         }
-
                     }
                 }
                 return;
@@ -231,12 +254,13 @@ export default class SForm extends Component<SFromProps> {
             }
             return data;
         }
-        return null;
+        return false;
     }
     getButtom() {
         // if (!this.props.onSubmit) return <View />
         if (!this.props.onSubmitName) return <View />
         return <SButtom
+            loading={this.props.loading}
             props={{
                 type: "danger",
                 // col: "xs-12 md-6",
@@ -281,6 +305,14 @@ export default class SForm extends Component<SFromProps> {
         })
     }
 
+    render_error() {
+        if (!this.props.error) return null;
+        return <SView col={"xs-12"} center>
+            <SHr />
+            <SText col={"xs-12"} center color={STheme.color.danger}>{this.props.error}</SText>
+        </SView>
+
+    }
     render() {
         return (
             <SView
@@ -289,6 +321,7 @@ export default class SForm extends Component<SFromProps> {
                 {...this.props.props}
             >
                 {this.getInputs()}
+                {this.render_error()}
                 <SView col={"xs-12"} style={{
                     height: 14,
                 }}></SView>

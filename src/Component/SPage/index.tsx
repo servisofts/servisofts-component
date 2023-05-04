@@ -6,6 +6,7 @@ import SScrollView2 from '../SScrollView2/index';
 import SNavigation from '../SNavigation';
 import SLoad from '../SLoad';
 import SThread from '../SThread';
+import SwipeToRefresh from '../SScrollView3/SwipeToRefresh';
 
 
 export type SPageProps = {
@@ -93,23 +94,56 @@ export default class SPage extends Component<SPageProps> {
         if (this.props.disableScroll) return <SView center={this.props.center} col={"xs-12"} flex>
             {this.getChildren()}
         </SView>
-        return <ScrollView style={{
-            flex: 1,
-            width: "100%",
-        }} contentContainerStyle={{
-            width: "100%",
-            minHeight: "100%",
-        }}
-            refreshControl={this.getRefresh()}
-        >
+
+        if (Platform.OS != "web") {
+
+            return <ScrollView style={{
+                flex: 1,
+                width: "100%",
+            }} contentContainerStyle={{
+                width: "100%",
+                minHeight: "100%",
+            }}
+                refreshControl={this.getRefresh()}
+            >
+                <SView style={{
+                    width: '100%',
+                    flex: 1,
+                }} center={this.props.center}>
+                    {this.getChildren()}
+                </SView>
+            </ScrollView>
+        }
+        return <SwipeToRefresh onRefresh={this.props.onRefresh}>
             <SView style={{
                 width: '100%',
                 flex: 1,
             }} center={this.props.center}>
                 {this.getChildren()}
             </SView>
-        </ScrollView>
+        </SwipeToRefresh >
     }
+    // getScroll() {
+    //     if (this.props.disableScroll) return <SView center={this.props.center} col={"xs-12"} flex>
+    //         {this.getChildren()}
+    //     </SView>
+    //     return <ScrollView style={{
+    //         flex: 1,
+    //         width: "100%",
+    //     }} contentContainerStyle={{
+    //         width: "100%",
+    //         minHeight: "100%",
+    //     }}
+    //         refreshControl={this.getRefresh()}
+    //     >
+    //         <SView style={{
+    //             width: '100%',
+    //             flex: 1,
+    //         }} center={this.props.center}>
+    //             {this.getChildren()}
+    //         </SView>
+    //     </ScrollView>
+    // }
 
     render_footer() {
         if (!this.props.footer) return null
@@ -129,8 +163,11 @@ export default class SPage extends Component<SPageProps> {
                     height: '100%',
                 }}
             >
+                {SPage.backgroundComponent}
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    // behavior={"padding"}
+                    // enabled={Platform.OS === "ios"}
                     style={{
                         flex: 1,
                     }}>
@@ -142,7 +179,7 @@ export default class SPage extends Component<SPageProps> {
                             height: "100%",
                             overflow: "hidden",
                         }}>
-                        {SPage.backgroundComponent}
+
                         {this.getScroll()}
                     </SView>
                     {this.render_footer()}

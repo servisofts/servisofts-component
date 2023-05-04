@@ -1,3 +1,4 @@
+import SDate from "../SDate";
 var SOrdenador = /** @class */ (function () {
     function SOrdenador(arrProps) {
         this.arrProps = arrProps;
@@ -59,6 +60,10 @@ var SOrdenador = /** @class */ (function () {
             if (prop.type == "number") {
                 valA = parseFloat(valA !== null && valA !== void 0 ? valA : 0);
                 valB = parseFloat(valB !== null && valB !== void 0 ? valB : 0);
+            }
+            if (prop.type == "date") {
+                valA = new SDate(valA).getTime();
+                valB = new SDate(valB).getTime();
             }
             // const expres = /^[0-9]+$/
             // if ((valA + "").match(expres)) {

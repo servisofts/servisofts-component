@@ -17,15 +17,15 @@ declare module '@react-navigation/stack' {
     import { createStackNavigator } from '@react-navigation/stack';
     export { createStackNavigator };
 }
-declare module 'react-native-svg' {
-    import Svg, { Line, Rect, Svg, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Path, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml } from 'react-native-svg';
-    export { Svg, Line, Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml };
-    export default Svg;
-}
-declare module 'xlsx-color' {
-    import xlsx from 'xlsx-color';
-    export default xlsx;
-}
+// declare module 'react-native-svg' {
+//     import Svg, { Line, Rect, Svg, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Path, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml } from 'react-native-svg';
+//     export { Svg, Line, Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml };
+//     export default Svg;
+// }
+// declare module 'xlsx-color' {
+//     import xlsx from 'xlsx-color';
+//     export default xlsx;
+// }
 
 declare module 'react-native-linear-gradient' {
     import LinearGradient from 'react-native-linear-gradient';
@@ -52,6 +52,12 @@ declare module 'react-native-image-picker' {
     export default ImagePicker;
 }
 
+declare module 'react-native-compressor' {
+    // import ImagePicker from 'react-native-compressor';
+    export { Image } from 'react-native-compressor';
+    // export default ImagePicker;
+}
+
 
 
 // declare module 'react-native-maps' {
@@ -63,6 +69,10 @@ declare module 'react-native-image-picker' {
 declare module '@react-native-community/geolocation' {
     import Geolocation from '@react-native-community/geolocation';
     export default Geolocation;
+}
+declare module 'react-native-fs' {
+    import RNFS from 'react-native-fs';
+    export default RNFS;
 }
 
 // declare module 'google-map-react' {
