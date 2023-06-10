@@ -150,15 +150,13 @@ var SPage = /** @class */ (function (_super) {
         return this.props.header;
     };
     SPage.prototype.render = function () {
+        var _a;
         return (React.createElement(SView, { col: "xs-12", style: {
                 flex: 1,
                 height: '100%'
             } },
             SPage.backgroundComponent,
-            React.createElement(KeyboardAvoidingView, { behavior: Platform.OS === "ios" ? "padding" : "height", 
-                // behavior={"padding"}
-                // enabled={Platform.OS === "ios"}
-                style: {
+            React.createElement(SView, { style: {
                     flex: 1
                 } },
                 this.getNavBar(),
@@ -167,7 +165,12 @@ var SPage = /** @class */ (function (_super) {
                         flex: 1,
                         height: "100%",
                         overflow: "hidden"
-                    } }, this.getScroll()),
+                    } },
+                    React.createElement(KeyboardAvoidingView, { behavior: Platform.OS === "ios" ? "padding" : null, keyboardVerticalOffset: (_a = this.props.keyboardVerticalOffset) !== null && _a !== void 0 ? _a : 60, 
+                        // behavior={"padding"}
+                        enabled: Platform.OS === "ios", style: {
+                            flex: 1
+                        } }, this.getScroll())),
                 this.render_footer())));
     };
     SPage.backgroundComponent = (React.createElement(View, { style: {

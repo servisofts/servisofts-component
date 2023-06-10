@@ -60,7 +60,7 @@ class SMapView extends Component<PropsType> {
 
 
     componentDidMount() {
-        this.getposition();
+        // this.getposition();
     }
 
     center() {

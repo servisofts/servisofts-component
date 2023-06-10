@@ -1,0 +1,12 @@
+example
+.env
+.git
+.gitignore
+coverage
+node_modules
+dist
+./src
+.copyignore
+package-lock.json
+tsconfig.json
+.gradle

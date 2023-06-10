@@ -9,14 +9,14 @@ declare module "*.svg" {
     export default content;
 }
 
-declare module '@react-navigation/native' {
-    import { NavigationContainer } from '@react-navigation/native';
-    export { NavigationContainer };
-}
-declare module '@react-navigation/stack' {
-    import { createStackNavigator } from '@react-navigation/stack';
-    export { createStackNavigator };
-}
+// declare module '@react-navigation/native' {
+//     import { NavigationContainer } from '@react-navigation/native';
+//     export { NavigationContainer };
+// }
+// declare module '@react-navigation/stack' {
+//     import { createStackNavigator } from '@react-navigation/stack';
+//     export { createStackNavigator };
+// }
 // declare module 'react-native-svg' {
 //     import Svg, { Line, Rect, Svg, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Path, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml } from 'react-native-svg';
 //     export { Svg, Line, Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml };

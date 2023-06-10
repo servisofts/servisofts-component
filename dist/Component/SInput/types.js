@@ -21,6 +21,7 @@ import SScrollView2 from "../SScrollView2";
 import SNavigation from "../SNavigation";
 import DropFileSingle from "./SInputTypes/DropFileSingle";
 import SIFecha_MY_Alert from "./SInputTypes/SIFecha_MY_Alert";
+import SIColorAlert from "./SInputTypes/SIColorAlert";
 var buildResp = function (data) {
     return data;
 };
@@ -30,6 +31,8 @@ export var Type = function (type, Parent) {
             return select(type, Parent);
         case "fecha":
             return fecha(type, Parent);
+        case "color":
+            return color(type, Parent);
         case "date":
             return fecha(type, Parent);
         case "date_my":
@@ -169,12 +172,13 @@ var email = function (type, Parent) {
             var value = _value;
             value = value.trim();
             value = value.split(" ")[0];
+            value = value.toLowerCase();
             return value;
         },
         verify: function (value) {
             if (!value)
                 return false;
-            return /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(value);
+            return /(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(value);
         }
     });
 };
@@ -183,6 +187,37 @@ var password = function (type, Parent) {
         props: {
             secureTextEntry: true
         },
+        style: {
+            View: {},
+            InputText: {},
+            LabelStyle: {}
+        }
+    });
+};
+var color = function (type, Parent) {
+    return buildResp({
+        props: {
+            editable: false,
+            // focusable: false,
+            pointerEvents: "none"
+        },
+        onPress: function () {
+            SPopupOpen({
+                key: "fechaPicker",
+                content: React.createElement(SIColorAlert, { defaultValue: Parent.getValue(), onClose: function () {
+                        // Parent.notifyBlur();
+                    }, onChange: function (val) {
+                        // console.log(val);
+                        Parent.setValue(val);
+                    } })
+            });
+        },
+        icon: (React.createElement(SView, { style: {
+                width: 30,
+                height: "100%",
+                padding: 6,
+                backgroundColor: Parent.getValue()
+            }, center: true })),
         style: {
             View: {},
             InputText: {},

@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { View, Text, Platform, Linking } from 'react-native';
+import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
 import { NavigationContainer } from '@react-navigation/native';
@@ -228,14 +228,11 @@ export default class SNavigation extends Component<SNavigationProps> {
                     if (!Page) {
                         Page = pages[key];
                     }
-                    if (!state.loading) return <SView col={"xs-12"} height>
+                    if (!state.loading) return <SView col={"xs-12"} style={{
+                        flex: 1
+                    }}>
                         {SPage.backgroundComponent}
                         {Page.TOPBAR}
-                        {/* <SLoad type='skeleton' col={"xs-12"} height={55} />
-                        <SHr />
-                        <SLoad type='skeleton' col={"xs-12"} flex />
-                        <SHr />
-                        <SLoad type='skeleton' col={"xs-12"} height={55} /> */}
                     </SView>
                     return <>
                         {!Validator ? null : <Validator />}
@@ -250,6 +247,7 @@ export default class SNavigation extends Component<SNavigationProps> {
             }
             return <Stack.Screen key={key} name={key}
                 component={Page}
+                // component={pages[key].component ?? pages[key]}
                 options={{
                     title: this.props.props?.title ? this.props.props?.title : "Servisofts",
                     headerShown: false,
@@ -262,14 +260,25 @@ export default class SNavigation extends Component<SNavigationProps> {
     render() {
         // var NavigationContainer = this.props.props.NavigationContainer;
         // var Stack = this.props.props.Stack;
+        let colors = {
+            primary: STheme.color.primary,
+            background: STheme.color.background,
+            card: STheme.color.card,
+            text: STheme.color.text,
+            border: "",
+            notification: STheme.color.primary
+        };
         return (<NavigationContainer ref={(ref) => {
             SNavigation.navigation = ref;
-        }} linking={this.getLinking()} theme={{
-            dark: false,
-            colors: {
-                background: STheme.color.background
-            }
-        }}
+        }} linking={this.getLinking()}
+            //  theme={{
+            //     dark: false,
+            //     colors: {
+            //         background: STheme.color.background
+            //     }
+            // }}
+
+            theme={{ dark: false, colors: colors }}
             // initialState={stateNavigator}
             onStateChange={(state) =>
                 stateNavigator = state

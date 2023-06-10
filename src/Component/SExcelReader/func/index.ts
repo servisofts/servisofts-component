@@ -5,18 +5,26 @@ export default {
     create: (props: SExcelReaderPropsType) => {
         const reader = new FileReader();
         reader.onload = function (e: any) {
-            const data = new Uint8Array(e.target.result);
-            const workbook = xlsx.read(data, { type: 'array', cellDates: true });
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
-            let data_json;
-            if (props.type == "toJson") {
-                data_json = transform2(sheet);
-            } else {
-                data_json = transform3(sheet);
+            try {
+
+                const data = new Uint8Array(e.target.result);
+                const workbook = xlsx.read(data, { type: 'array', cellDates: true });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                let data_json;
+                if (props.type == "toJson") {
+                    data_json = transform2(sheet);
+                } else {
+                    data_json = transform3(sheet);
+                }
+                // openWindow(sheet);
+                if (props.onSubmit) props.onSubmit(data_json, props.callback);
+            } catch (e) {
+                if (props.onError) props.onError(e, props.callback);
+                if (props.callback)props.callback()
+                console.error(e);
             }
-            // openWindow(sheet);
-            if (props.onSubmit) props.onSubmit(data_json, props.callback);
+
         };
         reader.readAsArrayBuffer(props.file);
 
@@ -47,6 +55,7 @@ const transform3 = (sheet) => {
             const cell = sheet[cellAddress];
             if (!cell || !cell.v) continue;
             const hh = sheet[xlsx.utils.encode_cell({ c: j, r: 0 })];
+            if (!hh) continue;
             if (hh.v) {
                 if (cell?.t == "d") {
                     row[hh.v] = (new Date(cell?.v).toISOString() + "") ?? "";

@@ -73,7 +73,7 @@ export default class SMapView extends Component<PropsType> {
     }
 
     componentDidMount() {
-        this.getposition()
+        // this.getposition()
     }
 
     animateToRegion(region, time) {

@@ -16,6 +16,7 @@ import SScrollView2 from "./Component/SScrollView2";
 import SScrollView3 from "./Component/SScrollView3";
 import SScroll from "./Component/SScroll";
 import { SInput } from "./Component/SInput";
+import SInput2 from "./Component/SInput2";
 import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
@@ -29,7 +30,7 @@ import SDate from "./Component/SDate";
 import SImage from "./Component/SImage";
 import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
-
+import SColorPicker from "./Component/SColorPicker"
 import SMapView2 from "./Component/SMapView";
 import SMapView from "./Component/SMapView2";
 import SExcel from "./Component/SExcel";
@@ -48,6 +49,8 @@ import SRangeSlider from "./Component/SRangeSlider";
 import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
+
+import SNativeModules from "./SNativeModules";
 export * from './Types'
 export {
     SHr,
@@ -83,6 +86,7 @@ export {
     STable,
     STable2,
     SInput,
+    SInput2,
     SForm,
     Submit,
     SButtom,
@@ -92,6 +96,7 @@ export {
     SExcel,
     SExcelReader,
     ExportExcel,
+    SColorPicker,
     SPromise,
     // MAPA
     SMapView,
@@ -101,6 +106,7 @@ export {
     SLocation,
     // FUENTES
     Font,
+    SNativeModules,
     //alvaro
     SAlvaro
 }

@@ -11,6 +11,7 @@ import SPage from '../SPage';
 import { SInputsCofig } from "../../Types/index"
 import SThread from '../SThread';
 import SLoadContainer from '../SLoad/SLoadContainer';
+// import KeyboardSpacer from './KeyboardSpacer';
 
 export type SComponentContainerProps = {
     theme?: SThemeProps,
@@ -99,7 +100,6 @@ export default class SComponentContainer extends Component<SComponentContainerPr
             <View style={{
                 width: "100%",
                 flex: 1,
-                height: "100%",
                 backgroundColor: this.state.theme?.barColor || "#222222"
             }} >
                 <SafeAreaView style={{
@@ -114,6 +114,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         <View style={{
                             width: "100%",
                             flex: 1,
+                            backgroundColor: this.state.theme?.background ?? "#ffffff"
                         }} onLayout={(evt) => {
                             // this.setState({ layout: evt.nativeEvent.layout })
                             this.onChangeSize(evt.nativeEvent.layout);

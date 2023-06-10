@@ -15,7 +15,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React, { Component } from 'react';
 import SPopup from '../..';
-import { SButtom } from '../../../SButtom';
 import SHr from '../../../SHr';
 import SPage from '../../../SPage';
 import SText from '../../../SText';
@@ -33,10 +32,23 @@ var Confirm = /** @class */ (function (_super) {
             this.props.onClose();
         }
     };
+    Confirm.prototype.handleAccept = function () {
+        if (this.props.onPress) {
+            this.state.acept = true;
+            this.props.onPress();
+        }
+        SPopup.close("confirm");
+    };
+    Confirm.prototype.handleCancel = function () {
+        if (this.props.onClose) {
+            this.props.onClose();
+        }
+        SPopup.close("confirm");
+    };
     Confirm.prototype.render = function () {
-        var _this = this;
-        return (React.createElement(SView, { col: "xs-11 md-6 xl-4", center: true, backgroundColor: STheme.color.background, withoutFeedback: true, style: {
-                height: 260,
+        return (React.createElement(SView, { col: "xs-11 sm-10 md-7 sm-5 xl-3", center: true, backgroundColor: STheme.color.background, withoutFeedback: true, style: {
+                maxHeight: 360,
+                minHeight: 100,
                 padding: 8,
                 // borderWidth:2,
                 // borderColor:STheme.color.text+"33",
@@ -44,31 +56,37 @@ var Confirm = /** @class */ (function (_super) {
                 overflow: 'hidden'
             } },
             SPage.backgroundComponent,
-            React.createElement(SView, { col: "xs-12", center: true, flex: true },
+            React.createElement(SView, { col: "xs-12", center: true },
                 React.createElement(SHr, null),
-                React.createElement(SView, { flex: true }),
                 React.createElement(SView, { col: "xs-11", center: true },
                     React.createElement(SText, { fontSize: 18, center: true, bold: true }, this.props.title)),
-                React.createElement(SView, { flex: true }),
+                React.createElement(SHr, { h: 16 }),
+                React.createElement(SView, { col: "xs-12", row: true, center: true },
+                    React.createElement(SView, { col: "xs-6", center: true },
+                        React.createElement(SView, { onPress: this.handleCancel.bind(this), style: {
+                                padding: 10,
+                                paddingLeft: 18,
+                                paddingRight: 18,
+                                borderRadius: 8,
+                                borderWidth: 1,
+                                borderColor: STheme.color.primary,
+                                backgroundColor: STheme.color.secondary
+                            } },
+                            React.createElement(SText, { color: STheme.color.primary }, "Cancelar"))),
+                    React.createElement(SView, { col: "xs-6", center: true },
+                        React.createElement(SView, { onPress: this.handleAccept.bind(this), style: {
+                                borderWidth: 1,
+                                borderColor: STheme.color.secondary,
+                                padding: 10,
+                                paddingLeft: 18,
+                                paddingRight: 18,
+                                borderRadius: 8,
+                                backgroundColor: STheme.color.primary
+                            } },
+                            React.createElement(SText, { color: STheme.color.secondary }, "Confirmar")))),
+                React.createElement(SHr, { h: 16 }),
                 React.createElement(SView, { col: "xs-10", center: true },
-                    React.createElement(SText, { fontSize: 14, center: true, color: STheme.color.lightGray }, this.props.message)),
-                React.createElement(SView, { flex: true }),
-                React.createElement(SView, { col: "xs-12", row: true, height: 70, center: true },
-                    React.createElement(SView, { col: "xs-6", center: true },
-                        React.createElement(SButtom, { props: { type: "danger" }, onPress: function () {
-                                if (_this.props.onClose) {
-                                    _this.props.onClose();
-                                }
-                                SPopup.close("confirm");
-                            } }, "Cancelar")),
-                    React.createElement(SView, { col: "xs-6", center: true },
-                        React.createElement(SButtom, { props: { type: "primary" }, onPress: function () {
-                                if (_this.props.onPress) {
-                                    _this.state.acept = true;
-                                    _this.props.onPress();
-                                }
-                                SPopup.close("confirm");
-                            } }, "Confirmar"))),
+                    React.createElement(SText, { fontSize: 12, center: true, color: STheme.color.gray }, this.props.message)),
                 React.createElement(SHr, null))));
     };
     Confirm.defaultProps = {

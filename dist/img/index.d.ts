@@ -4,6 +4,14 @@ declare const Icons: {
         Native: (props: any) => JSX.Element;
         Web: (props: any) => JSX.Element;
     };
+    MessageSend: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
+    Emoji: {
+        Native: (props: any) => JSX.Element;
+        Web: (props: any) => JSX.Element;
+    };
     Add: {
         Native: import("react").FunctionComponent<import("react").SVGAttributes<SVGElement>>;
         Web: (props: any) => JSX.Element;

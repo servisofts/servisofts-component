@@ -87,7 +87,8 @@ export default ({ children, onRefresh }) => {
         <View style={{ flex: 1 }}>
             <SView style={{
                 position: "absolute",
-            }} center col={'xs-12'}>{refreshing ? <SLoad /> : null}</SView>
+                flex: 1,
+            }} center height col={'xs-12'}>{refreshing ? <SLoad /> : null}</SView>
             <Animated.ScrollView
                 // ref={scrollViewRef}
                 style={{ flex: 1 }}
@@ -98,8 +99,11 @@ export default ({ children, onRefresh }) => {
                 scrollEventThrottle={16}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
                 {...panResponder.panHandlers}
+                contentContainerStyle={{
+                    flex: 1
+                }}
             >
-                <Animated.View style={{ transform: [{ translateY: ContainerAnim }] }}>
+                <Animated.View style={{ transform: [{ translateY: ContainerAnim }], flex: 1}}>
                     {children}
                 </Animated.View>
             </Animated.ScrollView>

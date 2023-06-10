@@ -53,7 +53,12 @@ import Wifi from "./Wifi"
 import WifiDisconnect from "./WifiDisconnect"
 import World from "./World"
 import Svg from "./Svg";
+
+import MessageSend from "./MessageSend"
+import Emoji from "./Emoji"
 const Icons = {
+    MessageSend,
+    Emoji,
     Add,
     Ajustes,
     AlertOutline,

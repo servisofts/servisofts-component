@@ -3,20 +3,29 @@ export default {
     create: function (props) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            var data = new Uint8Array(e.target.result);
-            var workbook = xlsx.read(data, { type: 'array', cellDates: true });
-            var sheetName = workbook.SheetNames[0];
-            var sheet = workbook.Sheets[sheetName];
-            var data_json;
-            if (props.type == "toJson") {
-                data_json = transform2(sheet);
+            try {
+                var data = new Uint8Array(e.target.result);
+                var workbook = xlsx.read(data, { type: 'array', cellDates: true });
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+                var data_json = void 0;
+                if (props.type == "toJson") {
+                    data_json = transform2(sheet);
+                }
+                else {
+                    data_json = transform3(sheet);
+                }
+                // openWindow(sheet);
+                if (props.onSubmit)
+                    props.onSubmit(data_json, props.callback);
             }
-            else {
-                data_json = transform3(sheet);
+            catch (e) {
+                if (props.onError)
+                    props.onError(e, props.callback);
+                if (props.callback)
+                    props.callback();
+                console.error(e);
             }
-            // openWindow(sheet);
-            if (props.onSubmit)
-                props.onSubmit(data_json, props.callback);
         };
         reader.readAsArrayBuffer(props.file);
     }
@@ -45,6 +54,8 @@ var transform3 = function (sheet) {
             if (!cell || !cell.v)
                 continue;
             var hh = sheet[xlsx.utils.encode_cell({ c: j, r: 0 })];
+            if (!hh)
+                continue;
             if (hh.v) {
                 if ((cell === null || cell === void 0 ? void 0 : cell.t) == "d") {
                     row[hh.v] = (_a = (new Date(cell === null || cell === void 0 ? void 0 : cell.v).toISOString() + "")) !== null && _a !== void 0 ? _a : "";

@@ -59,8 +59,8 @@ export default class SMapView extends SMapViewAbstract {
             this.mapa.animateToRegion({
                 latitude: crd.latitude,
                 longitude: crd.longitude,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
+                latitudeDelta: 0.002,
+                longitudeDelta: 0.002,
             })
         }).catch((err) => {
             console.log(err);

@@ -33,14 +33,29 @@ export default class Confirm extends Component<PropsType> {
             this.props.onClose()
         }
     }
+
+    handleAccept() {
+        if (this.props.onPress) {
+            this.state.acept = true;
+            this.props.onPress()
+        }
+        SPopup.close("confirm")
+    }
+    handleCancel() {
+        if (this.props.onClose) {
+            this.props.onClose()
+        }
+        SPopup.close("confirm")
+    }
     render() {
         return (
-            <SView col={"xs-11 md-6 xl-4"}
+            <SView col={"xs-11 sm-10 md-7 sm-5 xl-3"}
                 center
                 backgroundColor={STheme.color.background}
                 withoutFeedback
                 style={{
-                    height: 260,
+                    maxHeight: 360,
+                    minHeight: 100,
                     padding: 8,
                     // borderWidth:2,
                     // borderColor:STheme.color.text+"33",
@@ -48,39 +63,47 @@ export default class Confirm extends Component<PropsType> {
                     overflow: 'hidden',
                 }}>
                 {SPage.backgroundComponent}
-                <SView col={"xs-12"} center flex>
+                <SView col={"xs-12"} center>
                     <SHr />
                     {/* <SView col={"xs-12"} height={90}>
                         <SIcon name={"AlertOutline"} fill={STheme.color.danger} />
                     </SView> */}
-                    <SView flex />
                     <SView col={"xs-11"} center>
                         <SText fontSize={18} center bold>{this.props.title}</SText>
                     </SView>
-                    <SView flex />
-                    <SView col={"xs-10"} center>
-                        <SText fontSize={14} center color={STheme.color.lightGray}>{this.props.message}</SText>
-                    </SView>
-                    <SView flex />
-                    <SView col={"xs-12"} row height={70} center>
-                        <SView col={"xs-6"} center>
-                            <SButtom props={{ type: "danger" }} onPress={() => {
-                                if (this.props.onClose) {
-                                    this.props.onClose()
-                                }
-                                SPopup.close("confirm")
-                            }}>Cancelar</SButtom>
+                    <SHr h={16}/>
+
+                    <SView col={"xs-12"} row center>
+                        <SView col={"xs-6"} center >
+                            <SView onPress={this.handleCancel.bind(this)} style={{
+                                padding: 10,
+                                paddingLeft: 18,
+                                paddingRight: 18,
+                                borderRadius: 8,
+                                borderWidth: 1,
+                                borderColor: STheme.color.primary,
+                                backgroundColor: STheme.color.secondary
+                            }}>
+                                <SText color={STheme.color.primary}>Cancelar</SText>
+                            </SView>
                         </SView>
                         <SView col={"xs-6"} center >
-                            <SButtom props={{ type: "primary" }} onPress={() => {
-                                if (this.props.onPress) {
-                                    this.state.acept = true;
-                                    this.props.onPress()
-                                }
-                                SPopup.close("confirm")
-
-                            }}>Confirmar</SButtom>
+                            <SView onPress={this.handleAccept.bind(this)} style={{
+                                borderWidth: 1,
+                                borderColor: STheme.color.secondary,
+                                padding: 10,
+                                paddingLeft: 18,
+                                paddingRight: 18,
+                                borderRadius: 8,
+                                backgroundColor: STheme.color.primary
+                            }}>
+                                <SText color={STheme.color.secondary}>Confirmar</SText>
+                            </SView>
                         </SView>
+                    </SView>
+                    <SHr h={16}/>
+                    <SView col={"xs-10"} center>
+                        <SText fontSize={12} center color={STheme.color.gray}>{this.props.message}</SText>
                     </SView>
                     <SHr />
                 </SView>

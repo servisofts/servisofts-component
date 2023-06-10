@@ -73,7 +73,7 @@ var SMapView = /** @class */ (function (_super) {
         return _this;
     }
     SMapView.prototype.componentDidMount = function () {
-        this.getposition();
+        // this.getposition()
     };
     SMapView.prototype.animateToRegion = function (region, time) {
         this.mapa.animateToRegion(region, !time ? 1000 : time);

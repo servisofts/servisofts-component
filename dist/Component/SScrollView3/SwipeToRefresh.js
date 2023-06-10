@@ -93,14 +93,17 @@ export default (function (_a) {
     })).current;
     return (React.createElement(View, { style: { flex: 1 } },
         React.createElement(SView, { style: {
-                position: "absolute"
-            }, center: true, col: 'xs-12' }, refreshing ? React.createElement(SLoad, null) : null),
+                position: "absolute",
+                flex: 1
+            }, center: true, height: true, col: 'xs-12' }, refreshing ? React.createElement(SLoad, null) : null),
         React.createElement(Animated.ScrollView
         // ref={scrollViewRef}
         , __assign({ 
             // ref={scrollViewRef}
             style: { flex: 1 }, bounces: true, disableScrollViewPanResponder: true, nestedScrollEnabled: true, 
             // contentContainerStyle={styles.contentContainer}
-            scrollEventThrottle: 16, onScroll: Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true }) }, panResponder.panHandlers),
-            React.createElement(Animated.View, { style: { transform: [{ translateY: ContainerAnim }] } }, children))));
+            scrollEventThrottle: 16, onScroll: Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true }) }, panResponder.panHandlers, { contentContainerStyle: {
+                flex: 1
+            } }),
+            React.createElement(Animated.View, { style: { transform: [{ translateY: ContainerAnim }], flex: 1 } }, children))));
 });

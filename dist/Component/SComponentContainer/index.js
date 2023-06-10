@@ -109,13 +109,12 @@ var SComponentContainer = /** @class */ (function (_super) {
     };
     SComponentContainer.prototype.getContenido = function () {
         var _this = this;
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         if (!this.state.theme)
             return null;
         return (React.createElement(View, { style: {
                 width: "100%",
                 flex: 1,
-                height: "100%",
                 backgroundColor: ((_a = this.state.theme) === null || _a === void 0 ? void 0 : _a.barColor) || "#222222"
             } },
             React.createElement(SafeAreaView, { style: {
@@ -129,7 +128,8 @@ var SComponentContainer = /** @class */ (function (_super) {
                     React.createElement(StatusBar, { barStyle: (_b = this.state.theme) === null || _b === void 0 ? void 0 : _b.barStyle, animated: true, backgroundColor: ((_c = this.state.theme) === null || _c === void 0 ? void 0 : _c.barColor) || "#222222" }),
                     React.createElement(View, { style: {
                             width: "100%",
-                            flex: 1
+                            flex: 1,
+                            backgroundColor: (_e = (_d = this.state.theme) === null || _d === void 0 ? void 0 : _d.background) !== null && _e !== void 0 ? _e : "#ffffff"
                         }, onLayout: function (evt) {
                             // this.setState({ layout: evt.nativeEvent.layout })
                             _this.onChangeSize(evt.nativeEvent.layout);

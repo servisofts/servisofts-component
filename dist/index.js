@@ -15,6 +15,7 @@ import SScrollView2 from "./Component/SScrollView2";
 import SScrollView3 from "./Component/SScrollView3";
 import SScroll from "./Component/SScroll";
 import { SInput } from "./Component/SInput";
+import SInput2 from "./Component/SInput2";
 import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
@@ -28,6 +29,7 @@ import SDate from "./Component/SDate";
 import SImage from "./Component/SImage";
 import SHr from "./Component/SHr";
 import SGradient from "./Component/SGradient";
+import SColorPicker from "./Component/SColorPicker";
 import SMapView2 from "./Component/SMapView";
 import SMapView from "./Component/SMapView2";
 import SExcel from "./Component/SExcel";
@@ -46,11 +48,12 @@ import SRangeSlider from "./Component/SRangeSlider";
 import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
+import SNativeModules from "./SNativeModules";
 export * from './Types';
-export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SRangeSlider, SUuid, SImage, SList, SList2, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SForm, Submit, SButtom, SMath, SSection, Upload, SExcel, SExcelReader, ExportExcel, SPromise, 
+export { SHr, SGradient, SDate, SInfo, SOrdenador, SComponentContainer, SGrid, SIcon, SNavBar, SNavigation, SPage, SScroll, SSCrollView, SScrollView2, SScrollView3, SText, STheme, SThread, SRangeSlider, SUuid, SImage, SList, SList2, SBuscador, SView, SLoad, SStorage, SPopup, SPopupOpen, SPopupClose, STable, STable2, SInput, SInput2, SForm, Submit, SButtom, SMath, SSection, Upload, SExcel, SExcelReader, ExportExcel, SColorPicker, SPromise, 
 // MAPA
 SMapView, SMapView2, SMarker, SPolyline, SLocation, 
 // FUENTES
-Font, 
+Font, SNativeModules, 
 //alvaro
 SAlvaro };

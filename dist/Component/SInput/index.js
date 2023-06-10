@@ -230,8 +230,15 @@ var SInput = /** @class */ (function (_super) {
     SInput.prototype.render = function () {
         var _this = this;
         var _a, _b, _c;
-        if (this.props.value) {
-            this.state.value = this.props.value;
+        if (this.props.type == "checkBox") {
+            if (this.props.value !== null && this.props.value !== undefined) {
+                this.state.value = this.props.value;
+            }
+        }
+        else {
+            if (this.props.value) {
+                this.state.value = this.props.value;
+            }
         }
         if (this.props.required || this.props.isRequired) {
             this.required = true;

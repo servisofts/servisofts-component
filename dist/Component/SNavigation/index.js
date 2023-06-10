@@ -201,7 +201,9 @@ var SNavigation = /** @class */ (function (_super) {
                         Page = pages[key];
                     }
                     if (!state.loading)
-                        return React.createElement(SView, { col: "xs-12", height: true },
+                        return React.createElement(SView, { col: "xs-12", style: {
+                                flex: 1
+                            } },
                             SPage.backgroundComponent,
                             Page.TOPBAR);
                     return React.createElement(React.Fragment, null,
@@ -214,20 +216,32 @@ var SNavigation = /** @class */ (function (_super) {
                     return null;
                 }
             };
-            return React.createElement(Stack.Screen, { key: key, name: key, component: Page, options: __assign({ title: ((_a = _this.props.props) === null || _a === void 0 ? void 0 : _a.title) ? (_b = _this.props.props) === null || _b === void 0 ? void 0 : _b.title : "Servisofts", headerShown: false }, pages[key].options) });
+            return React.createElement(Stack.Screen, { key: key, name: key, component: Page, 
+                // component={pages[key].component ?? pages[key]}
+                options: __assign({ title: ((_a = _this.props.props) === null || _a === void 0 ? void 0 : _a.title) ? (_b = _this.props.props) === null || _b === void 0 ? void 0 : _b.title : "Servisofts", headerShown: false }, pages[key].options) });
         });
     };
     SNavigation.prototype.render = function () {
         // var NavigationContainer = this.props.props.NavigationContainer;
         // var Stack = this.props.props.Stack;
+        var colors = {
+            primary: STheme.color.primary,
+            background: STheme.color.background,
+            card: STheme.color.card,
+            text: STheme.color.text,
+            border: "",
+            notification: STheme.color.primary
+        };
         return (React.createElement(NavigationContainer, { ref: function (ref) {
                 SNavigation.navigation = ref;
-            }, linking: this.getLinking(), theme: {
-                dark: false,
-                colors: {
-                    background: STheme.color.background
-                }
-            }, 
+            }, linking: this.getLinking(), 
+            //  theme={{
+            //     dark: false,
+            //     colors: {
+            //         background: STheme.color.background
+            //     }
+            // }}
+            theme: { dark: false, colors: colors }, 
             // initialState={stateNavigator}
             onStateChange: function (state) {
                 return stateNavigator = state;

@@ -16,5 +16,7 @@ export default class Confirm extends Component<PropsType> {
     state: any;
     constructor(props: any);
     componentWillUnmount(): void;
+    handleAccept(): void;
+    handleCancel(): void;
     render(): JSX.Element;
 }

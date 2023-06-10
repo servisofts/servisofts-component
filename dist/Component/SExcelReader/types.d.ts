@@ -3,6 +3,7 @@ export declare type SExcelReaderPropsType = {
     file?: File;
     onPress?: (sheet: any) => any;
     onSubmit?: (data: any, callback: any) => any;
+    onError?: (data: any, callback: any) => any;
     callback?: any;
     children?: any;
     type?: "default" | "toJson";

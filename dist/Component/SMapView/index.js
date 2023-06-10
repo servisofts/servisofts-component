@@ -65,7 +65,7 @@ var SMapView = /** @class */ (function (_super) {
         return _this;
     }
     SMapView.prototype.componentDidMount = function () {
-        this.getposition();
+        // this.getposition();
     };
     SMapView.prototype.center = function () {
         var _map = this.mapa;

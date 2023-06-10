@@ -10,6 +10,7 @@ export declare type SPageProps = {
     navBar?: any;
     header?: any;
     footer?: any;
+    keyboardVerticalOffset?: any;
 };
 export default class SPage extends Component<SPageProps> {
     static backgroundComponent: JSX.Element;

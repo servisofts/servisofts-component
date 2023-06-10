@@ -20,6 +20,7 @@ export type SPageProps = {
     navBar?: any,
     header?: any,
     footer?: any,
+    keyboardVerticalOffset?: any,
 
 }
 
@@ -164,13 +165,9 @@ export default class SPage extends Component<SPageProps> {
                 }}
             >
                 {SPage.backgroundComponent}
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                    // behavior={"padding"}
-                    // enabled={Platform.OS === "ios"}
-                    style={{
-                        flex: 1,
-                    }}>
+                <SView style={{
+                    flex: 1,
+                }}>
                     {this.getNavBar()}
                     {this.render_header()}
                     <SView col={"xs-12"}
@@ -179,12 +176,22 @@ export default class SPage extends Component<SPageProps> {
                             height: "100%",
                             overflow: "hidden",
                         }}>
+                        <KeyboardAvoidingView
+                            behavior={Platform.OS === "ios" ? "padding" : null}
+                            keyboardVerticalOffset={this.props.keyboardVerticalOffset ?? 60}
+                            // behavior={"padding"}
+                            enabled={Platform.OS === "ios"}
+                            style={{
+                                flex: 1,
+                            }}>
 
-                        {this.getScroll()}
+                            {this.getScroll()}
+                        </KeyboardAvoidingView>
+
                     </SView>
                     {this.render_footer()}
-                </KeyboardAvoidingView>
-            </SView>
+                </SView >
+            </SView >
         );
 
     }
