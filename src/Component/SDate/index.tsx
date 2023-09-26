@@ -12,6 +12,8 @@ type formatsTypes =
     | "dd/MM"
     | "yyyy/MM"
     | "yyyy-MM-dd"
+    | "yyyy-MM"
+    | "MM-dd"
 
 export default class SDate {
 
@@ -67,7 +69,7 @@ export default class SDate {
         if (props.fromFormat) {
             date = new SDate(dateStr, props.fromFormat)
         } else {
-            date = new SDate(dateStr, props.fromFormat ?? "")
+            date = new SDate(dateStr, props.fromFormat ?? 'yyyy-MM-ddThh:mm:ss')
         }
         return date.toString(props.toFormat);
     }
@@ -103,7 +105,7 @@ export default class SDate {
 
     //CLASS
     date: Date
-    constructor(date?: any, format?: formatsTypes | string) {
+    constructor(date?: any, format?: formatsTypes) {
         if (!date) {
             this.date = new Date();
             return;

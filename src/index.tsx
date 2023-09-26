@@ -21,6 +21,8 @@ import SInfo from "./SInfo";
 import SPopup, { SPopupOpen, SPopupClose } from "./Component/SPopup";
 import STable from "./Component/STable";
 import STable2 from "./Component/STable2";
+import STable3 from "./Component/STable3/index2";
+import STable4 from "./Component/STable4";
 import SForm from './Component/SForm';
 import Submit from "./Component/SForm/submit";
 import { SButtom } from './Component/SButtom';
@@ -49,7 +51,7 @@ import SRangeSlider from "./Component/SRangeSlider";
 import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
-
+import SSwitch from "./Component/SSwitch";
 import SNativeModules from "./SNativeModules";
 export * from './Types'
 export {
@@ -85,8 +87,11 @@ export {
     SPopupClose,
     STable,
     STable2,
+    STable3,
+    STable4,
     SInput,
     SInput2,
+    SSwitch,
     SForm,
     Submit,
     SButtom,

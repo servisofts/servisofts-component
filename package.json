@@ -1,6 +1,6 @@
 {
   "name": "servisofts-component",
-  "version": "2.11.11",
+  "version": "2.11.25",
   "description": "Servisofts-component is a library for React Native Web.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -17,7 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "@react-navigation/native": "^5.9.6",
-    "@react-navigation/stack": "^5.14.7"
+    "@react-navigation/stack": "^5.14.7",
+    "@mapbox/geo-viewport": "^0.4.0",
+    "supercluster": "^6.0.2"
   },
   "peerDependencies": {
     "react": "*",

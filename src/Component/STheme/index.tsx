@@ -133,12 +133,12 @@ export default class STheme extends Component<SThemeProps> {
                 ...this.props.themes[this.state.select]
             };
         }
-        new SThread(100, "algo", false).start(() => {
-            SStorage.setItem("themeState", theme);
-            if (this.props.onLoad) {
-                this.props.onLoad(STheme.color);
-            }
-        })
+        // new SThread(100, "algo", false).start(() => {
+        SStorage.setItem("themeState", theme);
+        if (this.props.onLoad) {
+            this.props.onLoad(STheme.color);
+        }
+        // })
 
     }
     change() {

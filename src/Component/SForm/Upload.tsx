@@ -16,10 +16,11 @@ export default class Upload {
         return new Promise(async (resolve, reject) => {
             if (!file) reject("file not found");
             if (!file.type) reject("file.type not found");
-            if (file.type.startsWith("image")) {
+            if (file.type == "image/gif") {
+                file = file;
+            } else if (file.type.startsWith("image")) {
                 file = await SImageCompressor.compress({ file: file, maxWidth: 1024, quality: 0.8 })
             }
-            console.log("enviandoooooo")
             var body = new FormData();
             body.append('file', file);
             var request = new XMLHttpRequest();

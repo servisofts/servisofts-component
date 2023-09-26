@@ -39,7 +39,7 @@
 /* Open Sans */
 @font-face {
   font-family: 'OpenSans';
-  src: url(./OpenSans-Regular.ttf);
+  src: url(./OpenSans.ttf);
 }
 @font-face {
   font-family: 'OpenSans-Bold';
@@ -115,4 +115,58 @@
 @font-face {
   font-family: 'Oswald-SemiBold';
   src: url(./Oswald-SemiBold.ttf);
+}
+
+
+@font-face {
+  font-family: 'SF-Mono';
+  src: url(./SF-Mono.ttf);
+}
+@font-face {
+  font-family: 'SF-Mono-Regular';
+  src: url(./SF-Mono-Regular.ttf);
+}
+@font-face {
+  font-family: 'SF-Mono-Semibold';
+  src: url(./SF-Mono-Semibold.ttf);
+}
+
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat.ttf);
+}
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url(./Montserrat-Regular.ttf);
+}
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url(./Montserrat-ExtraBold.ttf);
+}
+
+
+@font-face {
+  font-family: 'TT-Norms-Pro';
+  src: url(./TT-Norms-Pro-Regular.otf);
+}
+@font-face {
+  font-family: 'TT-Norms-Pro-Regular';
+  src: url(./TT-Norms-Pro-Regular.otf);
+}
+@font-face {
+  font-family: 'TT-Norms-Pro-Bold';
+  src: url(./TT-Norms-Pro-Bold.otf);
+}
+@font-face {
+  font-family: 'AcherusGrotesque-Regular';
+  src: url(./AcherusGrotesque-Regular.ttf);
+}
+@font-face {
+  font-family: 'AcherusGrotesque-Medium';
+  src: url(./AcherusGrotesque-Medium.ttf);
+}
+@font-face {
+  font-family: 'AcherusGrotesque-Bold';
+  src: url(./AcherusGrotesque-Bold.ttf);
 }

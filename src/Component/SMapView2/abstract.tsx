@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SMarker from "./SMarker"
 import SPolyline from './SPolyline'
 import SCircle from './SCircle'
+import ClusteredMapView from './Cluster'
 type PositionType = {
     x: number,
     y: number,
@@ -24,7 +25,7 @@ type EdgePadding = {
 export type SMapViewType = {
     initialRegion: RegionType,
     customMapStyle?: [any],
-    onRegionChangeComplete?: (region: LatLngType) => void,
+    onRegionChangeComplete?: (region: RegionType) => void,
     onPress?: (event: { coordinate: LatLngType, position: PositionType }) => void,
 }
 
@@ -32,6 +33,7 @@ export default abstract class SMapViewAbstract extends Component<SMapViewType> {
     static SMarker = SMarker;
     static SPolyline = SPolyline;
     static SCircle = SCircle;
+    static Cluster = ClusteredMapView;
     mapa;
     state = {
         region: {

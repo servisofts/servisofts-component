@@ -183,7 +183,7 @@ export default class SForm extends Component<SFromProps> {
                     if (typeof files == "string") {
                         files = JSON.parse(files);
                     }
-                }catch(e){
+                } catch (e) {
                     return;
                 }
                 if (!files) return;
@@ -266,7 +266,9 @@ export default class SForm extends Component<SFromProps> {
                 // col: "xs-12 md-6",
                 ...this.props.onSubmitProps,
                 // customStyle: "primary",
-            }} onPress={() => {
+            }}
+            {...this.props.onSubmitProps}
+            onPress={() => {
                 this.submit()
             }}>
             {this.props.onSubmitName}

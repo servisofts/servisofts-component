@@ -7,6 +7,8 @@ import Confirm, { PropsType as ConfirmProps } from './SPopupVariants/Confirm/ind
 import Alert, { PropsType as AlertProps } from './SPopupVariants/Alert/index';
 import DateBetween, { PropsType as DateBetweenProps } from './SPopupVariants/DateBetween/index';
 import Info from './SPopupVariants/Info';
+import Form from './SPopupVariants/Form';
+import Container, { PopupContainerPropsType } from './SPopupVariants/Container';
 
 type SPopupOpenProps = {
     key?: string,
@@ -40,11 +42,26 @@ export default class SPopup extends Component {
         // alert(obj)
         INSTANCE.open({ key: "dateBetween", content: <DateBetween title={text} onPress={onPress} />, style: {} });
     }
+    // static form() {
+    //     INSTANCE.open({ key: "dateBetween", content: <Form />, style: {} });
+    // }
+    static openContainer(props: { key, render, props?: PopupContainerPropsType }) {
+        let key = props.key ?? "popupContainer";
+        INSTANCE.open({
+            key: key, content: <Container {...props.props ?? {}}>
+                {props.render({
+                    key: key,
+                    close: () => INSTANCE.close(key),
+                })}
+            </Container>
+        });
+    }
     static open(obj: SPopupOpenProps) {
         var key = obj.key;
         if (!obj.key) key = 'default';
         INSTANCE.open({ key, content: obj.content, style: obj.style });
     }
+
     static close(key?: string) {
         if (!key) {
             INSTANCE.closeAll();
@@ -95,7 +112,7 @@ export default class SPopup extends Component {
                 close={() => { this.close(key) }}
             >
                 {/* <TouchableWithoutFeedback> */}
-                    {obj}
+                {obj}
                 {/* </TouchableWithoutFeedback> */}
             </SPopupComponent>
         })

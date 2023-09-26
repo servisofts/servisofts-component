@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps, Platform } from 'react-native';
+
 import { SColType, SDirectionType } from '../../Types/index';
 import SGrid from '../SGrid/index';
 import STheme from '../STheme';
@@ -77,10 +78,7 @@ export default class SView extends Component<SViewProps> {
       // }
     }
     if (this.props.animated) {
-      if (!this._ELEM) {
-        this._ELEM = Animated.createAnimatedComponent(Element);
-      }
-      Element = this._ELEM;
+      Element = Animated.createAnimatedComponent(Element);
     }
     var styles_p: any = this.props.style
     var style = { ...styles_p };

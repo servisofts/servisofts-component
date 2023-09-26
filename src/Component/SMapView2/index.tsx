@@ -2,6 +2,7 @@ import React from 'react'
 import SMapViewAbstract from './abstract'
 import GoogleMapReact from 'google-map-react';
 import STheme from '../STheme';
+import SView from '../SView';
 
 type OptionsTypes = {
     styles?: any,
@@ -62,9 +63,10 @@ export default class SMapView extends SMapViewAbstract {
             latitudeDelta: c.lat.delta,
             longitudeDelta: c.lng.delta
         })
+        console.log("Intentando centrar")
     }
 
-
+    state;
     maps;
 
     animateToRegion(region: { latitudeDelta: number; longitudeDelta: number; } & { latitude: number; longitude: number; }, time: number) {
@@ -75,6 +77,25 @@ export default class SMapView extends SMapViewAbstract {
         var promedio = (region.longitudeDelta + region.latitudeDelta) / 4
         let zoom = Math.log(360 / promedio) / Math.LN2;
         return zoom;
+    }
+
+
+    zoomToDelta(zoom, mapWidthPixels, latitude) {
+        const earthCircumference = 40075017; // Circunferencia de la tierra en metros en el ecuador
+        const initialResolution = earthCircumference; // Resolución (m por pixel) a zoom level 0
+        const resolutionAtZoom = initialResolution / (Math.pow(2, zoom));
+        const equatorLatitudeDelta = mapWidthPixels * resolutionAtZoom / earthCircumference;
+
+        // Ajuste por la latitud (el área visible del mapa se "estira" más cerca de los polos en una proyección mercator)
+        const latitudeDelta = equatorLatitudeDelta * Math.cos((latitude * Math.PI) / 180);
+
+        // Como una aproximación, puedes usar el mismo valor para longitudeDelta.
+        const longitudeDelta = latitudeDelta;
+
+        return {
+            latitudeDelta,
+            longitudeDelta
+        };
     }
 
     _toRemove = [];
@@ -95,7 +116,7 @@ export default class SMapView extends SMapViewAbstract {
                 var ClassType = child.type;
                 var ins = new ClassType(child.props);
                 if (ins.renderMap) {
-                    return ins.renderMap(child, { map: this.mapa, maps: this.maps }, this._toRemove)
+                    return ins.renderMap(child, { map: this.mapa, maps: this.maps, key: child?.props?.key }, this._toRemove)
                 }
             }
             return null;
@@ -116,46 +137,54 @@ export default class SMapView extends SMapViewAbstract {
             streetViewControl: false,
             zoomControl: false,
         }
-        return <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyDYLp8tqYQvGbQLdL0BbsAGYaXWr8dxTUg" }
-            }
-            center={toLatLng(this.state.region)
-            }
-            zoom={zoom}
-            options={options}
-            onGoogleApiLoaded={({ map, maps }) => {
-                this.mapa = map;
-                this.maps = maps;
-                this._getChildrens()
-            }}
-            onDragEnd={(evt) => {
-                if (this.props.onRegionChangeComplete) {
-                    var center = { latitude: evt.center.lat(), longitude: evt.center.lng() }
-                    this.props.onRegionChangeComplete(center);
+        return <SView col={"xs-12"} flex onLayout={(evt) => {
+            this.setState({ layout: evt.nativeEvent.layout })
+        }}>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key: "AIzaSyDYLp8tqYQvGbQLdL0BbsAGYaXWr8dxTUg" }
                 }
-            }}
-            onZoomAnimationEnd={(evt) => {
-
-                if (this.props.onRegionChangeComplete) {
-                    if (!this.mapa) return;
-                    if (!this.mapa.center) return;
-                    var center = { latitude: this.mapa.center.lat(), longitude: this.mapa.center.lng() }
-                    this.props.onRegionChangeComplete(center);
+                center={toLatLng(this.state.region)
                 }
-            }}
-            onClick={(evt) => {
-                if (this.props.onPress) {
-                    var latitude = evt.lat;
-                    var longitude = evt.lng;
-                    var latLng = { latitude: latitude, longitude: longitude };
-                    this.props.onPress({
-                        coordinate: latLng,
-                        position: { x: evt.x, y: evt.y }
-                    })
-                }
-            }}
-        >
-            {this._getChildrens()}
-        </GoogleMapReact >
+                zoom={zoom}
+                options={options}
+                onGoogleApiLoaded={({ map, maps }) => {
+                    this.mapa = map;
+                    this.maps = maps;
+                    this._getChildrens()
+                }}
+                onDragEnd={(evt) => {
+                    if (this.props.onRegionChangeComplete) {
+                        var center = {
+                            latitude: evt.center.lat(), longitude: evt.center.lng(),
+                            ...this.zoomToDelta(evt.zoom, this.state?.layout?.width, this.mapa.center.lat())
+                        }
+                        this.props.onRegionChangeComplete(center);
+                    }
+                }}
+                onZoomAnimationEnd={(evt) => {
+                    if (this.props.onRegionChangeComplete) {
+                        if (!this.mapa) return;
+                        if (!this.mapa.center) return;
+                        var center = {
+                            latitude: this.mapa.center.lat(), longitude: this.mapa.center.lng(),
+                            ...this.zoomToDelta(evt, this.state?.layout?.width, this.mapa.center.lat())
+                        }
+                        this.props.onRegionChangeComplete(center);
+                    }
+                }}
+                onClick={(evt) => {
+                    if (this.props.onPress) {
+                        var latitude = evt.lat;
+                        var longitude = evt.lng;
+                        var latLng = { latitude: latitude, longitude: longitude };
+                        this.props.onPress({
+                            coordinate: latLng,
+                            position: { x: evt.x, y: evt.y }
+                        })
+                    }
+                }}
+            >{this._getChildrens()}
+            </GoogleMapReact >
+        </SView>
     }
 }

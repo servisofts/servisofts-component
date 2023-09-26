@@ -3,6 +3,7 @@ import { NativeModules, NativeEventEmitter, AppRegistry, Platform } from 'react-
 export const ServisoftsComponent = Platform.select({
     android: NativeModules.ServisoftsComponent,
     ios: NativeModules.ServisoftsComponent,
+    web: null,
 })
 
 export default class SNativeModules {

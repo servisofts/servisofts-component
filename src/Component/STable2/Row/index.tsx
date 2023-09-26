@@ -5,7 +5,6 @@ import STheme from '../../STheme';
 import SView from '../../SView';
 import { HeaderProps } from '../Header';
 
-
 export type STable2cellStyle = {
     fontSize?: number
     height?: number,

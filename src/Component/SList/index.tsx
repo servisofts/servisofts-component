@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { SHr, SPage, SSection, SText, SView, SInput, SBuscador, SIcon, STheme, SThread } from '../../index';
+import SHr from "../SHr";
+import SSection from "../SSection";
+import SText from "../SText";
+import SView from "../SView";
+import { SInput } from "../SInput";
+import SBuscador from "../SBuscador";
+import SIcon from "../SIcon";
+import STheme from "../STheme";
+import SThread from "../SThread";
 import SOrdenador, { TypeOrdenar } from '../SOrdenador';
 import { FlatList } from 'react-native';
 

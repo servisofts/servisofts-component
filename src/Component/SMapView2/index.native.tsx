@@ -3,6 +3,7 @@ import SMapViewAbstract from './abstract'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import STheme from '../STheme';
 import Geolocation from '@react-native-community/geolocation';
+import SView from '../SView';
 
 export default class SMapView extends SMapViewAbstract {
     fitToCoordinates(points: { latitude: number; longitude: number; }[], options: { edgePadding?: { top: number; right: number; bottom: number; left: number; }; animated?: boolean; }) {
@@ -68,51 +69,53 @@ export default class SMapView extends SMapViewAbstract {
         // console.log("TODO: center() SMapView2.index.native.tsx")
     }
     render() {
-        return <MapView
-            ref={(ref) => this.mapa = ref}
-            style={{
-                width: "100%",
-                height: "100%",
-                flex: 1,
-            }}
-            moveOnMarkerPress={false}
-            showsUserLocation={false}
-            showsMyLocationButton={false}
-            initialRegion={this.state.region}
-            provider={PROVIDER_GOOGLE}
-            {...this.props}
+        return <SView col={"xs-12"} flex >
+            <MapView
+                ref={(ref) => this.mapa = ref}
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    flex: 1,
+                }}
+                moveOnMarkerPress={false}
+                showsUserLocation={false}
+                showsMyLocationButton={false}
+                initialRegion={this.state.region}
+                provider={PROVIDER_GOOGLE}
+                {...this.props}
 
-            onMarkerPress={(evt) => {
-                if (this.props.children) {
-                    var resp = [];
-                    this.analiceRecurcibe(evt, this.props.children, resp);
+                onMarkerPress={(evt) => {
+                    if (this.props.children) {
+                        var resp = [];
+                        this.analiceRecurcibe(evt, this.props.children, resp);
 
-                }
-                // console.log(evt);
+                    }
+                    // console.log(evt);
 
-                if (this.props.onPress) {
-                    this.props.onPress(evt.nativeEvent)
-                }
-            }}
-            onPress={(evt) => {
-                if (this.props.children) {
-                    var resp = [];
-                    this.analiceRecurcibe(evt, this.props.children, resp);
+                    if (this.props.onPress) {
+                        this.props.onPress(evt.nativeEvent)
+                    }
+                }}
+                onPress={(evt) => {
+                    if (this.props.children) {
+                        var resp = [];
+                        this.analiceRecurcibe(evt, this.props.children, resp);
 
-                }
-                // console.log(evt);
+                    }
+                    // console.log(evt);
 
 
 
-                if (this.props.onPress) {
-                    this.props.onPress(evt.nativeEvent)
-                }
-            }}
+                    if (this.props.onPress) {
+                        this.props.onPress(evt.nativeEvent)
+                    }
+                }}
 
-            customMapStyle={this.props.customMapStyle ?? STheme.color.mapStyle}
-            onRegionChangeComplete={this.props.onRegionChangeComplete}
-        >
-            {this.props.children}
-        </MapView>
+                customMapStyle={this.props.customMapStyle ?? STheme.color.mapStyle}
+                onRegionChangeComplete={this.props.onRegionChangeComplete}
+            >
+                {this.props.children}
+            </MapView>
+        </SView>
     }
 }

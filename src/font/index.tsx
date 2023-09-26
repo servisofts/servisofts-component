@@ -28,6 +28,18 @@ export type FontsType = "hello baby"
     | "Oswald-Medium"
     | "Oswald-Regular"
     | "Oswald-SemiBold"
+    | "SF-Mono"
+    | "SF-Mono-Regular"
+    | "SF-Mono-Semibold"
+    | "Montserrat-ExtraBold"
+    | "Montserrat-Regular"
+    | "Montserrat"
+    | "TT-Norms-Pro"
+    | "TT-Norms-Pro-Regular"
+    | 'TT-Norms-Pro-Bold'
+    | "AcherusGrotesque-Regular"
+    | "AcherusGrotesque-Medium"
+    | "AcherusGrotesque-Bold"
 
 const Font = (props) => {
     return <></>

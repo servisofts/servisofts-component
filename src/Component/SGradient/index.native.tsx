@@ -13,11 +13,27 @@ class SGradient extends Component<typeProps> {
         this.state = {
         };
     }
+    gradientCoordinates(degrees) {
+        const adjustedDegrees = (degrees + 360 - 90) % 360; // Ajustar los grados a nuestro sistema de coordenadas
+        const radians = adjustedDegrees * (Math.PI / 180); // Convertir grados a radianes
+        return {
+            start: {
+                x: 0.5 * (1 - Math.cos(radians)),
+                y: 0.5 * (1 - Math.sin(radians)),
+            },
+            end: {
+                x: 0.5 * (1 + Math.cos(radians)),
+                y: 0.5 * (1 + Math.sin(radians)),
+            },
+        };
+    }
     render() {
         if (!this.props.colors) return null;
+        let prop = this.gradientCoordinates(this.props.deg ?? 0)
+
         return (
             <LinearGradient
-                start={{ x: 0, y: 1 }} end={{ x: 0, y: 0}}
+                {...prop}
                 colors={this.props.colors}
                 style={{
                     position: 'absolute',

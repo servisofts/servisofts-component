@@ -10,6 +10,7 @@ import SThread from '../SThread';
 import { SUuid } from '../SUuid';
 import SView from '../SView';
 import SHr from '../SHr';
+import SLinking, { SLinkingPropsType } from './SLinking';
 export type SPageProps = {
     params?: [string],
     component: any,
@@ -23,8 +24,9 @@ export declare type SPageListProps = {
     [name in string]?: SPageProps | object;
 }
 export type SNavigationProps = {
+    linking?: SLinkingPropsType,
     props: {
-        prefixes: [string],
+        prefixes?: [string],
         pages: { [name in string]: SPageProps },
         title?: string,
         navBar?: any,
@@ -167,6 +169,8 @@ export default class SNavigation extends Component<SNavigationProps> {
         }
         return true;
     }
+
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -175,51 +179,14 @@ export default class SNavigation extends Component<SNavigationProps> {
 
     }
 
-
-    getLinking() {
-        const linking = {
-            prefixes: this.props.props.prefixes,
-            config: {
-                screens: {}
-            },
-        };
-        var pages: any = {
-            ...this.props.props.pages,
-            ...Pages,
-        };
-        SNavigation.root = "";
-        Object.keys(pages).map((key) => {
-            var url = key;
-            if (!SNavigation.root) {
-                SNavigation.root = url;
-                url = "";
-            }
-
-            if (pages[key].params) {
-                pages[key].params.map((parm) => {
-                    url += "/:" + parm;
-                })
-            }
-
-            linking.config.screens[key] = url;
-        })
-        return linking;
-    }
-    getPages(Stack) {
-        var pages: any = {
-            ...this.props.props.pages,
-            ...Pages,
-        };
-        const Validator = this.props.props.validator;
+    getPages(pages, Stack) {
+        const Validator = this.props?.props?.validator;
+        let currentPage = "";
         return Object.keys(pages).map((key) => {
+            if (!SNavigation.root) {
+                SNavigation.root = key;
+            }
             var Page = (props) => {
-                const [state, setState] = useState({ loading: false });
-                useEffect(() => {
-                    // if (state.loading) return;
-                    new SThread(10, "load-page", false).start(() => {
-                        setState({ loading: true })
-                    })
-                }, [])
                 try {
                     if (props) {
                         SNavigation.lastRoute = props;
@@ -228,12 +195,6 @@ export default class SNavigation extends Component<SNavigationProps> {
                     if (!Page) {
                         Page = pages[key];
                     }
-                    if (!state.loading) return <SView col={"xs-12"} style={{
-                        flex: 1
-                    }}>
-                        {SPage.backgroundComponent}
-                        {Page.TOPBAR}
-                    </SView>
                     return <>
                         {!Validator ? null : <Validator />}
                         {Page.TOPBAR}
@@ -243,11 +204,9 @@ export default class SNavigation extends Component<SNavigationProps> {
                     console.error(e);
                     return null;
                 }
-
             }
             return <Stack.Screen key={key} name={key}
                 component={Page}
-                // component={pages[key].component ?? pages[key]}
                 options={{
                     title: this.props.props?.title ? this.props.props?.title : "Servisofts",
                     headerShown: false,
@@ -258,8 +217,6 @@ export default class SNavigation extends Component<SNavigationProps> {
 
 
     render() {
-        // var NavigationContainer = this.props.props.NavigationContainer;
-        // var Stack = this.props.props.Stack;
         let colors = {
             primary: STheme.color.primary,
             background: STheme.color.background,
@@ -268,26 +225,24 @@ export default class SNavigation extends Component<SNavigationProps> {
             border: "",
             notification: STheme.color.primary
         };
+
+        const pages = {
+            ...this.props.props.pages,
+            ...Pages,
+        }
         return (<NavigationContainer ref={(ref) => {
             SNavigation.navigation = ref;
-        }} linking={this.getLinking()}
-            //  theme={{
-            //     dark: false,
-            //     colors: {
-            //         background: STheme.color.background
-            //     }
-            // }}
-
+        }}
+            linking={SLinking(this.props.linking ?? {}, pages)}
             theme={{ dark: false, colors: colors }}
-            // initialState={stateNavigator}
             onStateChange={(state) =>
                 stateNavigator = state
                 // AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
             }
         ><Stack.Navigator>
-                {this.getPages(Stack)}
+                {this.getPages(pages, Stack)}
             </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer >
         );
 
     }

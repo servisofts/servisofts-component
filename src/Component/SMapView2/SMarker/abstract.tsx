@@ -8,7 +8,9 @@ export type SMarkerType = {
     latitude: number,
     longitude: number,
     width?: number,
+    height?: number,
     fill?: string,
+    onPress?: () => any
 }
 
 export default abstract class SMarkerAbstract extends Component<SMarkerType> {

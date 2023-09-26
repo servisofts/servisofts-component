@@ -66,6 +66,10 @@ declare module 'react-native-compressor' {
 //     export default MapView;
 // }
 
+// declare module 'react-native-reanimated' {
+//     import Animated from 'react-native-reanimated';
+//     export default Animated;
+// }
 declare module '@react-native-community/geolocation' {
     import Geolocation from '@react-native-community/geolocation';
     export default Geolocation;
