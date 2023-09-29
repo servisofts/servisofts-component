@@ -16,7 +16,7 @@ import SLoadContainer from '../SLoad/SLoadContainer';
 export type SComponentContainerProps = {
     theme?: SThemeProps,
     background?: any,
-    debug?: boolean,
+    debug?: any,
     socket?: any,
     assets?: SAssets,
     inputs?: () => SInputsCofig,
@@ -95,7 +95,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
 
     }
     getContenido() {
-        if (!this.state.theme) return null;
+        if (!this.state.theme) return null
         return (
             <View style={{
                 width: "100%",
@@ -133,7 +133,9 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
+              
                 if (this.state.theme != color) {
+                  
                     this.setState({ theme: null });
                     new SThread(10, "render_theme", false).start(() => {
                         this.setState({ theme: color });

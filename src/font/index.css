@@ -148,15 +148,15 @@
 
 @font-face {
   font-family: 'TT-Norms-Pro';
-  src: url(./TT-Norms-Pro-Regular.otf);
+  src: url(./TT-Norms-Pro-Regular.ttf);
 }
 @font-face {
   font-family: 'TT-Norms-Pro-Regular';
-  src: url(./TT-Norms-Pro-Regular.otf);
+  src: url(./TT-Norms-Pro-Regular.ttf);
 }
 @font-face {
   font-family: 'TT-Norms-Pro-Bold';
-  src: url(./TT-Norms-Pro-Bold.otf);
+  src: url(./TT-Norms-Pro-Bold.ttf);
 }
 @font-face {
   font-family: 'AcherusGrotesque-Regular';

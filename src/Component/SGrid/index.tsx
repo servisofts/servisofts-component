@@ -9,6 +9,7 @@ export type SGridProps = {
     col: SColType,
     style: ViewStyle,
     colSquare?: boolean,
+    animated?: boolean,
     flex?: Number | boolean,
     margin?: any,
     height?: any,
@@ -112,13 +113,17 @@ export default class SGrid extends Component<SGridProps> {
 
     render() {
         const size = this.getValue()
+        let Element: any = View;
+        if (this.props.animated) {
+            Element = Animated.createAnimatedComponent(Element);
+        }
         return (
-            <View
+            <Element
                 // key={SUuid()}
                 style={{
                     ...(!this.props.style.position ? {} : { position: this.props.style.position, }),
                     ...(!this.props.style.flex ? {} : { flex: this.props.style.flex, }),
-                    ...(!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : parseInt(this.props.flex+"") }),
+                    ...(!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : parseInt(this.props.flex + "") }),
                     ...(!this.props.style.height ? {} : { height: this.props.style.height, }),
                     ...(!this.props.style.maxHeight ? {} : { maxHeight: this.props.style.maxHeight, }),
                     ...(!this.props.style.maxWidth ? {} : { maxWidth: this.props.style.maxWidth, }),
@@ -159,7 +164,7 @@ export default class SGrid extends Component<SGridProps> {
 
                 }}>
                 {this.props.children}
-            </View >
+            </Element >
         );
 
     }

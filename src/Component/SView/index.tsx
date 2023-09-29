@@ -105,6 +105,7 @@ export default class SView extends Component<SViewProps> {
         height={this.props.height}
         margin={this.props.margin}
         flex={this.props.flex}
+        animated={this.props.animated}
         col={this.state.params.col}
         style={(!this.props.style ? {} : this.props.style)}
         onLayout={(evt) => {

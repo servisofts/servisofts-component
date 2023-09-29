@@ -41,7 +41,7 @@ export type SThemeProps = {
     themes: SThemeThemes,
     noAnimated?: boolean,
     data?: any,
-    onLoad: (color: SThemeColors) => any
+    onLoad?: (color: SThemeColors) => any
 }
 
 export default class STheme extends Component<SThemeProps> {
@@ -109,6 +109,7 @@ export default class STheme extends Component<SThemeProps> {
     }
     async getItemTheme() {
         SStorage.getItem("themeState", (data) => {
+            console.log("Entro en el onLoad")
             if (data) {
                 this.select(data);
             } else {

@@ -78,6 +78,10 @@ declare module 'react-native-fs' {
     import RNFS from 'react-native-fs';
     export default RNFS;
 }
+declare module '@react-native-async-storage/async-storage' {
+    import AsyncStorage from '@react-native-async-storage/async-storage'
+    export default AsyncStorage;
+}
 
 // declare module 'google-map-react' {
 //     import GoogleMapReact from 'google-map-react';
