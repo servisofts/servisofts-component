@@ -103,8 +103,12 @@ export default class SMapView extends SMapViewAbstract {
     _getChildrens() {
         var childs: any = this.props.children;
         if (!childs) return null;
+        if (!Array.isArray(childs)) {
+            childs = [childs]
+        }
         this._toRemove.map(i => i.setMap(null))
         this._toRemove = [];
+        console.log("MOSTRANDO LOS CHILDS", childs)
         childs = [].concat.apply([], childs);
         return childs.map((child) => {
             if (!child) return null;
@@ -118,6 +122,7 @@ export default class SMapView extends SMapViewAbstract {
                 if (ins.renderMap) {
                     return ins.renderMap(child, { map: this.mapa, maps: this.maps, key: child?.props?.key }, this._toRemove)
                 }
+                return child;
             }
             return null;
         })
@@ -127,6 +132,7 @@ export default class SMapView extends SMapViewAbstract {
         console.log("TODO: center() SMapView2.index.tsx")
     }
     render() {
+        console.log("Repinto el mapa")
         var zoom = this.getZoom(this.state.region);
         var options: OptionsTypes = {
             styles: this.props.customMapStyle ?? STheme.color.mapStyle,
@@ -158,6 +164,7 @@ export default class SMapView extends SMapViewAbstract {
                             latitude: evt.center.lat(), longitude: evt.center.lng(),
                             ...this.zoomToDelta(evt.zoom, this.state?.layout?.width, this.mapa.center.lat())
                         }
+                        this.setRegion(center);
                         this.props.onRegionChangeComplete(center);
                     }
                 }}
@@ -169,6 +176,7 @@ export default class SMapView extends SMapViewAbstract {
                             latitude: this.mapa.center.lat(), longitude: this.mapa.center.lng(),
                             ...this.zoomToDelta(evt, this.state?.layout?.width, this.mapa.center.lat())
                         }
+
                         this.props.onRegionChangeComplete(center);
                     }
                 }}

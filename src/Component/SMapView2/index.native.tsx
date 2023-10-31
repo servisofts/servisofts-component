@@ -76,6 +76,7 @@ export default class SMapView extends SMapViewAbstract {
                     width: "100%",
                     height: "100%",
                     flex: 1,
+                    minHeight:50,
                 }}
                 moveOnMarkerPress={false}
                 showsUserLocation={false}

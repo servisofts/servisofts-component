@@ -36,7 +36,7 @@ export default class STable2 extends Component<STable2Type> {
         super(props);
         this.state = {
             limit: this.props.limit || 20,
-            space: 4,
+            space: 2,
             height: 40,
             page: 1,
             isLoad: false,
@@ -229,7 +229,7 @@ export default class STable2 extends Component<STable2Type> {
             return <Row
                 key={"row_" + i}
                 index={((this.state.page - 1) * this.state.limit) + i}
-                height={this.props?.rowHeight ?? 50}
+                height={this.props?.rowHeight ?? 40}
                 space={this.state.space}
                 data={data}
                 cellStyle={this.props.cellStyle}
@@ -244,12 +244,12 @@ export default class STable2 extends Component<STable2Type> {
         //     return <SLoad />
         // }
         var cantidad = this.props.data ? Object.keys(this.state.data).length : 0;
-        return <SView col={"xs-12"} height={30} center backgroundColor={STheme.color.primary} style={{
+        return <SView col={"xs-12"} height={22} center backgroundColor={STheme.color.primary} style={{
             borderTopLeftRadius: 16,
             borderTopRightRadius: 16,
         }} row>
             <SView col={"xs-4"}>
-                <SText># {cantidad}</SText>
+                <SText fontSize={11}># {cantidad}</SText>
             </SView>
             <SView col={"xs-4"}>
                 <SPagination data={this.state.data} limit={this.state.limit} page={this.state.page} onChange={(page) => {
@@ -308,7 +308,7 @@ export default class STable2 extends Component<STable2Type> {
                             width: null
                         }}
                         header={{
-                            style: { height: 40 },
+                            style: { height: 30 },
                             content: <SView col={"xs-12"} row height>
                                 {this.getHeader()}
                             </SView>
@@ -320,7 +320,7 @@ export default class STable2 extends Component<STable2Type> {
                             }}
                         >
                             {this.getData()}
-                            <SView height={200} />
+                            {/* <SView height={200} /> */}
                         </SView>
                     </SScrollView2>
                 </SView>

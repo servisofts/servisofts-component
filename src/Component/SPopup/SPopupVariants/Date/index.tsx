@@ -16,7 +16,7 @@ export type PropsType = {
     onPress?: (obj) => void
     onClose?: () => void
 }
-export default class DateBetween extends Component<PropsType> {
+export default class Date extends Component<PropsType> {
     static defaultProps = {
         title: '',
         message: '',
@@ -25,7 +25,6 @@ export default class DateBetween extends Component<PropsType> {
     }
     state
     fecha_ini
-    fecha_fin
     constructor(props) {
         super(props)
         this.state = {
@@ -57,13 +56,8 @@ export default class DateBetween extends Component<PropsType> {
                     </SView>
                     <SView col={"xs-11"} center row >
                         <SView col={"xs-12 md-5.5"} center >
-                            <SInput ref={(ref) => this.fecha_ini = ref} type={'date'} label={"Fecha inicio"} defaultValue={new SDate().setDay(1).toString("yyyy-MM-dd")} />
+                            <SInput ref={(ref) => this.fecha_ini = ref} type={'date'} label={"Fecha"} defaultValue={new SDate().toString("yyyy-MM-dd")} />
                         </SView>
-                        <SView col={"xs-0 md-1"} />
-                        <SView col={"xs-12 md-5.5"} center >
-                            <SInput ref={(ref) => this.fecha_fin = ref} type={'date'} label={"Fecha fin"} defaultValue={new SDate().toString("yyyy-MM-dd")} />
-                        </SView>
-
                     </SView>
                     <SView col={"xs-10"} center height={40}>
                         <SText fontSize={12} center> {this.props.message} </SText>
@@ -74,21 +68,19 @@ export default class DateBetween extends Component<PropsType> {
                                 if (this.props.onClose) {
                                     this.props.onClose()
                                 }
-                                SPopup.close("dateBetween")
+                                SPopup.close("Date")
                             }}>Cancelar</SButtom>
                         </SView>
                         <SView col={"xs-6"} center >
                             <SButtom props={{ type: "outline" }} onPress={() => {
                                 if (this.props.onPress) {
                                     this.state.acept = true;
-                                    var fecha_inicio = this.fecha_ini.getValue()
-                                    var fecha_fin = this.fecha_fin.getValue()
+                                    var fecha = this.fecha_ini.getValue()
                                     this.props.onPress({
-                                        fecha_inicio: fecha_inicio,
-                                        fecha_fin: fecha_fin
+                                        fecha: fecha,
                                     })
                                 }
-                                SPopup.close("dateBetween")
+                                SPopup.close("Date")
 
                             }}>Confirmar</SButtom>
                         </SView>

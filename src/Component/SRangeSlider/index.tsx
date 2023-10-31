@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import { SView, SText, SColType, STheme } from '../../index';
 import SAPanResponder from '../SAnimated/SAPanResponder';
+import Selection from './Selection';
 
 type SRangeSliderType = {
     range: [number, number],
@@ -49,6 +50,7 @@ export default class SRangeSlider extends Component<SRangeSliderType> {
         this.pan = new SAPanResponder({
             onGrand: (e, gs) => {
                 this.initSize = this.pos._value;
+                Selection.preventSelection();
             },
             onMove: (e, gs) => {
                 if (this.props.value) return;
@@ -62,15 +64,22 @@ export default class SRangeSlider extends Component<SRangeSliderType> {
                     return;
                 }
                 this.pos.setValue(this.initSize + dx);
-                var value = this.getValue();
+                
                 if (this.props.onChange) {
+                    var value = this.getValue();
                     this.props.onChange(value);
                 }
+
+            },
+            onRelease: () => {
+                var value = this.getValue();
                 if (this.state.value != value) {
                     this.setState({ value: value })
                 }
-            },
-            onRelease: () => {
+                if (this.props.onChange) {
+                    this.props.onChange(value);
+                }
+                Selection.allowSelection();
             }
         });
 

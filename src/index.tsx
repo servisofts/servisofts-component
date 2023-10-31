@@ -53,6 +53,8 @@ import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
 import SSwitch from "./Component/SSwitch";
 import SNativeModules from "./SNativeModules";
+import SNotification from "./Component/SNotification";
+import SGeolocation from "./Component/SGeolocation";
 export * from './Types'
 export {
     SHr,
@@ -106,12 +108,14 @@ export {
     // MAPA
     SMapView,
     SMapView2,
+    SGeolocation,
     SMarker,
     SPolyline,
     SLocation,
     // FUENTES
     Font,
     SNativeModules,
+    SNotification,
     //alvaro
     SAlvaro
 }

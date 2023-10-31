@@ -8,7 +8,7 @@ import { HeaderProps } from '../Header';
 export type STable2cellStyle = {
     fontSize?: number
     height?: number,
-    textAlign?: "center" | "end" | "start"
+    textAlign?: "center" | "right" | "left"
 }
 type typeProps = {
     header: Array<HeaderProps>,
@@ -52,9 +52,11 @@ class Row extends Component<typeProps> {
     }
     getItems = () => {
         return this.props.header.map((item, index) => {
-            let cellStyle: STable2cellStyle = {
+            let cellStyle: any = {
                 fontSize: 12,
-                height: this.props.height,
+                textAlign: "left",
+                textWrap: "nowrap",
+                height: this.props?.height ?? 30,
                 ...this.props.cellStyle ?? {},
                 ...item.cellStyle ?? {},
             }
@@ -70,32 +72,40 @@ class Row extends Component<typeProps> {
                 if (typeof data == "object") {
                     data = JSON.stringify(data);
                 }
-                ITEM = <SText fontSize={cellStyle.fontSize} col={"xs-12"} center={item.center} style={{
-                    textAlign: cellStyle.textAlign
+                ITEM = <SText font={"Calibri"} fontSize={cellStyle.fontSize} col={"xs-12"} center={item.center} style={{
+                    textAlign: cellStyle.textAlign,
+                    ...cellStyle
                 }} >{data}</SText>
             }
 
             return <SView row key={"itm_row_" + item.key} height={cellStyle.height}>
                 <SView width={this.props.space} height
-                    backgroundColor={this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22"}
+                    style={{
+                        // borderRightWidth: 1,
+                        // borderColor: STheme.color.text + "33"
+                    }}
+                // backgroundColor={STheme.color.gray}
                 />
                 <SView
                     animated
                     height
                     style={{
                         width: this.props.animHeader[item.key],
-                        overflow: 'hidden',
+                        // overflow: 'hidden',
+                        // borderRightWidth: 1,
+                        // borderColor: STheme.color.text + "22"
                     }}
                 >
                     <SView
                         height
                         {...item}
                         style={{
-                            backgroundColor: this.props.index % 2 == 0 ? STheme.color.primary + "22" : STheme.color.secondary + "22",
+                            backgroundColor: this.props.index % 2 == 0 ? "" : STheme.color.card,
                             overflow: 'hidden',
-                            padding: 2,
+                            // padding: 1,
                             justifyContent: 'center',
                             width: "100%",
+
                         }}>
                         {ITEM}
                     </SView>

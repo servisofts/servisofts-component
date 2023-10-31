@@ -145,8 +145,8 @@ export default class ExportExcel extends Component<ExportExcelProps> {
         return (
             <SView
                 style={{
-                    width: 30,
-                    height: 26,
+                    width: 20,
+                    height: 20,
                     // backgroundColor: "#f0f",
                     // padding: 2,
                 }}

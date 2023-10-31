@@ -11,6 +11,7 @@ import SPage from '../SPage';
 import { SInputsCofig } from "../../Types/index"
 import SThread from '../SThread';
 import SLoadContainer from '../SLoad/SLoadContainer';
+import SNotificationContainer from '../SNotification/SNotificationContainer';
 // import KeyboardSpacer from './KeyboardSpacer';
 
 export type SComponentContainerProps = {
@@ -123,6 +124,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         </View>
                         <DebugBar debug={this.props.debug} />
                         <SPopup />
+                        <SNotificationContainer />
                         <SLoadContainer />
                     </View>
                 </SafeAreaView>
@@ -133,9 +135,9 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
-              
+
                 if (this.state.theme != color) {
-                  
+
                     this.setState({ theme: null });
                     new SThread(10, "render_theme", false).start(() => {
                         this.setState({ theme: color });

@@ -9,6 +9,7 @@ import DateBetween, { PropsType as DateBetweenProps } from './SPopupVariants/Dat
 import Info from './SPopupVariants/Info';
 import Form from './SPopupVariants/Form';
 import Container, { PopupContainerPropsType } from './SPopupVariants/Container';
+import Date from './SPopupVariants/Date';
 
 type SPopupOpenProps = {
     key?: string,
@@ -41,6 +42,10 @@ export default class SPopup extends Component {
     static dateBetween(text, onPress) {
         // alert(obj)
         INSTANCE.open({ key: "dateBetween", content: <DateBetween title={text} onPress={onPress} />, style: {} });
+    }
+    static date(text, onPress) {
+        // alert(obj)
+        INSTANCE.open({ key: "Date", content: <Date title={text} onPress={onPress} />, style: {} });
     }
     // static form() {
     //     INSTANCE.open({ key: "dateBetween", content: <Form />, style: {} });

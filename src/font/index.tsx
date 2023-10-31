@@ -40,6 +40,8 @@ export type FontsType = "hello baby"
     | "AcherusGrotesque-Regular"
     | "AcherusGrotesque-Medium"
     | "AcherusGrotesque-Bold"
+    | "Cascadia"
+    | "Calibri"
 
 const Font = (props) => {
     return <></>

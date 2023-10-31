@@ -1,11 +1,13 @@
 import circle from "./type/circle"
 import window from "./type/window"
 import skeleton from "./type/skeleton"
+import bar from "./type/bar"
 import { SViewProps } from "../SView"
 export default {
     circle,
     window,
-    skeleton
+    skeleton,
+    bar
 
 }
 
@@ -14,7 +16,7 @@ export default {
 export type SLoadPropsType = {
     color?: string,
     hidden?: boolean,
-    type?: "circle" | "window" | "skeleton",
+    type?: "circle" | "window" | "skeleton" | "bar",
     label?: string,
     key?: any,
     onCancel?: () => any,

@@ -65,6 +65,8 @@ export default ({ prefixes, getInitialURL }: SLinkingPropsType, pages): any => {
             };
             Linking.addEventListener('url', onReceiveURL);
             return () => {
+                if(!Linking) return;
+                if(!Linking.removeEventListener) return;
                 Linking.removeEventListener('url', onReceiveURL);
             };
         },

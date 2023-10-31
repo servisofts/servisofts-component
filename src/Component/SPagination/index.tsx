@@ -34,8 +34,8 @@ class SPagination extends Component<typeProps> {
                 <SView
                     key={"itm_sp_1"}
                     style={{
-                        width: 20,
-                        height: 20,
+                        width: 18,
+                        height: 18,
                         borderRadius: 100,
                     }} center onPress={() => {
                         this.props.onChange(this.props.page - 1);
@@ -85,8 +85,8 @@ class SPagination extends Component<typeProps> {
                 <SView
                     key={"itm_sp_2_" + index}
                     style={{
-                        width: 22,
-                        height: 22,
+                        width: 18,
+                        height: 18,
                         borderRadius: 40,
                         backgroundColor: (val == this.props.page ? STheme.color.secondary + "66" : "transparent")
                     }} center onPress={() => {
@@ -102,8 +102,8 @@ class SPagination extends Component<typeProps> {
                 <SView
                     key={"itm_sp_3"}
                     style={{
-                        width: 20,
-                        height: 20,
+                        width: 18,
+                        height: 18,
                         borderRadius: 100,
                     }} center onPress={() => {
                         this.props.onChange(this.props.page + 1);

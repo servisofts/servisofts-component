@@ -5,7 +5,7 @@ import SView, { SViewProps } from '../SView/index';
 import { FontsType } from '../../font/index';
 import { SThemeColors } from '../STheme'
 export type STextProps = {
-    style?: TextStyle | [TextStyle] | any,
+    style?: TextStyle,
     primary?: boolean,
     secondary?: boolean,
     fontSize?: number,
@@ -34,6 +34,7 @@ export default class SText extends Component<STextProps> {
         //   return newSize;
         // };
         // const adjustedFontSize = normalize(fontSize);
+        const ps: any = this.props.style
         return (
             <SView {...this.props}>
                 <Text style={{
@@ -66,7 +67,7 @@ export default class SText extends Component<STextProps> {
                     ...(!this.props.justify ? {} : {
                         textAlign: "justify",
                     }),
-                    ...this.props.style
+                    ...ps
                 }} allowFontScaling={false}>{this.props.children}</Text>
             </SView>
         );

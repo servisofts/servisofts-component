@@ -106,11 +106,11 @@ class Header extends Component<HeaderProps> {
                     style={{
                         width: anm,
                         backgroundColor: this.props.headerColor ?? STheme.color.primary,
-                        borderRadius: 2,
+                        borderRadius: 0,
                         overflow: 'hidden',
                     }}>
                     <SView row center>
-                        <SText fontSize={12} font={"Roboto-Bold"}>{this.props.label}</SText>
+                        <SText fontSize={11} font={"Calibri"}>{this.props.label}</SText>
 
                         {this.props.order ? <SView width={14} center style={{
                             transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }],

@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
-import { NavigationContainer } from '@react-navigation/native';
+import { CommonActions, NavigationContainer, NavigationContainerRef, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Pages from '../../Pages/index';
 import SLoad from '../SLoad';
@@ -11,6 +11,7 @@ import { SUuid } from '../SUuid';
 import SView from '../SView';
 import SHr from '../SHr';
 import SLinking, { SLinkingPropsType } from './SLinking';
+import SNotificationContainer from '../SNotification/SNotificationContainer';
 export type SPageProps = {
     params?: [string],
     component: any,
@@ -54,7 +55,7 @@ type navigationFuncion = {
 const Stack = createStackNavigator();
 var stateNavigator;
 export default class SNavigation extends Component<SNavigationProps> {
-    static navigation: any = null;
+    static navigation: NavigationContainerRef = null;
     static lastRoute: any;
     static navBar: any = null;
     static root: any;
@@ -67,10 +68,30 @@ export default class SNavigation extends Component<SNavigationProps> {
         // if (Platform.OS === "web") {
         //     window.history.pushState([], "", route);
         // }
-        SNavigation.lastRoute.navigation.reset({
-            index: 0,
+        // SNavigation.navigation.dispatch(CommonActions.reset({
+        //     index: 0,
+        //     routes: [{ name: route, params: params }]
+        // }))
+        // SNavigation.navigation.dispatch(
+        //     StackActions.reset({
+        //         index: 0,
+        //         actions: [NavigationActions.navigate({ routeName: 'Home' })],
+        //     })
+        // );
+        // SNavigation.navigation.
+        // SNavigation.lastRoute.navigation.popToTop();
+        SNavigation.navigation.reset({
             routes: [{ name: route, params: params }]
-        });
+        })
+
+        // SNavigation.navigation.dispatch(CommonActions.reset({
+        //     index: 0,
+        //     routes: [{ name: route, params: params }]
+        // }))
+        // SNavigation.lastRoute.navigation.reset({
+        //     index: 0,
+        //     routes: [{ name: route, params: params }]
+        // });
     }
     static openURL(route: string) {
         Linking.openURL(route);

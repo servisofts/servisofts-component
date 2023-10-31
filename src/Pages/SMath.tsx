@@ -31,7 +31,7 @@ export default class index extends Component {
                         center
                         space={16}
                         data={dataTest}
-                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "end" }}>{SMath.formatMoney(n)}</SText>}
+                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "right" }}>{SMath.formatMoney(n)}</SText>}
                     />
                     <SHr height={50} />
                     <SText>{'SMath.formatMoney(n,0)'}</SText>
@@ -39,7 +39,7 @@ export default class index extends Component {
                         center
                         space={16}
                         data={dataTest}
-                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "end" }}>{SMath.formatMoney(n, 0)}</SText>}
+                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "right" }}>{SMath.formatMoney(n, 0)}</SText>}
                     />
                     <SHr height={50} />
 
@@ -48,7 +48,7 @@ export default class index extends Component {
                         center
                         space={16}
                         data={dataTest}
-                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "end" }}>{SMath.formatMoney(n, 2, ".")}</SText>}
+                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "right" }}>{SMath.formatMoney(n, 2, ".")}</SText>}
                     />
                     <SHr height={50} />
                     <SText>{'SMath.formatMoney( n , 0 , "." )'}</SText>
@@ -56,7 +56,7 @@ export default class index extends Component {
                         center
                         space={16}
                         data={dataTest}
-                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "end" }}>{SMath.formatMoney(n, 0, ".")}</SText>}
+                        render={n => <SText fontSize={18} col={"xs-12"} style={{ textAlign: "right" }}>{SMath.formatMoney(n, 0, ".")}</SText>}
                     />
                 </SView>
             </SPage>

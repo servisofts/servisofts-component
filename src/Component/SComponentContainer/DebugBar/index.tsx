@@ -19,30 +19,30 @@ export default class DebugBar extends Component<typeSDebugBar> {
             stateSocket: false,
         }
     }
-    register() {
-        new SThread(100, "hiloeste", true).start(() => {
-            if (SComponentContainer.SSocket) {
-                if (SComponentContainer.SSocket.getSession() != null) {
-                    SComponentContainer.SSocket.register("DebugBar", (instance) => {
-                        this.register();
-                    })
-                    if (this.state.stateSocket != SComponentContainer.SSocket.getSession().isOpen()) {
+    // register() {
+    //     new SThread(100, "hiloeste", true).start(() => {
+    //         if (SComponentContainer.SSocket) {
+    //             if (SComponentContainer.SSocket.getSession() != null) {
+    //                 SComponentContainer.SSocket.register("DebugBar", (instance) => {
+    //                     this.register();
+    //                 })
+    //                 if (this.state.stateSocket != SComponentContainer.SSocket.getSession().isOpen()) {
 
-                        this.setState({
-                            stateSocket: SComponentContainer.SSocket.getSession().isOpen()
-                        })
-                    }
-                    if (!this.state.register) this.setState({ register: true });
-                    return;
-                }
-            }
-            this.register();
-        })
-    }
+    //                     this.setState({
+    //                         stateSocket: SComponentContainer.SSocket.getSession().isOpen()
+    //                     })
+    //                 }
+    //                 if (!this.state.register) this.setState({ register: true });
+    //                 return;
+    //             }
+    //         }
+    //         this.register();
+    //     })
+    // }
 
     render() {
         if (!this.props.debug) return <View />
-        this.register();
+        // this.register();
         return (
             <>
                 <SView
@@ -61,10 +61,7 @@ export default class DebugBar extends Component<typeSDebugBar> {
                         // STheme.change();
                     }}
                 >
-                    {!this.state.stateSocket ?
-                        <SIcon name={"WifiDisconnect"} fill={STheme.color.primary + "99"} stroke={STheme.color.primary} /> :
-                        <SIcon name={"Wifi"} fill={STheme.color.primary} />
-                    }
+                     <SIcon name={"Notify"} fill={STheme.color.primary} />
                 </SView>
                 <SView
                     style={{
@@ -84,7 +81,7 @@ export default class DebugBar extends Component<typeSDebugBar> {
                 >
                     <SIcon name={STheme.getTheme() == "default" ? "Sun" : "Moon"} fill={STheme.color.primary} />
                 </SView>
-                <SView
+                {/* <SView
                     style={{
                         position: "absolute",
                         width: 25,
@@ -101,7 +98,7 @@ export default class DebugBar extends Component<typeSDebugBar> {
                     }}
                 >
                     <SIcon name={"AlertOutline"} fill={STheme.color.primary} />
-                </SView>
+                </SView> */}
             </>
         )
     }

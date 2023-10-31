@@ -25,6 +25,7 @@ type EdgePadding = {
 export type SMapViewType = {
     initialRegion: RegionType,
     customMapStyle?: [any],
+    showsUserLocation?: boolean,
     onRegionChangeComplete?: (region: RegionType) => void,
     onPress?: (event: { coordinate: LatLngType, position: PositionType }) => void,
 }
@@ -36,9 +37,10 @@ export default abstract class SMapViewAbstract extends Component<SMapViewType> {
     static Cluster = ClusteredMapView;
     mapa;
     state = {
+        time: 0,
         region: {
-            latitude: 17,
-            longitude: 17,
+            latitude: -17,
+            longitude: -63,
             latitudeDelta: 0.1,
             longitudeDelta: 0.1,
         }
@@ -57,6 +59,7 @@ export default abstract class SMapViewAbstract extends Component<SMapViewType> {
 
     setRegion(region: RegionType) {
         this.state.region = region;
+        this.state.time = new Date().getTime();
         this.setState({ ...this.state });
     }
 }

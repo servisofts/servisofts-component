@@ -170,3 +170,11 @@
   font-family: 'AcherusGrotesque-Bold';
   src: url(./AcherusGrotesque-Bold.ttf);
 }
+@font-face {
+  font-family: 'Cascadia';
+  src: url(./Cascadia.ttf);
+}
+@font-face {
+  font-family: 'Calibri';
+  src: url(./Calibri.ttf);
+}

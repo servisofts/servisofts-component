@@ -56,7 +56,7 @@ export default class Confirm extends Component<PropsType> {
                 style={{
                     maxHeight: 360,
                     minHeight: 100,
-                    padding: 8,
+                    // padding: 8,
                     // borderWidth:2,
                     // borderColor:STheme.color.text+"33",
                     borderRadius: 16,

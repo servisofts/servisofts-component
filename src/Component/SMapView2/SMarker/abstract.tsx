@@ -4,6 +4,7 @@ import SView from '../../SView'
 
 
 export type SMarkerType = {
+    key?: any,
     _type_map: string,
     latitude: number,
     longitude: number,
@@ -23,7 +24,10 @@ export default abstract class SMarkerAbstract extends Component<SMarkerType> {
     }
 
     state = {
+        latitude: null,
+        longitude: null
     }
+    abstract setCoordinate({ latitude, longitude })
     constructor(props) {
         super(props);
 

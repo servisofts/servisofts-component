@@ -3,7 +3,7 @@ import { View, Text, Platform } from 'react-native';
 import { SText, STheme, SView, SImage } from '../../../../index';
 // import DocumentPicker from 'react-native-document-picker';
 // import ImagePicker from 'react-native-image-picker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 
 type Props = {
     onUpload?: Function,
@@ -23,7 +23,7 @@ export default class DropFileSingle extends Component<Props> {
             files: [],
         };
         var value = props.defaultValue || "";
-      if (value) {
+        if (value) {
             if (props.filePath) {
                 // console.log(props.filePath + "/" + props.name + "/" + value)
                 this.state.files.push({
@@ -42,18 +42,23 @@ export default class DropFileSingle extends Component<Props> {
     }
 
     fileUpload = async () => {
-        launchImageLibrary({}, (response) => {
+        // launchCamera({
+        //     mediaType: "photo",
+        // }, (response) => {
+        launchImageLibrary({
+            // mediaType: "photo",
+        }, (response) => {
             console.log(response);
             if (response.assets) {
                 if (response.assets[0]) {
                     var file = response.assets[0];
 
                     this.state.files[0] = {
-                        file:{
+                        file: {
                             ...file,
                             name: file.fileName,
                         },
-                        uri:Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
+                        uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
                     };
                     if (this.props.onChange) {
                         this.props.onChange(this.state.files);

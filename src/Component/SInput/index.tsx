@@ -127,7 +127,7 @@ export class SInput extends Component<TypeInputProps> {
         }
     }
     setValue(value) {
-        this.setState({ value });
+        this.setState({ value: value });
         this.onChangeText(value);
     }
     getType() {

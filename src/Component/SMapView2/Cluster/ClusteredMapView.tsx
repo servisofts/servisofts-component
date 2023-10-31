@@ -181,12 +181,10 @@ export default class ClusteredMapView extends Component<ClusteredMapViewProps> {
   }
 
   render() {
-    const { style, ...props } = this.props
 
     return (
       <SMapView
-        {...props}
-        style={style}
+        {...this.props}
         ref={this.mapRef}
         onRegionChangeComplete={this.onRegionChangeComplete}>
         {
