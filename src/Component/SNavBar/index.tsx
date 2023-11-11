@@ -97,7 +97,7 @@ export default class SNavBar extends Component<SPageProps> {
         </SView>
     }
 
-    renderTitle() {
+    renderTitle(): any {
         if (!this.props.title) return null;
         if (typeof this.props.title == "object") return this.props.title;
         return <SText color={STheme.color.secondary}>{this.props.title}</SText>

@@ -66,7 +66,9 @@ export default ({ prefixes, getInitialURL }: SLinkingPropsType, pages): any => {
             Linking.addEventListener('url', onReceiveURL);
             return () => {
                 if(!Linking) return;
+                  // @ts-ignore
                 if(!Linking.removeEventListener) return;
+                  // @ts-ignore
                 Linking.removeEventListener('url', onReceiveURL);
             };
         },

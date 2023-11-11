@@ -20,6 +20,7 @@ export type SComponentContainerProps = {
     debug?: any,
     socket?: any,
     assets?: SAssets,
+    children?: any,
     inputs?: () => SInputsCofig,
 }
 
@@ -124,7 +125,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         </View>
                         <DebugBar debug={this.props.debug} />
                         <SPopup />
-                        <SNotificationContainer />
+                        {/* <SNotificationContainer /> */}
                         <SLoadContainer />
                     </View>
                 </SafeAreaView>
@@ -133,6 +134,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     }
     render() {
         SComponentContainer.Instance = this;
+        // return this.getContenido()
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
 

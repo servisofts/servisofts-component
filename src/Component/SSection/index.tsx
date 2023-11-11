@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 type SSectionType = {
     key: string,
+    children?: any,
 }
 class SSection extends Component<SSectionType> {
     constructor(props) {

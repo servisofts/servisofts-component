@@ -8,7 +8,7 @@ import SText from '../../../SText'
 import SHr from '../../../SHr'
 
 export type PopupContainerPropsType = {
-
+    children?: any,
 }
 export default class Container extends Component<PopupContainerPropsType> {
     render() {

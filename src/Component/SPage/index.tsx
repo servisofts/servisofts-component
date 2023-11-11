@@ -21,6 +21,7 @@ export type SPageProps = {
     header?: any,
     footer?: any,
     keyboardVerticalOffset?: any,
+    children?: any,
 
 }
 

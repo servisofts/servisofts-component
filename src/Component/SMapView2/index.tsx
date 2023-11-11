@@ -108,7 +108,6 @@ export default class SMapView extends SMapViewAbstract {
         }
         this._toRemove.map(i => i.setMap(null))
         this._toRemove = [];
-        console.log("MOSTRANDO LOS CHILDS", childs)
         childs = [].concat.apply([], childs);
         return childs.map((child) => {
             if (!child) return null;
@@ -132,7 +131,6 @@ export default class SMapView extends SMapViewAbstract {
         console.log("TODO: center() SMapView2.index.tsx")
     }
     render() {
-        console.log("Repinto el mapa")
         var zoom = this.getZoom(this.state.region);
         var options: OptionsTypes = {
             styles: this.props.customMapStyle ?? STheme.color.mapStyle,

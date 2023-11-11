@@ -22,9 +22,9 @@ declare module "*.svg" {
 //     export { Svg, Line, Path, Rect, Circle, ClipPath, Defs, Ellipse, ForeignObject, Image, G, LinearGradient, Mask, Marker, Pattern, Polygon, Polyline, Stop, SvgAst, SvgCss, Text, TextPath, SvgXml };
 //     export default Svg;
 // }
-// declare module 'xlsx-color' {
-//     import xlsx from 'xlsx-color';
-//     export default xlsx;
+// declare module 'react-dom' {
+//     import ReactDOM from 'react-dom';
+//     export default ReactDOM;
 // }
 
 declare module 'react-native-linear-gradient' {

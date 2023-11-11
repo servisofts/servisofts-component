@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, Animated } from 'react-native';
-import SThread from '../SThread/index';
 import SStorage from '../SStorage';
-import SLoad from '../SLoad';
 import MapStyle from './MapStyle';
-import SIcon from '../SIcon';
 import { FontsType } from '../../font/index';
 export type SThemeColors = {
     barStyle: "dark-content" | "light-content",
@@ -41,6 +38,7 @@ export type SThemeProps = {
     themes: SThemeThemes,
     noAnimated?: boolean,
     data?: any,
+    children?: any,
     onLoad?: (color: SThemeColors) => any
 }
 

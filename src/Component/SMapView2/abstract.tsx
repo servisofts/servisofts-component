@@ -26,6 +26,7 @@ export type SMapViewType = {
     initialRegion: RegionType,
     customMapStyle?: [any],
     showsUserLocation?: boolean,
+    children?: any,
     onRegionChangeComplete?: (region: RegionType) => void,
     onPress?: (event: { coordinate: LatLngType, position: PositionType }) => void,
 }

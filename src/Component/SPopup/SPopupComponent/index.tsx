@@ -5,6 +5,7 @@ import STheme from '../../STheme';
 export type SPopupComponentProps = {
     style?: any,
     close?: () => void,
+    children?: any,
 
 }
 export default class SPopupComponent extends Component<SPopupComponentProps> {

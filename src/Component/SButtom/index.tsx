@@ -17,6 +17,7 @@ export type typeProps = {
     onPress?: Function,
     onPressValidation?: Function,
     loading?: boolean,
+    children?: any,
     //callBack:Function,
 } & onSubmitProps
 

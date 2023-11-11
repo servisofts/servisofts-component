@@ -9,6 +9,7 @@ type PropsType = {
     onRegionChangeComplete?: (region: any) => void,
     onPress?: (event: any) => void,
     preventCenter?: boolean,
+    children?: any,
     options?: {
         zoomControl?: boolean,
         mapTypeControl?: boolean,

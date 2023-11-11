@@ -60,7 +60,7 @@ class Row extends Component<typeProps> {
                 ...this.props.cellStyle ?? {},
                 ...item.cellStyle ?? {},
             }
-            var data = this.props.data;
+            var data:any = this.props.data;
             data = data[item.key];
             var ITEM;
             if (item.key == "index") {

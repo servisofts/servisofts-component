@@ -16,6 +16,7 @@ export type SGridProps = {
     onLayout?: (event: any) => void,
     getValue?: () => any,
     setValue?: (event: any) => void,
+    children?: any,
 }
 
 export default class SGrid extends Component<SGridProps> {

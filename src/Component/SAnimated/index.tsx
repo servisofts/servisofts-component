@@ -15,6 +15,7 @@ type typeProps = {
 export class SAnimated extends Component<typeProps> {
     styleType
     variant
+    props;
     constructor(props) {
         super(props);
         this.state = {

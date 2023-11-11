@@ -24,5 +24,5 @@ export type SLoadPropsType = {
 
 
 export type SLoadContainerPropsType = {
-
+    children?: any,
 }

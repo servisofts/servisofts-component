@@ -48,7 +48,7 @@ import SLocation from "./Component/SMapView/SLocation";
 import SSection from "./Component/SSection";
 import ExportExcel from "./Component/STable2/ExportExcel";
 import SRangeSlider from "./Component/SRangeSlider";
-import SAlvaro from "./Component/SAlvaro";
+// import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
 import SSwitch from "./Component/SSwitch";
@@ -117,5 +117,5 @@ export {
     SNativeModules,
     SNotification,
     //alvaro
-    SAlvaro
+    // SAlvaro
 }
