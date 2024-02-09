@@ -25,7 +25,7 @@ export type SComponentContainerProps = {
 }
 
 
-export default class SComponentContainer extends Component<SComponentContainerProps> {
+class SComponentContainer extends Component<SComponentContainerProps> {
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
     static SSocket: any;
@@ -125,7 +125,7 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                         </View>
                         <DebugBar debug={this.props.debug} />
                         <SPopup />
-                        {/* <SNotificationContainer /> */}
+                        <SNotificationContainer />
                         <SLoadContainer />
                     </View>
                 </SafeAreaView>
@@ -134,7 +134,6 @@ export default class SComponentContainer extends Component<SComponentContainerPr
     }
     render() {
         SComponentContainer.Instance = this;
-        // return this.getContenido()
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
 
@@ -153,3 +152,4 @@ export default class SComponentContainer extends Component<SComponentContainerPr
 
     }
 }
+export default SComponentContainer;

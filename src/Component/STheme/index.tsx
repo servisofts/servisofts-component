@@ -99,7 +99,7 @@ export default class STheme extends Component<SThemeProps> {
             select: !this.props.initialTheme ? "default" : this.props.initialTheme,
         };
         // this.repaint();
-        this.animFadeOut = new Animated.Value(0);
+        // this.animFadeOut = new Animated.Value(0);
     }
     componentDidMount() {
         this.getItemTheme();

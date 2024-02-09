@@ -46,6 +46,11 @@ declare module 'react-native-document-picker' {
 //     import ImagePicker from 'react-native-image-picker';
 //     export default ImagePicker;
 // }
+declare module 'react-dom' {
+    import ReactDOM from 'react-native-image-picker';
+    // export { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+    export default ReactDOM;
+}
 declare module 'react-native-image-picker' {
     import ImagePicker from 'react-native-image-picker';
     export { launchImageLibrary, launchCamera } from 'react-native-image-picker';

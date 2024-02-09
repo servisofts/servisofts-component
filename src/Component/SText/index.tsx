@@ -3,7 +3,6 @@ import { View, Text, TextStyle, TextProps, Dimensions, PixelRatio } from 'react-
 import STheme from '../STheme/index';
 import SView, { SViewProps } from '../SView/index';
 import { FontsType } from '../../font/index';
-import { SThemeColors } from '../STheme'
 export type STextProps = {
     style?: TextStyle,
     primary?: boolean,

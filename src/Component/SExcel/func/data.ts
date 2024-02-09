@@ -30,7 +30,7 @@ export default {
                 var value = findDataRecursive({ header: h, obj: o })
                 var myStyle = { fill: { patternType: "solid", fgColor: { rgb: ((ir % 2) != 0) ? "eeeeee" : "ffffff" } } }
 
-                return { v: value, t: h.type, z: h.z, s: { ...myStyle, ...h.styleData } };
+                return { v: value, t: h.type, z: h?.z, s: { ...myStyle, ...h.styleData } };
             })
         })
         xlsx.utils.sheet_add_aoa(worksheet, data_format, { origin: -1 })

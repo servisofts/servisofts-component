@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component  } from 'react';
 import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
