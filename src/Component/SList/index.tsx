@@ -28,6 +28,7 @@ type SListType = {
     flex?: boolean,
     scrollEnabled?: boolean,
     style?: any,
+    busqueda?: string,
     contentContainerStyle?: any
 }
 class SList extends Component<SListType> {
@@ -41,7 +42,7 @@ class SList extends Component<SListType> {
         super(props);
         this.state = {
             page: 1,
-            buscar: ""
+            buscar: this.props.busqueda ?? "",
         };
         this._rend = props.render;
 
@@ -183,6 +184,7 @@ class SList extends Component<SListType> {
                 }} height><SText fontSize={12} color={STheme.color.gray}>{`(${this.state.cant ?? 0})`}</SText></SView>}
                 placeholder={"Buscar..."}
                 ref={r => this._buscador = r}
+                defaultValue={this.state.buscar}
                 onChangeText={(val) => {
                     new SThread(500, "buscador_list", true).start(() => {
                         this.setState({ buscar: val })

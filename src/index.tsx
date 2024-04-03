@@ -55,6 +55,8 @@ import SSwitch from "./Component/SSwitch";
 import SNativeModules from "./SNativeModules";
 import SNotification from "./Component/SNotification";
 import SGeolocation from "./Component/SGeolocation";
+import SDatePicker from "./Component/SDatePicker";
+import SSPiner from "./Component/SSPiner";
 export * from './Types'
 export {
     SHr,
@@ -83,6 +85,7 @@ export {
     SBuscador,
     SView,
     SLoad,
+    SDatePicker,
     SStorage,
     SPopup,
     SPopupOpen,
@@ -105,6 +108,7 @@ export {
     ExportExcel,
     SColorPicker,
     SPromise,
+    SSPiner,
     // MAPA
     SMapView,
     SMapView2,

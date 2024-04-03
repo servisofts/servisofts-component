@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SNotification, { Notification } from '.';
 import NotificationItem from './NotificationItem';
 import { FlatList, View } from 'react-native';
+import SNavigation from '../SNavigation';
 
 
 const SeparatorItem = <View style={{
@@ -45,6 +46,9 @@ export default class SNotificationContainer extends Component {
                 scrollEnabled={false}
                 ItemSeparatorComponent={() => SeparatorItem}
                 renderItem={({ item, index }) => <NotificationItem key={item.key} data={item} index={index} onPress={() => {
+                    if(item.deeplink){
+                        SNavigation.INSTANCE.openDeepLink(item.deeplink);
+                    }
                     SNotification.remove(item.key)
                 }} />}
             />

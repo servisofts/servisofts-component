@@ -72,8 +72,9 @@ export default class SOrdenador {
                 valB = parseFloat(valB ?? 0);
             }
             if (prop.type == "date") {
-                valA = new SDate(valA).getTime()
-                valB = new SDate(valB).getTime()
+                // console.log(valA,valB)
+                valA = new SDate(valA,"yyyy-MM-ddThh:mm:ss").getTime()
+                valB = new SDate(valB,"yyyy-MM-ddThh:mm:ss").getTime()
             }
 
             // const expres = /^[0-9]+$/
@@ -100,6 +101,7 @@ export default class SOrdenador {
                 }
             }
         }
+        if(!dataFinal) return data[key]
         return data;
     }
     // ordernarArr(arr) {

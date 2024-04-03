@@ -69,6 +69,32 @@ export default class STheme extends Component<SThemeProps> {
         link: "#6666ff",
         mapStyle: MapStyle.default,
     };
+
+    public static colorRandom(d = 50, f = 100) {
+        const toHex = (c) => {
+            const hex = c.toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
+        };
+
+        var r = Math.floor(Math.random() * 256 - f) + d;
+        var g = Math.floor(Math.random() * 256 - f) + d;
+        var b = Math.floor(Math.random() * 256 - f) + d;
+        return "#" + toHex(r) + toHex(g) + toHex(b);
+    }
+    public static colorFromText(text) {
+        var sum = 0;
+        // if (text.length < 16) text = text + "aaaaaaaaaaaaaaaaaaa";
+        for (var i = 0; i < text.length; i++) {
+            sum += text.charCodeAt(i);
+        }
+        var hex = sum.toString(16);
+        while (hex.length < 3) {
+            hex = "0" + hex; // Añade ceros al principio si el valor hexadecimal es demasiado corto
+        }
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        return '#' + hex.substring(0, 6);
+    }
+
     public static instance: STheme;
     public static select(theme: SThemeOptions) {
         if (!this.instance) {
@@ -81,6 +107,12 @@ export default class STheme extends Component<SThemeProps> {
             return "error";
         }
         return this.instance.change();
+    };
+    public static repaint() {
+        if (!this.instance) {
+            return "error";
+        }
+        return this.instance.repaint();
     };
     public static getTheme() {
         if (!this.instance) {
@@ -139,6 +171,11 @@ export default class STheme extends Component<SThemeProps> {
         }
         // })
 
+    }
+    repaint() {
+        if (this.props.onLoad) {
+            this.props.onLoad(STheme.color);
+        }
     }
     change() {
         this.state.select = this.state.select != "default" ? "default" : "dark";

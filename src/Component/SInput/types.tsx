@@ -234,11 +234,17 @@ const password = (type: TypeType, Parent: SInput) => {
 const color = (type: TypeType, Parent: SInput) => {
     return buildResp({
         props: {
-            editable: false,
+            // editable: true,
             // focusable: false,
-            pointerEvents: "none",
+            // pointerEvents: "none",
         },
-        onPress: () => {
+
+        icon: (<SView style={{
+            width: 30,
+            height: "100%",
+            padding: 6,
+            backgroundColor: Parent.getValue(),
+        }} center onPress={() => {
             SPopupOpen({
                 key: "fechaPicker",
                 content: <SIColorAlert
@@ -251,13 +257,7 @@ const color = (type: TypeType, Parent: SInput) => {
                         Parent.setValue(val);
                     }} />
             })
-        },
-        icon: (<SView style={{
-            width: 30,
-            height: "100%",
-            padding: 6,
-            backgroundColor: Parent.getValue(),
-        }} center >
+        }} >
             {/* <SIcon name="World" fill={STheme.color.text} /> */}
         </SView>
         ),
@@ -269,7 +269,10 @@ const color = (type: TypeType, Parent: SInput) => {
 
             },
             LabelStyle: {}
-        }
+        },
+        filter: (_value: String) => {
+            return _value
+        },
     })
 }
 const fecha = (type: TypeType, Parent: SInput) => {
@@ -305,7 +308,8 @@ const fecha = (type: TypeType, Parent: SInput) => {
 
             },
             LabelStyle: {}
-        }
+        },
+
     })
 }
 const date_my = (type: TypeType, Parent: SInput) => {

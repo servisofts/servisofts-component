@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, ViewStyle } from 'react-native';
-import { SColType } from '../../Types/index';
+import { SColType, TColKey, TColKeyConv } from '../../Types/index';
 import SComponentContainer from '../SComponentContainer/index';
 import { SUuid } from '../SUuid/index';
 import { SViewProps } from '../SView/index';
 
 export type SGridProps = {
     col: SColType,
+    colHidden?: TColKeyConv,
     style: ViewStyle,
     colSquare?: boolean,
     animated?: boolean,
@@ -53,6 +54,14 @@ export default class SGrid extends Component<SGridProps> {
 
     setSize() {
         var col;
+        if (this.props.colHidden) {
+            if (this.props.colHidden.indexOf(this.medida) > -1) {
+                this.setState({ hidden: true });
+                return null;
+            } else if (this.state.hidden) {
+                this.setState({ hidden: false });
+            }
+        }
         if (typeof this.props.col == "string") {
             col = {};
             var text: string = this.props.col;
@@ -64,15 +73,13 @@ export default class SGrid extends Component<SGridProps> {
                 }
             })
             var max = this.getMax(col);
-            // Animated.timing(this.animSize, {
-            //     toValue: { x: (max * 100) / 12, y: this.animSize.y._value },
-            //     useNativeDriver: true,
-            //     duration: 1,
-            // }).start();
+
+            if (max == "0" && !this.state.hidden) {
+                this.setState({ hidden: true })
+            } else if (max != 0 && this.state.hidden) {
+                this.setState({ hidden: false })
+            }
             this.setValue({ x: (max * 100) / 12, y: this.state.y })
-            // console.log("animado")
-            // this.setState()
-            // this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
         } else {
             col = this.props.col;
         }
@@ -118,6 +125,7 @@ export default class SGrid extends Component<SGridProps> {
         if (this.props.animated) {
             Element = Animated.createAnimatedComponent(Element);
         }
+        if (this.state.hidden) return null;
         return (
             <Element
                 // key={SUuid()}

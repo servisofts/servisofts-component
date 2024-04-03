@@ -1,4 +1,4 @@
-import React, { Component  } from 'react';
+import React, { Component } from 'react';
 import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
@@ -10,7 +10,7 @@ import SThread from '../SThread';
 import { SUuid } from '../SUuid';
 import SView from '../SView';
 import SHr from '../SHr';
-import SLinking, { SLinkingPropsType } from './SLinking';
+import SLinking, { SLinkingPropsType, openURL } from './SLinking';
 import SNotificationContainer from '../SNotification/SNotificationContainer';
 export type SPageProps = {
     params?: [string],
@@ -60,6 +60,7 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navBar: any = null;
     static root: any;
     static routes = [];
+    static INSTANCE: SNavigation;
     static reset(route: string, params?: object) {
         if (!SNavigation.lastRoute) {
             alert("no hay navegacion");
@@ -197,9 +198,31 @@ export default class SNavigation extends Component<SNavigationProps> {
         this.state = {
         };
         SNavigation.navBar = props.props.navBar;
-
+        SNavigation.INSTANCE = this;
     }
+    openDeepLink(url) {
+        openURL(url, this.props.linking.prefixes);
+    }
+    handleDeepLink = (event) => {
 
+        // let data = Linking.parse(event.url);
+        if (event.url) {
+            openURL(event.url, this.props.linking.prefixes);
+            // Navega a la pantalla de detalles con los parámetros del enlace
+            // navigation.navigate('Details', { pk: data.queryParams.pk });
+        }
+    }
+    deleteListener;
+    componentDidMount(): void {
+        this.deleteListener = Linking.addEventListener('url', this.handleDeepLink);
+    }
+    componentWillUnmount(): void {
+        if (this.deleteListener) {
+            console.log(this.deleteListener)
+            this.deleteListener.remove();
+            this.deleteListener = null;
+        }
+    }
     getPages(pages, Stack) {
         const Validator = this.props?.props?.validator;
         let currentPage = "";
@@ -255,6 +278,11 @@ export default class SNavigation extends Component<SNavigationProps> {
             SNavigation.navigation = ref;
         }}
             linking={SLinking(this.props.linking ?? {}, pages)}
+            // onReady={() => {
+            //     if (this?.props?.linking?.getInitialURL) {
+            //         this.props.linking.getInitialURL();
+            //     }
+            // }}
             theme={{ dark: false, colors: colors }}
             onStateChange={(state) =>
                 stateNavigator = state

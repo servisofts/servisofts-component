@@ -1,6 +1,6 @@
 {
   "name": "servisofts-component",
-  "version": "3.0.20",
+  "version": "3.0.23",
   "description": "Servisofts-component is a library for React Native Web.",
   "main": "index.js",
   "types": "index.d.ts",

@@ -19,14 +19,16 @@ export const openURL = (url: string, prefixes: string[]) => {
                 params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
             }
             console.log("Entro acaaa")
-            SNavigation.replace("/" + page, params)
+            SNavigation.navigate("/" + page, params)
+            // SNavigation.replace("/" + page, params)
+
             return null;
         }
     })
 
 }
-export default ({ prefixes, getInitialURL }: SLinkingPropsType, pages): any => {
-    if (!prefixes) return null;
+export default (props: SLinkingPropsType, pages): any => {
+    if (!props.prefixes) return null;
     if (Platform.OS == "web") {
         let screens = {}
         Object.keys(pages).map(k => {
@@ -47,30 +49,31 @@ export default ({ prefixes, getInitialURL }: SLinkingPropsType, pages): any => {
         }
     }
     return {
-        prefixes: prefixes,
+        prefixes: props.prefixes,
         async getInitialURL() {
             const url = await Linking.getInitialURL();
+            console.log("ENTRO AL LINKING GET INITIAL URL", url)
             if (url != null) {
                 new SThread(1000, "deeplink", false).start(() => {
-                    openURL(url, prefixes);
+                    openURL(url, props.prefixes);
                 })
                 return null
             }
-            if (getInitialURL) getInitialURL();
+            if (props.getInitialURL) props.getInitialURL();
             return url;
         },
         subscribe(listener) {
-            const onReceiveURL = ({ url }: { url: string }) => {
-                openURL(url, prefixes);
-            };
-            Linking.addEventListener('url', onReceiveURL);
-            return () => {
-                if(!Linking) return;
-                  // @ts-ignore
-                if(!Linking.removeEventListener) return;
-                  // @ts-ignore
-                Linking.removeEventListener('url', onReceiveURL);
-            };
+            // const onReceiveURL = ({ url }: { url: string }) => {
+            //     openURL(url, props.prefixes);
+            // };
+            // Linking.addEventListener('url', onReceiveURL);
+            // return () => {
+            //     if (!Linking) return;
+            //     // @ts-ignore
+            //     if (!Linking.removeEventListener) return;
+            //     // @ts-ignore
+            //     Linking.removeEventListener('url', onReceiveURL);
+            // };
         },
         config: {
             screens: {

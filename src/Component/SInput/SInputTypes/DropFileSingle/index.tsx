@@ -151,6 +151,8 @@ export default class DropFileSingle extends Component<Props> {
             return <SText center>{""}</SText>
         }
         var image = this.state.images[0];
+        console.log("", image);
+
         return <SView col={"xs-12"} height style={{
             overflow: 'hidden',
             borderRadius: 4,
@@ -158,7 +160,8 @@ export default class DropFileSingle extends Component<Props> {
             <SView col={"xs-12"} height style={{
                 position: "absolute",
             }} center>
-                {/* <SText color={STheme.color.gray} fontSize={18} bold>{this.getExtension(image?.file?.name ?? image.name)}</SText> */}
+                <SText color={STheme.color.gray} fontSize={18} bold>{image?.file?.name ?? image.name}</SText>
+
             </SView>
             {/* <SIcon name={"Ajustes"} width={100} /> */}
             <SView flex col={"xs-12"}>

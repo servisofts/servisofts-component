@@ -78,7 +78,7 @@ export default class SDate {
         if (!format) {
             format = "yyyy-MM-dd hh:mm"
         }
-        var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(mm)|(ss)', 'g');
+        var myRe = new RegExp('(yyyy)|(MM)|(dd)|(hh)|(HH)|(mm)|(ss)', 'g');
         // var res = [...format.matchAll(myRe)];
         // var res = Array.from(format.matchAll(myRe));
         // res = [...res];
@@ -249,7 +249,33 @@ export default class SDate {
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
         return diffDays;
     }
+    timeSince(sdate) {
+        var date1 = this.date;
+        var date2 = sdate.date;
+        const seconds = Math.floor((date2.getTime() - date1.getTime()) / 1000);
 
+        let interval = seconds / 31536000;
+        if (interval > 1) {
+            return Math.floor(interval) + " años";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+            return Math.floor(interval) + " meses";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+            return Math.floor(interval) + " días";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " horas";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutos";
+        }
+        return Math.floor(seconds) + " segundos";
+    }
     isCurDate() {
         if (this.toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")) {
             return true;
@@ -264,6 +290,20 @@ export default class SDate {
         return "0" + val
     }
 
+    formatTime12(hours, minutes) {
+        // Determina si es AM o PM
+        let period = hours >= 12 ? 'p.m.' : 'a.m.';
+
+        // Convierte las horas al formato de 12 horas
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Si las horas son 0, se convierte a 12
+
+        // Añade un cero al principio si los minutos son menores a 10
+        let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+        // Devuelve la hora formateada en h:mm a.m./p.m.
+        return hours + ':' + formattedMinutes + ' ' + period;
+    }
     toString(format?: formatsTypes | String) {
         if (!format) {
             format = "yyyy-MM-dd hh:mm:ss"
@@ -277,6 +317,7 @@ export default class SDate {
         format = format.replace("MON", this.getMonthJson().textSmall);
         format = format.replace("dd", this.formatCero(json.day));
         format = format.replace("hh", this.formatCero(json.hour));
+        format = format.replace("HH", this.formatTime12(json.hour, json.minutes));
         format = format.replace("mm", this.formatCero(json.minutes));
         format = format.replace("ss", this.formatCero(json.seconds));
         return format;
