@@ -206,6 +206,7 @@ export default class SNavigation extends Component<SNavigationProps> {
     handleDeepLink = (event) => {
 
         // let data = Linking.parse(event.url);
+        console.log("ENTRO EN EL HANDLE DEEPLINK", event)
         if (event.url) {
             openURL(event.url, this.props.linking.prefixes);
             // Navega a la pantalla de detalles con los parámetros del enlace
@@ -215,6 +216,17 @@ export default class SNavigation extends Component<SNavigationProps> {
     deleteListener;
     componentDidMount(): void {
         this.deleteListener = Linking.addEventListener('url', this.handleDeepLink);
+        this.initialURL();
+    }
+    async initialURL() {
+        const url = await Linking.getInitialURL();
+        console.log("ENTRO AL LINKING GET INITIAL URL", url)
+        if (url != null) {
+            new SThread(1000, "deeplink", false).start(() => {
+                this.openDeepLink(url);
+            })
+        }
+        if (this.props.linking.getInitialURL) this.props.linking.getInitialURL();
     }
     componentWillUnmount(): void {
         if (this.deleteListener) {

@@ -28,6 +28,10 @@ export type SComponentContainerProps = {
 class SComponentContainer extends Component<SComponentContainerProps> {
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
+
+    public static getCurrentCol() {
+        return this.Instance?.state?.medida;
+    }
     static SSocket: any;
     public static registerGrid(key: string, grid: any) {
         if (!this.Instance) return;

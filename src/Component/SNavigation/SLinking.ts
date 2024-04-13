@@ -48,6 +48,7 @@ export default (props: SLinkingPropsType, pages): any => {
             },
         }
     }
+    return null;
     return {
         prefixes: props.prefixes,
         async getInitialURL() {
@@ -60,27 +61,7 @@ export default (props: SLinkingPropsType, pages): any => {
                 return null
             }
             if (props.getInitialURL) props.getInitialURL();
-            return url;
-        },
-        subscribe(listener) {
-            // const onReceiveURL = ({ url }: { url: string }) => {
-            //     openURL(url, props.prefixes);
-            // };
-            // Linking.addEventListener('url', onReceiveURL);
-            // return () => {
-            //     if (!Linking) return;
-            //     // @ts-ignore
-            //     if (!Linking.removeEventListener) return;
-            //     // @ts-ignore
-            //     Linking.removeEventListener('url', onReceiveURL);
-            // };
-        },
-        config: {
-            screens: {
-                "test": {
-                    path: "test"
-                }
-            }
+            return null;
         },
     }
 }
