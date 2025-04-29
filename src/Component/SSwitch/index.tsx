@@ -5,11 +5,18 @@ import SLoad from '../SLoad';
 
 export type SSwitchPropsType = {
     size?: any,
+    scale?: any,
+    scaleBar?: any,
     defaultValue?: any,
     onChange?: (e: any) => any,
     loading?: any,
     value?: any,
-    color?: any
+    color?: any,
+    colorActive?: any,
+    backgroundColor?: any,
+    backgroundColorActive?: any,
+
+
 }
 export default class SSwitch extends Component<SSwitchPropsType> {
     state;
@@ -32,24 +39,30 @@ export default class SSwitch extends Component<SSwitchPropsType> {
             this.state.value = this.props.value
         }
         let size = this.props.size ?? 20
-        let width = size * 2;
+        let width = size * (this.props.scale ?? 2);
+
+        const color = this.props.color ?? STheme.color.text;
+        const colorActive = this.props.colorActive ?? color;
+        const backgroundColor = this.props.backgroundColor ?? STheme.color.lightGray;
+        const backgroundColorActive = this.props.backgroundColorActive ?? STheme.color.success;
+        let space = 3;
         return <SView center width={width} height={size} onPress={() => {
             this.setValue(!this.state.value)
         }}>
-            <SView col={"xs-12"} height={size / 1.5} style={{
+            <SView col={"xs-12"} height={size * (this.props.scaleBar ?? 1)} style={{
                 borderRadius: 100,
-                borderWidth: 2,
-                borderColor: !this.state.value ? STheme.color.card : STheme.color.success,
-                backgroundColor: !this.state.value ? STheme.color.card : STheme.color.success
+                // borderWidth: 2,
+                // borderColor: !this.state.value ? STheme.color.card : STheme.color.success,
+                backgroundColor: !this.state.value ? backgroundColor : backgroundColorActive
             }}>
             </SView>
             <SView style={{
                 position: "absolute",
-                width: size,
-                height: size,
+                width: size - space,
+                height: size - space,
                 borderRadius: 100,
-                backgroundColor: this.props.color ?? STheme.color.text,
-                ...(!this.state.value ? { left: 0 } : { right: 0 })
+                backgroundColor: !this.state.value ? color : colorActive,
+                ...(!this.state.value ? { left: space / 2 } : { right: space / 2 })
             }} center>
                 {this.props.loading ? <SLoad color={STheme.color.primary} /> : null}
             </SView>

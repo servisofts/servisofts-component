@@ -3,17 +3,20 @@ import { View, Text, KeyboardAvoidingView, Platform, ScrollView, RefreshControl 
 import SNavBar from '../SNavBar/index';
 import SView from '../SView/index';
 import SScrollView2 from '../SScrollView2/index';
-import SNavigation from '../SNavigation';
+import SNavigation, { BackAlternative } from '../SNavigation';
 import SLoad from '../SLoad';
 import SThread from '../SThread';
 import SwipeToRefresh from '../SScrollView3/SwipeToRefresh';
+import { LanguageSource } from '../SLanguage';
 
 
 export type SPageProps = {
-    onBack?: Function,
     title?: String | Component,
+    titleLanguage?: LanguageSource,
     hidden?: boolean,
     preventBack?: boolean,
+    onBack?: Function,
+    backAlternative?: BackAlternative,
     disableScroll?: boolean,
     center?: boolean,
     onRefresh?: Function,
@@ -22,6 +25,7 @@ export type SPageProps = {
     footer?: any,
     keyboardVerticalOffset?: any,
     children?: any,
+    navBarContent?: any
 
 }
 
@@ -102,10 +106,13 @@ export default class SPage extends Component<SPageProps> {
             return <ScrollView style={{
                 flex: 1,
                 width: "100%",
-            }} contentContainerStyle={{
-                width: "100%",
-                minHeight: "100%",
             }}
+                nestedScrollEnabled={true}
+                // onScroll={e=>console.log(e)}
+                contentContainerStyle={{
+                    width: "100%",
+                    minHeight: "100%",
+                }}
                 refreshControl={this.getRefresh()}
             >
                 <SView style={{

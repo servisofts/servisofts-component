@@ -362,19 +362,32 @@ const select = (type: TypeType, Parent: SInput) => {
         },
         render: (_Parent: SInput) => {
             var value = _Parent.getValue();
+
             var options = _Parent.getOption("options");
             options.map((option) => {
                 if (option.key == value) {
                     value = option;
                 }
             })
-            if (!value) return <View />
+            const style = {
+                ...(_Parent.customStyle?.InputText ?? {}),
+
+            }
+            if (!value) return <SText clean col={"xs-12"} style={{
+                ...style,
+                color: _Parent.customStyle?.InputText?.placeholderTextColor ?? "#EEEEEE"
+                // backgroundColor:"#f0f"
+            }}>{_Parent?.props?.placeholder}</SText>
+
             if (typeof value != "object") {
-                return <SText col={"xs-12"}>{value}</SText>
+                if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value)}</SText>
+                return <SText clean col={"xs-12"} style={style}>{value}</SText>
             }
             if (!value.content) return <View />
+
             if (typeof value.content != "object") {
-                return <SText col={"xs-12"}>{value.content}</SText>
+                if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value.content)}</SText>
+                return <SText clean col={"xs-12"} style={style}>{value.content}</SText>
             }
             return value.content;
         },
@@ -607,7 +620,7 @@ const image = (type: TypeType, Parent: SInput) => {
                     overflow: 'hidden',
                     backgroundColor: STheme.color.card,
                 }} height colSquare>
-                    <DropFileSingle {...Parent.getProps()} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
+                    <DropFileSingle {...Parent.getProps()} style={{}} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
                         Parent.setValue(val);
                     }} />
                 </SView>
@@ -639,7 +652,7 @@ const file = (type: TypeType, Parent: SInput) => {
                 // backgroundColor:"#f0f",
                 overflow: 'hidden',
             }}>
-                <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                <DropFileSingle {...Parent.getProps()} style={{}} cstyle={Parent.getStyle()} onChange={(val) => {
                     // console.log(val);
                     Parent.setValue(val);
                 }} />
@@ -722,33 +735,59 @@ const textArea = (type: TypeType, Parent: SInput) => {
     })
 }
 const checkBox = (type: TypeType, Parent: SInput) => {
+    let style = {};
+    if (Parent) {
+        if (Parent.getProps()) {
+            if (Parent.getProps().style) {
+                style = Parent.getProps().style;
+            }
+        }
+    }
+
     return buildResp({
         props: {
             editable: false,
-
         },
         style: {
             View: {
+                flexDirection: "row",
                 paddingStart: 0,
-                width: 20,
-                height: 20,
+                // flex:1,
+                flexWrap: "wrap",
+                // width: 20,
+                // height: 20,
+                borderWidth: 0,
+                backgroundColor: "transparent"
+                // opacity:0,
             },
             LabelStyle: {
-                width: null,
-                position: "absolute"
+                position: "absolute",
+                // width: "auto",
+                margin: 0,
+                padding: 0,
+                marginRight: 0,
+                top: 2,
+                left: 20,
+
             }
 
         },
         render: (data) => {
             var active = Parent.getValue();
             Parent.state.value = !!active;
+
             return <SView style={{
+                position: "absolute",
+                left: 0,
                 width: 20,
                 height: 20,
                 borderWidth: 1,
                 borderRadius: 4,
-                borderColor: STheme.color.card,
-                backgroundColor: !active ? "" : "#1975FF",
+                borderColor: (Parent.props.color ?? STheme.color.text),
+                backgroundColor: !active ? "" : (Parent.props.backgroundColor ?? "#1975FF"),
+                justifyContent: "center",
+                alignItems: "center",
+                ...style
             }} onPress={() => {
                 if (Parent.getProps().disabled) {
                     return;
@@ -756,9 +795,9 @@ const checkBox = (type: TypeType, Parent: SInput) => {
 
                 Parent.setValue(!active);
 
-            }} center>
-                {!active ? null : <SText fontSize={18} font={"Roboto"} bold color={"#fff"}>{"✓"}</SText>}
-            </SView>
+            }} center >
+                {!active ? null : <SText fontSize={16} font={"Roboto"} bold color={(Parent.props.color ?? STheme.color.text)}>{"✓"}</SText>}
+            </SView >
         }
     })
 }

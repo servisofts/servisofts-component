@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { SIcon, SImage, SText, STheme, SView, SNavigation } from '../../../../index';
+import { View, Text, ImageStyle } from 'react-native';
+import { SIcon, SImage, SText, STheme, SView, SNavigation, SUuid } from '../../../../index';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 type Props = {
     onUpload?: Function,
@@ -10,6 +10,7 @@ type Props = {
     onChange?: Function,
     defaultValue?: string,
     accept?: string,
+    style?: ImageStyle,
 }
 
 export default class DropFileSingle extends Component<Props> {
@@ -41,7 +42,7 @@ export default class DropFileSingle extends Component<Props> {
 
         }
         this.onUpload = this.props.onUpload;
-        this.idInstance = new Date().getTime();
+        this.idInstance = SUuid();
     }
     componentDidMount() {
         this.esperar();
@@ -151,21 +152,18 @@ export default class DropFileSingle extends Component<Props> {
             return <SText center>{""}</SText>
         }
         var image = this.state.images[0];
-        console.log("", image);
-
         return <SView col={"xs-12"} height style={{
             overflow: 'hidden',
-            borderRadius: 4,
+            // borderRadius: 4,
         }}>
-            <SView col={"xs-12"} height style={{
+            {/* <SView col={"xs-12"} height style={{
                 position: "absolute",
             }} center>
                 <SText color={STheme.color.gray} fontSize={18} bold>{image?.file?.name ?? image.name}</SText>
-
-            </SView>
+            </SView> */}
             {/* <SIcon name={"Ajustes"} width={100} /> */}
             <SView flex col={"xs-12"}>
-                <SImage src={image.uri} />
+                <SImage src={image.uri} style={this.props.style} />
             </SView>
             {/* <SView style={{
                 position: "absolute",

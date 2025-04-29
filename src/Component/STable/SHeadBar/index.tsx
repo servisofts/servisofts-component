@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import {
     SInput,
-    STheme, SView, SIcon, SThread
+    STheme, SView, SIcon, SThread,
+    SLanguage
 } from '../../../index';
 
 type SHeadBarProps = {
@@ -56,7 +57,10 @@ export default class SHeadBar extends Component<SHeadBarProps> {
                             // backgroundColor: "#f0f",
                         }}
                         autoFocus={true}
-                        placeholder={"Buscar..."}
+                        placeholder={SLanguage.select({
+                            en: "Find...",
+                            es: "Buscar..."
+                        })}
                         onChangeText={(text) => {
                             new SThread(300, "buscadorTabla", true).start(() => {
                                 this.props.buscar(text);

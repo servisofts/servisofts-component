@@ -28,7 +28,15 @@ export type SThemeColors = {
     lightBlack?: string,
     mapStyle?: any[],
     font?: FontsType,
-
+    aux1?:string,
+    aux2?:string,
+    aux3?:string,
+    aux4?:string,
+    aux5?:string,
+    aux6?:string,
+    aux7?:string,
+    aux8?:string,
+    aux9?:string,
 
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -138,8 +146,8 @@ export default class STheme extends Component<SThemeProps> {
 
     }
     async getItemTheme() {
-        SStorage.getItem("themeState", (data) => {
-            console.log("Entro en el onLoad")
+        SStorage.getItem("themeState", (data:any) => {
+            // console.log("Entro en el onLoad")
             if (data) {
                 this.select(data);
             } else {

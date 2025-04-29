@@ -6,6 +6,7 @@ export default class SMarker extends SMarkerAbstract {
         this.setState({ latitude: latitude, longitude: longitude })
     }
     render() {
+
         return (
             <Marker
                 coordinate={{

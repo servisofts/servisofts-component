@@ -10,6 +10,7 @@ import STheme from "../STheme";
 import SThread from "../SThread";
 import SOrdenador, { TypeOrdenar } from '../SOrdenador';
 import { FlatList } from 'react-native';
+import SLanguage from '../SLanguage';
 
 
 type SListType = {
@@ -18,12 +19,14 @@ type SListType = {
     inverse?: boolean,
     center?: boolean,
     render: (item: any, key?: any, index?: any,) => JSX.Element,
+    sort?: (itema: any, itemb: any) => number,
     filter?: (item: any) => boolean,
     space?: number,
     initSpace?: number,
     limit?: number,
     order?: [TypeOrdenar],
     buscador?: boolean,
+    numColumns?: number,
     flexEnd?: boolean,
     flex?: boolean,
     scrollEnabled?: boolean,
@@ -115,6 +118,8 @@ class SList extends Component<SListType> {
         } else {
             arr = Object.keys(data);
         }
+
+
         if (this.props.limit) {
             arr = arr.slice(0, (this.props.limit ?? 1) * this.state.page)
         }
@@ -136,9 +141,14 @@ class SList extends Component<SListType> {
             e_contentstyle["alignItems"] = "center";
             e_contentstyle["justifyContent"] = "center";
         }
+        // return null
         return <FlatList
+            key={"key_for_list"}
             data={arr}
             horizontal={this.props.horizontal}
+            numColumns={this.props.numColumns}
+            // horizontal={}
+            // nestedScrollEnabled={true}
             style={{
                 ...e_style
             }}
@@ -146,7 +156,8 @@ class SList extends Component<SListType> {
                 ...e_contentstyle,
                 ...(this.props.contentContainerStyle ?? {})
             }}
-            scrollEnabled={this.props.scrollEnabled}
+            // scrollEnabled={false}
+            // scrollEnabled={this.props.scrollEnabled}
             renderItem={({ item, index }) => {
                 if (!this._rend) {
                     this._rend = (o) => <SText>{JSON.stringify(o)}</SText>
@@ -182,7 +193,10 @@ class SList extends Component<SListType> {
                 iconR={<SView center style={{
                     padding: 4
                 }} height><SText fontSize={12} color={STheme.color.gray}>{`(${this.state.cant ?? 0})`}</SText></SView>}
-                placeholder={"Buscar..."}
+                placeholder={SLanguage.select({
+                    en: "Find...",
+                    es: "Buscar..."
+                })}
                 ref={r => this._buscador = r}
                 defaultValue={this.state.buscar}
                 onChangeText={(val) => {

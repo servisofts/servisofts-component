@@ -19,6 +19,9 @@ export default class SBuscador extends Component<SBuscadorPropsType> {
 
         var peso = 0;
         arr_busqueda.map((palabra_a_buscar) => {
+            palabra_a_buscar = palabra_a_buscar.replace("-","\\-")
+            palabra_a_buscar = palabra_a_buscar.replace("'","\\'")
+            palabra_a_buscar = palabra_a_buscar.replace("\"","\\\"")
             var expreg = new RegExp(":.*?" + palabra_a_buscar + ".*?(,|})", "i");
             if (expreg.test(str)) {
                 if (palabra_a_buscar + "".length < 2) {

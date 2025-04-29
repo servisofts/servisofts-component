@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import STheme from '../STheme';
 import SView from '../SView';
 
+
 type OptionsTypes = {
     styles?: any,
     zoomControl?: boolean,
@@ -11,7 +12,9 @@ type OptionsTypes = {
     scaleControl?: boolean,
     streetViewControl?: boolean,
     rotateControl?: boolean,
-    fullscreenControl?: boolean
+    fullscreenControl?: boolean,
+    disableDefaultUI?: boolean,
+
 }
 
 const toLatLng = (obj) => {
@@ -19,7 +22,8 @@ const toLatLng = (obj) => {
 }
 
 export default class SMapView extends SMapViewAbstract {
-    fitToCoordinates(points: { latitude: number; longitude: number; }[], options: { edgePadding?: { top: number; right: number; bottom: number; left: number; }; animated?: boolean; }) {
+
+    static fitToCoordinatesCalculate = (points: { latitude: number; longitude: number; }[], options: { edgePadding?: { top: number; right: number; bottom: number; left: number; } }) => {
         if (!points) return;
         if (points.length <= 0) return;
         var c = {
@@ -57,12 +61,17 @@ export default class SMapView extends SMapViewAbstract {
             c.lng.media += (options.edgePadding.right - options.edgePadding.left) * a;
             // c.lng.media += sd_lng * cb;
         }
-        this.setRegion({
+        return {
             latitude: c.lat.media,
             longitude: c.lng.media,
             latitudeDelta: c.lat.delta,
             longitudeDelta: c.lng.delta
-        })
+        }
+        console.log("Intentando centrar")
+    }
+    fitToCoordinates(points: { latitude: number; longitude: number; }[], options: { edgePadding?: { top: number; right: number; bottom: number; left: number; }; animated?: boolean; }) {
+        const c = SMapView.fitToCoordinatesCalculate(points, options);
+        this.setRegion(c)
         console.log("Intentando centrar")
     }
 
@@ -74,9 +83,11 @@ export default class SMapView extends SMapViewAbstract {
     }
 
     getZoom = (region) => {
-        var promedio = (region.longitudeDelta + region.latitudeDelta) / 4
-        let zoom = Math.log(360 / promedio) / Math.LN2;
+        const zoom = Math.log2(360 / region.longitudeDelta);
         return zoom;
+        // var promedio = (region.longitudeDelta + region.latitudeDelta) / 4
+        // let zoom = Math.log(360 / promedio) / Math.LN2;
+        // return zoom;
     }
 
 
@@ -127,12 +138,51 @@ export default class SMapView extends SMapViewAbstract {
         })
 
     }
+    getUserLocation(): Promise<{ latitude: number; longitude: number; }> {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    })
+                },
+                (error) => {
+                    console.log(error.code, error.message);
+                    reject(error);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+            );
+        });
+    }
     center() {
-        console.log("TODO: center() SMapView2.index.tsx")
+        var _map = this.mapa;
+        var props = this.props;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log("Latitude is :", position.coords.latitude);
+            _map.setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            })
+            _map.setZoom(18)
+            if (props.onRegionChangeComplete) props.onRegionChangeComplete({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            });
+        }, (error) => {
+            console.log(error)
+        }, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 1500
+        });
     }
     render() {
         var zoom = this.getZoom(this.state.region);
         var options: OptionsTypes = {
+            disableDefaultUI: true, // 👈🏼
             styles: this.props.customMapStyle ?? STheme.color.mapStyle,
             fullscreenControl: false,
             mapTypeControl: false,
@@ -145,12 +195,12 @@ export default class SMapView extends SMapViewAbstract {
             this.setState({ layout: evt.nativeEvent.layout })
         }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyDYLp8tqYQvGbQLdL0BbsAGYaXWr8dxTUg" }
-                }
+                bootstrapURLKeys={SMapView.bootstrapURLKeys}
                 center={toLatLng(this.state.region)
                 }
                 zoom={zoom}
-                options={options}
+                options={()=>options}
+                
                 onGoogleApiLoaded={({ map, maps }) => {
                     this.mapa = map;
                     this.maps = maps;
@@ -162,7 +212,7 @@ export default class SMapView extends SMapViewAbstract {
                             latitude: evt.center.lat(), longitude: evt.center.lng(),
                             ...this.zoomToDelta(evt.zoom, this.state?.layout?.width, this.mapa.center.lat())
                         }
-                        this.setRegion(center);
+                        // this.setRegion(center);
                         this.props.onRegionChangeComplete(center);
                     }
                 }}
@@ -189,8 +239,8 @@ export default class SMapView extends SMapViewAbstract {
                         })
                     }
                 }}
-            >{this._getChildrens()}
-            </GoogleMapReact >
-        </SView>
+                heatmapLibrary={!!this.props.headmap}
+                heatmap={this.props.headmap}>{this._getChildrens()}</GoogleMapReact >
+        </SView >
     }
 }

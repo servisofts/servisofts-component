@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
-import { SText, SHr, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView, SMath } from '../../index';
+import { SText, SHr, SLoad, SOrdenador, SScrollView2, STheme, SThread, SView, SMath, SUuid, SLanguage } from '../../index';
 import SGradient from '../SGradient';
 import SIcon from '../SIcon';
 import { SInput } from '../SInput';
@@ -40,6 +40,7 @@ export default class STable2 extends Component<STable2Type> {
             height: 40,
             page: 1,
             isLoad: false,
+            key: SUuid(),
             data: {},
             buscador: "",
             HFilter: {},
@@ -183,7 +184,7 @@ export default class STable2 extends Component<STable2Type> {
 
         console.log(this.state.totales)
         this.state.data = this.buscar(this.state.data);
-        new SThread(100, "as", false).start(() => {
+        new SThread(100, "as" + this.state.key, false).start(() => {
             this.state.isLoad = true;
             this.setState({ ...this.state });
         });
@@ -202,6 +203,7 @@ export default class STable2 extends Component<STable2Type> {
                 key_header={item.key} animWidth={this._animHeader[item.key]} space={this.state.space}
                 filter_h={this.state.HFilter[item.key]}
                 filter_notin={this.state.HFNI[item.key]}
+                renderHeader={item.renderHeader}
                 changeHFNI={(filter) => {
                     this.state.HFNI[item.key] = filter;
                     this.setState({ HFNI: { ...this.state.HFNI } });
@@ -225,6 +227,9 @@ export default class STable2 extends Component<STable2Type> {
             }
         })
         return new SOrdenador(orderArr).ordernarObject(this.state.data).slice(((this.state.page - 1) * this.state.limit), (this.state.page * this.state.limit)).map((itemData, i) => {
+            // console.log(this.state.data);
+            const obj = this.props.data[itemData];
+            // console.log(obj);
             var data = this.state.data[itemData];
             return <Row
                 key={"row_" + i}
@@ -232,6 +237,7 @@ export default class STable2 extends Component<STable2Type> {
                 height={this.props?.rowHeight ?? 40}
                 space={this.state.space}
                 data={data}
+                obj={obj}
                 cellStyle={this.props.cellStyle}
                 header={this.props.header}
                 animHeader={this._animHeader}
@@ -282,12 +288,16 @@ export default class STable2 extends Component<STable2Type> {
                 height: "100%",
             }}>
                 <SView col={"xs-12"} height={30} center>
-                    <SInput placeholder={"Buscar"} col={"xs-11.9"} height={24} style={{
-                        backgroundColor: STheme.color.primary + "BB",
-                        borderRadius: 4,
-                        paddingLeft: 8,
-                        height: 24,
-                    }}
+                    <SInput
+                        placeholder={SLanguage.select({
+                            en: "Find...",
+                            es: "Buscar..."
+                        })} col={"xs-11.9"} height={24} style={{
+                            backgroundColor: STheme.color.primary + "BB",
+                            borderRadius: 4,
+                            paddingLeft: 8,
+                            height: 24,
+                        }}
                         icon={<SIcon name={"Search"} width={16} fill={STheme.color.secondary} />}
                         onChangeText={(txt) => {
                             new SThread(400, "tbl_buscar", true).start(() => {

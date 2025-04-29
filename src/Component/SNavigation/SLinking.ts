@@ -7,7 +7,7 @@ export type SLinkingPropsType = {
     getInitialURL?: () => any,
 }
 
-export const openURL = (url: string, prefixes: string[]) => {
+export const openURL = (url: string, prefixes: string[], replace: boolean) => {
     prefixes.map((p) => {
         if (url.startsWith(p)) {
             let pageAndParams = url.substring(p.length, url.length);
@@ -18,10 +18,11 @@ export const openURL = (url: string, prefixes: string[]) => {
             if (search) {
                 params = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
             }
-            console.log("Entro acaaa")
-            SNavigation.navigate("/" + page, params)
-            // SNavigation.replace("/" + page, params)
-
+            if (replace) {
+                SNavigation.replace("/" + page, params)
+            } else {
+                SNavigation.navigate("/" + page, params)
+            }
             return null;
         }
     })
@@ -56,7 +57,7 @@ export default (props: SLinkingPropsType, pages): any => {
             console.log("ENTRO AL LINKING GET INITIAL URL", url)
             if (url != null) {
                 new SThread(1000, "deeplink", false).start(() => {
-                    openURL(url, props.prefixes);
+                    openURL(url, props.prefixes, false);
                 })
                 return null
             }

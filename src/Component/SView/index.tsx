@@ -82,7 +82,15 @@ export default class SView extends Component<SViewProps> {
       Element = Animated.createAnimatedComponent(Element);
     }
     var styles_p: any = this.props.style
-    var style = { ...styles_p };
+    var style: any = {};
+    if (Array.isArray(styles_p)) {
+      styles_p.forEach((sty: any) => {
+        style = { ...style, ...sty };
+      })
+
+    } else {
+      style = { ...styles_p };
+    }
     if (style) {
       delete style["top"];
       delete style["left"];

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SHr, SIcon, SInput, SText, STheme, SThread, SView } from '../..';
+import { SHr, SIcon, SInput, SLanguage, SText, STheme, SThread, SView } from '../..';
 import { SBuscadorInputPropsType } from './type';
 
 
@@ -21,14 +21,17 @@ export default class SBuscadorInput extends Component<SBuscadorInputPropsType> {
     render() {
         this.proccessData();
         // if (!this.props.buscador) return null;
-        var cant = 0;
+        var cant = (this.props?.data ?? []).length ?? 0
         return <SView col={"xs-12"}>
             <SInput
                 icon={<SView center col={"xs-12"} height><SIcon name={"Search"} fill={STheme.color.gray} width={22} /></SView>}
                 iconR={<SView center style={{
                     padding: 4
                 }} height><SText fontSize={12} color={STheme.color.gray}>{`(${cant ?? 0})`}</SText></SView>}
-                placeholder={"Buscar..."}
+                placeholder={SLanguage.select({
+                    en: "Find...",
+                    es: "Buscar..."
+                })}
                 ref={r => this._buscador = r}
                 onChangeText={(val) => {
                     new SThread(500, "SBuscadorInput", true).start(() => {

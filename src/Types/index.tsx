@@ -3,6 +3,7 @@ import { SViewProps } from '../Component/SView/index';
 import { STextProps } from '../Component/SText/index';
 import { SComponentContainerProps } from '../Component/SComponentContainer/index';
 import { SNavigationProps, SPageProps, SPageListProps } from '../Component/SNavigation/index';
+import { SPageProps as SPagePropsType } from '../Component/SPage';
 import { SThemeColors, SThemeOptions, SThemeProps, SThemeThemes } from '../Component/STheme/index';
 import { STable2Type } from "../Component/STable2";
 import { HeaderProps } from "../Component/STable2/Header";
@@ -63,6 +64,7 @@ export type {
     SViewProps,
     STextProps,
     TColKeyConv,
+    SPagePropsType ,
     SComponentContainerProps,
     SNavigationProps, SPageProps, SPageListProps,
     SThemeColors, SThemeOptions, SThemeProps, SThemeThemes,

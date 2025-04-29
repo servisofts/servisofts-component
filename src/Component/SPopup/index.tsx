@@ -10,11 +10,15 @@ import Info from './SPopupVariants/Info';
 import Form from './SPopupVariants/Form';
 import Container, { PopupContainerPropsType } from './SPopupVariants/Container';
 import Date from './SPopupVariants/Date';
+import SPopupComponent2 from './SPopupComponent2';
+import SPopupComponent3 from './SPopupComponent3';
 
 type SPopupOpenProps = {
     key?: string,
     content: any,
     style?: any,
+    type?: "1" | "2" | "3",
+    onClose?: Function,
 }
 
 var INSTANCE;
@@ -24,6 +28,13 @@ export const SPopupOpen = ({ key, content, style }: SPopupOpenProps) => {
 }
 export const SPopupClose = (key) => {
     INSTANCE.close(key);
+}
+
+
+const ContainerTypes = {
+    "1": SPopupComponent,
+    "2": SPopupComponent2,
+    "3": SPopupComponent3,
 }
 export default class SPopup extends Component {
 
@@ -64,7 +75,7 @@ export default class SPopup extends Component {
     static open(obj: SPopupOpenProps) {
         var key = obj.key;
         if (!obj.key) key = 'default';
-        INSTANCE.open({ key, content: obj.content, style: obj.style });
+        INSTANCE.open({ key, content: obj.content, ...obj });
     }
 
     static close(key?: string) {
@@ -80,21 +91,20 @@ export default class SPopup extends Component {
             data: {
 
             },
-            style: {}
         };
         INSTANCE = this;
     }
     componentDidMount() {
         INSTANCE = this;
     }
-    open({ key, content, style }) {
+    open({ key, content, style = {}, type = "1", onClose }: SPopupOpenProps) {
         // console.log(key);
-        this.state.data[key] = content;
-        if (style) {
-            this.state.style[key] = style;
-        } else {
-            this.state.style[key] = {};
-        }
+        this.state.data[key] = {
+            content: content,
+            style: style,
+            type: type,
+            onClose: onClose
+        };
         this.setState({ ...this.state });
     }
     closeAll() {
@@ -108,18 +118,18 @@ export default class SPopup extends Component {
     getPopups() {
         return Object.keys(this.state.data).map((key) => {
             var obj = this.state.data[key];
-            var style = this.state.style[key];
-            return <SPopupComponent
+            const { style, content, type = "1" } = obj;
+            const CONTAINER = ContainerTypes[type];
+            // var style = this.state.style[key];
+            return <CONTAINER
                 key={key}
-                style={{
-                    ...style
-                }}
+                {...obj}
                 close={() => { this.close(key) }}
             >
                 {/* <TouchableWithoutFeedback> */}
-                {obj}
+                {content}
                 {/* </TouchableWithoutFeedback> */}
-            </SPopupComponent>
+            </CONTAINER>
         })
     }
     render() {

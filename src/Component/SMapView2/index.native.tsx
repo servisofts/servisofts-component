@@ -1,6 +1,6 @@
 import React from 'react'
 import SMapViewAbstract from './abstract'
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Heatmap } from 'react-native-maps';
 import STheme from '../STheme';
 import Geolocation from '@react-native-community/geolocation';
 import SView from '../SView';
@@ -54,29 +54,74 @@ export default class SMapView extends SMapViewAbstract {
             return this.analiceRecurcibe(evt, obj, arr);
         })
     }
+    getUserLocation(): Promise<{ latitude: number; longitude: number; }> {
+        return new Promise((resolve, reject) => {
+            Geolocation.getCurrentPosition(
+                (position) => {
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    })
+                },
+                (error) => {
+                    console.log(error.code, error.message);
+                    reject(error);
+                },
+                { enableHighAccuracy: false, timeout: 1500, maximumAge: 10000 }
+            );
+        })
+    }
     center() {
-        Geolocation.getCurrentPosition((pos) => {
-            const crd = pos.coords;
-            this.mapa.animateToRegion({
-                latitude: crd.latitude,
-                longitude: crd.longitude,
-                latitudeDelta: 0.002,
-                longitudeDelta: 0.002,
-            })
-        }).catch((err) => {
-            console.log(err);
-        });
+        Geolocation.getCurrentPosition(
+            (position) => {
+                var region = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    latitudeDelta: 0.002,
+                    longitudeDelta: 0.002
+                }
+                // if (callback) {
+                // callback(region)
+                // }
+                // this.props.state.myUbicacionReducer.position = region;
+                // if (!this.props.preventCenter) {
+                this.mapa.animateToRegion(region, 1000)
+                // }
+                this.setState({ position: region })
+
+            },
+            (error) => {
+                console.log(error.code, error.message);
+            },
+            { enableHighAccuracy: false, timeout: 1500, maximumAge: 10000 }
+        );
+        // Geolocation.getCurrentPosition((pos) => {
+        //     const crd = pos.coords;
+        //     this.mapa.animateToRegion({
+        //         latitude: crd.latitude,
+        //         longitude: crd.longitude,
+        //         latitudeDelta: 0.002,
+        //         longitudeDelta: 0.002,
+        //     })
+        // }).catch((err) => {
+        //     console.log(err);
+        // });
         // console.log("TODO: center() SMapView2.index.native.tsx")
+    }
+    getHeadMap() {
+        if (!this.props?.headmap?.positions) return null;
+        return <Heatmap {...(this.props?.headmap?.options ?? {})} points={this.props.headmap.positions.map(a => { return { latitude: a.lat, longitude: a.lng } })} />
     }
     render() {
         return <SView col={"xs-12"} flex >
             <MapView
                 ref={(ref) => this.mapa = ref}
+                key={"mapa"}
                 style={{
                     width: "100%",
                     height: "100%",
                     flex: 1,
-                    minHeight:50,
+                    minHeight: 50,
                 }}
                 moveOnMarkerPress={false}
                 showsUserLocation={false}
@@ -116,6 +161,7 @@ export default class SMapView extends SMapViewAbstract {
                 onRegionChangeComplete={this.props.onRegionChangeComplete}
             >
                 {this.props.children}
+                {this.getHeadMap()}
             </MapView>
         </SView>
     }

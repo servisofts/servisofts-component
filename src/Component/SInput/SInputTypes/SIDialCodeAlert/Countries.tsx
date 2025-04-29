@@ -36,7 +36,6 @@ const Counesies = [
   { es:"Burundi", en: 'Burundi',flag: '🇧🇮',code: 'BI', dialCode: '+257', mask: '99 99 99 99' },
   { es:"Kamboçya", en: 'Cambodia',flag: '🇰🇭',code: 'KH', dialCode: '+855', mask: '999 999 999' },
   { es:"Kamerun", en: 'Cameroon',flag: '🇨🇲',code: 'CM', dialCode: '+237', mask: '9 99 99 99 99' },
-  { es:"Kanada", en: 'Canada',flag: '🇨🇦',code: 'CA', dialCode: '+1', mask: '(999) 999-9999' },
   { es:"Yeşil Burun Adaları", en: 'Cape Verde',flag: '🇨🇻',code: 'CV', dialCode: '+238', mask: '999 99 99' },
   { es:"Cayman Adaları", en: 'Cayman Islands',flag: '🇰🇾',code: 'KY', dialCode: '+345', mask: '999 9999' },
   { es:"Orta Afrika Cumhuriyeti", en: 'Cenesal African Republic',flag: '🇨🇫',code: 'CF', dialCode: '+236', mask: '99 99 99 99' },

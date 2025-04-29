@@ -125,6 +125,9 @@ export class SInput extends Component<TypeInputProps> {
         if (this.props.onBlur) {
             this.props.onBlur(null);
         }
+        if(this.props.onEndEditing){
+            this.props.onEndEditing(null);
+        }
     }
     setValue(value) {
         this.setState({ value: value });
@@ -148,7 +151,16 @@ export class SInput extends Component<TypeInputProps> {
         return this.state.value;
     }
     focus() {
-        this.inpref.focus();
+        if (this.inpref) {
+            this.inpref.focus();
+            return;
+        }
+        if (this.type) {
+            if (this.type.onPress) {
+                this.type.onPress();
+                return;
+            }
+        }
     }
     getCustomStyle() {
         return this.customStyle;
@@ -169,14 +181,15 @@ export class SInput extends Component<TypeInputProps> {
 
         }
         if (type.render) {
-            return <View style={{
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-            }}>
-                {type.render(this)}
-            </View>
+            return type.render(this)
+            // return  <View style={{
+            //     width: "100%",
+            //     height: "100%",
+            //     justifyContent: "center",
+            //     alignItems: "center",
+            // }}>
+            //     {type.render(this)}
+            // </View>
         }
     }
     onChangeText = (_text) => {
@@ -304,6 +317,30 @@ export class SInput extends Component<TypeInputProps> {
             delete styleFinal.height
         }
         var sp: any = this.props.style
+
+        let styleInputFinal = {
+            flex: 1,
+            height: "100%",
+            ...(Platform.select({
+                web: { outline: "none" },
+            })),
+            ...customStyle["InputText"],
+            ...type.style.InputText,
+            ...(this.props.color ? { color: this.props.color } : {}),
+            ...sp,
+        }
+
+        var extraprops = {
+            ...this.props,
+            ...type.props
+        }
+        if (Platform.OS == "android") {
+            delete styleInputFinal["placeholderTextColor"]
+            delete styleInputFinal["flex"]
+            delete extraprops["flex"]
+
+            styleInputFinal.height = "100%"
+        }
         return (
             <SView
                 col={"xs-12"}
@@ -321,7 +358,7 @@ export class SInput extends Component<TypeInputProps> {
                 style={styleFinal}
             >
                 {this.getLabel()}
-                <SView
+                {type.render ? null : <SView
                     col={"xs-12"}
                     row
                     center
@@ -333,22 +370,13 @@ export class SInput extends Component<TypeInputProps> {
                             value={valueFilter}
                             editable={!this.props.disabled}
                             placeholderTextColor={customStyle["InputText"]?.placeholderTextColor ?? ""}
-                            {...this.props}
-                            {...type.props}
-                            style={{
-                                flex: 1,
-                                height: "100%",
-                                outline: "none",
-                                ...customStyle["InputText"],
-                                ...type.style.InputText,
-                                ...(this.props.color ? { color: this.props.color } : {}),
-                                ...sp,
-                            }}
+                            {...extraprops}
+                            style={styleInputFinal}
                             onChangeText={this.onChangeText}
                         />
                     </SView>
                     {this.getIcon_r()}
-                </SView>
+                </SView>}
                 {this.isRender(type)}
             </SView>
         );

@@ -116,7 +116,7 @@ export class SButtom extends Component<typeProps> {
                     alignItems: 'center',
                 },
                 text: {
-                    color: STheme.color.secondary,
+                    color: STheme.color.white,
                     ...this.props.styleText
                 }
             },

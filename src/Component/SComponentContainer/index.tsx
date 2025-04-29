@@ -4,6 +4,7 @@ import SText from '../SText/index';
 import SGrid from '../SGrid/index';
 import STheme, { SThemeColors, SThemeProps } from '../STheme/index';
 import DebugBar from './DebugBar/index';
+import Font from '../../font';
 import { SAssets } from '../../Types';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
@@ -12,6 +13,7 @@ import { SInputsCofig } from "../../Types/index"
 import SThread from '../SThread';
 import SLoadContainer from '../SLoad/SLoadContainer';
 import SNotificationContainer from '../SNotification/SNotificationContainer';
+import SLanguage from '../SLanguage';
 // import KeyboardSpacer from './KeyboardSpacer';
 
 export type SComponentContainerProps = {
@@ -140,7 +142,6 @@ class SComponentContainer extends Component<SComponentContainerProps> {
         SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
-
                 if (this.state.theme != color) {
 
                     this.setState({ theme: null });
@@ -149,7 +150,7 @@ class SComponentContainer extends Component<SComponentContainerProps> {
                     })
                 }
             }}>
-                {this.getContenido()}
+                    {this.getContenido()}
             </STheme>
 
         );

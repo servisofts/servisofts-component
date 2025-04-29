@@ -22,6 +22,7 @@ export type SFromProps = {
     inputs: InputsTp,
     loading?: boolean,
     onSubmit?: Function,
+    onSubmitError?: Function,
     onSubmitName?: String,
     onSubmitProps?: ButtomType,
     error?: String,
@@ -171,9 +172,12 @@ export default class SForm extends Component<SFromProps> {
     submit() {
         var data = {};
         var isValid = true;
+
+        const invalidKeys = [];
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
             if (!input.verify()) {
+                invalidKeys.push(key);
                 isValid = false;
             }
             if (input.getType() == "files") {
@@ -253,6 +257,9 @@ export default class SForm extends Component<SFromProps> {
                 this.props.onSubmit(data, this);
             }
             return data;
+        } else {
+            if (this.props.onSubmitError) this.props.onSubmitError({ menssage: "Faltan datos en el formulatio", invalidKeys });
+            console.log("error");
         }
         return false;
     }

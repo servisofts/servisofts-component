@@ -68,7 +68,7 @@ export default class SNavBar extends Component<SPageProps> {
                         return;
                     }
                 }
-                SNavigation.goBack();
+                SNavigation.goBack(this.props.backAlternative);
 
                 // return;
                 // }
@@ -98,6 +98,9 @@ export default class SNavBar extends Component<SPageProps> {
     }
 
     renderTitle(): any {
+        if (this.props.titleLanguage) {
+            return <SText language={this.props.titleLanguage} color={STheme.color.secondary} />
+        }
         if (!this.props.title) return null;
         if (typeof this.props.title == "object") return this.props.title;
         return <SText color={STheme.color.secondary}>{this.props.title}</SText>

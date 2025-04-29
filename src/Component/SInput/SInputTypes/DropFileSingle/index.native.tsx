@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
-import { SText, STheme, SView, SImage, SPopup, SHr } from '../../../../index';
+import { View, Text, Platform, ImageStyle } from 'react-native';
+import { SText, STheme, SView, SImage, SPopup, SHr, SIcon } from '../../../../index';
 // import DocumentPicker from 'react-native-document-picker';
 // import ImagePicker from 'react-native-image-picker';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
@@ -14,6 +14,7 @@ type Props = {
     onChange?: Function,
     defaultValue?: string,
     accept?: string,
+    style?: ImageStyle,
 }
 
 export default class DropFileSingle extends Component<Props> {
@@ -75,34 +76,53 @@ export default class DropFileSingle extends Component<Props> {
         // });
         SPopup.openContainer({
             render: (props) => {
-                return <SView col={"xs-12"} center padding={8}>
-                    <SText onPress={() => {
-                        if (Platform.OS == "android") {
-                            request(PERMISSIONS.ANDROID.CAMERA).then((result) => {
-                                // …
-                            });
-                        } else if (Platform.OS == "ios") {
-                            request(PERMISSIONS.IOS.CAMERA).then((result) => {
-                                // …
-                            });
-                        }
+                return <SView col={"xs-12"} center padding={16}>
+                    <SView padding={20}
+                        col={"xs-12"}
+                        card row center
+                        onPress={() => {
+                            if (Platform.OS == "android") {
+                                request(PERMISSIONS.ANDROID.CAMERA).then((result) => {
+                                    // …
+                                });
+                            } else if (Platform.OS == "ios") {
+                                request(PERMISSIONS.IOS.CAMERA).then((result) => {
+                                    // …
+                                });
+                            }
 
-                        launchCamera({
-                            mediaType: "photo",
-                        }, (response) => {
-                            this.handleResponseLibrary(response);
-                        });
-                        props.close();
-                    }} fontSize={20} padding={8} card col={"xs-12"} bold center>Camara</SText>
-                    <SHr />
-                    <SText onPress={() => {
-                        launchImageLibrary({
-                            // mediaType: "photo",
-                        }, (response) => {
-                            this.handleResponseLibrary(response);
-                        });
-                        props.close();
-                    }} fontSize={20} padding={8} card col={"xs-12"} bold center>Galeria</SText>
+                            launchCamera({
+                                mediaType: "photo",
+                            }, (response) => {
+                                this.handleResponseLibrary(response);
+                            });
+                            props.close();
+                        }} >
+                        <SView width={18} height={18}>
+                            <SIcon stroke={STheme.color.text} name={"Camara"} />
+                        </SView>
+                        <SView width={8} />
+                        <SText fontSize={18} bold center>Camara</SText>
+                    </SView>
+                    <SHr h={16}/>
+                    <SView padding={20}
+                        col={"xs-12"}
+                        card row center
+                        onPress={() => {
+                            launchImageLibrary({
+                                // mediaType: "photo",
+                            }, (response) => {
+                                this.handleResponseLibrary(response);
+                            });
+                            props.close();
+                        }}
+                    >
+                        <SView width={18} height={18}>
+                            <SIcon stroke={STheme.color.text} name={"Galeria"} />
+                        </SView>
+                        <SView width={10} />
+                        <SText fontSize={18} bold center>Galeria</SText>
+                    </SView>
                 </SView>
             },
             key: "dropFile"
@@ -123,12 +143,10 @@ export default class DropFileSingle extends Component<Props> {
             return <SText center>{""}</SText>
         }
         var image = this.state.files[0];
-        console.log(image)
         return <SView col={"xs-12"} flex style={{
             overflow: 'hidden',
-            borderRadius: 4,
         }}>
-            <SImage src={image.uri} />
+            <SImage src={image.uri} style={this.props.style} />
         </SView>
     }
     render() {
@@ -156,7 +174,7 @@ export default class DropFileSingle extends Component<Props> {
                     // });
                 }}>
                 <SView flex col={"xs-12"} style={{
-                    borderRadius: 4,
+                    // borderRadius: 4,
                 }} center>
                     {this.getImages()}
                     {/* <SText center>{this.props.placeholder}</SText> */}

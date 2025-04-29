@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
 import SPage from '../SPage/index';
-import { CommonActions, NavigationContainer, NavigationContainerRef, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, NavigationContainerRef, Route, StackActions } from '@react-navigation/native';
+import { createStackNavigator, } from '@react-navigation/stack';
 import Pages from '../../Pages/index';
 import SLoad from '../SLoad';
 import SThread from '../SThread';
@@ -12,6 +12,8 @@ import SView from '../SView';
 import SHr from '../SHr';
 import SLinking, { SLinkingPropsType, openURL } from './SLinking';
 import SNotificationContainer from '../SNotification/SNotificationContainer';
+import SNavigationStack from './SNavigationStack';
+
 export type SPageProps = {
     params?: [string],
     component: any,
@@ -21,6 +23,7 @@ export type SPageProps = {
         headerShown: boolean
     }
 }
+export type BackAlternative = (opt: { url: string, params: any }) => void
 export declare type SPageListProps = {
     [name in string]?: SPageProps | object;
 }
@@ -60,10 +63,34 @@ export default class SNavigation extends Component<SNavigationProps> {
     static navBar: any = null;
     static root: any;
     static routes = [];
+    static pagesAvailable = [];
     static INSTANCE: SNavigation;
+
+
+    static Listeners = [];
+    static addOnChangeListener(cb: (state: Route<any>) => any) {
+        if (SNavigation.Listeners.find((item) => item == cb)) {
+            return;
+        }
+        SNavigation.Listeners.push(cb);
+    }
+
+    static removeOnChangeListener(cb: (state: Route<any>) => any) {
+        SNavigation.Listeners = SNavigation.Listeners.filter((item) => item != cb);
+    }
+
+    static disatchOnChangeListener(state: Route<any>) {
+        SNavigation.Listeners.forEach((item) => {
+            try {
+                item(state);
+            } catch (e) {
+                console.error(e);
+            }
+        })
+    }
     static reset(route: string, params?: object) {
         if (!SNavigation.lastRoute) {
-            alert("no hay navegacion");
+            // alert("no hay navegacion");
             return;
         }
         // if (Platform.OS === "web") {
@@ -94,55 +121,109 @@ export default class SNavigation extends Component<SNavigationProps> {
         //     routes: [{ name: route, params: params }]
         // });
     }
+    static openDeepLink(route: string, replace?: boolean) {
+        if (!SNavigation.INSTANCE) return;
+        SNavigation.INSTANCE.openDeepLink(route, replace);
+    }
     static openURL(route: string) {
         Linking.openURL(route);
     }
     static navigate(route: string, params?: object) {
-        if (!SNavigation.lastRoute) {
-            alert("no hay navegacion");
+        if (!SNavigation.navigation) {
+            // alert("no hay navegacion");
+            console.log("SNavigation", "No hay navegacion")
             return;
         }
         // if (Platform.OS === "web") {
         //     window.location.pathname = route
         // }
-        SNavigation.lastRoute.navigation.navigate(route, params);
+        SNavigation.navigation.navigate(route, params);
     }
     static replace(route: string, params?: object) {
         // if (Platform.OS === "web") {
         //     window.location.pathname = route
         // }
-        SNavigation.lastRoute.navigation.replace(route, params);
+        if (!SNavigation.navigation) {
+            // alert("no hay navegacion");
+            return;
+        }
+
+        // Si estás en una plataforma web, puedes actualizar la URL de la siguiente manera
+        if (Platform.OS === "web") {
+            // window.location.pathname = route;
+            const replaceAction = StackActions.replace(route, params);
+            SNavigation.navigation.dispatch(replaceAction);
+            // SNavigation.navigation.navigate(route, params);
+        } else {
+            // Reemplaza la ruta actual utilizando la referencia de navegación estática
+            // @ts-ignore
+            const replaceAction = StackActions.replace(route, params);
+            SNavigation.navigation.dispatch(replaceAction);
+            // SNavigation.navigation.replace(route, params);
+        }
+        // SNavigation.navigation.replace(route, params);
     }
-    static goBack() {
-        if (SNavigation.lastRoute) {
-            if (!SNavigation.lastRoute.navigation.canGoBack()) {
-                if (SNavigation.lastRoute.route.name == SNavigation.root) {
-                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
-                }
-                if (Platform.OS == "web") {
-                    var locstr = window.location.pathname;
-                    locstr = locstr.substring(1, locstr.lastIndexOf("/"));
+    static goBack(alternative?: BackAlternative) {
+        try {
+            console.log("GoBack")
 
-                    if (locstr == "/") {
-                        SNavigation.lastRoute.navigation.replace(SNavigation.root);
+            if (SNavigation.navigation) {
+                if (!SNavigation.navigation.canGoBack()) {
+                    if (alternative) {
+                        alternative({
+                            params: SNavigation.navigation.getCurrentRoute().params,
+                            url: SNavigation.navigation.getCurrentRoute().name
+                        })
+                        return;
                     }
+                    // if (SNavigation.lastRoute.route.name == SNavigation.root) {
+                    //     SNavigation.replace(SNavigation.root);
+                    // }
 
-                    // SNavigation.lastRoute.navigation.replace(locstr);
-                    try {
-                        SNavigation.lastRoute.navigation.replace("/" + locstr, SNavigation.getAllParams())
-                    } catch (e) {
-                        window.location.pathname = locstr;
+                    if (Platform.OS == "web") {
+                        console.log("GOBACK", "Intentando go back")
+                        var locstr = window.location.pathname
+                        // console.log("history", window.history.state)
+                        locstr = locstr.substring(1, locstr.lastIndexOf("/"));
+                        if (locstr == "/") {
+                            SNavigation.replace(SNavigation.root);
+                        }
+
+                        // SNavigation.lastRoute.navigation.replace(locstr);
+                        if (SNavigation.pagesAvailable.includes("/" + locstr)) {
+                            SNavigation.replace("/" + locstr, SNavigation.navigation.getCurrentRoute().params)
+                        } else if (SNavigation.pagesAvailable.includes(locstr)) {
+                            SNavigation.replace(locstr, SNavigation.navigation.getCurrentRoute().params)
+                        } else {
+                            SNavigation.replace(SNavigation.root);
+                        }
+                        // try {
+                        //     console.log("history", "/" + locstr, SNavigation.getAllParams())
+                        //     SNavigation.lastRoute.navigation.replace("/" + locstr, SNavigation.getAllParams())
+                        // } catch (e) {
+                        //     console.log("history", "error", e)
+                        //     window.location.pathname = locstr;
+                        // }
+                        return;
+                    } else {
+                        // SNavigation.navigation.resetRoot();
+                        SNavigation.replace(SNavigation.root);
+                        return;
                     }
-                    return;
+                    // if (locstr.split("/").length <= 2) {
+                    //     return <View />
+                    // }
+                    SNavigation.navigation.resetRoot();
                 } else {
-                    SNavigation.lastRoute.navigation.replace(SNavigation.root);
-                    return;
+                    SNavigation.navigation.goBack()
                 }
-                // if (locstr.split("/").length <= 2) {
-                //     return <View />
-                // }
+
+            } else {
+                console.log("Se perdio la navegacion regresando")
+                SNavigation.reset("/");
             }
-            SNavigation.lastRoute.navigation.goBack();
+        } catch (error) {
+            console.error(error)
         }
 
     }
@@ -155,6 +236,7 @@ export default class SNavigation extends Component<SNavigationProps> {
         return params;
     }
     static getParam(key: string, valDef?: any) {
+
         var route = SNavigation.lastRoute?.route;
         var params = route?.params;
         if (!params) {
@@ -200,15 +282,16 @@ export default class SNavigation extends Component<SNavigationProps> {
         SNavigation.navBar = props.props.navBar;
         SNavigation.INSTANCE = this;
     }
-    openDeepLink(url) {
-        openURL(url, this.props.linking.prefixes);
+
+    openDeepLink(url, replace?: boolean) {
+        openURL(url, this.props.linking.prefixes, replace);
     }
     handleDeepLink = (event) => {
 
         // let data = Linking.parse(event.url);
         console.log("ENTRO EN EL HANDLE DEEPLINK", event)
         if (event.url) {
-            openURL(event.url, this.props.linking.prefixes);
+            openURL(event.url, this.props.linking.prefixes, false);
             // Navega a la pantalla de detalles con los parámetros del enlace
             // navigation.navigate('Details', { pk: data.queryParams.pk });
         }
@@ -216,8 +299,12 @@ export default class SNavigation extends Component<SNavigationProps> {
     deleteListener;
     componentDidMount(): void {
         this.deleteListener = Linking.addEventListener('url', this.handleDeepLink);
-        this.initialURL();
+        // this.initialURL();
+
+
     }
+
+
     async initialURL() {
         const url = await Linking.getInitialURL();
         console.log("ENTRO AL LINKING GET INITIAL URL", url)
@@ -234,7 +321,9 @@ export default class SNavigation extends Component<SNavigationProps> {
             this.deleteListener.remove();
             this.deleteListener = null;
         }
+
     }
+    static lastPageInstaced = null;
     getPages(pages, Stack) {
         const Validator = this.props?.props?.validator;
         let currentPage = "";
@@ -242,19 +331,37 @@ export default class SNavigation extends Component<SNavigationProps> {
             if (!SNavigation.root) {
                 SNavigation.root = key;
             }
+            var _Page = pages[key].component;
+            if (!_Page) {
+                _Page = pages[key];
+            }
+
+
             var Page = (props) => {
+
+                const [_key, _setKey] = React.useState(SUuid());
+                SNavigation.lastPageInstaced = {
+                    ...props, key: _key,
+                    class: _Page,
+                    forceUpdate: () => {
+                        _setKey(SUuid());
+                    }
+                };
+                
+                if (!SNavigation.navigation) {
+                    SNavigation.navigation = props.navigation;
+                }
+                // useEffect(() => {
+                //     console.log(JSON.stringify(props.route))
+                // }, [])
+                SNavigation.lastRoute = props;
                 try {
-                    if (props) {
-                        SNavigation.lastRoute = props;
-                    }
-                    var Page = pages[key].component;
-                    if (!Page) {
-                        Page = pages[key];
-                    }
+
                     return <>
                         {!Validator ? null : <Validator />}
-                        {Page.TOPBAR}
-                        <Page {...props} />
+                        {_Page.TOPBAR}
+                        <_Page {...props} />
+                        {_Page.FOOTER}
                     </>
                 } catch (e) {
                     console.error(e);
@@ -286,7 +393,14 @@ export default class SNavigation extends Component<SNavigationProps> {
             ...this.props.props.pages,
             ...Pages,
         }
+        SNavigation.pagesAvailable = Object.keys(pages);
+        // console.log("Entro al RENDER DE SNavigation", this.props)
         return (<NavigationContainer ref={(ref) => {
+            if (!ref) {
+                // console.log("SNavigation", "Se retorno por que estaba vacio")
+                return;
+            }
+            // console.log("SNavigation", "Se seteo la navegacion")
             SNavigation.navigation = ref;
         }}
             linking={SLinking(this.props.linking ?? {}, pages)}
@@ -295,11 +409,20 @@ export default class SNavigation extends Component<SNavigationProps> {
             //         this.props.linking.getInitialURL();
             //     }
             // }}
+            onReady={() => {
+                // console.log("SNavigation", "onReady", SNavigation.navigation.getCurrentRoute())
+                SNavigation.disatchOnChangeListener(SNavigation.navigation.getCurrentRoute());
+            }}
             theme={{ dark: false, colors: colors }}
-            onStateChange={(state) =>
+            onStateChange={(state) => {
                 stateNavigator = state
+                const currentRoute = state.routes[state.index];
+                SNavigation.disatchOnChangeListener(currentRoute);
+                // console.log("SNavigation", "onStateChange", state)
                 // AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-            }
+            }}
+
+
         ><Stack.Navigator>
                 {this.getPages(pages, Stack)}
             </Stack.Navigator>
