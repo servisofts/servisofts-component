@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform } from 'react-native';
-import { STheme, SText, SView, SViewProps } from '../../index';
+import { STheme, SText, SView, SViewProps, SThread } from '../../index';
 
 import { Variant, TypeVariant } from './variants';
 import { Type, TypeType } from './types';
@@ -44,8 +44,11 @@ export class SInput extends Component<TypeInputProps> {
     customStyle
     variant
     _ref
+    refView
     inpref
+    refSelect;
     required;
+    fisrtFocus = false;
     static defaultProps = {
         props: {},
         style: {},
@@ -125,7 +128,7 @@ export class SInput extends Component<TypeInputProps> {
         if (this.props.onBlur) {
             this.props.onBlur(null);
         }
-        if(this.props.onEndEditing){
+        if (this.props.onEndEditing) {
             this.props.onEndEditing(null);
         }
     }
@@ -193,6 +196,7 @@ export class SInput extends Component<TypeInputProps> {
         }
     }
     onChangeText = (_text) => {
+        console.log("onChangeText", _text);
         var text = _text;
         if (this.type) {
             if (this.type.onChangeText) {
@@ -301,9 +305,9 @@ export class SInput extends Component<TypeInputProps> {
         } else {
             valueFilter = "";
         }
-        if (this.props.autoFocus) {
-            this.inpref?.focus();
-        }
+        // if (this.props.autoFocus) {
+        //     this.inpref?.focus();
+        // }
 
         var styleFinal = {
             ...customStyle["View"],
@@ -355,6 +359,12 @@ export class SInput extends Component<TypeInputProps> {
                     }
                 } : {})}
                 {...this.props}
+                onLayout={(evt) => {
+                    this.layout = evt.nativeEvent.layout;
+                    // @ts-ignore
+                    this.refView = evt.nativeEvent.target;
+                    // console.log("onLayout", this.layout, this.refView);
+                }}
                 style={styleFinal}
             >
                 {this.getLabel()}
@@ -366,11 +376,23 @@ export class SInput extends Component<TypeInputProps> {
                     {this.getIcon()}
                     <SView flex height>
                         <TextInput
-                            ref={(ref) => { this.inpref = ref }}
+                            ref={(ref) => {
+                                this.inpref = ref
+                                if (this.props.autoFocus && this.inpref) {
+                                    if(this.fisrtFocus) return;
+                                    this.fisrtFocus = true;
+                                    new SThread(200, "start", false).start(() => {
+                                        this.inpref.focus();
+                                    })
+
+                                }
+                            }}
                             value={valueFilter}
                             editable={!this.props.disabled}
                             placeholderTextColor={customStyle["InputText"]?.placeholderTextColor ?? ""}
                             {...extraprops}
+                            autoFocus={false}
+
                             style={styleInputFinal}
                             onChangeText={this.onChangeText}
                         />

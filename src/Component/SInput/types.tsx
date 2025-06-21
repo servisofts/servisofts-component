@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { StyleSheet, TextInputProps, TextStyle, TouchableOpacity, View, ViewStyle, Text } from "react-native"
 import { SInput } from "."
 import SDate from "../SDate"
-import { SText, STheme, SView, SPopupOpen, SPopupClose, SIcon } from "../../index"
+import { SText, STheme, SView, SPopupOpen, SPopupClose, SIcon, SPopup, SThread } from "../../index"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
 import SISelect from "./SInputTypes/SISelect"
@@ -12,10 +12,12 @@ import SNavigation from "../SNavigation"
 import DropFileSingle from "./SInputTypes/DropFileSingle"
 import SIFecha_MY_Alert from "./SInputTypes/SIFecha_MY_Alert"
 import SIColorAlert from "./SInputTypes/SIColorAlert"
+import Select2Class from "./SInputTypes/Select2/index"
 
 export type TypeType =
     "default"
     | "select"
+    | "select2"
     | "fecha"
     | "date"
     | "date_my"
@@ -58,6 +60,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
     switch (type) {
         case "select":
             return select(type, Parent);
+        case "select2":
+            return select2(type, Parent);
         case "fecha":
             return fecha(type, Parent);
         case "color":
@@ -420,6 +424,171 @@ const select = (type: TypeType, Parent: SInput) => {
                 fontSize: 0,
             },
             LabelStyle: {}
+        }
+    })
+}
+const select2 = (type: TypeType, Parent: SInput) => {
+    // var format = "yyyy-MM-dd";
+    return buildResp({
+        // filter: (_value: String) => {
+        //     let result = "";
+        //     var options = Parent.getOption("options");
+
+        //     const op = options.find((opt) => {
+        //         if (opt.key) {
+        //             if (opt.key == _value) {
+        //                 return true;
+        //             }
+        //         } else {
+        //             if (opt == _value) {
+        //                 return true;
+        //             }
+        //         }
+        //         return false;
+        //     })
+        //     console.log(options, op, _value);
+        //     return op?.content ?? op;
+        // },
+        onChangeText: (e) => {
+            if (Parent.refSelect) {
+                Parent.refSelect.filter(e)
+                // const select = Parent.refSelect.getSelect();
+                // Parent.setValue(select.key ?? select);
+            }
+            return e;
+        },
+        props: {
+            editable: true,
+            onFocus: (e) => {
+                var options = Parent.getOption("options");
+                let target = e.target;
+                // @ts-ignore
+                if (!target?.measure) {
+                    // @ts-ignore
+                    target = Parent.refView
+                }
+
+                console.log("target", target);
+                // @ts-ignore
+                if (!target?.measure) return;
+                // @ts-ignore
+                target.measure((x, y, width, height, pageX, pageY) => {
+                    SPopup.open({
+                        key: "select2",
+                        type: "2",
+                        content: <SView style={{
+                            position: "absolute",
+                            top: pageY + height + 2,
+                            left: pageX,
+                            width: width + 20,
+                            height: 200,
+                            backgroundColor: STheme.color.background,
+                            borderRadius: 8,
+                            borderWidth: 1,
+                            borderColor: STheme.color.card,
+                        }}>
+                            <Select2Class ref={ref => Parent.refSelect = ref} options={options} onSelect={select => {
+                                Parent.setValue(select.key ?? select);
+                            }} />
+                        </SView>
+                    })
+                })
+
+
+            },
+
+            selectTextOnFocus: true,
+            onSubmitEditing: (e) => {
+                if (Parent.refSelect) {
+                    const select = Parent.refSelect.getSelect();
+                    Parent.setValue(select.key ?? select);
+                }
+            },
+            onBlur: (e) => {
+                new SThread(150, "select2_close", false).start(() => {
+                    // const select = Parent.refSelect.getSelect();
+                    // Parent.setValue(select.key ?? select);
+                    SPopup.close("select2");
+                })
+
+                // Parent.notifyBlur();
+            },
+            onKeyPress: (e) => {
+                // down
+                if (e.nativeEvent.key == "ArrowUp") {
+                    if (Parent.refSelect) {
+                        Parent.refSelect.setState({
+                            select: Parent.refSelect.state.select - 1
+                        })
+                    }
+                }
+                if (e.nativeEvent.key == "ArrowDown") {
+                    if (Parent.refSelect) {
+                        Parent.refSelect.setState({
+                            select: Parent.refSelect.state.select + 1
+                        })
+                    }
+                }
+            }
+            // focusable: false,
+            // pointerEvents: "none",
+        },
+
+        // render: (_Parent: SInput) => {
+        //     var value = _Parent.getValue();
+
+        //     var options = _Parent.getOption("options");
+        //     options.map((option) => {
+        //         if (option.key == value) {
+        //             value = option;
+        //         }
+        //     })
+        //     const style = {
+        //         ...(_Parent.customStyle?.InputText ?? {}),
+
+        //     }
+        //     if (!value) return <SText clean col={"xs-12"} style={{
+        //         ...style,
+        //         color: _Parent.customStyle?.InputText?.placeholderTextColor ?? "#EEEEEE"
+        //         // backgroundColor:"#f0f"
+        //     }}>{_Parent?.props?.placeholder}</SText>
+
+        //     if (typeof value != "object") {
+        //         if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value)}</SText>
+        //         return <SText clean col={"xs-12"} style={style}>{value}</SText>
+        //     }
+        //     if (!value.content) return <View />
+
+        //     if (typeof value.content != "object") {
+        //         if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value.content)}</SText>
+        //         return <SText clean col={"xs-12"} style={style}>{value.content}</SText>
+        //     }
+        //     return value.content;
+        // },
+        // onPress: () => {
+        // var options = Parent.getOption("options");
+
+        // SPopupOpen({
+        //     key: "fechaPicker",
+        //     content: <SISelect
+        //         height={300}
+        //         props={{
+        //             defaultValue: Parent.getValue(),
+        //         }}
+        //         options={options}
+        //         onClose={() => {
+        //             Parent.notifyBlur();
+        //         }}
+        //         onChange={(val) => {
+        //             // console.log(val);
+        //             Parent.setValue(val);
+        //         }} />
+        // })
+        // },
+        style: {
+            View: {},
+            InputText: {},
+            // LabelStyle: {}
         }
     })
 }
