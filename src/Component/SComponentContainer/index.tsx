@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { View, Text, SafeAreaView, StatusBar } from 'react-native';
 import SText from '../SText/index';
 import SGrid from '../SGrid/index';
@@ -27,7 +27,7 @@ export type SComponentContainerProps = {
 }
 
 
-class SComponentContainer extends Component<SComponentContainerProps> {
+export default class SComponentContainer extends React.Component<SComponentContainerProps, any> {
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
 
@@ -58,7 +58,7 @@ class SComponentContainer extends Component<SComponentContainerProps> {
     }
     layout;
     state;
-    constructor(props) {
+    constructor(props: SComponentContainerProps, context: any) {
         super(props);
         this.state = {
             layout: {},
@@ -138,7 +138,7 @@ class SComponentContainer extends Component<SComponentContainerProps> {
             </View>
         )
     }
-    render() {
+    render(): JSX.Element {
         SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
@@ -150,11 +150,10 @@ class SComponentContainer extends Component<SComponentContainerProps> {
                     })
                 }
             }}>
-                    {this.getContenido()}
+                {this.getContenido()}
             </STheme>
 
         );
 
     }
 }
-export default SComponentContainer;
