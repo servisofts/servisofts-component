@@ -11,6 +11,7 @@ type typeScroll = {
     onScroll?: (e: any) => void,
     onPageFinish?: () => {},
     parent?: SScrollView2,
+    children?: any,
 
 }
 const preventDefault = e => e.preventDefault();

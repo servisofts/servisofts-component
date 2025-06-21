@@ -3,7 +3,8 @@ import { ScrollView } from 'react-native';
 import SView from '../SView';
 type _SScrollProps = {
     horizontal?: boolean,
-    center?: boolean
+    center?: boolean,
+    children?: any,
 }
 export default class SScroll extends Component<_SScrollProps> {
     constructor(props) {

@@ -4,8 +4,9 @@ import { SAssets } from '../../Types';
 import STheme from '../STheme';
 import LocalImg, { IconNames, IconsVariant } from '../../img/index'
 import SView from '../SView';
+import { SUuid } from '../SUuid';
 
-type SIconType = {
+export type SIconType = {
     name?: IconNames,
     width?: number | string,
     height?: number | string,
@@ -57,7 +58,7 @@ export default class SIcon extends Component<SIconType> {
                 <SView col={"xs-11"} height={"90%"} style={{
                     position: "absolute",
                 }} center >
-                    <Icon fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} width={"100%"} height={"100%"} />
+                    <Icon key={SUuid()} fill={"#000"} {...this.getIconProps(this.props.name)}  {...this.props} width={"100%"} height={"100%"} />
                 </SView>
             </SView>)
         }

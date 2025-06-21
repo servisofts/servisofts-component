@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SHr, SPage, SSection, SText, SView, SInput, SBuscador, SIcon, STheme, SThread } from '../../index';
+import { SHr, SPage, SSection, SText, SView, SInput, SBuscador, SIcon, STheme, SThread, SLanguage } from '../../index';
 import SOrdenador, { TypeOrdenar } from '../SOrdenador';
 
 
@@ -135,7 +135,10 @@ class SList extends Component<SListType> {
                 iconR={<SView center style={{
                     padding: 4
                 }} height><SText fontSize={12} color={STheme.color.gray}>{`(${this.state.cant ?? 0})`}</SText></SView>}
-                placeholder={"Buscar..."}
+                placeholder={SLanguage.select({
+                    en: "Find...",
+                    es: "Buscar..."
+                })}
                 ref={r => this._buscador = r}
                 onChangeText={(val) => {
                     new SThread(500, "buscador_list", true).start(() => {

@@ -6,7 +6,8 @@ type PropsType = {
     direcction?: "top" | "bottom" | "left" | "right",
     size?: any,
     width: any,
-    onContentSizeChange?: any
+    onContentSizeChange?: any,
+    children?: any,
 }
 const preventDefault = e => e.preventDefault();
 export default class SResizableView extends Component<PropsType> {

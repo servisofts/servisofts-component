@@ -1,5 +1,5 @@
-import { TextInput, View, Picker } from 'react-native'
-import React, { Component, useState } from 'react'
+import { TextInput, View, } from 'react-native'
+import React, { Component } from 'react'
 import { SInput2PropsType } from './type'
 import InputTypes from "./types/index"
 import SInput2TypeAbstract from './SInput2TypeAbstract';

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, ViewStyle } from 'react-native';
-import { SColType } from '../../Types/index';
+import { SColType, TColKey, TColKeyConv } from '../../Types/index';
 import SComponentContainer from '../SComponentContainer/index';
 import { SUuid } from '../SUuid/index';
 import { SViewProps } from '../SView/index';
 
 export type SGridProps = {
     col: SColType,
+    colHidden?: TColKeyConv,
     style: ViewStyle,
     colSquare?: boolean,
     animated?: boolean,
@@ -16,6 +17,7 @@ export type SGridProps = {
     onLayout?: (event: any) => void,
     getValue?: () => any,
     setValue?: (event: any) => void,
+    children?: any,
 }
 
 export default class SGrid extends Component<SGridProps> {
@@ -52,6 +54,14 @@ export default class SGrid extends Component<SGridProps> {
 
     setSize() {
         var col;
+        if (this.props.colHidden) {
+            if (this.props.colHidden.indexOf(this.medida) > -1) {
+                this.setState({ hidden: true });
+                return null;
+            } else if (this.state.hidden) {
+                this.setState({ hidden: false });
+            }
+        }
         if (typeof this.props.col == "string") {
             col = {};
             var text: string = this.props.col;
@@ -63,15 +73,13 @@ export default class SGrid extends Component<SGridProps> {
                 }
             })
             var max = this.getMax(col);
-            // Animated.timing(this.animSize, {
-            //     toValue: { x: (max * 100) / 12, y: this.animSize.y._value },
-            //     useNativeDriver: true,
-            //     duration: 1,
-            // }).start();
+
+            if (max == "0" && !this.state.hidden) {
+                this.setState({ hidden: true })
+            } else if (max != 0 && this.state.hidden) {
+                this.setState({ hidden: false })
+            }
             this.setValue({ x: (max * 100) / 12, y: this.state.y })
-            // console.log("animado")
-            // this.setState()
-            // this.animSize.setValue({ x: (max * 100) / 12, y: this.animSize.y._value });
         } else {
             col = this.props.col;
         }
@@ -117,31 +125,43 @@ export default class SGrid extends Component<SGridProps> {
         if (this.props.animated) {
             Element = Animated.createAnimatedComponent(Element);
         }
+        if (this.state.hidden) return null;
+
+        var styles_p: any = this.props.style
+        var style: any = {};
+        if (Array.isArray(styles_p)) {
+            styles_p.forEach((sty: any) => {
+                style = { ...style, ...sty };
+            })
+
+        } else {
+            style = { ...styles_p };
+        }
         return (
             <Element
                 // key={SUuid()}
                 style={{
-                    ...(!this.props.style.position ? {} : { position: this.props.style.position, }),
-                    ...(!this.props.style.flex ? {} : { flex: this.props.style.flex, }),
+                    ...(!style.position ? {} : { position: style.position, }),
                     ...(!this.props.flex ? {} : { flex: this.props.flex == true ? 1 : parseInt(this.props.flex + "") }),
-                    ...(!this.props.style.height ? {} : { height: this.props.style.height, }),
-                    ...(!this.props.style.maxHeight ? {} : { maxHeight: this.props.style.maxHeight, }),
-                    ...(!this.props.style.maxWidth ? {} : { maxWidth: this.props.style.maxWidth, }),
-                    ...(!this.props.style.width ? {} : { width: this.props.style.width, }),
+                    ...(!style.flex ? {} : { flex: style.flex, }),
+                    ...(!style.height ? {} : { height: style.height, }),
+                    ...(!style.maxHeight ? {} : { maxHeight: style.maxHeight, }),
+                    ...(!style.maxWidth ? {} : { maxWidth: style.maxWidth, }),
+                    ...(!style.width ? {} : { width: style.width, }),
                     ...(!this.props.colSquare ? {} : (!this.props.col ? { width: size.x } : { height: size.y })),
                     ...(!this.props.height ? {} : { height: this.props.height == true ? "100%" : this.props.height }),
-                    ...(!this.props.style.zIndex ? {} : { zIndex: this.props.style.zIndex, }),
-                    ...(this.props.style.margin == null ? {} : { margin: this.props.style.margin }),
-                    ...(this.props.style.marginBottom == null ? {} : { marginBottom: this.props.style.marginBottom }),
-                    ...(this.props.style.marginTop == null ? {} : { marginTop: this.props.style.marginTop }),
-                    ...(this.props.style.marginLeft == null ? {} : { marginLeft: this.props.style.marginLeft }),
-                    ...(this.props.style.marginRight == null ? {} : { marginRight: this.props.style.marginRight }),
-                    ...(this.props.style.marginStart == null ? {} : { marginStart: this.props.style.marginStart }),
-                    ...(this.props.style.marginEnd == null ? {} : { marginEnd: this.props.style.marginEnd }),
-                    ...(this.props.style.top == null ? {} : { top: this.props.style.top }),
-                    ...(this.props.style.bottom == null ? {} : { bottom: this.props.style.bottom }),
-                    ...(this.props.style.left == null ? {} : { left: this.props.style.left }),
-                    ...(this.props.style.right == null ? {} : { right: this.props.style.right }),
+                    ...(!style.zIndex ? {} : { zIndex: style.zIndex, }),
+                    ...(style.margin == null ? {} : { margin: style.margin }),
+                    ...(style.marginBottom == null ? {} : { marginBottom: style.marginBottom }),
+                    ...(style.marginTop == null ? {} : { marginTop: style.marginTop }),
+                    ...(style.marginLeft == null ? {} : { marginLeft: style.marginLeft }),
+                    ...(style.marginRight == null ? {} : { marginRight: style.marginRight }),
+                    ...(style.marginStart == null ? {} : { marginStart: style.marginStart }),
+                    ...(style.marginEnd == null ? {} : { marginEnd: style.marginEnd }),
+                    ...(style.top == null ? {} : { top: style.top }),
+                    ...(style.bottom == null ? {} : { bottom: style.bottom }),
+                    ...(style.left == null ? {} : { left: style.left }),
+                    ...(style.right == null ? {} : { right: style.right }),
                     ...(this.props.margin == null ? {} : { padding: this.props.margin }),
                     ...(!this.props.col ? {} : {
                         width: size.x + "%",

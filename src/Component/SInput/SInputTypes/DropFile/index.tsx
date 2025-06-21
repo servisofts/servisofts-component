@@ -234,9 +234,7 @@ export default class DropFile extends Component<Props> {
                             }} />
 
                         {this.getImages()}
-
                         {/* {this.props.children} */}
-
                     </div>
                 </SView>
             </SView>

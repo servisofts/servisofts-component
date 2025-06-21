@@ -1,4 +1,4 @@
-import { Picker, Switch, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
+import {  Switch, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
 import React, { Component } from 'react'
 import SInput2TypeAbstract from '../SInput2TypeAbstract'
 

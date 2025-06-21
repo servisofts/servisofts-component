@@ -31,9 +31,17 @@ export type FontsType = "hello baby"
     | "SF-Mono"
     | "SF-Mono-Regular"
     | "SF-Mono-Semibold"
+
+    | "Montserrat-Bold"
     | "Montserrat-ExtraBold"
+    | "Montserrat-ExtraLight"
+    | "Montserrat-ExtraLightItalic"
+    | "Montserrat-Italic"
+    | "Montserrat-Medium"
     | "Montserrat-Regular"
+    | "Montserrat-SemiBold"
     | "Montserrat"
+    
     | "TT-Norms-Pro"
     | "TT-Norms-Pro-Regular"
     | 'TT-Norms-Pro-Bold'
@@ -42,8 +50,11 @@ export type FontsType = "hello baby"
     | "AcherusGrotesque-Bold"
     | "Cascadia"
     | "Calibri"
+    | "Retropulse"
+    | "AlbertSans"
+    | "Poppins"
 
-const Font = (props) => {
+const Font = (props:any) => {
     return <></>
 }
 export default Font;

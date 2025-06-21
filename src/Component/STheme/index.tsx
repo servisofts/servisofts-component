@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator, Animated } from 'react-native';
-import SThread from '../SThread/index';
 import SStorage from '../SStorage';
-import SLoad from '../SLoad';
 import MapStyle from './MapStyle';
-import SIcon from '../SIcon';
 import { FontsType } from '../../font/index';
 export type SThemeColors = {
     barStyle: "dark-content" | "light-content",
@@ -31,7 +28,15 @@ export type SThemeColors = {
     lightBlack?: string,
     mapStyle?: any[],
     font?: FontsType,
-
+    aux1?:string,
+    aux2?:string,
+    aux3?:string,
+    aux4?:string,
+    aux5?:string,
+    aux6?:string,
+    aux7?:string,
+    aux8?:string,
+    aux9?:string,
 
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -41,6 +46,7 @@ export type SThemeProps = {
     themes: SThemeThemes,
     noAnimated?: boolean,
     data?: any,
+    children?: any,
     onLoad?: (color: SThemeColors) => any
 }
 
@@ -71,6 +77,32 @@ export default class STheme extends Component<SThemeProps> {
         link: "#6666ff",
         mapStyle: MapStyle.default,
     };
+
+    public static colorRandom(d = 50, f = 100) {
+        const toHex = (c) => {
+            const hex = c.toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
+        };
+
+        var r = Math.floor(Math.random() * 256 - f) + d;
+        var g = Math.floor(Math.random() * 256 - f) + d;
+        var b = Math.floor(Math.random() * 256 - f) + d;
+        return "#" + toHex(r) + toHex(g) + toHex(b);
+    }
+    public static colorFromText(text) {
+        var sum = 0;
+        // if (text.length < 16) text = text + "aaaaaaaaaaaaaaaaaaa";
+        for (var i = 0; i < text.length; i++) {
+            sum += text.charCodeAt(i);
+        }
+        var hex = sum.toString(16);
+        while (hex.length < 3) {
+            hex = "0" + hex; // Añade ceros al principio si el valor hexadecimal es demasiado corto
+        }
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        return '#' + hex.substring(0, 6);
+    }
+
     public static instance: STheme;
     public static select(theme: SThemeOptions) {
         if (!this.instance) {
@@ -83,6 +115,12 @@ export default class STheme extends Component<SThemeProps> {
             return "error";
         }
         return this.instance.change();
+    };
+    public static repaint() {
+        if (!this.instance) {
+            return "error";
+        }
+        return this.instance.repaint();
     };
     public static getTheme() {
         if (!this.instance) {
@@ -101,15 +139,15 @@ export default class STheme extends Component<SThemeProps> {
             select: !this.props.initialTheme ? "default" : this.props.initialTheme,
         };
         // this.repaint();
-        this.animFadeOut = new Animated.Value(0);
+        // this.animFadeOut = new Animated.Value(0);
     }
     componentDidMount() {
         this.getItemTheme();
 
     }
     async getItemTheme() {
-        SStorage.getItem("themeState", (data) => {
-            console.log("Entro en el onLoad")
+        SStorage.getItem("themeState", (data:any) => {
+            // console.log("Entro en el onLoad")
             if (data) {
                 this.select(data);
             } else {
@@ -141,6 +179,11 @@ export default class STheme extends Component<SThemeProps> {
         }
         // })
 
+    }
+    repaint() {
+        if (this.props.onLoad) {
+            this.props.onLoad(STheme.color);
+        }
     }
     change() {
         this.state.select = this.state.select != "default" ? "default" : "dark";

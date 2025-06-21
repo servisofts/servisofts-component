@@ -47,16 +47,24 @@ import SPolyline from "./Component/SMapView/SPolyline";
 import SLocation from "./Component/SMapView/SLocation";
 import SSection from "./Component/SSection";
 import ExportExcel from "./Component/STable2/ExportExcel";
+import SIFechaAlert from "./Component/SInput/SInputTypes/SIFechaAlert";
 import SRangeSlider from "./Component/SRangeSlider";
-import SAlvaro from "./Component/SAlvaro";
+// import SAlvaro from "./Component/SAlvaro";
 import Upload from "./Component/SForm/Upload";
 import SPromise from "./Component/SPromise";
 import SSwitch from "./Component/SSwitch";
 import SNativeModules from "./SNativeModules";
 import SNotification from "./Component/SNotification";
 import SGeolocation from "./Component/SGeolocation";
+import SDatePicker from "./Component/SDatePicker";
+import SSPiner from "./Component/SSPiner";
+import SUtil from "./Component/SUtil";
+import DropFile from "./Component/SInput/SInputTypes/DropFile";
+import DropFileSingle from "./Component/SInput/SInputTypes/DropFileSingle";
+import SLanguage from "./Component/SLanguage";
 export * from './Types'
 export {
+    SUtil,
     SHr,
     SGradient,
     SDate,
@@ -80,9 +88,11 @@ export {
     SImage,
     SList,
     SList2,
+    SIFechaAlert,
     SBuscador,
     SView,
     SLoad,
+    SDatePicker,
     SStorage,
     SPopup,
     SPopupOpen,
@@ -101,10 +111,14 @@ export {
     SSection,
     Upload,
     SExcel,
+    DropFile,
+    DropFileSingle,
     SExcelReader,
     ExportExcel,
     SColorPicker,
     SPromise,
+    SSPiner,
+    SLanguage,
     // MAPA
     SMapView,
     SMapView2,
@@ -117,5 +131,5 @@ export {
     SNativeModules,
     SNotification,
     //alvaro
-    SAlvaro
+    // SAlvaro
 }

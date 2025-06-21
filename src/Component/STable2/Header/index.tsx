@@ -6,6 +6,7 @@ import SIcon from '../../SIcon';
 import SPopup from '../../SPopup';
 import HAjustes from '../HAjustes';
 import { STable2cellStyle } from '../Row';
+import { CellObject } from 'xlsx-color';
 
 export type HeaderProps = {
     label: string,
@@ -22,8 +23,10 @@ export type HeaderProps = {
     orderPriority?: number,
     component?: any,
     options?: Array<any>,
+    renderHeader?: any,
     render?: (data: any, id?: any) => {},
-    renderExcel?: (data: any) => {},
+    excelProps?: CellObject,
+    renderExcel?: (data: any) => any,
     sumar?: boolean,
     renderTotal?: (total: number) => any,
     animWidth?: Animated.Value,
@@ -110,8 +113,7 @@ class Header extends Component<HeaderProps> {
                         overflow: 'hidden',
                     }}>
                     <SView row center>
-                        <SText fontSize={11} font={"Calibri"}>{this.props.label}</SText>
-
+                        {this.props.renderHeader ? this.props.renderHeader() : <SText fontSize={11} font={"Calibri"}>{this.props.label}</SText>}
                         {this.props.order ? <SView width={14} center style={{
                             transform: [{ rotate: (this.props.order != "desc" ? "90deg" : "-90deg") }],
                         }}>
@@ -127,7 +129,8 @@ class Header extends Component<HeaderProps> {
                         style={{
                             position: "absolute",
                             right: 0,
-                            width: 16,
+                            width: 8,
+                            // backgroundColor:"#f0f",
                             zIndex: 99,
                             height: "100%",
                             cursor: "col-resize",

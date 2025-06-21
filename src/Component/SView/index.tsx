@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, ViewStyle, TouchableOpacity, Animated, ViewProps, TouchableOpacityProps, Platform } from 'react-native';
 
-import { SColType, SDirectionType } from '../../Types/index';
+import { SColType, SDirectionType, TColKeyConv } from '../../Types/index';
 import SGrid from '../SGrid/index';
 import STheme from '../STheme';
 
 
 export type SViewProps = {
   col?: SColType,
+  colHidden?: TColKeyConv,
   dir?: SDirectionType,
   row?: boolean,
   borderRadius?: number,
@@ -81,7 +82,15 @@ export default class SView extends Component<SViewProps> {
       Element = Animated.createAnimatedComponent(Element);
     }
     var styles_p: any = this.props.style
-    var style = { ...styles_p };
+    var style: any = {};
+    if (Array.isArray(styles_p)) {
+      styles_p.forEach((sty: any) => {
+        style = { ...style, ...sty };
+      })
+
+    } else {
+      style = { ...styles_p };
+    }
     if (style) {
       delete style["top"];
       delete style["left"];
@@ -107,6 +116,7 @@ export default class SView extends Component<SViewProps> {
         flex={this.props.flex}
         animated={this.props.animated}
         col={this.state.params.col}
+        colHidden={this.props.colHidden}
         style={(!this.props.style ? {} : this.props.style)}
         onLayout={(evt) => {
           this.layout = evt.nativeEvent.layout;

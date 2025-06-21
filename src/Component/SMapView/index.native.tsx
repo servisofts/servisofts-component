@@ -12,6 +12,7 @@ type PropsType = {
     preventCenter?: boolean,
     showsMyLocationButton?: boolean,
     showsUserLocation?: boolean,
+    children?: any,
     options?: {
         styles?: any,
         zoomControl?: boolean,

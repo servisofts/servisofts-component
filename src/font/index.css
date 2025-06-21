@@ -22,15 +22,17 @@
   font-family: 'Athelas';
   src: url(./Athelas.ttf);
 }
- 
+
 @font-face {
   font-family: 'LondonBetween';
   src: url(./LondonBetween.ttf);
 }
+
 @font-face {
   font-family: 'LondonMM';
   src: url(./LondonMM.ttf);
 }
+
 @font-face {
   font-family: 'LondonTwo';
   src: url(./LondonTwo.ttf);
@@ -41,50 +43,62 @@
   font-family: 'OpenSans';
   src: url(./OpenSans.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-Bold';
   src: url(./OpenSans-Bold.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-BoldItalic';
   src: url(./OpenSans-BoldItalic.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-ExtraBold';
   src: url(./OpenSans-ExtraBold.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-ExtraBoldItalic';
   src: url(./OpenSans-ExtraBoldItalic.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-Italic';
   src: url(./OpenSans-Italic.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-Light';
   src: url(./OpenSans-Light.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-LightItalic';
   src: url(./OpenSans-LightItalic.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-Medium';
   src: url(./OpenSans-Medium.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-MediumItalic';
   src: url(./OpenSans-MediumItalic.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-Regular';
   src: url(./OpenSans-Regular.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-SemiBold';
   src: url(./OpenSans-SemiBold.ttf);
 }
+
 @font-face {
   font-family: 'OpenSans-SemiBoldItalic';
   src: url(./OpenSans-SemiBoldItalic.ttf);
@@ -96,22 +110,27 @@
   font-family: 'Oswald-Bold';
   src: url(./Oswald-Bold.ttf);
 }
+
 @font-face {
   font-family: 'Oswald-ExtraLight';
   src: url(./Oswald-ExtraLight.ttf);
 }
+
 @font-face {
   font-family: 'Oswald-Light';
   src: url(./Oswald-Light.ttf);
 }
+
 @font-face {
   font-family: 'Oswald-Medium';
   src: url(./Oswald-Medium.ttf);
 }
+
 @font-face {
   font-family: 'Oswald-Regular';
   src: url(./Oswald-Regular.ttf);
 }
+
 @font-face {
   font-family: 'Oswald-SemiBold';
   src: url(./Oswald-SemiBold.ttf);
@@ -122,59 +141,118 @@
   font-family: 'SF-Mono';
   src: url(./SF-Mono.ttf);
 }
+
 @font-face {
   font-family: 'SF-Mono-Regular';
   src: url(./SF-Mono-Regular.ttf);
 }
+
 @font-face {
   font-family: 'SF-Mono-Semibold';
   src: url(./SF-Mono-Semibold.ttf);
 }
 
 
+
+/* | "Montserrat-Bold" */
 @font-face {
-  font-family: 'Montserrat';
-  src: url(./Montserrat.ttf);
+  font-family: 'Montserrat-Bold';
+  src: url(./Montserrat-Bold.ttf);
 }
-@font-face {
-  font-family: 'Montserrat-Regular';
-  src: url(./Montserrat-Regular.ttf);
-}
+/* | "Montserrat-ExtraBold" */
 @font-face {
   font-family: 'Montserrat-ExtraBold';
   src: url(./Montserrat-ExtraBold.ttf);
 }
+/* | "Montserrat-ExtraLight" */
+@font-face {
+  font-family: 'Montserrat-ExtraLight';
+  src: url(./Montserrat-ExtraLight.ttf);
+}
+/* | "Montserrat-ExtraLightItalic" */
+@font-face {
+  font-family: 'Montserrat-ExtraLightItalic';
+  src: url(./Montserrat-ExtraLightItalic.ttf);
+}
+/* | "Montserrat-Italic" */
+@font-face {
+  font-family: 'Montserrat-Italic';
+  src: url(./Montserrat-Italic.ttf);
+}
+/* | "Montserrat-Medium" */
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: url(./Montserrat-Medium.ttf);
+}
+/* | "Montserrat-Regular" */
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url(./Montserrat-Regular.ttf);
+}
+/* | "Montserrat-SemiBold" */
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url(./Montserrat-SemiBold.ttf);
+}
+/* | "Montserrat" */
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./Montserrat.ttf);
+}
+
 
 
 @font-face {
   font-family: 'TT-Norms-Pro';
   src: url(./TT-Norms-Pro-Regular.ttf);
 }
+
 @font-face {
   font-family: 'TT-Norms-Pro-Regular';
   src: url(./TT-Norms-Pro-Regular.ttf);
 }
+
 @font-face {
   font-family: 'TT-Norms-Pro-Bold';
   src: url(./TT-Norms-Pro-Bold.ttf);
 }
+
 @font-face {
   font-family: 'AcherusGrotesque-Regular';
   src: url(./AcherusGrotesque-Regular.ttf);
 }
+
 @font-face {
   font-family: 'AcherusGrotesque-Medium';
   src: url(./AcherusGrotesque-Medium.ttf);
 }
+
 @font-face {
   font-family: 'AcherusGrotesque-Bold';
   src: url(./AcherusGrotesque-Bold.ttf);
 }
+
 @font-face {
   font-family: 'Cascadia';
   src: url(./Cascadia.ttf);
 }
+
 @font-face {
   font-family: 'Calibri';
   src: url(./Calibri.ttf);
+}
+
+@font-face {
+  font-family: 'Retropulse';
+  src: url(./Retropulse.ttf);
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url(./Poppins.ttf);
+}
+
+@font-face {
+  font-family: 'AlbertSans';
+  src: url(./AlbertSans.ttf);
 }

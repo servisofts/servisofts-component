@@ -17,6 +17,7 @@ export type typeProps = {
     onPress?: Function,
     onPressValidation?: Function,
     loading?: boolean,
+    children?: any,
     //callBack:Function,
 } & onSubmitProps
 
@@ -115,7 +116,7 @@ export class SButtom extends Component<typeProps> {
                     alignItems: 'center',
                 },
                 text: {
-                    color: STheme.color.secondary,
+                    color: STheme.color.white,
                     ...this.props.styleText
                 }
             },

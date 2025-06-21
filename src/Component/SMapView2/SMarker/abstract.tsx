@@ -11,6 +11,7 @@ export type SMarkerType = {
     width?: number,
     height?: number,
     fill?: string,
+    children?: any,
     onPress?: () => any
 }
 

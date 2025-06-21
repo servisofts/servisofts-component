@@ -12,6 +12,7 @@ export default class SPolyline extends SPolylineAbstract {
                 path: path,
                 geodesic: true,
                 fillColor: this.props.fillColor,
+                fillOpacity: 1.0,
                 strokeColor: this.props.strokeColor,
                 strokeOpacity: 1.0,
                 strokeWeight: this.props.strokeWidth,

@@ -38,7 +38,7 @@ class HAjustes extends Component {
             <SForm
                 
                 inputProps={{
-                    customStyle: "calistenia",
+                    // customStyle: "calistenia",
                 }}
                 inputs={{
                     // "order": { label: "Ordenar", type: "select", defaultValue: this.props?.order, options: ["no", "asc", "desc"], },

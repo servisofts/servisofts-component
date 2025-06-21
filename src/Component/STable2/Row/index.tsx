@@ -8,11 +8,13 @@ import { HeaderProps } from '../Header';
 export type STable2cellStyle = {
     fontSize?: number
     height?: number,
-    textAlign?: "center" | "right" | "left"
+    textAlign?: "center" | "right" | "left",
+    justifyContent?: "center",
 }
 type typeProps = {
     header: Array<HeaderProps>,
     data: Object,
+    obj: Object,
     animHeader: any,
     animSize: any,
     space?: number,
@@ -56,18 +58,19 @@ class Row extends Component<typeProps> {
                 fontSize: 12,
                 textAlign: "left",
                 textWrap: "nowrap",
-                height: this.props?.height ?? 30,
+                // height: this.props?.height ?? 30,
                 ...this.props.cellStyle ?? {},
                 ...item.cellStyle ?? {},
             }
-            var data = this.props.data;
+            var data: any = this.props.data;
+            // console.log(data);
             data = data[item.key];
             var ITEM;
             if (item.key == "index") {
                 data = this.props.index + 1;
             }
             if (item.component) {
-                ITEM = item.component(data);
+                ITEM = item.component(data, this.props.obj);
             } else {
                 if (typeof data == "object") {
                     data = JSON.stringify(data);
@@ -91,6 +94,7 @@ class Row extends Component<typeProps> {
                     height
                     style={{
                         width: this.props.animHeader[item.key],
+
                         // overflow: 'hidden',
                         // borderRightWidth: 1,
                         // borderColor: STheme.color.text + "22"
@@ -99,18 +103,20 @@ class Row extends Component<typeProps> {
                     <SView
                         height
                         {...item}
+                        onPress={!item.onPress ? null : item.onPress.bind(this, data, this.props.obj)}
                         style={{
                             backgroundColor: this.props.index % 2 == 0 ? "" : STheme.color.card,
                             overflow: 'hidden',
                             // padding: 1,
                             justifyContent: 'center',
+                            alignItems: "center",
                             width: "100%",
 
                         }}>
                         {ITEM}
                     </SView>
                 </SView>
-            </SView>
+            </SView >
         })
     }
     render() {

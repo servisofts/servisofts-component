@@ -67,6 +67,7 @@ class Indicator extends Component<typeScroll> {
 
     }
     setSize = ({ width, height }) => {
+        // @ts-ignore
         Animated.timing(this.state.animSize, {
             toValue: { x: width, y: height },
             duration: 10,

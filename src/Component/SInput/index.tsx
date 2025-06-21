@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform } from 'react-native';
-import { STheme, SText, SView, SViewProps } from '../../index';
+import { STheme, SText, SView, SViewProps, SThread } from '../../index';
 
 import { Variant, TypeVariant } from './variants';
 import { Type, TypeType } from './types';
@@ -44,8 +44,11 @@ export class SInput extends Component<TypeInputProps> {
     customStyle
     variant
     _ref
+    refView
     inpref
+    refSelect;
     required;
+    fisrtFocus = false;
     static defaultProps = {
         props: {},
         style: {},
@@ -125,6 +128,9 @@ export class SInput extends Component<TypeInputProps> {
         if (this.props.onBlur) {
             this.props.onBlur(null);
         }
+        if (this.props.onEndEditing) {
+            this.props.onEndEditing(null);
+        }
     }
     setValue(value) {
         this.setState({ value: value });
@@ -148,7 +154,16 @@ export class SInput extends Component<TypeInputProps> {
         return this.state.value;
     }
     focus() {
-        this.inpref.focus();
+        if (this.inpref) {
+            this.inpref.focus();
+            return;
+        }
+        if (this.type) {
+            if (this.type.onPress) {
+                this.type.onPress();
+                return;
+            }
+        }
     }
     getCustomStyle() {
         return this.customStyle;
@@ -169,17 +184,19 @@ export class SInput extends Component<TypeInputProps> {
 
         }
         if (type.render) {
-            return <View style={{
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-            }}>
-                {type.render(this)}
-            </View>
+            return type.render(this)
+            // return  <View style={{
+            //     width: "100%",
+            //     height: "100%",
+            //     justifyContent: "center",
+            //     alignItems: "center",
+            // }}>
+            //     {type.render(this)}
+            // </View>
         }
     }
     onChangeText = (_text) => {
+        console.log("onChangeText", _text);
         var text = _text;
         if (this.type) {
             if (this.type.onChangeText) {
@@ -288,9 +305,9 @@ export class SInput extends Component<TypeInputProps> {
         } else {
             valueFilter = "";
         }
-        if (this.props.autoFocus) {
-            this.inpref?.focus();
-        }
+        // if (this.props.autoFocus) {
+        //     this.inpref?.focus();
+        // }
 
         var styleFinal = {
             ...customStyle["View"],
@@ -304,6 +321,30 @@ export class SInput extends Component<TypeInputProps> {
             delete styleFinal.height
         }
         var sp: any = this.props.style
+
+        let styleInputFinal = {
+            flex: 1,
+            height: "100%",
+            ...(Platform.select({
+                web: { outline: "none" },
+            })),
+            ...customStyle["InputText"],
+            ...type.style.InputText,
+            ...(this.props.color ? { color: this.props.color } : {}),
+            ...sp,
+        }
+
+        var extraprops = {
+            ...this.props,
+            ...type.props
+        }
+        if (Platform.OS == "android") {
+            delete styleInputFinal["placeholderTextColor"]
+            delete styleInputFinal["flex"]
+            delete extraprops["flex"]
+
+            styleInputFinal.height = "100%"
+        }
         return (
             <SView
                 col={"xs-12"}
@@ -318,10 +359,16 @@ export class SInput extends Component<TypeInputProps> {
                     }
                 } : {})}
                 {...this.props}
+                onLayout={(evt) => {
+                    this.layout = evt.nativeEvent.layout;
+                    // @ts-ignore
+                    this.refView = evt.nativeEvent.target;
+                    // console.log("onLayout", this.layout, this.refView);
+                }}
                 style={styleFinal}
             >
                 {this.getLabel()}
-                <SView
+                {type.render ? null : <SView
                     col={"xs-12"}
                     row
                     center
@@ -329,26 +376,29 @@ export class SInput extends Component<TypeInputProps> {
                     {this.getIcon()}
                     <SView flex height>
                         <TextInput
-                            ref={(ref) => { this.inpref = ref }}
+                            ref={(ref) => {
+                                this.inpref = ref
+                                if (this.props.autoFocus && this.inpref) {
+                                    if(this.fisrtFocus) return;
+                                    this.fisrtFocus = true;
+                                    new SThread(200, "start", false).start(() => {
+                                        this.inpref.focus();
+                                    })
+
+                                }
+                            }}
                             value={valueFilter}
                             editable={!this.props.disabled}
                             placeholderTextColor={customStyle["InputText"]?.placeholderTextColor ?? ""}
-                            {...this.props}
-                            {...type.props}
-                            style={{
-                                flex: 1,
-                                height: "100%",
-                                outline: "none",
-                                ...customStyle["InputText"],
-                                ...type.style.InputText,
-                                ...(this.props.color ? { color: this.props.color } : {}),
-                                ...sp,
-                            }}
+                            {...extraprops}
+                            autoFocus={false}
+
+                            style={styleInputFinal}
                             onChangeText={this.onChangeText}
                         />
                     </SView>
                     {this.getIcon_r()}
-                </SView>
+                </SView>}
                 {this.isRender(type)}
             </SView>
         );

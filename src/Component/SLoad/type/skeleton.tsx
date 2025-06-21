@@ -16,9 +16,9 @@ export default class skeleton extends Component<SLoadPropsType> {
 
         Animated.loop(Animated.timing(this.animation, {
             toValue: 1,
-            duration: 1000,
+            duration: 600,
             useNativeDriver: false,
-        }), {}).start(()=>{
+        }), {}).start(() => {
             this.animation.setValue(0);
         });
     }
@@ -28,8 +28,8 @@ export default class skeleton extends Component<SLoadPropsType> {
         var style: any = {
             ...style_parent,
             backgroundColor: this.animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: ["#AAAAAA22", "#44444422"]
+                inputRange: [0, 0.5, 1],
+                outputRange: ["#AAAAAA22", "#44444422", "#AAAAAA22"]
             })
         }
         return (

@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import STheme from "../Component/STheme"
 import Add from "./Add"
 import Ajustes from "./Ajustes"
@@ -54,6 +55,8 @@ import WifiDisconnect from "./WifiDisconnect"
 import World from "./World"
 import Svg from "./Svg";
 import Notify from "./Notify";
+import Camara from "./Camara"
+import Galeria from "./Galeria"
 
 import MessageSend from "./MessageSend"
 import Emoji from "./Emoji"
@@ -115,8 +118,9 @@ const Icons = {
     WifiDisconnect,
     World,
     Notify,
-    ...Svg
-
+    Camara,
+    Galeria,
+    ...Svg,
 }
 export default Icons;
 

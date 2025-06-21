@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { StyleSheet, TextInputProps, TextStyle, TouchableOpacity, View, ViewStyle, Text } from "react-native"
 import { SInput } from "."
 import SDate from "../SDate"
-import { SText, STheme, SView, SPopupOpen, SPopupClose, SIcon } from "../../index"
+import { SText, STheme, SView, SPopupOpen, SPopupClose, SIcon, SPopup, SThread } from "../../index"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
 import SISelect from "./SInputTypes/SISelect"
@@ -12,10 +12,12 @@ import SNavigation from "../SNavigation"
 import DropFileSingle from "./SInputTypes/DropFileSingle"
 import SIFecha_MY_Alert from "./SInputTypes/SIFecha_MY_Alert"
 import SIColorAlert from "./SInputTypes/SIColorAlert"
+import Select2Class from "./SInputTypes/Select2/index"
 
 export type TypeType =
     "default"
     | "select"
+    | "select2"
     | "fecha"
     | "date"
     | "date_my"
@@ -58,6 +60,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
     switch (type) {
         case "select":
             return select(type, Parent);
+        case "select2":
+            return select2(type, Parent);
         case "fecha":
             return fecha(type, Parent);
         case "color":
@@ -234,11 +238,17 @@ const password = (type: TypeType, Parent: SInput) => {
 const color = (type: TypeType, Parent: SInput) => {
     return buildResp({
         props: {
-            editable: false,
+            // editable: true,
             // focusable: false,
-            pointerEvents: "none",
+            // pointerEvents: "none",
         },
-        onPress: () => {
+
+        icon: (<SView style={{
+            width: 30,
+            height: "100%",
+            padding: 6,
+            backgroundColor: Parent.getValue(),
+        }} center onPress={() => {
             SPopupOpen({
                 key: "fechaPicker",
                 content: <SIColorAlert
@@ -251,13 +261,7 @@ const color = (type: TypeType, Parent: SInput) => {
                         Parent.setValue(val);
                     }} />
             })
-        },
-        icon: (<SView style={{
-            width: 30,
-            height: "100%",
-            padding: 6,
-            backgroundColor: Parent.getValue(),
-        }} center >
+        }} >
             {/* <SIcon name="World" fill={STheme.color.text} /> */}
         </SView>
         ),
@@ -269,7 +273,10 @@ const color = (type: TypeType, Parent: SInput) => {
 
             },
             LabelStyle: {}
-        }
+        },
+        filter: (_value: String) => {
+            return _value
+        },
     })
 }
 const fecha = (type: TypeType, Parent: SInput) => {
@@ -305,7 +312,8 @@ const fecha = (type: TypeType, Parent: SInput) => {
 
             },
             LabelStyle: {}
-        }
+        },
+
     })
 }
 const date_my = (type: TypeType, Parent: SInput) => {
@@ -358,19 +366,32 @@ const select = (type: TypeType, Parent: SInput) => {
         },
         render: (_Parent: SInput) => {
             var value = _Parent.getValue();
+
             var options = _Parent.getOption("options");
             options.map((option) => {
                 if (option.key == value) {
                     value = option;
                 }
             })
-            if (!value) return <View />
+            const style = {
+                ...(_Parent.customStyle?.InputText ?? {}),
+
+            }
+            if (!value) return <SText clean col={"xs-12"} style={{
+                ...style,
+                color: _Parent.customStyle?.InputText?.placeholderTextColor ?? "#EEEEEE"
+                // backgroundColor:"#f0f"
+            }}>{_Parent?.props?.placeholder}</SText>
+
             if (typeof value != "object") {
-                return <SText col={"xs-12"}>{value}</SText>
+                if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value)}</SText>
+                return <SText clean col={"xs-12"} style={style}>{value}</SText>
             }
             if (!value.content) return <View />
+
             if (typeof value.content != "object") {
-                return <SText col={"xs-12"}>{value.content}</SText>
+                if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value.content)}</SText>
+                return <SText clean col={"xs-12"} style={style}>{value.content}</SText>
             }
             return value.content;
         },
@@ -403,6 +424,171 @@ const select = (type: TypeType, Parent: SInput) => {
                 fontSize: 0,
             },
             LabelStyle: {}
+        }
+    })
+}
+const select2 = (type: TypeType, Parent: SInput) => {
+    // var format = "yyyy-MM-dd";
+    return buildResp({
+        // filter: (_value: String) => {
+        //     let result = "";
+        //     var options = Parent.getOption("options");
+
+        //     const op = options.find((opt) => {
+        //         if (opt.key) {
+        //             if (opt.key == _value) {
+        //                 return true;
+        //             }
+        //         } else {
+        //             if (opt == _value) {
+        //                 return true;
+        //             }
+        //         }
+        //         return false;
+        //     })
+        //     console.log(options, op, _value);
+        //     return op?.content ?? op;
+        // },
+        onChangeText: (e) => {
+            if (Parent.refSelect) {
+                Parent.refSelect.filter(e)
+                // const select = Parent.refSelect.getSelect();
+                // Parent.setValue(select.key ?? select);
+            }
+            return e;
+        },
+        props: {
+            editable: true,
+            onFocus: (e) => {
+                var options = Parent.getOption("options");
+                let target = e.target;
+                // @ts-ignore
+                if (!target?.measure) {
+                    // @ts-ignore
+                    target = Parent.refView
+                }
+
+                console.log("target", target);
+                // @ts-ignore
+                if (!target?.measure) return;
+                // @ts-ignore
+                target.measure((x, y, width, height, pageX, pageY) => {
+                    SPopup.open({
+                        key: "select2",
+                        type: "2",
+                        content: <SView style={{
+                            position: "absolute",
+                            top: pageY + height + 2,
+                            left: pageX,
+                            width: width + 20,
+                            height: 200,
+                            backgroundColor: STheme.color.background,
+                            borderRadius: 8,
+                            borderWidth: 1,
+                            borderColor: STheme.color.card,
+                        }}>
+                            <Select2Class ref={ref => Parent.refSelect = ref} options={options} onSelect={select => {
+                                Parent.setValue(select.key ?? select);
+                            }} />
+                        </SView>
+                    })
+                })
+
+
+            },
+
+            selectTextOnFocus: true,
+            onSubmitEditing: (e) => {
+                if (Parent.refSelect) {
+                    const select = Parent.refSelect.getSelect();
+                    Parent.setValue(select.key ?? select);
+                }
+            },
+            onBlur: (e) => {
+                new SThread(150, "select2_close", false).start(() => {
+                    // const select = Parent.refSelect.getSelect();
+                    // Parent.setValue(select.key ?? select);
+                    SPopup.close("select2");
+                })
+
+                // Parent.notifyBlur();
+            },
+            onKeyPress: (e) => {
+                // down
+                if (e.nativeEvent.key == "ArrowUp") {
+                    if (Parent.refSelect) {
+                        Parent.refSelect.setState({
+                            select: Parent.refSelect.state.select - 1
+                        })
+                    }
+                }
+                if (e.nativeEvent.key == "ArrowDown") {
+                    if (Parent.refSelect) {
+                        Parent.refSelect.setState({
+                            select: Parent.refSelect.state.select + 1
+                        })
+                    }
+                }
+            }
+            // focusable: false,
+            // pointerEvents: "none",
+        },
+
+        // render: (_Parent: SInput) => {
+        //     var value = _Parent.getValue();
+
+        //     var options = _Parent.getOption("options");
+        //     options.map((option) => {
+        //         if (option.key == value) {
+        //             value = option;
+        //         }
+        //     })
+        //     const style = {
+        //         ...(_Parent.customStyle?.InputText ?? {}),
+
+        //     }
+        //     if (!value) return <SText clean col={"xs-12"} style={{
+        //         ...style,
+        //         color: _Parent.customStyle?.InputText?.placeholderTextColor ?? "#EEEEEE"
+        //         // backgroundColor:"#f0f"
+        //     }}>{_Parent?.props?.placeholder}</SText>
+
+        //     if (typeof value != "object") {
+        //         if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value)}</SText>
+        //         return <SText clean col={"xs-12"} style={style}>{value}</SText>
+        //     }
+        //     if (!value.content) return <View />
+
+        //     if (typeof value.content != "object") {
+        //         if (!!value.renderResult) return <SText clean col={"xs-12"} style={style}>{value.renderResult(value.content)}</SText>
+        //         return <SText clean col={"xs-12"} style={style}>{value.content}</SText>
+        //     }
+        //     return value.content;
+        // },
+        // onPress: () => {
+        // var options = Parent.getOption("options");
+
+        // SPopupOpen({
+        //     key: "fechaPicker",
+        //     content: <SISelect
+        //         height={300}
+        //         props={{
+        //             defaultValue: Parent.getValue(),
+        //         }}
+        //         options={options}
+        //         onClose={() => {
+        //             Parent.notifyBlur();
+        //         }}
+        //         onChange={(val) => {
+        //             // console.log(val);
+        //             Parent.setValue(val);
+        //         }} />
+        // })
+        // },
+        style: {
+            View: {},
+            InputText: {},
+            // LabelStyle: {}
         }
     })
 }
@@ -603,7 +789,7 @@ const image = (type: TypeType, Parent: SInput) => {
                     overflow: 'hidden',
                     backgroundColor: STheme.color.card,
                 }} height colSquare>
-                    <DropFileSingle {...Parent.getProps()} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
+                    <DropFileSingle {...Parent.getProps()} style={{}} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
                         Parent.setValue(val);
                     }} />
                 </SView>
@@ -635,7 +821,7 @@ const file = (type: TypeType, Parent: SInput) => {
                 // backgroundColor:"#f0f",
                 overflow: 'hidden',
             }}>
-                <DropFileSingle {...Parent.getProps()} cstyle={Parent.getStyle()} onChange={(val) => {
+                <DropFileSingle {...Parent.getProps()} style={{}} cstyle={Parent.getStyle()} onChange={(val) => {
                     // console.log(val);
                     Parent.setValue(val);
                 }} />
@@ -718,33 +904,59 @@ const textArea = (type: TypeType, Parent: SInput) => {
     })
 }
 const checkBox = (type: TypeType, Parent: SInput) => {
+    let style = {};
+    if (Parent) {
+        if (Parent.getProps()) {
+            if (Parent.getProps().style) {
+                style = Parent.getProps().style;
+            }
+        }
+    }
+
     return buildResp({
         props: {
             editable: false,
-
         },
         style: {
             View: {
+                flexDirection: "row",
                 paddingStart: 0,
-                width: 20,
-                height: 20,
+                // flex:1,
+                flexWrap: "wrap",
+                // width: 20,
+                // height: 20,
+                borderWidth: 0,
+                backgroundColor: "transparent"
+                // opacity:0,
             },
             LabelStyle: {
-                width: null,
-                position: "absolute"
+                position: "absolute",
+                // width: "auto",
+                margin: 0,
+                padding: 0,
+                marginRight: 0,
+                top: 2,
+                left: 20,
+
             }
 
         },
         render: (data) => {
             var active = Parent.getValue();
             Parent.state.value = !!active;
+
             return <SView style={{
+                position: "absolute",
+                left: 0,
                 width: 20,
                 height: 20,
                 borderWidth: 1,
                 borderRadius: 4,
-                borderColor: STheme.color.card,
-                backgroundColor: !active ? "" : "#1975FF",
+                borderColor: (Parent.props.color ?? STheme.color.text),
+                backgroundColor: !active ? "" : (Parent.props.backgroundColor ?? "#1975FF"),
+                justifyContent: "center",
+                alignItems: "center",
+                ...style
             }} onPress={() => {
                 if (Parent.getProps().disabled) {
                     return;
@@ -752,9 +964,9 @@ const checkBox = (type: TypeType, Parent: SInput) => {
 
                 Parent.setValue(!active);
 
-            }} center>
-                {!active ? null : <SText fontSize={18} font={"Roboto"} bold color={"#fff"}>{"✓"}</SText>}
-            </SView>
+            }} center >
+                {!active ? null : <SText fontSize={16} font={"Roboto"} bold color={(Parent.props.color ?? STheme.color.text)}>{"✓"}</SText>}
+            </SView >
         }
     })
 }

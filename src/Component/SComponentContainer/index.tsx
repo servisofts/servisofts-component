@@ -4,6 +4,7 @@ import SText from '../SText/index';
 import SGrid from '../SGrid/index';
 import STheme, { SThemeColors, SThemeProps } from '../STheme/index';
 import DebugBar from './DebugBar/index';
+import Font from '../../font';
 import { SAssets } from '../../Types';
 import SIcon from '../SIcon/index';
 import SPopup from '../SPopup';
@@ -12,6 +13,7 @@ import { SInputsCofig } from "../../Types/index"
 import SThread from '../SThread';
 import SLoadContainer from '../SLoad/SLoadContainer';
 import SNotificationContainer from '../SNotification/SNotificationContainer';
+import SLanguage from '../SLanguage';
 // import KeyboardSpacer from './KeyboardSpacer';
 
 export type SComponentContainerProps = {
@@ -20,13 +22,18 @@ export type SComponentContainerProps = {
     debug?: any,
     socket?: any,
     assets?: SAssets,
+    children?: any,
     inputs?: () => SInputsCofig,
 }
 
 
-export default class SComponentContainer extends Component<SComponentContainerProps> {
+class SComponentContainer extends Component<SComponentContainerProps> {
     private static Instance: SComponentContainer = null;
     private static GridListen: { [key in string]: SGrid } = {};
+
+    public static getCurrentCol() {
+        return this.Instance?.state?.medida;
+    }
     static SSocket: any;
     public static registerGrid(key: string, grid: any) {
         if (!this.Instance) return;
@@ -135,7 +142,6 @@ export default class SComponentContainer extends Component<SComponentContainerPr
         SComponentContainer.Instance = this;
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
-
                 if (this.state.theme != color) {
 
                     this.setState({ theme: null });
@@ -144,10 +150,11 @@ export default class SComponentContainer extends Component<SComponentContainerPr
                     })
                 }
             }}>
-                {this.getContenido()}
+                    {this.getContenido()}
             </STheme>
 
         );
 
     }
 }
+export default SComponentContainer;

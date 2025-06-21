@@ -14,6 +14,7 @@ const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 export default class DeleteBtn extends Component<tprop> {
     time
     state
+    props;
     constructor(props) {
         super(props);
         this.time = !props.time ? 3 : props.time;

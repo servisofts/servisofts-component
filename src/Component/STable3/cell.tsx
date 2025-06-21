@@ -11,6 +11,7 @@ type PropsType = {
     borderColor?: any,
     code: string,
     sheet: Sheet,
+    children?: any,
 }
 export default class cell extends Component<PropsType> {
     shouldComponentUpdate(nextProps, nextState) {
