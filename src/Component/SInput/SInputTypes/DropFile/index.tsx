@@ -94,6 +94,7 @@ export default class DropFile extends Component<Props> {
                     fr.readAsDataURL(file);
                     // }
                 }
+                inputElement.value = null;
             });
 
             dropZoneElement.addEventListener("dragover", (e) => {
