@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, NativeScrollEvent, ViewStyle } from 'react-native';
-import { SText, SView, STheme, SThread, SSCrollView, SColorPicker } from '../../../../index';
+import { SText, SView, STheme, SThread, SSCrollView, SColorPicker, SColorPicker2 } from '../../../../index';
 import SPage from '../../../SPage';
 // import SBackground from '../../../SBackground';
 
@@ -38,10 +38,10 @@ export default class SIColorAlert extends Component<typeProps> {
 
     render() {
         return <SView
-            col={"xs-11 sm-9 md-7 lg-5 xl-4"}
             center
             withoutFeedback
             style={{
+                width: 250,
                 borderRadius: 8,
                 backgroundColor: STheme.color.background,
                 overflow: "hidden"
@@ -49,8 +49,9 @@ export default class SIColorAlert extends Component<typeProps> {
             }>
             {SPage.backgroundComponent}
             {/* <SBackground /> */}
-            <SView col={"xs-12"} colSquare padding={8} center>
-                <SColorPicker {...this.props} />
+            <SView col={"xs-12"} padding={8} center>
+                {/* <SColorPicker {...this.props} /> */}
+                <SColorPicker2 onChange={this.props.onChange} initialColor={this.props.defaultValue} width={200} />
 
             </SView>
 

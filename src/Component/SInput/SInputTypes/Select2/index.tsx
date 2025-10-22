@@ -1,23 +1,40 @@
 import React from "react";
 import SView from "../../../SView";
 import SText from "../../../SText";
-import { ScrollView } from "react-native";
+import { ScrollView, TextStyle } from "react-native";
 import STheme from "../../../STheme";
 
-class Select2 extends React.Component<{ options: any[], onClose?: Function, onSelect: Function }, any> {
+class Select2 extends React.Component<{
+    options: any[],
+    onClose?: Function,
+    onSelect: Function,
+    selectStyle: TextStyle,
+    defaultValue: any
+}, any> {
 
     state = {
         select: 0,
         filtro: ""
+    }
+    componentDidMount(): void {
+        if (this.props.defaultValue) {
+            // this.setState({
+            //     select: this.props.options.indexOf(this.props.defaultValue)
+            // })
+        }
     }
 
     componentWillUnmount(): void {
         if (this.props.onClose) {
             this.props.onClose(this.getSelect());
         }
+
     }
 
     getSelect() {
+        if (this.state.select < 0 || this.state.select >= this.optFilter.length) {
+            return null;
+        }
         return this.optFilter[this.state.select];
     }
     filter(e) {
@@ -34,7 +51,6 @@ class Select2 extends React.Component<{ options: any[], onClose?: Function, onSe
         const select = index === this.state.select;
         return <SView key={index} style={{
             padding: 8,
-            marginTop: 4,
             backgroundColor: select ? STheme.color.card : "transparent",
         }} onPress={(e) => {
             if (this.props.onSelect) {
@@ -42,7 +58,7 @@ class Select2 extends React.Component<{ options: any[], onClose?: Function, onSe
             }
             // console.log("onPress", e);
         }}>
-            <SText numberOfLines={1}>{value}</SText>
+            <SText numberOfLines={1} style={this.props.selectStyle}>{value}</SText>
         </SView>
     }
     optFilter;
@@ -50,6 +66,7 @@ class Select2 extends React.Component<{ options: any[], onClose?: Function, onSe
         const { options } = this.props;
         this.optFilter = options.filter(a => {
             if (this.state.filtro) {
+                if (a.key) return a.content.toLowerCase().includes(this.state.filtro.toLowerCase());
                 return a.toLowerCase().includes(this.state.filtro.toLowerCase());
             }
             return true;

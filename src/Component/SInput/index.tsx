@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform } from 'react-native';
+import { View, StyleSheet, ViewStyle, TouchableOpacity, TextInputProps, Animated, TextInput, Platform, TextStyle } from 'react-native';
 import { STheme, SText, SView, SViewProps, SThread } from '../../index';
 
 import { Variant, TypeVariant } from './variants';
@@ -18,6 +18,8 @@ export type TypeInputProps = {
     col?: SColType,
     color?: any,
     defaultValue?: any,
+    inputStyle?: TextStyle,
+    labelStyle?: TextStyle,
     error?: boolean,
     placeholder?: any,
     icon?: any,
@@ -32,6 +34,8 @@ export type TypeInputProps = {
     onStateChange?: (value: any) => void,
     latLng?: { latitude: number, longitude: number },
     render?: (ref) => any,
+    selectStyle?: TextStyle,
+    decimales?: number
 } & TextInputProps & SViewProps
 
 
@@ -43,7 +47,7 @@ export class SInput extends Component<TypeInputProps> {
     state
     customStyle
     variant
-    _ref
+    _ref: any = {}
     refView
     inpref
     refSelect;
@@ -218,7 +222,12 @@ export class SInput extends Component<TypeInputProps> {
     }
     getLabel() {
         if (!this.props.label) return null;
-        return <SText style={{ position: "absolute", ...this.customStyle["LabelStyle"], ...this.type?.style?.LabelStyle ?? {} }}>{this.props.label}</SText>
+        return <SText 
+        {...this.customStyle?.labelProps}
+        style={{
+            position: "absolute", ...this.customStyle["LabelStyle"], ...this.type?.style?.LabelStyle ?? {},
+            ...(this.props.labelStyle ?? {}),
+        }}>{this.props.label}</SText>
     }
 
     getIcon_r() {
@@ -345,6 +354,12 @@ export class SInput extends Component<TypeInputProps> {
 
             styleInputFinal.height = "100%"
         }
+        if (this.props.inputStyle) {
+            styleInputFinal = {
+                ...styleInputFinal,
+                ...this.props.inputStyle
+            }
+        }
         return (
             <SView
                 col={"xs-12"}
@@ -379,7 +394,7 @@ export class SInput extends Component<TypeInputProps> {
                             ref={(ref) => {
                                 this.inpref = ref
                                 if (this.props.autoFocus && this.inpref) {
-                                    if(this.fisrtFocus) return;
+                                    if (this.fisrtFocus) return;
                                     this.fisrtFocus = true;
                                     new SThread(200, "start", false).start(() => {
                                         this.inpref.focus();

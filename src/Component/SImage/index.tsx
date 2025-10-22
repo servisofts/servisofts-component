@@ -9,6 +9,7 @@ type SImageType = {
     src?: any,
     style?: ImageStyle,
     enablePreview?: boolean,
+    srcPreview?: any, // This is used to show a preview of the image before it is loaded
     // name?: "",
 }
 
@@ -63,7 +64,7 @@ export default class SImage extends Component<SImageType> {
                         backgroundColor: STheme.color.background,
                         borderRadius: 8,
                     }} >
-                        {this.getImage(source, { width: "100%", height: "100%", })}
+                        {this.getImage(this.props.srcPreview ? this.props.srcPreview : source, { width: "100%", height: "100%", })}
                     </SView>,
                 })
             }}>

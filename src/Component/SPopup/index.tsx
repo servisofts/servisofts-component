@@ -38,6 +38,7 @@ const ContainerTypes = {
 }
 export default class SPopup extends Component {
 
+    static popupsList: any = {}
     static confirm(props: ConfirmProps) {
         // alert(obj)
         INSTANCE.open({ key: "confirm", content: <Confirm {...props} />, style: {} });
@@ -87,11 +88,9 @@ export default class SPopup extends Component {
     state
     constructor(props) {
         super(props);
-        this.state = {
-            data: {
-
-            },
-        };
+        // this.state = {
+        //     data: SPopup.popupsList,
+        // };
         INSTANCE = this;
     }
     componentDidMount() {
@@ -99,25 +98,27 @@ export default class SPopup extends Component {
     }
     open({ key, content, style = {}, type = "1", onClose }: SPopupOpenProps) {
         // console.log(key);
-        this.state.data[key] = {
+        SPopup.popupsList[key] = {
             content: content,
             style: style,
             type: type,
             onClose: onClose
         };
-        this.setState({ ...this.state });
+        this.forceUpdate();
+        // this.setState({ ...this.state });
     }
     closeAll() {
-        this.setState({ data: {} });
+        SPopup.popupsList = {};
+        this.forceUpdate();
     }
     close(key) {
-        delete this.state.data[key];
-        this.setState({ ...this.state });
+        delete SPopup.popupsList[key];
+        this.forceUpdate();
     }
 
     getPopups() {
-        return Object.keys(this.state.data).map((key) => {
-            var obj = this.state.data[key];
+        return Object.keys(SPopup.popupsList).map((key) => {
+            var obj = SPopup.popupsList[key];
             const { style, content, type = "1" } = obj;
             const CONTAINER = ContainerTypes[type];
             // var style = this.state.style[key];

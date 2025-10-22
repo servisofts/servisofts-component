@@ -19,6 +19,24 @@ type formatsTypes =
     | "yyyy-MM"
     | "MM-dd"
 
+export type TimeZoneName =
+    | "UTC"
+    | "Europe/Madrid"
+    | "Europe/London"
+    | "America/New_York"
+    | "America/Los_Angeles"
+    | "America/Argentina/Buenos_Aires"
+    | "America/Lima"
+    | "America/Bogota"
+    | "America/Mexico_City"
+    | "America/La_Paz"
+    | "Asia/Tokyo"
+    | "Asia/Shanghai"
+    | "Asia/Kolkata"
+    | "Asia/Dubai"
+    | "Africa/Johannesburg"
+    | "Australia/Sydney";
+
 export default class SDate {
 
 
@@ -311,6 +329,94 @@ export default class SDate {
         }
         return es;
     }
+
+    toTimezone(timezone: TimeZoneName) {
+        // Obtener el timestamp original
+        const utc = this.date.toISOString();
+        // Verificar si la zona horaria es UTC
+        if (timezone === "UTC") {
+            return new SDate(new Date(utc));
+        }
+        // Crear Intl.DateTimeFormat para convertir a zona deseada
+        const formatter = new Intl.DateTimeFormat("en-US", {
+            timeZone: timezone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+        });
+
+        const parts = formatter.formatToParts(new Date(utc));
+
+        const getNumber = (type: string) =>
+            parseInt(parts.find(p => p.type === type)?.value ?? "0", 10);
+
+        const year = getNumber("year");
+        const month = getNumber("month") - 1; // Date usa 0 = enero
+        const day = getNumber("day");
+        const hour = getNumber("hour");
+        const minute = getNumber("minute");
+        const second = getNumber("second");
+
+        // Restale el timezone actual
+        const localOffset = this.date.getTimezoneOffset() * 60000; // Convertir a milisegundos
+        const utcOffset = new Date(Date.UTC(year, month, day, hour, minute, second)).getTime() - localOffset;
+        // Crear la fecha local ajustada al timezone deseado
+        const localDate = new Date(utcOffset + localOffset);
+
+        // const localDate = new Date(year, month, day, hour, minute, second);
+
+
+        return new SDate(localDate);
+    }
+
+
+    transformTimeZone(timezone: TimeZoneName) {
+        // Obtener el timestamp original
+        const utc = this.date.toISOString();
+        // Verificar si la zona horaria es UTC
+        if (timezone === "UTC") {
+            return new SDate(new Date(utc));
+        }
+        // Crear Intl.DateTimeFormat para convertir a zona deseada
+        const formatter = new Intl.DateTimeFormat("en-US", {
+            timeZone: timezone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+        });
+
+        const parts = formatter.formatToParts(new Date(utc));
+
+        const getNumber = (type: string) =>
+            parseInt(parts.find(p => p.type === type)?.value ?? "0", 10);
+
+        const year = getNumber("year");
+        const month = getNumber("month") - 1; // Date usa 0 = enero
+        const day = getNumber("day");
+        const hour = getNumber("hour");
+        const minute = getNumber("minute");
+        const second = getNumber("second");
+
+        // Restale el timezone actual
+        const localOffset = this.date.getTimezoneOffset() * 60000; // Convertir a milisegundos
+        const utcOffset = new Date(Date.UTC(year, month, day, hour, minute, second)).getTime() + localOffset;
+        // Crear la fecha local ajustada al timezone deseado
+        const localDate = new Date(utcOffset);
+
+        // const localDate = new Date(year, month, day, hour, minute, second);
+
+
+        return new SDate(localDate);
+    }
+
     timeSince(sdate) {
 
         var date1 = this.date;
@@ -318,7 +424,7 @@ export default class SDate {
         const seconds = Math.floor((date2.getTime() - date1.getTime()) / 1000);
 
 
-        let lbl=""
+        let lbl = ""
         let interval = seconds / 31536000;
         if (interval > 1) {
             lbl = interval > 1 ? this.__selectLanguage({ en: "years", es: "años" }) : this.__selectLanguage({ en: "year", es: "año" });
@@ -342,12 +448,12 @@ export default class SDate {
         interval = seconds / 60;
         if (interval > 1) {
             lbl = interval > 1 ? this.__selectLanguage({ en: "minutes", es: "minutos" }) : this.__selectLanguage({ en: "minute", es: "minuto" });
-            return Math.floor(interval) + " "+lbl;
+            return Math.floor(interval) + " " + lbl;
         }
 
         lbl = seconds > 1 ? this.__selectLanguage({ en: "seconds", es: "segundos" }) : this.__selectLanguage({ en: "second", es: "segundo" });
 
-        return Math.floor(seconds) + " "+lbl;
+        return Math.floor(seconds) + " " + lbl;
     }
 
     isCurDate() {
@@ -384,6 +490,7 @@ export default class SDate {
         }
         var json = this.toJson();
         format = format.replace("yyyy", json.year + "");
+        format = format.replace("yy", (json.year + "").substring(2, 4));
         format = format.replace("MM", this.formatCero(json.month));
         format = format.replace("MONTH", this.getMonthJson().text);
         format = format.replace("DAY", this.getDayOfWeekJson().text);

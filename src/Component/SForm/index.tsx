@@ -46,6 +46,7 @@ export default class SForm extends Component<SFromProps> {
         var isValid = true;
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
+            if (!input) return;
             if (!input.verify()) {
                 isValid = false;
             }
@@ -56,6 +57,7 @@ export default class SForm extends Component<SFromProps> {
         var isValid = true;
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
+            if (!input) return;
             input.setValue("");
         })
         return this;
@@ -63,6 +65,7 @@ export default class SForm extends Component<SFromProps> {
     setValues(obj) {
         Object.keys(obj).map((key) => {
             var input: SInput = this._ref[key];
+            if(!input) return;
             input.setValue(obj[key]);
         })
     }
@@ -70,6 +73,7 @@ export default class SForm extends Component<SFromProps> {
         var obj = {};
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
+            if(!input) return;
             obj[key] = input.getValue();
         })
         return obj;
@@ -176,6 +180,7 @@ export default class SForm extends Component<SFromProps> {
         const invalidKeys = [];
         Object.keys(this._ref).map((key) => {
             var input: SInput = this._ref[key];
+            if(!input) return;
             if (!input.verify()) {
                 invalidKeys.push(key);
                 isValid = false;

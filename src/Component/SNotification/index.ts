@@ -1,17 +1,19 @@
 import SThread from "../SThread";
 import { SUuid } from "../SUuid";
+import { onDropNotificationEvent } from "./NotificationItem";
 import SNotificationContainer from "./SNotificationContainer";
 
 export type Notification = {
     title: string,
     body?: string,
-    image?:string,
-    deeplink?:string,
-
+    image?: string,
+    deeplink?: string,
     key?: string,
     time?: number,
     color?: string,
     type?: "loading",
+    onPress?: (e: any) => void,
+    onDrop?: onDropNotificationEvent,
 }
 
 export type NotificationInstance = {

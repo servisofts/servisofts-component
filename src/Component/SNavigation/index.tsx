@@ -1,18 +1,12 @@
 import React, { Component, useEffect } from 'react';
 import { View, Text, Platform, Linking, KeyboardAvoidingView } from 'react-native';
 import STheme from '../STheme/index';
-import SPage from '../SPage/index';
 import { NavigationContainer, NavigationContainerRef, Route, StackActions } from '@react-navigation/native';
 import { createStackNavigator, } from '@react-navigation/stack';
 import Pages from '../../Pages/index';
-import SLoad from '../SLoad';
 import SThread from '../SThread';
 import { SUuid } from '../SUuid';
-import SView from '../SView';
-import SHr from '../SHr';
 import SLinking, { SLinkingPropsType, openURL } from './SLinking';
-import SNotificationContainer from '../SNotification/SNotificationContainer';
-import SNavigationStack from './SNavigationStack';
 
 export type SPageProps = {
     params?: [string],

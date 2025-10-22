@@ -94,6 +94,7 @@ export default class SRangeSlider extends Component<SRangeSliderType> {
             top: -((size / 2) - (this.state.height / 2)),
             borderRadius: 100,
             position: "absolute",
+            userSelect: "none",
             backgroundColor: this.props.color ?? STheme.color.primary,
             transform: [{
                 translateX: this.pos.interpolate({

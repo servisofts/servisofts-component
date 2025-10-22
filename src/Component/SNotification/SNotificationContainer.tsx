@@ -41,17 +41,36 @@ export default class SNotificationContainer extends Component {
             top: 29,
             right: 8,
         }}>
-            <FlatList
+            {arr.reverse().slice(0, limit).map((item, index) => {
+                return <NotificationItem
+                    {...item}            
+                    key={item.key} data={item} index={index}
+                    onPress={(e) => {
+                        if (item.onPress) {
+                            item.onPress(e);
+                            return;
+                        }
+                        if (item.deeplink) {
+                            SNavigation.INSTANCE.openDeepLink(item.deeplink);
+                        }
+                        SNotification.remove(item.key)
+                    }} />
+            })}
+            {/* <FlatList
                 data={arr.reverse().slice(0, limit)}
                 scrollEnabled={false}
                 ItemSeparatorComponent={() => SeparatorItem}
-                renderItem={({ item, index }) => <NotificationItem key={item.key} data={item} index={index} onPress={() => {
-                    if(item.deeplink){
+                renderItem={({ item, index }) => <NotificationItem key={item.key} data={item} index={index} onPress={(e) => {
+                    if (item.onPress) {
+                        item.onPress(e);
+                        return;
+                    }
+                    if (item.deeplink) {
                         SNavigation.INSTANCE.openDeepLink(item.deeplink);
                     }
                     SNotification.remove(item.key)
                 }} />}
-            />
+            /> */}
             {arr.length > limit ? <>
                 {SeparatorItem}
                 <NotificationItem index={limit}

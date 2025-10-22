@@ -57,12 +57,14 @@ import SNativeModules from "./SNativeModules";
 import SNotification from "./Component/SNotification";
 import SGeolocation from "./Component/SGeolocation";
 import SDatePicker from "./Component/SDatePicker";
+import SColorPicker2 from "./Component/SColorPicker/SColorPicker2/SColorPicker2";
 import SSPiner from "./Component/SSPiner";
 import SUtil from "./Component/SUtil";
 import DropFile from "./Component/SInput/SInputTypes/DropFile";
 import DropFileSingle from "./Component/SInput/SInputTypes/DropFileSingle";
 import SLanguage from "./Component/SLanguage";
 export * from './Types'
+export * from "./Component/SNotification/NotificationItem";
 export {
     SUtil,
     SHr,
@@ -116,6 +118,7 @@ export {
     SExcelReader,
     ExportExcel,
     SColorPicker,
+    SColorPicker2,
     SPromise,
     SSPiner,
     SLanguage,

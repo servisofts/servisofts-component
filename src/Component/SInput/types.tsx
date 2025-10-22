@@ -26,6 +26,7 @@ export type TypeType =
     | "phone"
     | "number"
     | "money"
+    | "money2"
     | "telefono"
     | "image"
     | "files"
@@ -82,6 +83,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return number(type, Parent);
         case "money":
             return money(type, Parent);
+        case "money2":
+            return money2(type, Parent);
         case "hour":
             return hour(type, Parent);
         case "image":
@@ -487,9 +490,14 @@ const select2 = (type: TypeType, Parent: SInput) => {
                             borderWidth: 1,
                             borderColor: STheme.color.card,
                         }}>
-                            <Select2Class ref={ref => Parent.refSelect = ref} options={options} onSelect={select => {
-                                Parent.setValue(select.key ?? select);
-                            }} />
+                            <Select2Class ref={ref => Parent.refSelect = ref}
+                                options={options}
+                                defaultValue={Parent.getValue()}
+                                selectStyle={Parent.props?.selectStyle}
+                                onSelect={select => {
+                                    Parent.setValue(select.content ?? select);
+                                    // Parent.setData(select)
+                                }} />
                         </SView>
                     })
                 })
@@ -501,7 +509,11 @@ const select2 = (type: TypeType, Parent: SInput) => {
             onSubmitEditing: (e) => {
                 if (Parent.refSelect) {
                     const select = Parent.refSelect.getSelect();
-                    Parent.setValue(select.key ?? select);
+                    if (select) {
+                        Parent.setValue(select?.key ?? select);
+                    } else {
+
+                    }
                 }
             },
             onBlur: (e) => {
@@ -517,6 +529,7 @@ const select2 = (type: TypeType, Parent: SInput) => {
                 // down
                 if (e.nativeEvent.key == "ArrowUp") {
                     if (Parent.refSelect) {
+                        if (Parent.refSelect.state.select - 1 < 0) return;
                         Parent.refSelect.setState({
                             select: Parent.refSelect.state.select - 1
                         })
@@ -675,6 +688,62 @@ const money = (type: TypeType, Parent: SInput) => {
         }
     })
 }
+const money2 = (type: TypeType, Parent: SInput) => {
+    const maxDecimal = Parent.props.decimales || 2;
+
+    return buildResp({
+        props: {
+            keyboardType: "number-pad",
+            placeholder: `0.${"0".repeat(maxDecimal)}`,
+        },
+        style: {
+            View: {
+                // alignItems:"flex-start",
+                // justifyContent:"flex-start",
+            },
+            InputText: {
+                flex: 1,
+                width: "100%",
+                marginEnd: 4,
+                textAlign: "right",
+                fontSize: 16,
+                paddingStart: 2,
+            }
+        },
+        icon: (<SView style={{
+            height: "100%",
+        }} center >
+            <SText fontSize={10} >Bs.</SText>
+        </SView>
+        ),
+        filter: (_value: String) => {
+            if (!_value) return _value;
+            var value: any = _value + "";
+            value = value.trim();
+
+            // remplaza las comas por puntos
+            value = value.replace(/,/g, ".");
+
+            // Quita las letras deja solo numero y . o ,
+            value = value.replace(/[^0-9.]/g, "");
+
+            // Deja maximo 1 punto y 2 decimales
+            var arr = value.split(".");
+            if (arr.length > 2) {
+                value = arr[0] + "." + arr[1];
+            }
+            if (arr[1] && arr[1].length > maxDecimal) {
+                value = arr[0] + "." + arr[1].substring(0, maxDecimal);
+            }
+
+            return value + "";
+        },
+        verify: (value) => {
+            if (!value) return false;
+            return true;
+        }
+    })
+}
 const hour = (type: TypeType, Parent: SInput) => {
     return buildResp({
         props: {
@@ -784,14 +853,28 @@ const image = (type: TypeType, Parent: SInput) => {
                     bgColor = customStyle.View.backgroundColor;
                 }
             }
+            if (Parent.state.value != Parent.state.oldvalue) {
+                Parent.state.oldvalue = Parent.state.value;
+                if (Parent._ref.dropFileSingle) {
+                    Parent._ref.dropFileSingle.setState({
+                        "images": [{
+                            uri: Parent.state.value,
+                            name: Parent.state.value,
+                        }]
+                    })
+                }
+            }
             return <SView col={"xs-12"} center height >
                 <SView style={{
                     overflow: 'hidden',
                     backgroundColor: STheme.color.card,
                 }} height colSquare>
                     <DropFileSingle {...Parent.getProps()} style={{}} accept={"image/*"} cstyle={Parent.getStyle()} onChange={(val) => {
+                        Parent.state.oldvalue = val;
                         Parent.setValue(val);
-                    }} />
+                    }}
+                        ref={ref => Parent._ref.dropFileSingle = ref}
+                    />
                 </SView>
             </SView>
         }

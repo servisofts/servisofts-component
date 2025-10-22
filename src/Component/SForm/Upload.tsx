@@ -12,13 +12,14 @@ export default class Upload {
         request.send(body);
         console.log("Se envio la data")
     }
-    static sendPromise({ file }, url) {
+    static sendPromise({ file, compress = true }, url) {
         return new Promise(async (resolve, reject) => {
             if (!file) reject("file not found");
             if (!file.type) reject("file.type not found");
             if (file.type == "image/gif") {
                 file = file;
-            } else if (file.type.startsWith("image")) {
+            } else if (file.type.startsWith("image") && compress) {
+                console.log("Compressing image", file);
                 file = await SImageCompressor.compress({ file: file, maxWidth: 1024, quality: 0.8 })
             }
             var body = new FormData();

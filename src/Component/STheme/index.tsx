@@ -28,15 +28,16 @@ export type SThemeColors = {
     lightBlack?: string,
     mapStyle?: any[],
     font?: FontsType,
-    aux1?:string,
-    aux2?:string,
-    aux3?:string,
-    aux4?:string,
-    aux5?:string,
-    aux6?:string,
-    aux7?:string,
-    aux8?:string,
-    aux9?:string,
+    aux1?: string,
+    aux2?: string,
+    aux3?: string,
+    aux4?: string,
+    aux5?: string,
+    aux6?: string,
+    aux7?: string,
+    aux8?: string,
+    aux9?: string,
+    backgroundOpacity?: number,
 
 }
 export type SThemeOptions = 'default' | 'dark'
@@ -53,7 +54,8 @@ export type SThemeProps = {
 export default class STheme extends Component<SThemeProps> {
     public static colorSelect: SThemeColors;
 
-    public static color: SThemeColors = {
+
+    public static defaultColors: SThemeColors = {
         barStyle: "dark-content",
         barColor: "#000000",
         background: "#222222",
@@ -75,8 +77,10 @@ export default class STheme extends Component<SThemeProps> {
         lightBlack: "#666666",
         blue: "#0000FF",
         link: "#6666ff",
+        backgroundOpacity: 1,
         mapStyle: MapStyle.default,
     };
+    public static color: SThemeColors = STheme.defaultColors;
 
     public static colorRandom(d = 50, f = 100) {
         const toHex = (c) => {
@@ -146,7 +150,7 @@ export default class STheme extends Component<SThemeProps> {
 
     }
     async getItemTheme() {
-        SStorage.getItem("themeState", (data:any) => {
+        SStorage.getItem("themeState", (data: any) => {
             // console.log("Entro en el onLoad")
             if (data) {
                 this.select(data);

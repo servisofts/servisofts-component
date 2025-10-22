@@ -53,6 +53,7 @@ type SInputsCofig = {
         View?: any,
         LabelStyle?: any,
         InputText?: any,
+        labelProps?: STextProps,
         placeholder?: any,
         error?: any,
     }

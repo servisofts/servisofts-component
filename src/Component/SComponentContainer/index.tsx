@@ -14,6 +14,7 @@ import SThread from '../SThread';
 import SLoadContainer from '../SLoad/SLoadContainer';
 import SNotificationContainer from '../SNotification/SNotificationContainer';
 import SLanguage from '../SLanguage';
+import SNavigation from '../SNavigation';
 // import KeyboardSpacer from './KeyboardSpacer';
 
 export type SComponentContainerProps = {
@@ -143,14 +144,13 @@ class SComponentContainer extends Component<SComponentContainerProps> {
         return (
             <STheme {...this.props.theme} data={this.state.theme} onLoad={(color: SThemeColors) => {
                 if (this.state.theme != color) {
-
                     this.setState({ theme: null });
                     new SThread(10, "render_theme", false).start(() => {
                         this.setState({ theme: color });
                     })
                 }
             }}>
-                    {this.getContenido()}
+                {this.getContenido()}
             </STheme>
 
         );
